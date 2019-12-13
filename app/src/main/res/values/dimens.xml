@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_temp">36sp</dimen>
+    <dimen name="current_weather_temp">48sp</dimen>
+    <dimen name="icon_dim">90dp</dimen>
+</resources>

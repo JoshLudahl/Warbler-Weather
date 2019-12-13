@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weatheruous</string>
+
+    <string name="current_temp_high_string">75˚</string>
+    <string name="current_temp_low_string">40˚</string>
+    <string name="condition_text_string">Cloudy</string>
+    <string name="city_label_string">Portland, OR</string>
+    <string name="refreshed_at_label_string">9:25 AM</string>
+    <string name="current_weather_temp_string">67˚</string>
+    <string name="current_weather_description">Current Weather</string>
+    <string name="refresh">Click to refresh</string>
+
+    <string name="version">v0.0.5</string>
+    <string name="updated_at_string">refreshed at 9:27 AM</string>
+</resources>

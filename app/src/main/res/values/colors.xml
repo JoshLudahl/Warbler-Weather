@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorAccent">#9E9E9E</color>
+    <color name="colorRed">#B71C1C</color>
+    <color name="colorBlue">#01579B</color>
+    <color name="colorCharcoal">#212121</color>
+
+    <color name="weatherIconFillColor">#FF01579B</color>
+    <color name="colorCharcoalSystem">#FF757575</color>
+
+</resources>
