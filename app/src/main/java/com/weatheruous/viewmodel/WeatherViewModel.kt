@@ -1,10 +1,11 @@
 package com.weatheruous.viewmodel
-
+import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.weatheruous.Location.LocationProviderImp
 import com.weatheruous.data.WeatherAPI
 import com.weatheruous.data.WeatherDatabaseDao
 import com.weatheruous.data.WeatherUrls
@@ -19,6 +20,9 @@ class WeatherViewModel(
     val database: WeatherDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
+
+    var loc = LocationProviderImp(application)
+
 
     private val _currentTemp = MutableLiveData<String>()
     private val _currentTempHi = MutableLiveData<String>()
@@ -52,6 +56,7 @@ class WeatherViewModel(
         getWeatherData()
         getCurrentWeather()
         generateUpdatedTime()
+
     }
 
     private suspend fun getUrlsFromDatabase(): WeatherUrls? {
@@ -60,6 +65,13 @@ class WeatherViewModel(
             weatherUrls
         }
     }
+//    private suspend fun updateLocation() {
+//        println("asdfasdfasdfasdf asdf asdf asdf asdfa sdfa sdfasd fasdf asdfasdfa")
+//        withContext(Dispatchers.IO) {
+//            var snuff = async { loc.getLastLocation() }
+//            println(snuff.await())
+//        }
+//    }
 
     private suspend fun clear() {
         withContext(Dispatchers.IO) {
@@ -98,6 +110,7 @@ class WeatherViewModel(
         generateUpdatedTime()
         uiScope.launch { urls.value = getUrlsFromDatabase() }
             .also { Log.i("What????", urls.value.toString()) }
+        Log.i("WeatherViewModel", "Put database stuff here")
     }
 
     fun generateUpdatedTime() {

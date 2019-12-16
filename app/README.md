@@ -6,6 +6,17 @@
 | api documentation | [https://www.weather.gov/documentation/services-web-api](https://www.weather.gov/documentation/services-web-api)|
 | api status | [api.weather.gov](https://api.weather.gov) |
 | points | [https://api.weather.gov/points/{points}](https://api.weather.gov/points/) |
-| OneDrive | [plugins/onedrive/README.md] |
-| Medium | [plugins/medium/README.md] |
-| Google Analytics | [plugins/googleanalytics/README.md] |
+
+
+#####  Get location (if location access is allowed)
+* This will attempt to get the location of the user
+* It will check the database for a location and update the long/lat
+* It will refresh the weather view
+
+
+##### Ask for a zip code if location isn't allowed
+* This will use a zip code to find the long lat of a city
+* It will check the database for a location and update the long/lat
+* It will refresh the weather view
+
+##### 
