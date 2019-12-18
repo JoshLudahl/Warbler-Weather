@@ -14,5 +14,8 @@ data class WeatherUrls(
     var gridpoints: String = "107,99",
 
     @ColumnInfo(name = "temperature_measurement")
-    var scale: String = "Celsius"
+    var scale: String = "Celsius",
+
+    @ColumnInfo(name = "lat_long")
+    var location: String = "45.45945945945946,-122.78933059959456"
 )
