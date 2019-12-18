@@ -1,20 +1,19 @@
 package com.weatheruous.Location
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.pm.PackageManager
 import android.location.Location
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.delay
 
-private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
-private var locations: Location? = null
-
+@SuppressLint("Registered")
 class LocationProviderImp(application: Application) : LocationProvider, Application() {
 
+    private var locations: Location? = null
     private val context = application.applicationContext
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
 
@@ -41,12 +40,10 @@ class LocationProviderImp(application: Application) : LocationProvider, Applicat
             //  Not sure if I can get away without having this delay, seems egregious in this capacity.
             delay(500)
             println("Location: ${locations?.latitude} + ${locations?.longitude}")
-
             return builder.toString()
         }
         else {
             TODO("Add permission request, descriptive error toast for now.")
-            Toast.makeText(applicationContext, "Unable to get location.", Toast.LENGTH_SHORT).show()
         }
     }
 
