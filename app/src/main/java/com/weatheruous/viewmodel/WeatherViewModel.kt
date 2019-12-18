@@ -2,6 +2,7 @@ package com.weatheruous.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 import java.text.DateFormat
 
 class WeatherViewModel(
@@ -56,6 +58,7 @@ class WeatherViewModel(
         getWeatherData()
         getCurrentWeather()
         generateUpdatedTime()
+        uiScope.launch { updateLocation() }
 
     }
 
@@ -65,13 +68,18 @@ class WeatherViewModel(
             weatherUrls
         }
     }
-//    private suspend fun updateLocation() {
-//        println("asdfasdfasdfasdf asdf asdf asdf asdfa sdfa sdfasd fasdf asdfasdfa")
-//        withContext(Dispatchers.IO) {
-//            var snuff = async { loc.getLastLocation() }
-//            println(snuff.await())
-//        }
-//    }
+    private suspend fun updateLocation() {
+        withContext(Dispatchers.IO) {
+            try {
+                var snuff = async { loc.getLastLocation() }
+                println(snuff.await())
+
+            } catch (e: Exception) {
+                // Catch Exception
+                Log.ERROR
+            }
+        }
+    }
 
     private suspend fun clear() {
         withContext(Dispatchers.IO) {
@@ -123,8 +131,7 @@ class WeatherViewModel(
     private fun getWeatherData() {
         WeatherAPI.retrofitService.getCurrentWeather().enqueue(object : Callback<WeatherData> {
             override fun onFailure(call: Call<WeatherData>, t: Throwable) {
-                Log.i("WeatherViewModel", "Calling failure response on getting current weather.")
-                //  todo handle failure
+                TODO("Implement exception handle.")
             }
 
             override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {
@@ -140,7 +147,7 @@ class WeatherViewModel(
     private fun getCurrentWeather() {
         WeatherAPI.retrofitService.getWeatherForecast().enqueue(object : Callback<WeatherData> {
             override fun onFailure(call: Call<WeatherData>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                TODO("Implement exception handle.")
             }
 
             override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {

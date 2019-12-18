@@ -4,52 +4,47 @@ import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
 
 private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 
 class LocationProviderImp(application: Application) : LocationProvider, Application() {
-    private val context = application.applicationContext
 
+    private val context = application.applicationContext
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var locationJob = Job()
-    private var locationScope = CoroutineScope(Dispatchers.Main + locationJob)
 
     init {
         fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(application)
-
-        locationScope.launch {
-            createLocationRequest()
-            getLastLocation()
-        }
-
     }
 
     override suspend fun hasLocationChanged(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented")
+        //  Might be restricting this
     }
 
     override suspend fun getLastLocation(): String {
 
-
-
-        var stringbuilder = StringBuilder()
-        var stringy = ""
+        var builder: StringBuilder = StringBuilder()
         if (hasLocationPermission()) {
 
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
-                  println("Longitude is: ${location?.longitude}")
-                    println("Latitude is: ${location?.latitude}")
+
+                    builder.append(location?.latitude.toString())
+                        .append(",")
+                        .append(location?.longitude.toString())
                 }
+            //  Not sure if I can get away without having this delay, seems egregious in this capacity.
+            delay(1000)
+            return builder.toString()
         }
-        return stringbuilder.toString()
+        else {
+            TODO("Add permission request")
+        }
     }
 
     private fun hasLocationPermission(): Boolean {
@@ -58,14 +53,4 @@ class LocationProviderImp(application: Application) : LocationProvider, Applicat
             Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
-
-    fun createLocationRequest() {
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-    }
-
 }
