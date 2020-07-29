@@ -1,12 +1,10 @@
 package com.weatheruous.viewmodel
-import android.app.Activity
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.weatheruous.Location.LocationProviderImp
+import com.weatheruous.location.LocationProviderImp
 import com.weatheruous.data.WeatherAPI
 import com.weatheruous.data.WeatherDatabaseDao
 import com.weatheruous.data.WeatherUrls
@@ -31,6 +29,7 @@ class WeatherViewModel(
     private val _currentTempLow = MutableLiveData<String>()
     private val _refreshed = MutableLiveData<String>()
     private val _conditions = MutableLiveData<String>()
+    private val _cityName = MutableLiveData<String>()
     private val _icon = MutableLiveData<String>()
 
     //  Jobs
@@ -52,6 +51,9 @@ class WeatherViewModel(
 
     val conditions: LiveData<String>
         get() = _conditions
+
+    val cityName: LiveData<String>
+        get() = _cityName
 
     init {
         Log.i("WeatherViewModel", "Weather ViewModel created.")

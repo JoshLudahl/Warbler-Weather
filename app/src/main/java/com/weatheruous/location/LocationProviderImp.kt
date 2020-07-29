@@ -1,4 +1,4 @@
-package com.weatheruous.Location
+package com.weatheruous.location
 
 import android.Manifest
 import android.annotation.SuppressLint

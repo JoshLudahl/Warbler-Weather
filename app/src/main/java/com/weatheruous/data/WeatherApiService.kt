@@ -24,6 +24,9 @@ private val retrofit = Retrofit.Builder()
 
 interface WeatherApiService {
 
+    @GET
+    fun setupWeatherModel(): Call<WeatherData>
+
     @GET(FORECAST_HOURLY_URL)
     fun getCurrentWeather(): Call<WeatherData>
 

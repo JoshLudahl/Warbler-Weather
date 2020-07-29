@@ -32,3 +32,22 @@ data class Periods(
     val shortForecast: String,
     val detailedForecast: String
 )
+
+data class Locations(
+    val properties: WeatherLocationProperties
+)
+
+data class WeatherLocationProperties(
+    val forcast: String,
+    val forcastHourly: String,
+    val relativeLocation: RelativeLocation
+)
+
+data class RelativeLocation(
+    val properties: LocationProperties
+)
+
+data class LocationProperties(
+    val city: String,
+    val state: String
+)
