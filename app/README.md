@@ -20,3 +20,4 @@
 * It will refresh the weather view
 
 ##### 
+Currently crashes until location permission is implemented. :)
