@@ -3,7 +3,7 @@
 buildscript {
     ext {
         kotlin_version = '1.5.21'
-        version_retrofit = "2.7.1"
+        version_retrofit = "2.9.0"
         version_moshi = "1.8.0"
         version_room = "2.3.0"
         version_coroutine = "1.5.0"
