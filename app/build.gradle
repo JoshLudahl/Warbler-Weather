@@ -12,7 +12,7 @@ android {
     compileSdkVersion target
     defaultConfig {
         applicationId "com.weatheruous"
-        minSdkVersion 27
+        minSdkVersion 25
         targetSdkVersion target
         versionCode 1
         versionName "0.1"
@@ -25,9 +25,13 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv('WEATHER_API_KEY') ?: getProperty("WEATHER_API_KEY")}\"")
         }
         debug {
             minifyEnabled false
+
+            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv('WEATHER_API_KEY') ?: getProperty("WEATHER_API_KEY")}\"")
         }
     }
 
