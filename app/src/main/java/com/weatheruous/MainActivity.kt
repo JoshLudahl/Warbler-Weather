@@ -17,11 +17,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTheme(R.style.Theme_Tokenator)
+        setTheme(R.style.Theme_Main)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+
         navController = navHostFragment.navController
     }
 }

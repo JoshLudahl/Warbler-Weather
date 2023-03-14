@@ -16,10 +16,9 @@ android {
         targetSdkVersion target
         versionCode 1
         versionName "0.1"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.weatheruous.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
         vectorDrawables.useSupportLibrary = true
-
     }
 
     buildTypes {
@@ -37,11 +36,16 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled true
+    }
+
     kotlinOptions {
         jvmTarget = '11'
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         viewBinding = true
     }
@@ -116,11 +120,6 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$navigation"
 
-    //  testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
     //  json parsing help
     implementation "com.squareup.moshi:moshi:$moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi"
@@ -132,4 +131,17 @@ dependencies {
     // network
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+
+    //  testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.0.0'
+    androidTestImplementation 'com.github.JoshLudahl:espresso-library-kotlin:0.14.0'
+
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
 }
