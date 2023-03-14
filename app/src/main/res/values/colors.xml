@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1E88E5</color>
-    <color name="colorPrimaryDark">#0D47A1</color>
-    <color name="colorAccent">#9E9E9E</color>
-    <color name="colorRed">#B71C1C</color>
-    <color name="colorBlue">#01579B</color>
-    <color name="colorCharcoal">#212121</color>
+    <color name="colorPrimary">#256D85</color>
+    <color name="colorPrimaryDark">#06283D</color>
+    <color name="colorAccent">#47B5FF</color>
+    <color name="colorOnPrimary">#DFF6FF</color>
 
-    <color name="weatherIconFillColor">#FF01579B</color>
-    <color name="colorCharcoalSystem">#FF757575</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
     <!-- custom theme -->
     <color name="blackish">#222831</color>
     <color name="yellow">#ffa62b</color>
-    <color name="deep_blue">#34495E</color>
-    <color name="dark_gray">#393e46</color>
-    <color name="light_blue">#0195E6</color>
-    <color name="contrasted_blue_label">#039BE5</color>
-    <color name="contrasted_blue">#1E88E5</color>
-    <color name="light_gray">#eeeeee</color>
-    <color name="grayish">#9EABC1</color>
-    <color name="lighter_gray">#525965</color>
+
 </resources>

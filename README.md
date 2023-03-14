@@ -4,11 +4,21 @@
 The purpose of this app is to offer an unbiased view of weather data without all the fuss (ads, tracking, data mining). 
 
 ### Libraries used
-* Retrofit
-* Moshi
-* Uses weather.gov API
+* Uses [Open Weather Map](https://openweathermap.org/) API for weather data
+* Retrofit for Network traffic
+* Written in Kotlin
+* Jetpack Navigation
+* LiveData
+* Flow
+* ViewBinding
+* DataBinding
+* Room Database
+* DataStore
 * RecyclerView
-* ConstraintLayout
+* Dependency Injection using Dagger Hilt
+* MVVM
+* Kotlin Coroutines
+* Material Design Components
 
 ### Features
 * City Finder
@@ -17,4 +27,3 @@ The purpose of this app is to offer an unbiased view of weather data without all
 * [Weather Icons](https://erikflowers.github.io/weather-icons/)
 * Current Weather
 * Forecast
-* Historical data (future release)
