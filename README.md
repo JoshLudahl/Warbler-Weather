@@ -27,4 +27,3 @@ The purpose of this app is to offer an unbiased view of weather data without all
 * [Weather Icons](https://erikflowers.github.io/weather-icons/)
 * Current Weather
 * Forecast
-* <span style="color:blue">some *blue* text</span>.
