@@ -1,3 +1,5 @@
+[![Android CI](https://github.com/JoshLudahl/Weatheruous/actions/workflows/android.yml/badge.svg)](https://github.com/JoshLudahl/Weatheruous/actions/workflows/android.yml)
+
 # Weatheruous
 
 ## A simple app for weather
