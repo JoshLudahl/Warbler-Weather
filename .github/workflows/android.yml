@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11
@@ -27,7 +25,7 @@ jobs:
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
 
-  test:
+  ui-test:
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -61,3 +59,21 @@ jobs:
           name: Test-Reports
           path: app/build/reports
         if: always()
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew test
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
