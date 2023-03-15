@@ -35,9 +35,10 @@ interface WeatherApiService {
 
     @GET(BASE_URL)
     fun getWeatherApiStatus(): Call<String>
-
 }
 
 object WeatherAPI {
-    val retrofitService: WeatherApiService by lazy { retrofit.create(WeatherApiService::class.java) }
+    val retrofitService: WeatherApiService by lazy {
+        retrofit.create(WeatherApiService::class.java)
+    }
 }

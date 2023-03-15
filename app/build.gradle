@@ -69,6 +69,8 @@ ktlint {
     }
 }
 
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

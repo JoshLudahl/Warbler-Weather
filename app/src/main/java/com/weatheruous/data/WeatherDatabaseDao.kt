@@ -15,9 +15,8 @@ interface WeatherDatabaseDao {
     fun update(weatherUrls: WeatherUrls)
 
     @Query("SELECT * FROM location_information")
-    fun getWeatherUrls():  WeatherUrls
+    fun getWeatherUrls(): WeatherUrls
 
     @Query("DELETE FROM location_information")
     fun clear()
-
 }
