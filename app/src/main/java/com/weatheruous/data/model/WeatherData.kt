@@ -1,4 +1,4 @@
-package com.weatheruous.model
+package com.weatheruous.data.model
 
 data class WeatherData(
     var properties: Properties

@@ -1,8 +1,8 @@
-package com.weatheruous.data
+package com.weatheruous.data.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.weatheruous.model.WeatherData
+import com.weatheruous.data.model.WeatherData
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

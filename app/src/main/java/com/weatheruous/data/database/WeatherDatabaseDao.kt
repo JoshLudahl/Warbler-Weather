@@ -1,9 +1,10 @@
-package com.weatheruous.data
+package com.weatheruous.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.weatheruous.data.WeatherUrls
 
 @Dao
 interface WeatherDatabaseDao {
