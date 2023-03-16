@@ -44,6 +44,8 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 In the ```build.gradle```, you will find an associated weather API key assigned, so you will want to
 visit [Open Weather Map](https://openweathermap.org/api) and sign up to get an API key. 
 Once you have an API key, place it in your global ```gradle.properties``` file or in your environment. 
+It should look like this, replacing ```<api-key>``` with the actual key:
+```WEATHER_API_KEY=<api-key>```
 
 ## Tests
 There are UI tests setup to run Espresso tests. Unit tests are also configured and uses Mockito.
