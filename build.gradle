@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        coroutine = "1.6.4"
+        coroutine = '1.6.4'
         dagger_hilt = '2.45'
         hilt_lifecycle_viewmodel = '1.0.0'
         kotlin = '1.8.10'
         moshi = "1.14.0"
         navigation = '2.5.3'
-        retrofit = "2.9.0"
+        retrofit = '2.9.0'
         room = "2.5.0"
     }
 
