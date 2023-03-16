@@ -21,6 +21,9 @@ The purpose of this app is to offer an unbiased view of weather data without all
 * [Notifications](https://developer.android.com/develop/ui/views/notifications)
 * [MVVM](https://developer.android.com/topic/architecture)
 * [Material Design Components for Android](https://github.com/material-components/material-components-android)
+* Testing includes
+  * [Mockito](https://developer.android.com/training/testing/local-tests) for unit testing
+  * [Espresso](https://developer.android.com/training/testing/espresso) for UI testing
 
 ### Features
 * City Finder
@@ -39,11 +42,11 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ## Setup
 In the ```build.gradle```, you will find an associated weather API key assigned, so you will want to
-visit [Open Weather Map](https://openweathermap.org/api) and sign up to get an API key. Once you have an API key,
-place it in your global ```gradle.properties``` file or in your environment. 
+visit [Open Weather Map](https://openweathermap.org/api) and sign up to get an API key. 
+Once you have an API key, place it in your global ```gradle.properties``` file or in your environment. 
 
 ## Tests
-There are UI tests setup to run Espresso tests. Unit tests are also configured to run on Github.
+There are UI tests setup to run Espresso tests. Unit tests are also configured and uses Mockito.
 
 ## CI
 This project is configured to run Github Actions and uses Dependabot for dependency updates.
