@@ -1,53 +1,116 @@
 package com.weatheruous.data.model
 
+import android.os.Parcelable
+import androidx.room.Entity
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Entity
+@Serializable
 data class WeatherData(
-    var properties: Properties
-)
-
-data class Properties(
-    val updated: String,
-    val units: String,
-    val updateTime: String,
-    val elevation: Elevation,
-    val periods: List<Periods>
-)
-
-data class Elevation(
-    val value: Float,
-    val unitCode: String
-)
-
-data class Periods(
-    val number: String,
+    @SerialName("base")
+    val base: String,
+    @SerialName("clouds")
+    val clouds: Clouds,
+    @SerialName("cod")
+    val cod: Int,
+    @SerialName("coord")
+    val coord: Coord,
+    @SerialName("dt")
+    val dt: Int,
+    @SerialName("id")
+    val id: Int,
+    @SerialName("main")
+    val main: Main,
+    @SerialName("name")
     val name: String,
-    val startTime: String,
-    val endTime: String,
-    val isDaytime: Boolean,
-    val temperature: Int,
-    val temperatureUnit: String,
-    val temperatureTrend: String?,
-    val windSpeed: String,
-    val windDirection: String,
+    @SerialName("rain")
+    val rain: Rain,
+    @SerialName("sys")
+    val sys: Sys,
+    @SerialName("timezone")
+    val timezone: Int,
+    @SerialName("visibility")
+    val visibility: Int,
+    @SerialName("weather")
+    val weather: List<Weather>,
+    @SerialName("wind")
+    val wind: Wind
+)
+
+@Serializable
+data class Clouds(
+    @SerialName("all")
+    val all: Int
+)
+
+@Serializable
+data class Coord(
+    @SerialName("lat")
+    val lat: Double,
+    @SerialName("lon")
+    val lon: Double
+)
+
+@Serializable
+data class Main(
+    @SerialName("feels_like")
+    val feelsLike: Double,
+    @SerialName("grnd_level")
+    val grndLevel: Int,
+    @SerialName("humidity")
+    val humidity: Int,
+    @SerialName("pressure")
+    val pressure: Int,
+    @SerialName("sea_level")
+    val seaLevel: Int,
+    @SerialName("temp")
+    val temp: Double,
+    @SerialName("temp_max")
+    val tempMax: Double,
+    @SerialName("temp_min")
+    val tempMin: Double
+)
+
+@Serializable
+data class Rain(
+    @SerialName("1h")
+    val h: Double
+)
+
+@Serializable
+data class Sys(
+    @SerialName("country")
+    val country: String,
+    @SerialName("id")
+    val id: Int,
+    @SerialName("sunrise")
+    val sunrise: Int,
+    @SerialName("sunset")
+    val sunset: Int,
+    @SerialName("type")
+    val type: Int
+)
+
+@Serializable
+data class Weather(
+    @SerialName("description")
+    val description: String,
+    @SerialName("icon")
     val icon: String,
-    val shortForecast: String,
-    val detailedForecast: String
+    @SerialName("id")
+    val id: Int,
+    @SerialName("main")
+    val main: String
 )
 
-data class Locations(
-    val properties: WeatherLocationProperties
-)
-
-data class WeatherLocationProperties(
-    val forcast: String,
-    val forcastHourly: String,
-    val relativeLocation: RelativeLocation
-)
-
-data class RelativeLocation(
-    val properties: LocationProperties
-)
-
-data class LocationProperties(
-    val city: String,
-    val state: String
+@Serializable
+data class Wind(
+    @SerialName("deg")
+    val deg: Int,
+    @SerialName("gust")
+    val gust: Double,
+    @SerialName("speed")
+    val speed: Double
 )

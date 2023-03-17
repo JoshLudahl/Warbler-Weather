@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'org.jlleitschuh.gradle.ktlint'
+    id 'kotlinx-serialization'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -119,6 +121,7 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation"
