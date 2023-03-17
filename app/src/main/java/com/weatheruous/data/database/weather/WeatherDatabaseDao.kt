@@ -1,4 +1,4 @@
-package com.weatheruous.data.database
+package com.weatheruous.data.database.weather
 
 import androidx.room.Dao
 import androidx.room.Insert

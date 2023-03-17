@@ -2,8 +2,8 @@ package com.weatheruous.di
 
 import android.content.Context
 import androidx.room.Room
-import com.weatheruous.data.database.WeatherDatabase
-import com.weatheruous.data.database.WeatherDatabaseDao
+import com.weatheruous.data.database.weather.WeatherDatabase
+import com.weatheruous.data.database.weather.WeatherDatabaseDao
 import com.weatheruous.data.repositories.WeatherDatabaseRepository
 import dagger.Module
 import dagger.Provides
