@@ -8,7 +8,7 @@ import com.weatheruous.data.model.WeatherData
     entities = [
         WeatherData::class
     ],
-    version = 6,
+    version = 1,
     exportSchema = false
 )
 abstract class WeatherDatabase : RoomDatabase() {
