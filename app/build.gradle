@@ -14,7 +14,7 @@ android {
     compileSdkVersion target
     defaultConfig {
         applicationId "com.weatheruous"
-        minSdkVersion 25
+        minSdkVersion 26
         targetSdkVersion target
         versionCode 1
         versionName "0.1"
