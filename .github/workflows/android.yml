@@ -24,6 +24,7 @@ jobs:
         run: ./gradlew build
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
 
   ui-test:
     runs-on: macOS-latest
