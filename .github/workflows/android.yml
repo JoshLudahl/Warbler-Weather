@@ -52,6 +52,7 @@ jobs:
           script: avdmanager list device && ./gradlew connectedAndroidTest --stacktrace
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
 
       - name: Upload Reports
         uses: actions/upload-artifact@v3
@@ -77,3 +78,4 @@ jobs:
         run: ./gradlew testDebugUnitTest
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
