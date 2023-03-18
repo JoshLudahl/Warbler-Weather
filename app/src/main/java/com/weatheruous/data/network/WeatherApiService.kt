@@ -1,44 +1,38 @@
 package com.weatheruous.data.network
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.weatheruous.BuildConfig
 import com.weatheruous.data.model.WeatherData
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
-//  The URLS will be attached to a database and only the location will be used to obtain the correct links
-private const val BASE_URL = "https://api.weather.gov"
-private const val FORECAST_HOURLY_URL = "/gridpoints/PQR/107,99/forecast/hourly"
-private const val FORCAST_URL = "/gridpoints/PQR/107,99/forecast"
+private const val BASE_URL = BuildConfig.WEATHER_BASE_URL
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+val contentType = "application/json".toMediaType()
 
+@OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addConverterFactory(Json.asConverterFactory(contentType = contentType))
     .baseUrl(BASE_URL)
     .build()
 
 interface WeatherApiService {
 
-    @GET
-    fun setupWeatherModel(): Call<WeatherData>
-
-    @GET(FORECAST_HOURLY_URL)
-    fun getCurrentWeather(): Call<WeatherData>
-
-    @GET(FORCAST_URL)
-    fun getWeatherForecast(): Call<WeatherData>
-
-    @GET(BASE_URL)
-    fun getWeatherApiStatus(): Call<String>
+    @GET("/data/3.0/onecall?lat={lat}&lon={lon}&appid={apiKey}")
+    fun getWeather(
+        @Path("apiKey") apiKey: String,
+        @Path("lat") lat: Double,
+        @Path("lon") lon: Double
+    ): Call<WeatherData>
 }
 
 object WeatherAPI {
-    val retrofitService: WeatherApiService by lazy {
+    val weatherService: WeatherApiService by lazy {
         retrofit.create(WeatherApiService::class.java)
     }
 }

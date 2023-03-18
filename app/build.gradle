@@ -21,18 +21,18 @@ android {
         testInstrumentationRunner "com.weatheruous.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField("String", "WEATHER_BASE_URL", "\"${System.getenv('WEATHER_BASE_URL') ?: getProperty("WEATHER_BASE_URL")}\"")
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
             buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv('WEATHER_API_KEY') ?: getProperty("WEATHER_API_KEY")}\"")
         }
         debug {
             minifyEnabled false
-
             buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv('WEATHER_API_KEY') ?: getProperty("WEATHER_API_KEY")}\"")
         }
     }
@@ -129,10 +129,6 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$navigation"
 
-    //  json parsing help
-    implementation "com.squareup.moshi:moshi:$moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
-
     //  data
     implementation "androidx.room:room-runtime:$room"
     kapt "androidx.room:room-compiler:$room"
@@ -140,6 +136,8 @@ dependencies {
     // network
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    implementation "com.squareup.okhttp3:okhttp:4.7.2"
 
     //  testing
     testImplementation 'junit:junit:4.13.2'
