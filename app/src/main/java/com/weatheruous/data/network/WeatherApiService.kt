@@ -13,16 +13,14 @@ import retrofit2.http.Path
 
 private const val BASE_URL = BuildConfig.WEATHER_BASE_URL
 
-val contentType = "application/json".toMediaType()
+private val contentType = "application/json".toMediaType()
 
 @OptIn(ExperimentalSerializationApi::class)
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(Json.asConverterFactory(contentType = contentType))
-    .baseUrl(BASE_URL)
-    .build()
+private val retrofit =
+    Retrofit.Builder().addConverterFactory(Json.asConverterFactory(contentType = contentType))
+        .baseUrl(BASE_URL).build()
 
 interface WeatherApiService {
-
     @GET("/data/3.0/onecall?lat={lat}&lon={lon}&appid={apiKey}")
     fun getWeather(
         @Path("apiKey") apiKey: String,
