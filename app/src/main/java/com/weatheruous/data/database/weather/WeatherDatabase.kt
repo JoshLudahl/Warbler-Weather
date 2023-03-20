@@ -2,7 +2,7 @@ package com.weatheruous.data.database.weather
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.weatheruous.data.model.WeatherData
+import com.weatheruous.data.model.weather.WeatherData
 
 @Database(
     entities = [

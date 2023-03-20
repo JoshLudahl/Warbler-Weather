@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.weatheruous.data.database.weather.WeatherDatabase
 import com.weatheruous.data.database.weather.WeatherDatabaseDao
-import com.weatheruous.data.repositories.WeatherDatabaseRepository
+import com.weatheruous.data.repositories.weather.WeatherDatabaseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
