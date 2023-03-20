@@ -16,7 +16,7 @@ class WeatherDataSourceDto {
         )
     }
 
-    private fun getCityNameFromLatLon(lat: Double, lon: Double) : String {
+    private fun getCityNameFromLatLon(lat: Double, lon: Double): String {
         // TODO: Build out location service
         return ""
     }

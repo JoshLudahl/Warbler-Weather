@@ -1,7 +1,6 @@
 package com.weatheruous.data.model.weather
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 

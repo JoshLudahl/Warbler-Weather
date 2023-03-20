@@ -1,9 +1,7 @@
 package com.weatheruous.data.model.location
 import androidx.annotation.Keep
-
-import kotlinx.serialization.Serializable
-
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 class Location : ArrayList<LocationItem>()
 

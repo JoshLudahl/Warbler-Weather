@@ -1,4 +1,4 @@
-package com.weatheruous.data.network;
+package com.weatheruous.data.network
 
 sealed class Result {
     data class Success<T>(val data: T) : Result()
