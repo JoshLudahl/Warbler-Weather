@@ -3,4 +3,10 @@
     <dimen name="title_temp">36sp</dimen>
     <dimen name="current_weather_temp">48sp</dimen>
     <dimen name="icon_dim">90dp</dimen>
+    <dimen name="default_icon_size">30dp</dimen>
+    <dimen name="location_text_size">18sp</dimen>
+    <dimen name="date_title_text_size">25sp</dimen>
+    <dimen name="default_temperature_text_size">96sp</dimen>
+    <dimen name="weather_icon_size">140dp</dimen>
+    <dimen name="current_weather_description_text_size">18sp</dimen>
 </resources>

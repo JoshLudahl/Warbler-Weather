@@ -8,5 +8,17 @@
         android:id="@+id/mainWeatherFragment"
         android:name="com.weatheruous.ui.MainWeatherFragment"
         android:label="fragment_main_weather"
-        tools:layout="@layout/fragment_main_weather" />
+        tools:layout="@layout/fragment_main_weather" >
+        <action
+            android:id="@+id/action_mainWeatherFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.weatheruous.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
+            app:destination="@id/mainWeatherFragment" />
+    </fragment>
 </navigation>

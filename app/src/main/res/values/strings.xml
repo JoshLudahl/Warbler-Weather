@@ -12,4 +12,8 @@
 
     <string name="version">v0.0.5</string>
     <string name="updated_at_string">refreshed at 9:27 AM</string>
+    <string name="location_icon_description">Location Icon</string>
+    <string name="settings_icon_description">Settings Icon</string>
+    <string name="search_icon_description">Search Icon</string>
+    <string name="text_temperature">36°</string>
 </resources>
