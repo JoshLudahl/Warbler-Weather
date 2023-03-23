@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:background">@color/colorBackground</item>
     </style>
+
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
 </resources>
