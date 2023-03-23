@@ -27,6 +27,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         binding.settingsIcon.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_mainWeatherFragment_to_settingsFragment)
         }
+
+        binding.searchIcon.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+        }
     }
 
     override fun onDestroyView() {

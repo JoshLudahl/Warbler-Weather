@@ -12,10 +12,17 @@
         <action
             android:id="@+id/action_mainWeatherFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainWeatherFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -24,9 +31,17 @@
         <action
             android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.weatheruous.ui.location.LocationFragment"
+        android:label="LocationFragment" >
+        <action
+            android:id="@+id/action_locationFragment_to_mainWeatherFragment"
+            app:destination="@id/mainWeatherFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
 </navigation>
