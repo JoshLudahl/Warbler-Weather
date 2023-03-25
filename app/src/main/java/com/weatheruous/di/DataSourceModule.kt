@@ -2,8 +2,10 @@ package com.weatheruous.di
 
 import android.content.Context
 import androidx.room.Room
+import com.weatheruous.data.database.location.LocationDao
 import com.weatheruous.data.database.weather.WeatherDatabase
 import com.weatheruous.data.database.weather.WeatherDatabaseDao
+import com.weatheruous.data.repositories.location.LocationRepository
 import com.weatheruous.data.repositories.weather.WeatherDatabaseRepository
 import dagger.Module
 import dagger.Provides
@@ -34,4 +36,12 @@ object DataSourceModule {
     @Provides
     fun providesWeatherDatabaseRepository(weatherDatabaseDao: WeatherDatabaseDao) =
         WeatherDatabaseRepository(weatherDatabaseDao)
+
+    @Singleton
+    @Provides
+    fun providesLocationDatabaseDao(database: WeatherDatabase) = database.locationDao()
+
+    @Singleton
+    @Provides
+    fun providesLocationRepository(locationDao: LocationDao) = LocationRepository(locationDao)
 }

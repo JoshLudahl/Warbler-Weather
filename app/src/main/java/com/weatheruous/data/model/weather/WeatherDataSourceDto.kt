@@ -1,8 +1,8 @@
 package com.weatheruous.data.model.weather
 
 class WeatherDataSourceDto {
-    fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherData {
-        return WeatherData(
+    fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherDataEntity {
+        return WeatherDataEntity(
             city = getCityNameFromLatLon(weatherDataSource.lat, weatherDataSource.lon),
             condition = weatherDataSource.current.weather[0].main,
             description = weatherDataSource.current.weather[0].description,

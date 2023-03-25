@@ -13,6 +13,7 @@ object RetrofitClient {
     fun getRetrofitWithBaseUrl(baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(Json.asConverterFactory(contentType = contentType))
-            .baseUrl(baseUrl).build()
+            .baseUrl(baseUrl)
+            .build()
     }
 }

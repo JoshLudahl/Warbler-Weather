@@ -1,6 +1,6 @@
 package com.weatheruous.data.network.weather
 
-import com.weatheruous.data.model.weather.WeatherData
+import com.weatheruous.data.model.weather.WeatherDataSource
 import com.weatheruous.data.network.NetworkConstants
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,5 +12,5 @@ interface WeatherApiService {
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY
-    ): Call<WeatherData>
+    ): Call<WeatherDataSource>
 }

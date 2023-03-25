@@ -5,7 +5,7 @@ import java.time.Instant
 import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "weather_table", primaryKeys = ["lat", "lon"])
-data class WeatherData(
+data class WeatherDataEntity(
     val city: String,
     val condition: String,
     val description: String,

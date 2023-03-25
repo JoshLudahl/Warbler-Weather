@@ -9,4 +9,5 @@
     <dimen name="default_temperature_text_size">96sp</dimen>
     <dimen name="weather_icon_size">140dp</dimen>
     <dimen name="current_weather_description_text_size">18sp</dimen>
+    <dimen name="custom_button_corner_radius">15dp</dimen>
 </resources>
