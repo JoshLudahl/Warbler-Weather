@@ -11,18 +11,19 @@ import kotlinx.coroutines.flow.flowOn
 class LocationRepository @Inject constructor(
     private val locationDao: LocationDao
 ) {
-    fun getCurrentLocationFromDatabase(): Flow<LocationEntity> {
-        return locationDao.getCurrentLocation()?.flowOn(Dispatchers.IO) ?: flow {
-            emit(getDefaultLocation())
-        }
-    }
+    fun getCurrentLocationFromDatabase(): Flow<LocationEntity> = flow {
+        val currentLocation = locationDao.getCurrentLocation()
+        currentLocation?.let {
+            emit(it)
+        } ?: emit(getDefaultLocation())
+    }.flowOn(Dispatchers.IO)
 
     fun saveLocationToDatabaseAndSetAsCurrent(location: LocationEntity) {
         locationDao.updateCurrentLocation()
         locationDao.insertLocation(location)
     }
 
-    fun getDefaultLocation(): LocationEntity {
+    private fun getDefaultLocation(): LocationEntity {
         return LocationEntity(
             lat = 45.5152,
             lon = -122.6793,

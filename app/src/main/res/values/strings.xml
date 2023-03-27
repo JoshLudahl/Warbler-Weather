@@ -8,7 +8,7 @@
     <string name="refreshed_at_label_string">9:25 AM</string>
     <string name="current_weather_temp_string">67˚</string>
     <string name="current_weather_description">Current Weather</string>
-    <string name="refresh">Click to refresh</string>
+    <string name="refresh">Refresh</string>
 
     <string name="version">v0.0.5</string>
     <string name="updated_at_string">refreshed at 9:27 AM</string>

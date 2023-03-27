@@ -4,13 +4,16 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.weatheruous.data.model.location.LocationEntity
+import com.weatheruous.data.model.weather.Conversion
 import com.weatheruous.data.network.Resource
 import com.weatheruous.data.repositories.location.LocationRepository
 import com.weatheruous.data.repositories.weather.WeatherNetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.Instant
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -22,20 +25,51 @@ class MainWeatherViewModel @Inject constructor(
     val weatherState: StateFlow<Resource>
         get() = _weatherState
 
-    private val _locationState = MutableStateFlow(locationRepository.getDefaultLocation())
-    val locationState: StateFlow<LocationEntity> = _locationState
+    private val _locationState = MutableStateFlow<Resource>(Resource.Loading)
+    val locationState: StateFlow<Resource> = _locationState
+
+    private val _dateTitle =
+        MutableStateFlow(Conversion.getFormattedDateFromTimeStamp(Instant.now()))
+    val dateTitle: StateFlow<String> = _dateTitle
 
     init {
         viewModelScope.launch {
-            locationRepository.getCurrentLocationFromDatabase().collect {
-                _locationState.value = it
+            locationRepository.getCurrentLocationFromDatabase().catch { e ->
+                _locationState.value = Resource.Error(
+                    message = e.message ?: "An error occurred"
+                )
+            }.collect {
+                _locationState.value = Resource.Success(it)
             }
         }
-        Log.d("MainWeatherViewModel", "_locationState.value: ${_locationState.value}")
+    }
+    fun updateWeatherData() {
+        _weatherState.value = Resource.Loading
+        when (val location = _locationState.value) {
+            is Resource.Success<*> -> {
+                viewModelScope.launch {
+                    val currentLocation: LocationEntity = location.data as LocationEntity
+                    weatherNetworkRepository.getCurrentWeather(currentLocation)
+                        .catch { e ->
+                            _weatherState.value = Resource.Error(
+                                message = e.message ?: "An error occurred"
+                            )
 
-        viewModelScope.launch {
-            weatherNetworkRepository.getCurrentWeather(_locationState.value).collect {
-                _weatherState.value = it
+                            Log.d(
+                                "MainWeatherViewModel",
+                                "Error getting weather data: ${e.message}"
+                            )
+                        }
+                        .collect {
+                            _weatherState.value = Resource.Success(it)
+                        }
+                }
+            }
+            is Resource.Error -> {
+                Log.d("MainWeatherViewModel", "Error getting location.")
+            }
+            is Resource.Loading -> {
+                Log.d("MainWeatherViewModel", "Loading Weather")
             }
         }
     }

@@ -1,5 +1,4 @@
 package com.weatheruous.data.model.weather
-
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,6 +6,8 @@ import kotlinx.serialization.Serializable
 @Keep
 @Serializable
 data class WeatherDataSource(
+    @SerialName("alerts")
+    val alerts: List<Alert>? = null,
     @SerialName("current")
     val current: Current,
     @SerialName("daily")
@@ -18,7 +19,7 @@ data class WeatherDataSource(
     @SerialName("lon")
     val lon: Double,
     @SerialName("minutely")
-    val minutely: List<Minutely>,
+    val minutely: List<Minutely>? = null,
     @SerialName("timezone")
     val timezone: String,
     @SerialName("timezone_offset")
@@ -47,15 +48,15 @@ data class Current(
     @SerialName("temp")
     val temp: Double,
     @SerialName("uvi")
-    val uvi: Int,
+    val uvi: Double,
     @SerialName("visibility")
     val visibility: Int,
     @SerialName("weather")
     val weather: List<Weather>,
     @SerialName("wind_deg")
-    val windDeg: Int,
+    val windDeg: Int? = null,
     @SerialName("wind_gust")
-    val windGust: Double,
+    val windGust: Double? = null,
     @SerialName("wind_speed")
     val windSpeed: Double
 )
@@ -84,7 +85,9 @@ data class Daily(
     @SerialName("pressure")
     val pressure: Int,
     @SerialName("rain")
-    val rain: Double?,
+    val rain: Double? = null,
+    @SerialName("snow")
+    val snow: Double? = null,
     @SerialName("sunrise")
     val sunrise: Int,
     @SerialName("sunset")
@@ -96,11 +99,11 @@ data class Daily(
     @SerialName("weather")
     val weather: List<Weather>,
     @SerialName("wind_deg")
-    val windDeg: Int,
+    val windDeg: Int? = null,
     @SerialName("wind_gust")
-    val windGust: Double,
+    val windGust: Double? = null,
     @SerialName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double? = null
 )
 
 @Keep
@@ -120,6 +123,10 @@ data class Hourly(
     val pop: Double,
     @SerialName("pressure")
     val pressure: Int,
+    @SerialName("rain")
+    val rain: Rain? = null,
+    @SerialName("snow")
+    val snow: Snow? = null,
     @SerialName("temp")
     val temp: Double,
     @SerialName("uvi")
@@ -186,4 +193,35 @@ data class Temp(
     val morn: Double,
     @SerialName("night")
     val night: Double
+)
+
+@Keep
+@Serializable
+data class Rain(
+    @SerialName("1h")
+    val h: Double
+)
+
+@Keep
+@Serializable
+data class Snow(
+    @SerialName("1h")
+    val h: Double
+)
+
+@Keep
+@Serializable
+data class Alert(
+    @SerialName("description")
+    val description: String,
+    @SerialName("end")
+    val end: Int,
+    @SerialName("event")
+    val event: String,
+    @SerialName("sender_name")
+    val senderName: String,
+    @SerialName("start")
+    val start: Int,
+    @SerialName("tags")
+    val tags: List<String>
 )

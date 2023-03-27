@@ -39,7 +39,6 @@
                 android:id="@+id/location_text"
                 style="@style/title_style"
                 android:layout_marginStart="16dp"
-                android:text="Location, OR"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="@+id/location_icon"
                 app:layout_constraintEnd_toStartOf="@+id/search_icon"
@@ -76,11 +75,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Friday, March 12th"
                 app:layout_constrainedWidth="true"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/date_title_text_size"
+                android:text="@{viewModel.dateTitle}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_icon"
@@ -92,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/text_temperature"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/default_temperature_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +103,6 @@
                 android:layout_width="@dimen/weather_icon_size"
                 android:layout_height="@dimen/weather_icon_size"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/ic_wi_cloudy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/current_temperature" />
@@ -116,7 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Cloudy"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/current_weather_description_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,10 +127,25 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
                 android:layout_marginTop="32dp"
-                android:text="TextView"
+                android:text="@string/refresh"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/weather_description" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="5dp"
+                android:maxHeight="40dp"
+                android:visibility="gone"
+                android:minHeight="40dp"
+                android:background="@color/colorBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.weatheruous.data.model.location.LocationEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LocationDao {
@@ -14,11 +13,11 @@ interface LocationDao {
     fun insertLocation(location: LocationEntity)
 
     @Query("SELECT * FROM location_table where current = 1")
-    fun getCurrentLocation(): Flow<LocationEntity>?
+    fun getCurrentLocation(): LocationEntity?
 
     @Query("UPDATE location_table SET current = 0 where current = 1")
     fun updateCurrentLocation()
 
     @Query("SELECT * FROM location_table")
-    fun getAllLocations(): Flow<List<LocationEntity>>?
+    fun getAllLocations(): List<LocationEntity>?
 }
