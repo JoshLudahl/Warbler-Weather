@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.weatheruous.R
 import com.weatheruous.data.model.location.LocationEntity
@@ -19,6 +17,8 @@ import com.weatheruous.data.network.Resource
 import com.weatheruous.databinding.FragmentMainWeatherBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -27,19 +27,24 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private var _binding: FragmentMainWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
+    private val job = Job()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainWeatherBinding.bind(view)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+    }
 
+    override fun onStart() {
+        super.onStart()
         setupObservers()
         setUpListeners()
     }
 
     private fun setupObservers() {
-        lifecycleScope.launch {
-            viewModel.locationState.collectLatest { result ->
+        lifecycleScope.launch(Dispatchers.Main + job) {
+            viewModel.locationState.collect { result ->
                 when (result) {
                     is Resource.Success<*> -> {
                         viewModel.updateWeatherData()
@@ -55,11 +60,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.weatherState.collect { result ->
+        lifecycleScope.launch(Dispatchers.Main + job) {
+            viewModel.weatherState.collectLatest { result ->
                 binding.progressBar.visibility = View.VISIBLE
                 when (result) {
-                    is Resource.Success<*> -> {
+                    is Resource.Success -> {
                         with(binding) {
                             currentTemperature.text = (result.data as WeatherDataSource)
                                 .current
@@ -88,7 +93,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-
                     }
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
@@ -115,5 +119,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 }

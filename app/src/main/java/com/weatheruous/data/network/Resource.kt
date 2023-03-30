@@ -1,11 +1,11 @@
 package com.weatheruous.data.network
 
-sealed class Resource {
-    class Success<T>(val data: T) : Resource()
+sealed class Resource<out T> {
+    class Success<T>(val data: T) : Resource<T>()
     data class Error(
         val exception: Exception? = null,
         val message: String? = null
-    ) : Resource()
+    ) : Resource<Nothing>()
 
-    object Loading : Resource()
+    object Loading : Resource<Nothing>()
 }

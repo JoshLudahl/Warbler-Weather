@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.data.model.weather.Conversion
+import com.weatheruous.data.model.weather.WeatherDataSource
 import com.weatheruous.data.network.Resource
 import com.weatheruous.data.repositories.location.LocationRepository
 import com.weatheruous.data.repositories.weather.WeatherNetworkRepository
@@ -21,12 +22,12 @@ class MainWeatherViewModel @Inject constructor(
     private val weatherNetworkRepository: WeatherNetworkRepository,
     private val locationRepository: LocationRepository
 ) : ViewModel() {
-    private val _weatherState = MutableStateFlow<Resource>(Resource.Loading)
-    val weatherState: StateFlow<Resource>
+    private val _weatherState = MutableStateFlow<Resource<WeatherDataSource>>(Resource.Loading)
+    val weatherState: StateFlow<Resource<WeatherDataSource>>
         get() = _weatherState
 
-    private val _locationState = MutableStateFlow<Resource>(Resource.Loading)
-    val locationState: StateFlow<Resource> = _locationState
+    private val _locationState = MutableStateFlow<Resource<LocationEntity>>(Resource.Loading)
+    val locationState: StateFlow<Resource<LocationEntity>> = _locationState
 
     private val _dateTitle =
         MutableStateFlow(Conversion.getFormattedDateFromTimeStamp(Instant.now()))
