@@ -32,12 +32,136 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/settings_title_text"
                 style="@style/title_style"
-                android:text="Settings"
-                tools:text="Settings"
+                android:text="@string/settings"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="@+id/back_icon"
                 app:layout_constraintStart_toEndOf="@+id/back_icon"
-                app:layout_constraintTop_toTopOf="@+id/back_icon" />
+                app:layout_constraintTop_toTopOf="@+id/back_icon"
+                tools:text="Settings" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_units_of_measurement_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/back_icon">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_heading_text"
+                    style="@style/settings_heading_style"
+                    android:text="@string/settings_units_of_measurement"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Units of Measurement" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_temperature_text"
+                    style="@style/settings_subheading_style"
+                    android:text="@string/settings_temperature"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_heading_text"
+                    tools:text="Temperature" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_speed_subheading"
+                    style="@style/settings_subheading_style"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_speed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switch1"
+                    tools:text="Speed" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:textOff="@string/celsius"
+                    android:textOn="@string/fahrenheit"
+                    android:textColor="@color/colorAccent"
+                    android:background="@drawable/custom_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_temperature_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/settings_subheading_temperature_text"
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_temperature_text" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/speed_toggle_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_speed_subheading"
+                    android:background="@drawable/custom_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textOff="@string/mph"
+                    android:textOn="@string/km_h"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/settings_speed_subheading"
+                    app:layout_constraintTop_toTopOf="@+id/settings_speed_subheading" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_units_of_measurement_layout">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_about_heading_text"
+                    style="@style/settings_heading_style"
+                    android:text="@string/settings_about_heading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="About" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_about_this_app_text"
+                    style="@style/settings_subheading_style"
+                    android:text="@string/settings_about_this_app"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_about_heading_text"
+                    tools:text="About Weatheruous" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_privacy_policy_text"
+                    style="@style/settings_subheading_style"
+                    android:text="@string/settings_privacy_policy_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_about_this_app_text"
+                    tools:text="Privacy Policy" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageButton2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_about_this_app_text"
+                    app:layout_constraintStart_toEndOf="@+id/settings_subheading_about_this_app_text"
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_about_this_app_text"
+                    app:srcCompat="@drawable/ic_open" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageButton3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_privacy_policy_text"
+                    app:layout_constraintStart_toEndOf="@+id/settings_subheading_privacy_policy_text"
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_privacy_policy_text"
+                    app:srcCompat="@drawable/ic_open" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

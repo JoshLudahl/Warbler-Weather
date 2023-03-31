@@ -15,5 +15,16 @@
     <string name="location_icon_description">Location Icon</string>
     <string name="settings_icon_description">Settings Icon</string>
     <string name="search_icon_description">Search Icon</string>
-    <string name="text_temperature">36°</string>
+    <string name="text_temperature">36\u00B0</string>
+    <string name="settings">Settings</string>
+    <string name="settings_units_of_measurement">Units of Measurement</string>
+    <string name="settings_temperature">Temperature</string>
+    <string name="settings_speed">Speed</string>
+    <string name="settings_about_heading">About</string>
+    <string name="settings_about_this_app">About Weatheruous</string>
+    <string name="settings_privacy_policy_text">Privacy Policy</string>
+    <string name="km_h">KM/H</string>
+    <string name="mph">MPH</string>
+    <string name="celsius">C\u00B0</string>
+    <string name="fahrenheit">F\u00B0</string>
 </resources>

@@ -17,8 +17,34 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textSize">@dimen/location_text_size</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:fontFamily">@font/ubuntu_condensed_regular</item>
         <item name="android:layout_marginStart">16dp</item>
+        <item name="layout_constrainedWidth">true</item>
+        <item name="elevation">4dp</item>
     </style>
+
+    <style name="settings_heading_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/settings_heading_text_size</item>
+        <item name="android:fontFamily">@font/ubuntu_condensed_regular</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="layout_constrainedWidth">true</item>
+    </style>
+
+    <style name="settings_subheading_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:fontFamily">@font/ubuntu_condensed_regular</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="layout_constrainedWidth">true</item>
+    </style>
+
 </resources>
