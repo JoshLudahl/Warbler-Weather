@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
-            android:background="@color/colorBackground"
             android:fillViewport="true"
             tools:context=".ui.MainWeatherFragment">
 
@@ -33,8 +32,6 @@
                     android:id="@+id/location_icon"
                     android:layout_width="@dimen/default_icon_size"
                     android:layout_height="@dimen/default_icon_size"
-                    android:background="@drawable/solid_circle"
-                    android:padding="8dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:contentDescription="@string/location_icon_description"
@@ -60,8 +57,7 @@
                     android:id="@+id/settings_icon"
                     android:layout_width="@dimen/default_icon_size"
                     android:layout_height="@dimen/default_icon_size"
-                    android:background="@drawable/solid_circle"
-                    android:padding="8dp"
+
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:contentDescription="@string/settings_icon_description"
@@ -73,8 +69,6 @@
                     android:id="@+id/search_icon"
                     android:layout_width="@dimen/default_icon_size"
                     android:layout_height="@dimen/default_icon_size"
-                    android:background="@drawable/solid_circle"
-                    android:padding="8dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:contentDescription="@string/search_icon_description"
@@ -85,7 +79,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/date_title"
                     style="@style/font_family"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="@{viewModel.dateTitle}"
@@ -103,6 +97,8 @@
                     android:layout_width="@dimen/weather_icon_size"
                     android:layout_height="@dimen/weather_icon_size"
                     android:layout_marginTop="32dp"
+                    android:animateLayoutChanges="true"
+                    android:backgroundTint="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/date_title" />
@@ -113,7 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
+                    android:backgroundTint="@android:color/transparent"
                     android:textSize="@dimen/default_temperature_text_size"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/current_weather_icon"
@@ -123,6 +121,7 @@
                     android:id="@+id/temperature_hi_low_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/current_temperature">
@@ -133,6 +132,7 @@
                         android:layout_height="@dimen/hi_low_icon_dim"
                         android:src="@drawable/ic_arrow_up"
                         android:tint="@color/red"
+                        android:backgroundTint="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/temperature_hi_text"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -147,6 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/mdash"
+                        android:backgroundTint="@android:color/transparent"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/hi_low_temperature_text_size"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -163,6 +164,7 @@
                         android:layout_height="@dimen/hi_low_icon_dim"
                         android:src="@drawable/ic_arrow_down"
                         android:tint="@color/blue"
+                        android:backgroundTint="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/temperature_low_text"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -176,6 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/mdash"
+                        android:backgroundTint="@android:color/transparent"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/hi_low_temperature_text_size"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +196,8 @@
                     style="@style/font_family"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@android:color/transparent"
                     android:text="@string/mdash"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/current_weather_description_text_size"
@@ -218,9 +222,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/top_rounded_rectangle"
+                    android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/weather_description">
@@ -229,6 +237,7 @@
                         android:id="@+id/imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/uv_index_label"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -242,6 +251,7 @@
                         android:id="@+id/uv_index_label"
                         style="@style/weather_detail_text"
                         android:layout_marginStart="8dp"
+                        android:backgroundTint="@android:color/transparent"
                         android:text="@string/uv_index_label"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
                         app:layout_constraintEnd_toStartOf="@+id/uv_index_value"
@@ -253,6 +263,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/uv_index_value"
                         style="@style/weather_detail_text"
+                        android:backgroundTint="@android:color/transparent"
                         android:text="@string/mdash"
                         app:layout_constraintBottom_toBottomOf="@+id/uv_index_label"
                         app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
@@ -266,6 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:backgroundTint="@android:color/transparent"
                         android:src="@drawable/ic_water_drop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/humidity_text_value"
@@ -278,6 +290,7 @@
                         android:id="@+id/humidity_text_value"
                         style="@style/weather_detail_text"
                         android:layout_marginStart="8dp"
+                        android:backgroundTint="@android:color/transparent"
                         android:text="@string/mdash"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -288,8 +301,8 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

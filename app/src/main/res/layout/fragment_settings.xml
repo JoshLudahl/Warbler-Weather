@@ -106,6 +106,7 @@
                     <RadioButton
                         android:id="@+id/radio_celsius"
                         android:layout_width="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
                         android:layout_height="@dimen/radio_size"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent"
@@ -115,6 +116,7 @@
                         android:id="@+id/radio_fahrenheit"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
 
@@ -122,6 +124,7 @@
                         android:id="@+id/radio_kelvin"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
 
@@ -140,7 +143,7 @@
                     android:id="@+id/settings_subheading_option_mph_text"
                     style="@style/settings_subheading_option_style"
                     android:layout_marginTop="16dp"
-                    android:text="@string/mph"
+                    android:text="@string/miles_per_hour"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/settings_subheading_speed_text"
@@ -150,7 +153,7 @@
                     android:id="@+id/settings_subheading_option_kmh_text"
                     style="@style/settings_subheading_option_style"
                     android:layout_marginTop="16dp"
-                    android:text="@string/km_h"
+                    android:text="@string/meters_per_second"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mph_text"
@@ -168,6 +171,7 @@
                         android:id="@+id/radio_mph"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent"
                         android:checked="true" />
@@ -176,6 +180,7 @@
                         android:id="@+id/radio_kmh"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
 

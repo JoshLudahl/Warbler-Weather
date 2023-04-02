@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="true">
-        <shape android:shape="rectangle" android:tint="@color/colorAccent">
+        <shape android:shape="rectangle"
+            android:tint="@color/colorPrimaryDark">
             <corners
                 android:topLeftRadius="10dp"
-                android:topRightRadius="10dp" />
-            <solid android:color="@color/colorBackground" />
+                android:topRightRadius="10dp"
+                android:radius="23dp"
+                />
+            <solid android:color="@color/colorAccent" />
         </shape>
     </item>
 </selector>
