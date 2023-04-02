@@ -40,10 +40,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         setUpListeners()
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun setupObservers() {
         lifecycleScope.launch(Dispatchers.Main + job) {
             viewModel.locationState.collect { result ->
@@ -63,7 +59,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         lifecycleScope.launch(Dispatchers.Main + job) {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.weatherState.collectLatest { result ->
                     binding.progressBar.visibility = View.VISIBLE
                     when (result) {
@@ -123,16 +119,5 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        job.cancel()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        job.cancel()
     }
 }
