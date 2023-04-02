@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.data.model.weather.Conversion
 import com.weatheruous.data.model.weather.WeatherDataSource
-import com.weatheruous.data.network.Resource
 import com.weatheruous.data.repositories.location.LocationRepository
 import com.weatheruous.data.repositories.weather.WeatherNetworkRepository
+import com.weatheruous.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Instant
 import javax.inject.Inject

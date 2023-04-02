@@ -2,11 +2,15 @@ package com.weatheruous.ui.settings
 
 import android.os.Bundle
 import android.view.View
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.weatheruous.R
 import com.weatheruous.databinding.FragmentSettingsBinding
+import com.weatheruous.utilities.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +31,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun setupListeners() {
         binding.backIcon.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_settingsFragment_to_mainWeatherFragment)
+            view.findNavController().navigateUp()
+        }
+
+        binding.privacyPolicyIcon.setOnClickListener {
+            handleOnClickLink(Constants.PRIVACY_POLICY_URL)
+        }
+
+        binding.aboutIcon.setOnClickListener {
+            handleOnClickLink(Constants.ABOUT_URL)
+        }
+    }
+
+    private fun handleOnClickLink(url: String) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        try {
+            customTabsIntent.launchUrl(requireContext(), url.toUri())
+        } catch (exception: Exception) {
+            Snackbar
+                .make(binding.root, "Error opening link", Snackbar.LENGTH_LONG)
+                .show()
         }
     }
 }

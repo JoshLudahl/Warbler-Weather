@@ -27,4 +27,7 @@
     <string name="mph">MPH</string>
     <string name="celsius">C\u00B0</string>
     <string name="fahrenheit">F\u00B0</string>
+    <string name="settings_fahrenheit">Fahrenheit</string>
+    <string name="settings_celsius">Celsius</string>
+    <string name="settings_kelvin">Kelvin</string>
 </resources>

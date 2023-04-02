@@ -66,50 +66,125 @@
                     tools:text="Temperature" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_speed_subheading"
-                    style="@style/settings_subheading_style"
+                    android:id="@+id/settings_subheading_option_celsius_text"
+                    style="@style/settings_subheading_option_style"
                     android:layout_marginTop="16dp"
+                    android:text="@string/settings_celsius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_temperature_text"
+                    tools:text="Celsius" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_fahrenheit_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_fahrenheit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_celsius_text"
+                    tools:text="Fahrenheit" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_kelvin_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_kelvin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_fahrenheit_text"
+                    tools:text="Kelvin" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kelvin_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_celsius_text">
+
+                    <RadioButton
+                        android:id="@+id/radio_celsius"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radio_fahrenheit"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/radio_kelvin"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent" />
+
+                </RadioGroup>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_speed_text"
+                    style="@style/settings_subheading_style"
                     android:text="@string/settings_speed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/switch1"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kelvin_text"
                     tools:text="Speed" />
 
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:textOff="@string/celsius"
-                    android:textOn="@string/fahrenheit"
-                    android:textColor="@color/colorAccent"
-                    android:background="@drawable/custom_button"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_temperature_text"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_mph_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/mph"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/settings_subheading_temperature_text"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_temperature_text" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_speed_text"
+                    tools:text="Miles Per Hour" />
 
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/speed_toggle_button"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_kmh_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/km_h"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mph_text"
+                    tools:text="Kilometers Per Hour" />
+
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_speed_subheading"
-                    android:background="@drawable/custom_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kmh_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textOff="@string/mph"
-                    android:textOn="@string/km_h"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/settings_speed_subheading"
-                    app:layout_constraintTop_toTopOf="@+id/settings_speed_subheading" />
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mph_text">
+
+                    <RadioButton
+                        android:id="@+id/radio_mph"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radio_kmh"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent" />
+
+                </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_units_of_measurement_layout">
@@ -142,7 +217,7 @@
                     tools:text="Privacy Policy" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/about_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="8dp"
@@ -152,7 +227,7 @@
                     app:srcCompat="@drawable/ic_open" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/privacy_policy_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="8dp"

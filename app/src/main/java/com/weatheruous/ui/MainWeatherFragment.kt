@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.weatheruous.R
 import com.weatheruous.data.model.location.LocationEntity
@@ -13,8 +15,8 @@ import com.weatheruous.data.model.weather.Conversion.toDegrees
 import com.weatheruous.data.model.weather.Conversion.toFahrenheitFromKelvin
 import com.weatheruous.data.model.weather.WeatherDataSource
 import com.weatheruous.data.model.weather.WeatherIconSelection.getIconForCondition
-import com.weatheruous.data.network.Resource
 import com.weatheruous.databinding.FragmentMainWeatherBinding
+import com.weatheruous.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 import kotlinx.coroutines.Dispatchers
@@ -34,12 +36,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         _binding = FragmentMainWeatherBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        setupObservers()
+        setUpListeners()
     }
 
     override fun onStart() {
         super.onStart()
-        setupObservers()
-        setUpListeners()
     }
 
     private fun setupObservers() {
@@ -61,41 +63,43 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         lifecycleScope.launch(Dispatchers.Main + job) {
-            viewModel.weatherState.collectLatest { result ->
-                binding.progressBar.visibility = View.VISIBLE
-                when (result) {
-                    is Resource.Success -> {
-                        with(binding) {
-                            currentTemperature.text = (result.data as WeatherDataSource)
-                                .current
-                                .temp
-                                .toFahrenheitFromKelvin
-                                .roundToInt()
-                                .toDegrees
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.weatherState.collectLatest { result ->
+                    binding.progressBar.visibility = View.VISIBLE
+                    when (result) {
+                        is Resource.Success -> {
+                            with(binding) {
+                                currentTemperature.text = (result.data as WeatherDataSource)
+                                    .current
+                                    .temp
+                                    .toFahrenheitFromKelvin
+                                    .roundToInt()
+                                    .toDegrees
 
-                            weatherDescription.text = result.data
-                                .current
-                                .weather[0]
-                                .description
-                                .capitalizeEachFirst
+                                weatherDescription.text = result.data
+                                    .current
+                                    .weather[0]
+                                    .description
+                                    .capitalizeEachFirst
 
-                            currentWeatherIcon
-                                .setImageResource(
-                                    result.data
-                                        .current
-                                        .weather[0]
-                                        .icon
-                                        .getIconForCondition
-                                )
+                                currentWeatherIcon
+                                    .setImageResource(
+                                        result.data
+                                            .current
+                                            .weather[0]
+                                            .icon
+                                            .getIconForCondition
+                                    )
+                            }
+
+                            binding.progressBar.visibility = View.GONE
                         }
-
-                        binding.progressBar.visibility = View.GONE
-                    }
-                    is Resource.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                    }
-                    is Resource.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        is Resource.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                        }
+                        is Resource.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
@@ -119,10 +123,16 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        job.cancel()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        job.cancel()
+    }
+
+    override fun onPause() {
+        super.onPause()
         job.cancel()
     }
 }

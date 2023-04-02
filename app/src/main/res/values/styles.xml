@@ -47,4 +47,17 @@
         <item name="layout_constrainedWidth">true</item>
     </style>
 
+    <style name="settings_subheading_option_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/title_text_option_size</item>
+        <item name="android:fontFamily">@font/ubuntu_condensed_regular</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="layout_constrainedWidth">true</item>
+    </style>
+
+
 </resources>
