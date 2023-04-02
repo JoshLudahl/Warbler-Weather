@@ -37,4 +37,5 @@
     <string name="percent">%1$s%\u0025</string>
 
     <string name="mdash">&#8211;</string>
+    <string name="forecast">Forecast</string>
 </resources>
