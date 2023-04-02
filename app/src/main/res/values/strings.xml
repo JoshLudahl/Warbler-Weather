@@ -30,4 +30,9 @@
     <string name="settings_fahrenheit">Fahrenheit</string>
     <string name="settings_celsius">Celsius</string>
     <string name="settings_kelvin">Kelvin</string>
+    <string name="uv_index_label">"UV Index: "</string>
+
+    <string name="percent">%1$s%\u0025</string>
+
+    <string name="mdash">&#8211;</string>
 </resources>

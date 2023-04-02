@@ -59,5 +59,13 @@
         <item name="layout_constrainedWidth">true</item>
     </style>
 
+    <style name="weather_detail_text">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/colorPrimaryDark</item>
+    <item name="android:textSize">@dimen/title_text_option_size</item>
+    <item name="android:fontFamily">@font/ubuntu_condensed_regular</item>
+    <item name="layout_constrainedWidth">true</item>
+</style>
 
 </resources>

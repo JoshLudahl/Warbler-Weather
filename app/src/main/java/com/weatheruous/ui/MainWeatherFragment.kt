@@ -41,6 +41,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setupObservers() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.updateWeatherData()
+        }
+
         lifecycleScope.launch(Dispatchers.Main + job) {
             viewModel.locationState.collect { result ->
                 when (result) {
@@ -61,7 +65,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         lifecycleScope.launch(Dispatchers.Main + job) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.weatherState.collectLatest { result ->
-                    binding.progressBar.visibility = View.VISIBLE
                     when (result) {
                         is Resource.Success -> {
                             with(binding) {
@@ -86,15 +89,42 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                                             .icon
                                             .getIconForCondition
                                     )
+
+                                temperatureLowText.text = result.data
+                                    .daily[0]
+                                    .temp
+                                    .min
+                                    .toFahrenheitFromKelvin
+                                    .roundToInt()
+                                    .toDegrees
+
+                                temperatureHiText.text = result.data
+                                    .daily[0]
+                                    .temp
+                                    .max
+                                    .toFahrenheitFromKelvin
+                                    .roundToInt()
+                                    .toDegrees
+
+                                uvIndexValue.text = result.data
+                                    .current
+                                    .uvi
+                                    .toString()
+
+                                val humidityString = String.format(
+                                    getString(R.string.percent),
+                                    result.data.current.humidity.toString()
+                                )
+                                humidityTextValue.text = humidityString
                             }
 
-                            binding.progressBar.visibility = View.GONE
+                            binding.swipeRefreshLayout.isRefreshing = false
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                         }
                         is Resource.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
+                            binding.swipeRefreshLayout.isRefreshing = true
                         }
                     }
                 }
@@ -109,10 +139,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.searchIcon.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
-        }
-
-        binding.textView.setOnClickListener {
-            viewModel.updateWeatherData()
         }
     }
 
