@@ -41,6 +41,10 @@ data class Current(
     val humidity: Int,
     @SerialName("pressure")
     val pressure: Int,
+    @SerialName("rain")
+    val rain: Rain? = null,
+    @SerialName("snow")
+    val snow: Snow? = null,
     @SerialName("sunrise")
     val sunrise: Int,
     @SerialName("sunset")
@@ -149,7 +153,7 @@ data class Minutely(
     @SerialName("dt")
     val dt: Int,
     @SerialName("precipitation")
-    val precipitation: Int
+    val precipitation: Double
 )
 
 @Keep
