@@ -309,7 +309,6 @@
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                     tools:itemCount="8"
-                    android:orientation="horizontal"
                     tools:listitem="@layout/recycler_view_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

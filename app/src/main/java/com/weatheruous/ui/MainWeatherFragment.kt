@@ -40,6 +40,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         _binding = FragmentMainWeatherBinding.bind(view)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
         setupObservers()
         setUpListeners()
         setUpRecyclerView()
@@ -84,7 +85,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     when (result) {
                         is Resource.Success -> {
                             val list = WeatherDataSourceDto
-                                .buildWeatherForecast(result.data) as MutableList<WeatherForecast>
+                                .buildWeatherForecast(result.data)
 
                             updateRecyclerView(list)
                             setUiElements(result.data)
