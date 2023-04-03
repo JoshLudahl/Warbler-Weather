@@ -1,7 +1,6 @@
 package com.weatheruous.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -87,67 +86,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                             val list = WeatherDataSourceDto
                                 .buildWeatherForecast(result.data) as MutableList<WeatherForecast>
 
-                            Log.i(
-                                "MainWeatherFragment",
-                                "weatherForecastList: $list"
-                            )
                             updateRecyclerView(list)
-
-                            with(binding) {
-                                currentTemperature.text = (result.data as WeatherDataSource)
-                                    .current
-                                    .temp
-                                    .toFahrenheitFromKelvin
-                                    .roundToInt()
-                                    .toDegrees
-
-                                weatherDescription.text = result.data
-                                    .current
-                                    .weather[0]
-                                    .description
-                                    .capitalizeEachFirst
-
-                                currentWeatherIcon
-                                    .setImageResource(
-                                        result.data
-                                            .current
-                                            .weather[0]
-                                            .icon
-                                            .getIconForCondition
-                                    )
-
-                                temperatureLowText.text = result.data
-                                    .daily[0]
-                                    .temp
-                                    .min
-                                    .toFahrenheitFromKelvin
-                                    .roundToInt()
-                                    .toDegrees
-
-                                temperatureHiText.text = result.data
-                                    .daily[0]
-                                    .temp
-                                    .max
-                                    .toFahrenheitFromKelvin
-                                    .roundToInt()
-                                    .toDegrees
-
-                                uvIndexValue.text = result.data
-                                    .current
-                                    .uvi
-                                    .toString()
-
-                                val humidityString = String.format(
-                                    getString(R.string.percent),
-                                    result.data.current.humidity.toString()
-                                )
-                                humidityTextValue.text = humidityString
-                            }
+                            setUiElements(result.data)
 
                             binding.swipeRefreshLayout.isRefreshing = false
                         }
                         is Resource.Error -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding.swipeRefreshLayout.isRefreshing = false
+                            // TODO add error view
                         }
                         is Resource.Loading -> {
                             binding.swipeRefreshLayout.isRefreshing = true
@@ -155,6 +101,59 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     }
                 }
             }
+        }
+    }
+
+    private fun setUiElements(result: WeatherDataSource) {
+        with(binding) {
+            currentTemperature.text = (result)
+                .current
+                .temp
+                .toFahrenheitFromKelvin
+                .roundToInt()
+                .toDegrees
+
+            weatherDescription.text = result
+                .current
+                .weather[0]
+                .description
+                .capitalizeEachFirst
+
+            currentWeatherIcon
+                .setImageResource(
+                    result
+                        .current
+                        .weather[0]
+                        .icon
+                        .getIconForCondition
+                )
+
+            temperatureLowText.text = result
+                .daily[0]
+                .temp
+                .min
+                .toFahrenheitFromKelvin
+                .roundToInt()
+                .toDegrees
+
+            temperatureHiText.text = result
+                .daily[0]
+                .temp
+                .max
+                .toFahrenheitFromKelvin
+                .roundToInt()
+                .toDegrees
+
+            uvIndexValue.text = result
+                .current
+                .uvi
+                .toString()
+
+            val humidityString = String.format(
+                getString(R.string.percent),
+                result.current.humidity.toString()
+            )
+            humidityTextValue.text = humidityString
         }
     }
 
