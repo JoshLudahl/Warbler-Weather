@@ -1,6 +1,11 @@
 package com.weatheruous.data.model.weather
 
-class WeatherDataSourceDto {
+import com.weatheruous.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
+import com.weatheruous.data.model.weather.Conversion.toFahrenheitFromKelvin
+import com.weatheruous.data.model.weather.WeatherIconSelection.getIconForCondition
+import kotlin.math.roundToInt
+
+object WeatherDataSourceDto {
     fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherDataEntity {
         return WeatherDataEntity(
             city = getCityNameFromLatLon(weatherDataSource.lat, weatherDataSource.lon),
@@ -19,5 +24,17 @@ class WeatherDataSourceDto {
     private fun getCityNameFromLatLon(lat: Double, lon: Double): String {
         // TODO: Build out location service
         return ""
+    }
+
+    fun buildWeatherForecast(weatherDataSource: WeatherDataSource):
+        List<WeatherForecast> {
+        return weatherDataSource.daily.map {
+            WeatherForecast(
+                dayOfWeek = getDatOfWeekFromUnixUTC(it.dt.toLong()),
+                hi = it.temp.max.toFahrenheitFromKelvin.roundToInt().toString(),
+                low = it.temp.min.toFahrenheitFromKelvin.roundToInt().toString(),
+                icon = it.weather[0].icon.getIconForCondition
+            )
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.weatheruous.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -8,12 +9,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatheruous.R
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.data.model.weather.Conversion.capitalizeEachFirst
 import com.weatheruous.data.model.weather.Conversion.toDegrees
 import com.weatheruous.data.model.weather.Conversion.toFahrenheitFromKelvin
 import com.weatheruous.data.model.weather.WeatherDataSource
+import com.weatheruous.data.model.weather.WeatherDataSourceDto
+import com.weatheruous.data.model.weather.WeatherForecast
 import com.weatheruous.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.weatheruous.databinding.FragmentMainWeatherBinding
 import com.weatheruous.utilities.Resource
@@ -30,6 +34,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
     private val job = Job()
+    private val adapter = MainAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +43,18 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         binding.lifecycleOwner = viewLifecycleOwner
         setupObservers()
         setUpListeners()
+        setUpRecyclerView()
+    }
+
+    private fun setUpRecyclerView() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = layoutManager
+    }
+
+    private fun updateRecyclerView(weatherForecastList: List<WeatherForecast>) {
+        adapter.setItems(weatherForecastList)
     }
 
     private fun setupObservers() {
@@ -67,6 +84,15 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 viewModel.weatherState.collectLatest { result ->
                     when (result) {
                         is Resource.Success -> {
+                            val list = WeatherDataSourceDto
+                                .buildWeatherForecast(result.data) as MutableList<WeatherForecast>
+
+                            Log.i(
+                                "MainWeatherFragment",
+                                "weatherForecastList: $list"
+                            )
+                            updateRecyclerView(list)
+
                             with(binding) {
                                 currentTemperature.text = (result.data as WeatherDataSource)
                                     .current

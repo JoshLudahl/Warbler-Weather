@@ -2,7 +2,10 @@ package com.weatheruous.data.model.weather
 
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.*
 import kotlin.math.roundToInt
 
 object Conversion {
@@ -36,6 +39,13 @@ object Conversion {
         val month = date.month.toString().lowercase().capitalizeEachFirst
         val dayOfMonth = date.dayOfMonth
         return "$dayOfWeek, $month ${dayOfMonth.appendSuffix}"
+    }
+
+    fun getDatOfWeekFromUnixUTC(unixUTC: Long): String {
+        return Instant.ofEpochSecond(unixUTC)
+            .atZone(ZoneId.of("UTC"))
+            .dayOfWeek
+            .getDisplayName(TextStyle.FULL, Locale.US)
     }
 
     private val Int.appendSuffix
