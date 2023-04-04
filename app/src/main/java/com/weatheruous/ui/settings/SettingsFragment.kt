@@ -25,7 +25,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSettingsBinding.bind(view)
         binding.viewModel = viewModel
-
+        binding.lifecycleOwner = viewLifecycleOwner
         setupListeners()
     }
 
