@@ -1,6 +1,9 @@
 package com.weatheruous.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.weatheruous.data.database.location.LocationDao
 import com.weatheruous.data.database.weather.WeatherDatabase
@@ -17,6 +20,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
+
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     @Singleton
     @Provides
@@ -44,4 +49,9 @@ object DataSourceModule {
     @Singleton
     @Provides
     fun providesLocationRepository(locationDao: LocationDao) = LocationRepository(locationDao)
+
+    @Singleton
+    @Provides
+    fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        context.dataStore
 }
