@@ -8,11 +8,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatheruous.R
 import com.weatheruous.databinding.FragmentLocationBinding
 import com.weatheruous.utilities.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.fragment_location) {
 
     private var _binding: FragmentLocationBinding? = null
@@ -52,12 +55,19 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     }
 
     private fun setUpRecyclerView() {
-        binding.locationRecyclerView.adapter = adapter
+        binding.locationRecyclerView.apply {
+            adapter = adapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     private fun setUpListeners() {
         binding.backIcon.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
+        }
+
+        binding.addLocation.setOnClickListener { view ->
+            binding.searchBar.visibility = View.VISIBLE
         }
     }
 }
