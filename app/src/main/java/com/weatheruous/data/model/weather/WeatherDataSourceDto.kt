@@ -1,8 +1,8 @@
 package com.weatheruous.data.model.weather
 
 import com.weatheruous.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
-import com.weatheruous.data.model.weather.Conversion.toFahrenheitFromKelvin
 import com.weatheruous.data.model.weather.WeatherIconSelection.getIconForCondition
+import com.weatheruous.ui.settings.Temperature
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
@@ -26,13 +26,15 @@ object WeatherDataSourceDto {
         return ""
     }
 
-    fun buildWeatherForecast(weatherDataSource: WeatherDataSource):
+    fun buildWeatherForecast(weatherDataSource: WeatherDataSource, units: Temperature):
         List<WeatherForecast> {
         return weatherDataSource.daily.map {
             WeatherForecast(
                 dayOfWeek = getDatOfWeekFromUnixUTC(it.dt.toLong()),
-                hi = it.temp.max.toFahrenheitFromKelvin.roundToInt().toString(),
-                low = it.temp.min.toFahrenheitFromKelvin.roundToInt().toString(),
+                hi = Conversion.fromKelvinToProvidedUnit(it.temp.max, units).roundToInt()
+                    .toString(),
+                low = Conversion.fromKelvinToProvidedUnit(it.temp.min, units)
+                    .roundToInt().toString(),
                 icon = it.weather[0].icon.getIconForCondition
             )
         }

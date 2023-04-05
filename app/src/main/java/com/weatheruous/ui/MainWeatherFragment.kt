@@ -10,15 +10,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatheruous.R
-import com.weatheruous.data.model.location.LocationEntity
+import com.weatheruous.data.model.weather.Conversion
 import com.weatheruous.data.model.weather.Conversion.capitalizeEachFirst
 import com.weatheruous.data.model.weather.Conversion.toDegrees
-import com.weatheruous.data.model.weather.Conversion.toFahrenheitFromKelvin
 import com.weatheruous.data.model.weather.WeatherDataSource
 import com.weatheruous.data.model.weather.WeatherDataSourceDto
 import com.weatheruous.data.model.weather.WeatherForecast
 import com.weatheruous.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.weatheruous.databinding.FragmentMainWeatherBinding
+import com.weatheruous.ui.settings.Temperature
 import com.weatheruous.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
@@ -65,9 +65,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         lifecycleScope.launch(Dispatchers.Main + job) {
             viewModel.locationState.collect { result ->
                 when (result) {
-                    is Resource.Success<*> -> {
+                    is Resource.Success -> {
                         viewModel.updateWeatherData()
-                        binding.locationText.text = (result.data as LocationEntity).name
                     }
                     is Resource.Error -> {
                         // TODO
@@ -84,11 +83,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 viewModel.weatherState.collectLatest { result ->
                     when (result) {
                         is Resource.Success -> {
-                            val list = WeatherDataSourceDto
-                                .buildWeatherForecast(result.data)
+                            val list = WeatherDataSourceDto.buildWeatherForecast(
+                                result.data,
+                                viewModel.temperatureUnit.value
+                            )
 
                             updateRecyclerView(list)
-                            setUiElements(result.data)
+                            setUiElements(result.data, viewModel.temperatureUnit.value)
 
                             binding.swipeRefreshLayout.isRefreshing = false
                         }
@@ -105,50 +106,29 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
     }
 
-    private fun setUiElements(result: WeatherDataSource) {
+    private fun setUiElements(result: WeatherDataSource, value: Temperature) {
         with(binding) {
-            currentTemperature.text = (result)
-                .current
-                .temp
-                .toFahrenheitFromKelvin
-                .roundToInt()
-                .toDegrees
+            currentTemperature.text = Conversion.fromKelvinToProvidedUnit(
+                result.current.temp,
+                value
+            ).roundToInt().toDegrees
 
-            weatherDescription.text = result
-                .current
-                .weather[0]
-                .description
-                .capitalizeEachFirst
+            weatherDescription.text = result.current.weather[0].description.capitalizeEachFirst
 
-            currentWeatherIcon
-                .setImageResource(
-                    result
-                        .current
-                        .weather[0]
-                        .icon
-                        .getIconForCondition
-                )
+            currentWeatherIcon.setImageResource(
+                result.current.weather[0].icon.getIconForCondition
+            )
 
-            temperatureLowText.text = result
-                .daily[0]
-                .temp
-                .min
-                .toFahrenheitFromKelvin
-                .roundToInt()
-                .toDegrees
+            temperatureLowText.text =
+                Conversion.fromKelvinToProvidedUnit(result.daily[0].temp.min, value)
+                    .roundToInt().toDegrees
 
-            temperatureHiText.text = result
-                .daily[0]
-                .temp
-                .max
-                .toFahrenheitFromKelvin
-                .roundToInt()
-                .toDegrees
+            temperatureHiText.text = Conversion.fromKelvinToProvidedUnit(
+                result.daily[0].temp.max,
+                value
+            ).roundToInt().toDegrees
 
-            uvIndexValue.text = result
-                .current
-                .uvi
-                .toString()
+            uvIndexValue.text = result.current.uvi.toString()
 
             val humidityString = String.format(
                 getString(R.string.percent),

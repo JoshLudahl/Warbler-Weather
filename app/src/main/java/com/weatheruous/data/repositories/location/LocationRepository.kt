@@ -23,7 +23,7 @@ class LocationRepository @Inject constructor(
         locationDao.insertLocation(location)
     }
 
-    private fun getDefaultLocation(): LocationEntity {
+    fun getDefaultLocation(): LocationEntity {
         return LocationEntity(
             lat = 45.5152,
             lon = -122.6793,

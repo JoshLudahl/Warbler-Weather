@@ -7,8 +7,21 @@
     <data>
 
         <variable
+            name="location"
+            type="com.weatheruous.data.model.location.LocationEntity" />
+
+        <variable
+            name="r"
+            type="com.weatheruous.data.model.weather.WeatherDataSource" />
+
+        <variable
+            name="resource"
+            type="com.weatheruous.utilities.Resource.Success" />
+
+        <variable
             name="viewModel"
             type="com.weatheruous.ui.MainWeatherViewModel" />
+
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -44,7 +57,7 @@
                     android:id="@+id/location_text"
                     style="@style/title_style"
                     android:layout_marginStart="16dp"
-                    android:text="@string/mdash"
+                    android:text="@{viewModel.currentLocation.name}"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="@+id/location_icon"
                     app:layout_constraintEnd_toStartOf="@+id/search_icon"
@@ -81,7 +94,7 @@
                     style="@style/font_family"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="16dp"
                     android:text="@{viewModel.dateTitle}"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
@@ -96,7 +109,7 @@
                     android:id="@+id/current_weather_icon"
                     android:layout_width="@dimen/weather_icon_size"
                     android:layout_height="@dimen/weather_icon_size"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:animateLayoutChanges="true"
                     android:backgroundTint="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -226,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/top_rounded_rectangle"
                     android:padding="8dp"

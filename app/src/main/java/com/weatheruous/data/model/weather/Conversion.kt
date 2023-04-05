@@ -1,5 +1,6 @@
 package com.weatheruous.data.model.weather
 
+import com.weatheruous.ui.settings.Temperature
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -47,6 +48,13 @@ object Conversion {
             .dayOfWeek
             .getDisplayName(TextStyle.FULL, Locale.US)
     }
+
+    fun fromKelvinToProvidedUnit(value: Double, unit: Temperature) =
+        when (unit) {
+            Temperature.CELSIUS -> value.toCelsiusFromKelvin
+            Temperature.FAHRENHEIT -> value.toFahrenheitFromKelvin
+            Temperature.KELVIN -> value
+        }
 
     private val Int.appendSuffix
         get() = "$this${getSuffix(this)}"

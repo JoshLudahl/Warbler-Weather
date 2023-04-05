@@ -3,28 +3,32 @@ package com.weatheruous.utilities
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 
 object DataPref {
 
-    suspend fun readStringDataStore(key: String, dataStore: DataStore<Preferences>): String? {
-        val dataStoreKey = stringPreferencesKey(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
+    const val TEMPERATURE_UNIT = "temperature_unit"
+    val TEMPERATURE_UNIT_PREFERENCES = intPreferencesKey(TEMPERATURE_UNIT)
 
-    suspend fun readIntDataStore(key: String, dataStore: DataStore<Preferences>): Int? {
+    const val SPEED_UNIT = "speed_unit"
+    val SPEED_UNIT_PREFERENCES = intPreferencesKey(SPEED_UNIT)
+
+    fun readIntDataStoreFlow(key: String, dataStore: DataStore<Preferences>): Flow<Int> =
+        dataStore.data
+            .catch {
+                emit(emptyPreferences())
+            }.map { preferences ->
+                preferences[intPreferencesKey(key)] ?: 0
+            }
+
+    suspend fun saveIntDataStore(key: String, value: Int, dataStore: DataStore<Preferences>) {
         val dataStoreKey = intPreferencesKey(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
-
-    suspend fun saveDataStore(key: String, value: Boolean, dataStore: DataStore<Preferences>) {
-        val dataStoreKey = stringPreferencesKey(key)
         dataStore.edit { preferences ->
-            preferences[dataStoreKey] = value.toString()
+            preferences[dataStoreKey] = value
         }
     }
 }

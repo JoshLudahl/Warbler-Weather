@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.weatheruous.R
-import com.weatheruous.utilities.Constants
 import com.weatheruous.utilities.DataPref
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -30,11 +29,15 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val unit = DataPref.readIntDataStore(Constants.TEMPERATURE_UNIT, dataStore) ?: 0
-            updateTemperatureUnit(unit)
+            DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore).collect { unit ->
+                updateTemperatureUnit(unit)
+            }
+        }
 
-            val speed = DataPref.readIntDataStore(Constants.SPEED_UNIT, dataStore) ?: 0
-            updateSpeedUnit(speed)
+        viewModelScope.launch {
+            DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore).collect { unit ->
+                updateSpeedUnit(unit)
+            }
         }
     }
 
@@ -68,12 +71,12 @@ class SettingsViewModel @Inject constructor(
 
     private fun saveTemperatureUnit(unit: Temperature) {
         viewModelScope.launch {
-            dataStore.edit { preferences ->
-                preferences[Constants.TEMPERATURE_UNIT_PREFERENCES] = when (unit) {
-                    Temperature.CELSIUS -> 0
-                    Temperature.FAHRENHEIT -> 1
-                    Temperature.KELVIN -> 2
-                }
+            when (unit) {
+                Temperature.CELSIUS -> 0
+                Temperature.FAHRENHEIT -> 1
+                Temperature.KELVIN -> 2
+            }.let { value ->
+                DataPref.saveIntDataStore(DataPref.TEMPERATURE_UNIT, value, dataStore)
             }
         }
     }
@@ -91,7 +94,7 @@ class SettingsViewModel @Inject constructor(
     private fun saveSpeedUnit(unit: Speed) {
         viewModelScope.launch {
             dataStore.edit { preferences ->
-                preferences[Constants.SPEED_UNIT_PREFERENCES] = when (unit) {
+                preferences[DataPref.SPEED_UNIT_PREFERENCES] = when (unit) {
                     Speed.MPH -> 0
                     Speed.KPH -> 1
                 }
