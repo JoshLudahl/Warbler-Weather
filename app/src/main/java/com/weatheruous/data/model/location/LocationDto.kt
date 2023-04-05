@@ -1,7 +1,7 @@
 package com.weatheruous.data.model.location
 
-class LocationDto {
-    fun locationDataSourceToLocationEntity(location: LocationItem): LocationEntity {
+object LocationDto {
+    fun locationDataSourceToLocationEntity(location: LocationDataSource): LocationEntity {
         return LocationEntity(
             lat = location.lat,
             lon = location.lon,

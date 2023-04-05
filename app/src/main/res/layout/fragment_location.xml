@@ -33,11 +33,11 @@
                 android:id="@+id/settings_title_text"
                 style="@style/title_style"
                 android:text="@string/locations"
-                tools:text="Locations"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="@+id/back_icon"
                 app:layout_constraintStart_toEndOf="@+id/back_icon"
-                app:layout_constraintTop_toTopOf="@+id/back_icon" />
+                app:layout_constraintTop_toTopOf="@+id/back_icon"
+                tools:text="Locations" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/add_location"
@@ -49,28 +49,59 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_title_text" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_bar"
-                android:visibility="gone"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/search_bar_layout_container"
                 style="@style/SearchViewStyle"
-                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="32dp"
-                android:hint="@string/search_location"
-                app:layout_constraintEnd_toStartOf="@+id/add_location"
-                app:layout_constraintStart_toEndOf="@+id/back_icon"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_bar_edit_text"
+                    style="@style/SearchViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:hint="@string/search_location"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/close_search"
+                    android:layout_width="@dimen/search_close_icon_size"
+                    android:layout_height="@dimen/search_close_icon_size"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@+id/search_bar_edit_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/search_bar_edit_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_result_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_bar_edit_text"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:listitem="@layout/recycler_view_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/location_recycler_view"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/settings_title_text"
-                tools:listitem="@layout/recycler_view_item" />
+                tools:listitem="@layout/location_result_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
