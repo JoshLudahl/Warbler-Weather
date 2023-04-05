@@ -322,7 +322,8 @@
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                     tools:itemCount="8"
-                    tools:listitem="@layout/recycler_view_item" />
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/weather_forecast_list_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
