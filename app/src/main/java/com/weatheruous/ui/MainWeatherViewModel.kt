@@ -61,10 +61,12 @@ class MainWeatherViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             locationRepository.getCurrentLocationFromDatabase().catch { e ->
+                Log.d("MainWeatherViewModel", "Caught error getting location: ${e.message}")
                 _locationState.value = Resource.Error(
                     message = e.message ?: "An error occurred"
                 )
             }.collect {
+                Log.d("MainWeatherViewModel", "Setting location to $it")
                 _locationState.value = Resource.Success(it)
                 _currentLocation.value = it
             }
@@ -103,9 +105,11 @@ class MainWeatherViewModel @Inject constructor(
     }
 
     fun updateWeatherData() {
+        Log.d("MainWeatherViewModel", "Setting to Loading state.")
         _weatherState.value = Resource.Loading
         when (val location = _locationState.value) {
-            is Resource.Success<*> -> {
+            is Resource.Success -> {
+                Log.d("MainWeatherViewModel", "Setting to Success state")
                 viewModelScope.launch {
                     val currentLocation: LocationEntity = location.data as LocationEntity
                     weatherNetworkRepository.getCurrentWeather(currentLocation)
@@ -113,8 +117,14 @@ class MainWeatherViewModel @Inject constructor(
                             _weatherState.value = Resource.Error(
                                 message = e.message ?: "An error occurred."
                             )
+                            Log.d("MainWeatherViewModel", "Caught error: $e")
                         }
                         .collect {
+                            Log.d(
+                                "MainWeatherViewModel",
+                                "Updating ViewModel witth data: $it"
+                            )
+
                             _weatherState.value = Resource.Success(it)
                             _weatherObject.value = it
                         }
