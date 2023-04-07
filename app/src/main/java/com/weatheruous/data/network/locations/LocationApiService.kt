@@ -11,5 +11,5 @@ interface LocationApiService {
         @Query("q") query: String,
         @Query("limit") limit: Int = NetworkConstants.CITY_SEARCH_LIMIT,
         @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY
-    ): List<LocationDataSource?>
+    ): List<LocationDataSource>
 }

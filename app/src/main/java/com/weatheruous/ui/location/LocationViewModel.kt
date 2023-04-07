@@ -47,7 +47,9 @@ class LocationViewModel @Inject constructor(
     }
 
     fun searchForLocation(query: String) {
+        Log.d("LocationViewModel", "searchForLocation launching coroutine...")
         viewModelScope.launch {
+            Log.d("LocationViewModel", "searchForLocation Attempting to search for: $query")
             locationNetworkRepository.getLocationsFromGeoService(query).catch { error ->
                 Log.d("LocationViewModel", "searchForLocation error: ${error.message}")
             }.collect {

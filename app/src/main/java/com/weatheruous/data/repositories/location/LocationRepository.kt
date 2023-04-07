@@ -32,6 +32,7 @@ class LocationRepository @Inject constructor(
 
     fun getDefaultLocation(): LocationEntity {
         return LocationEntity(
+            country = "US",
             lat = 45.5152,
             lon = -122.6793,
             name = "Portland",

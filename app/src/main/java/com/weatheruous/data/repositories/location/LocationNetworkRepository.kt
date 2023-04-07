@@ -1,5 +1,6 @@
 package com.weatheruous.data.repositories.location
 
+import android.util.Log
 import com.weatheruous.data.model.location.LocationDto
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.data.network.locations.LocationApiService
@@ -14,14 +15,22 @@ class LocationNetworkRepository @Inject constructor(
 
 ) {
     fun getLocationsFromGeoService(location: String): Flow<List<LocationEntity>> = flow {
-        val locations = locationApiService.getLocations(location)
-        val locationsMapped = ArrayList<LocationEntity>()
-        if (locations.isEmpty()) {
-            emit(arrayListOf())
+        Log.d("LocationNetworkRepository", "Performing search for $location")
+        try {
+            val locations = locationApiService.getLocations(location)
+            val locationsMapped = ArrayList<LocationEntity>()
+            if (locations.isEmpty()) {
+                Log.d("LocationNetworkRepository", "No results, returning empty list.")
+                emit(arrayListOf<LocationEntity>())
+            }
+            Log.d("LocationNetworkRepository", "Filtering results... $locations")
+            locations.forEach {
+                it.let { locationsMapped.add(LocationDto.locationDataSourceToLocationEntity(it)) }
+            }
+            emit(locationsMapped)
+        } catch (e: Exception) {
+            Log.e("LocationNetworkRepository", "Error getting list: ${e.message}")
+            emit(arrayListOf<LocationEntity>())
         }
-        locations.forEach {
-            it?.let { locationsMapped.add(LocationDto.locationDataSourceToLocationEntity(it)) }
-        }
-        emit(locationsMapped)
     }.flowOn(Dispatchers.IO)
 }

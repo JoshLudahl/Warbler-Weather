@@ -107,6 +107,8 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         binding.closeSearch.setOnClickListener {
             listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
                 .forEach { it.visibility = View.GONE }
+            binding.searchBarEditText.text?.clear()
+            clearLocationSearchList()
         }
 
         binding.searchBarEditText.addTextChangedListener(object : TextWatcher {
@@ -116,8 +118,10 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (count >= 3) {
-                    // TODO: Implement search
+                    Log.d("LocationFragment", "Searching for string: $s")
                     viewModel.searchForLocation(s.toString())
+                } else {
+                    clearLocationSearchList()
                 }
             }
 
@@ -125,5 +129,12 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                 /* Do nothing */
             }
         })
+    }
+
+    private fun clearLocationSearchList() = locationNetworkAdapter.setItems(arrayListOf())
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

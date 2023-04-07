@@ -8,11 +8,14 @@ import retrofit2.Retrofit
 
 object RetrofitClient {
     private val contentType = "application/json".toMediaType()
+    private val json = Json {
+        ignoreUnknownKeys = true
+    }
 
     @OptIn(ExperimentalSerializationApi::class)
     fun getRetrofitWithBaseUrl(baseUrl: String): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(Json.asConverterFactory(contentType = contentType))
+            .addConverterFactory(json.asConverterFactory(contentType = contentType))
             .baseUrl(baseUrl)
             .build()
     }
