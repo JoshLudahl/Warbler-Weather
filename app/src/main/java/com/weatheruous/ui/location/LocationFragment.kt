@@ -11,9 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatheruous.R
+import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.databinding.FragmentLocationBinding
+import com.weatheruous.utilities.ClickListener
 import com.weatheruous.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,8 +27,12 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LocationViewModel by viewModels()
-    private val locationDatabaseAdapter = LocationAdapter()
-    private val locationNetworkAdapter = LocationNetworkAdapter()
+    private val locationDatabaseAdapter = LocationAdapter(
+        ClickListener { location -> setLocationFromDatabaseAsCurrent(location) }
+    )
+    private val locationNetworkAdapter = LocationNetworkAdapter(
+        ClickListener { location -> saveLocationSearchResultToDatabase(location) }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,20 +48,26 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     private fun setUpObservers() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.locationSearchList.collect { locationList ->
+                viewModel.locationList.collect { locationList ->
                     when (locationList) {
                         is Resource.Success -> {
-                            Log.i("LocationFragment", "locationList ${locationList.data}")
-                            Log.i("LocationFragment", "size ${locationList.data.size}")
+                            Log.d("LocationFragment", "locationList ${locationList.data}")
+                            Log.d("LocationFragment", "size ${locationList.data.size}")
                             locationDatabaseAdapter.setItems(locationList.data)
+
+                            Log.d(
+                                "LocationFragment",
+                                "locationList Success: ${locationDatabaseAdapter.itemCount}"
+                            )
+                            binding.locationRecyclerView.visibility = View.VISIBLE
                         }
                         is Resource.Error -> {
-                            Log.i("LocationFragment", "locationList Error")
-                            binding.locationRecyclerView.visibility = View.GONE
+                            Log.d("LocationFragment", "locationList Error")
+                            // binding.locationRecyclerView.visibility = View.GONE
                         }
                         is Resource.Loading -> {
-                            Log.i("LocationFragment", "locationList Loading")
-                            binding.locationRecyclerView.visibility = View.GONE
+                            Log.d("LocationFragment", "locationList Loading")
+                            // binding.locationRecyclerView.visibility = View.GONE
                         }
                     }
                 }
@@ -71,10 +84,10 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                             binding.locationRecyclerView.visibility = View.GONE
                         }
                         is Resource.Error -> {
-                            binding.locationRecyclerView.visibility = View.GONE
+                            // binding.locationRecyclerView.visibility = View.GONE
                         }
                         is Resource.Loading -> {
-                            binding.locationRecyclerView.visibility = View.GONE
+                            // binding.locationRecyclerView.visibility = View.GONE
                         }
                     }
                 }
@@ -84,7 +97,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
     private fun setUpRecyclerView() {
         binding.locationRecyclerView.apply {
-            adapter = adapter
+            adapter = locationDatabaseAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
@@ -105,10 +118,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         }
 
         binding.closeSearch.setOnClickListener {
-            listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
-                .forEach { it.visibility = View.GONE }
-            binding.searchBarEditText.text?.clear()
-            clearLocationSearchList()
+            closeAndClearSearch()
         }
 
         binding.searchBarEditText.addTextChangedListener(object : TextWatcher {
@@ -131,6 +141,26 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         })
     }
 
+    private fun saveLocationSearchResultToDatabase(location: LocationEntity) {
+        lifecycleScope.launch {
+            viewModel.saveToDatabase(location)
+        }
+        closeAndClearSearch()
+    }
+
+    private fun setLocationFromDatabaseAsCurrent(location: LocationEntity) {
+        lifecycleScope.launch {
+            viewModel.updateCurrentLocation(location)
+        }
+        findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
+    }
+    private fun closeAndClearSearch() {
+        listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
+            .forEach { it.visibility = View.GONE }
+        binding.searchBarEditText.text?.clear()
+        binding.locationRecyclerView.visibility = View.VISIBLE
+        clearLocationSearchList()
+    }
     private fun clearLocationSearchList() = locationNetworkAdapter.setItems(arrayListOf())
 
     override fun onDestroyView() {

@@ -33,16 +33,24 @@ class LocationViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             locationRepository.getAllLocationsFromDatabase().catch {
+                Log.d("LocationViewModel", "Error: ${it.message}")
                 _locationList.value = Resource.Error(message = it.message)
             }.collect {
+                Log.d("LocationViewModel", "Success: $it")
                 _locationList.value = Resource.Success(it)
             }
         }
     }
 
-    fun saveToDatabase(location: LocationEntity) {
+    suspend fun saveToDatabase(location: LocationEntity) {
         viewModelScope.launch {
             locationRepository.saveLocationToDatabaseAndSetAsCurrent(location)
+        }
+    }
+
+    suspend fun updateCurrentLocation(location: LocationEntity) {
+        viewModelScope.launch {
+            locationRepository.updateToCurrentLocation(location)
         }
     }
 

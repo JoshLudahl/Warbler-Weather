@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.databinding.LocationListItemBinding
+import com.weatheruous.utilities.ClickListener
 
-class LocationAdapter : ListAdapter<LocationEntity, LocationAdapter.ViewHolder>(
+class LocationAdapter(
+    private val clickListener: ClickListener<LocationEntity>
+) : ListAdapter<LocationEntity, LocationAdapter.ViewHolder>(
     LocationDiffUtilCallback
 ) {
 
@@ -16,8 +19,9 @@ class LocationAdapter : ListAdapter<LocationEntity, LocationAdapter.ViewHolder>(
 
     class ViewHolder(private val itemBinding: LocationListItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(location: LocationEntity) {
+        fun bind(location: LocationEntity, clickListener: ClickListener<LocationEntity>) {
             itemBinding.location = location
+            itemBinding.clickListener = clickListener
             itemBinding.executePendingBindings()
         }
     }
@@ -37,7 +41,7 @@ class LocationAdapter : ListAdapter<LocationEntity, LocationAdapter.ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = locationList[position]
-        holder.bind(currentItem)
+        holder.bind(currentItem, clickListener)
     }
 
     fun setItems(list: List<LocationEntity>) {

@@ -25,9 +25,14 @@ class LocationRepository @Inject constructor(
         } ?: emit(emptyList())
     }.flowOn(Dispatchers.IO)
 
-    fun saveLocationToDatabaseAndSetAsCurrent(location: LocationEntity) {
-        locationDao.updateCurrentLocation()
+    suspend fun saveLocationToDatabaseAndSetAsCurrent(location: LocationEntity) {
+        updateToCurrentLocation(location)
         locationDao.insertLocation(location)
+    }
+
+    suspend fun updateToCurrentLocation(location: LocationEntity) {
+        val updated = location.copy(updated = System.currentTimeMillis())
+        locationDao.updateCurrentLocation(updated)
     }
 
     fun getDefaultLocation(): LocationEntity {

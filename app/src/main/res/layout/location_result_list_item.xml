@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="clickListener"
+            type="com.weatheruous.utilities.ClickListener" />
+
+        <variable
             name="location"
             type="com.weatheruous.data.model.location.LocationEntity" />
     </data>
@@ -14,8 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        >
+        android:background="@android:color/transparent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/location_name"
@@ -27,6 +30,7 @@
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:text="@{location.toDisplayString()}"
+            android:onClick="@{() -> clickListener.onClick(location)}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"

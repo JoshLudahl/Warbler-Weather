@@ -4,20 +4,21 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.weatheruous.data.model.location.LocationEntity
 
 @Dao
 interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLocation(location: LocationEntity)
+    suspend fun insertLocation(location: LocationEntity)
 
-    @Query("SELECT * FROM location_table where current = 1")
+    @Query("SELECT * FROM location_table ORDER by updated DESC LIMIT 1")
     fun getCurrentLocation(): LocationEntity?
 
-    @Query("UPDATE location_table SET current = 0 where current = 1")
-    fun updateCurrentLocation()
+    @Update
+    suspend fun updateCurrentLocation(location: LocationEntity)
 
-    @Query("SELECT * FROM location_table")
+    @Query("SELECT * FROM location_table ORDER BY updated DESC")
     fun getAllLocations(): List<LocationEntity>?
 }

@@ -87,6 +87,7 @@
                     android:id="@+id/search_result_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:background="@color/colorAccent"
                     app:layout_constraintTop_toBottomOf="@+id/search_bar_edit_text"
                     tools:layout_editor_absoluteX="16dp"
@@ -96,12 +97,15 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/location_recycler_view"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/settings_title_text"
-                tools:listitem="@layout/location_result_list_item" />
+                tools:listitem="@layout/location_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
