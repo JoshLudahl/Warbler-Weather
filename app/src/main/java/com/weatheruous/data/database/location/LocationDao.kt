@@ -1,6 +1,7 @@
 package com.weatheruous.data.database.location
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -21,4 +22,7 @@ interface LocationDao {
 
     @Query("SELECT * FROM location_table ORDER BY updated DESC")
     fun getAllLocations(): List<LocationEntity>?
+
+    @Delete
+    suspend fun deleteLocation(location: LocationEntity)
 }

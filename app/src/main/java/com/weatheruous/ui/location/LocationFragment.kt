@@ -17,6 +17,7 @@ import com.weatheruous.R
 import com.weatheruous.data.model.location.LocationEntity
 import com.weatheruous.databinding.FragmentLocationBinding
 import com.weatheruous.utilities.ClickListener
+import com.weatheruous.utilities.ClickListenerInterface
 import com.weatheruous.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,8 +29,23 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     private val binding get() = _binding!!
     private val viewModel: LocationViewModel by viewModels()
     private val locationDatabaseAdapter = LocationAdapter(
-        ClickListener { location -> setLocationFromDatabaseAsCurrent(location) }
+        object : ClickListenerInterface<LocationEntity> {
+            override fun onClick(item: LocationEntity) {
+                setLocationFromDatabaseAsCurrent(item)
+            }
+
+            override fun delete(item: LocationEntity) {
+                deleteLocationFromDatabase(item)
+            }
+        }
     )
+
+    private fun deleteLocationFromDatabase(item: LocationEntity) {
+        lifecycleScope.launch {
+            viewModel.deleteFromDatabase(item)
+        }
+    }
+
     private val locationNetworkAdapter = LocationNetworkAdapter(
         ClickListener { location -> saveLocationSearchResultToDatabase(location) }
     )

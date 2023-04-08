@@ -1,5 +1,6 @@
 package com.weatheruous.data.repositories.location
 
+import android.util.Log
 import com.weatheruous.data.database.location.LocationDao
 import com.weatheruous.data.model.location.LocationEntity
 import javax.inject.Inject
@@ -33,6 +34,11 @@ class LocationRepository @Inject constructor(
     suspend fun updateToCurrentLocation(location: LocationEntity) {
         val updated = location.copy(updated = System.currentTimeMillis())
         locationDao.updateCurrentLocation(updated)
+    }
+
+    suspend fun deleteLocation(location: LocationEntity) {
+        Log.d("LocationRepository", "Deleting location: $location")
+        locationDao.deleteLocation(location)
     }
 
     fun getDefaultLocation(): LocationEntity {

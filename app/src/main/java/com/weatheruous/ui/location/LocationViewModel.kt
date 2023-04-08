@@ -48,6 +48,13 @@ class LocationViewModel @Inject constructor(
         }
     }
 
+    suspend fun deleteFromDatabase(location: LocationEntity) {
+        Log.d("LocationViewModel", "deleteFromDatabase launching coroutine...")
+        viewModelScope.launch {
+            locationRepository.deleteLocation(location)
+        }
+    }
+
     suspend fun updateCurrentLocation(location: LocationEntity) {
         viewModelScope.launch {
             locationRepository.updateToCurrentLocation(location)

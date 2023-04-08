@@ -1,35 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
 
         <variable
             name="clickListener"
-            type="com.weatheruous.utilities.ClickListener" />
+            type="com.weatheruous.utilities.ClickListenerInterface" />
+
+        <variable
+            name="adapter"
+            type="com.weatheruous.ui.location.LocationAdapter" />
+
+        <variable
+            name="viewModel"
+            type="com.weatheruous.ui.location.LocationViewModel" />
 
         <variable
             name="location"
             type="com.weatheruous.data.model.location.LocationEntity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_button">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:id="@+id/location_line_item"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{location.toDisplayStringWithCurrent()}"
-            android:textColor="@color/blue"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
             android:onClick="@{() -> clickListener.onClick(location)}"
+            android:text="@{location.toDisplayString}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/title_text_option_size"
             app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Location Name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/delete_location"
+            android:layout_width="@dimen/search_close_icon_size"
+            android:layout_height="@dimen/search_close_icon_size"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_close"
+            android:onClick="@{() -> clickListener.delete(location)}"
+            app:layout_constraintBottom_toBottomOf="@+id/location_line_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintStart_toEndOf="@+id/location_line_item"
+            app:layout_constraintTop_toTopOf="@+id/location_line_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

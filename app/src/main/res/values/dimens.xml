@@ -13,7 +13,7 @@
     <dimen name="current_weather_description_text_size">22sp</dimen>
     <dimen name="custom_button_corner_radius">15dp</dimen>
     <dimen name="settings_heading_text_size">32sp</dimen>
-    <dimen name="title_text_option_size">18dp</dimen>
+    <dimen name="title_text_option_size">18sp</dimen>
     <dimen name="radio_size">32dp</dimen>
     <dimen name="search_close_icon_size">28dp</dimen>
 </resources>
