@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.weatheruous.data.model.location.LocationEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LocationDao {
@@ -21,7 +22,7 @@ interface LocationDao {
     suspend fun updateCurrentLocation(location: LocationEntity)
 
     @Query("SELECT * FROM location_table ORDER BY updated DESC")
-    fun getAllLocations(): List<LocationEntity>?
+    fun getAllLocations(): Flow<List<LocationEntity>>
 
     @Delete
     suspend fun deleteLocation(location: LocationEntity)

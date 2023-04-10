@@ -19,12 +19,7 @@ class LocationRepository @Inject constructor(
         } ?: emit(getDefaultLocation())
     }.flowOn(Dispatchers.IO)
 
-    fun getAllLocationsFromDatabase(): Flow<List<LocationEntity>> = flow {
-        val allLocations = locationDao.getAllLocations()
-        allLocations?.let {
-            emit(it)
-        } ?: emit(emptyList())
-    }.flowOn(Dispatchers.IO)
+    fun getAllLocationsFromDatabase(): Flow<List<LocationEntity>> = locationDao.getAllLocations()
 
     suspend fun saveLocationToDatabaseAndSetAsCurrent(location: LocationEntity) {
         updateToCurrentLocation(location)
