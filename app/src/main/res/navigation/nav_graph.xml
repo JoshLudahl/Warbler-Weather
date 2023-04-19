@@ -32,7 +32,8 @@
             android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
@@ -42,6 +43,7 @@
             android:id="@+id/action_locationFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
 </navigation>

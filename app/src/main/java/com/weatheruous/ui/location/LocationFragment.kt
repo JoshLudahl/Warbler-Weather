@@ -125,7 +125,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
     private fun setUpListeners() {
         binding.backIcon.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
+            view.findNavController().navigateUp()
         }
 
         binding.addLocation.setOnClickListener {
