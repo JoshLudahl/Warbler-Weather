@@ -131,6 +131,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         binding.addLocation.setOnClickListener {
             listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
                 .forEach { it.visibility = View.VISIBLE }
+            binding.searchBarEditText.requestFocus()
         }
 
         binding.closeSearch.setOnClickListener {
@@ -162,6 +163,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             viewModel.saveToDatabase(location)
         }
         closeAndClearSearch()
+        findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
     }
 
     private fun setLocationFromDatabaseAsCurrent(location: LocationEntity) {
