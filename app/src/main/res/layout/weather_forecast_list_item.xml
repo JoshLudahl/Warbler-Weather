@@ -22,8 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:textColor="@color/colorAccent"
             android:text="@{weather.dayOfWeek}"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,42 +34,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            tools:src="@drawable/ic_01d"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/day_of_week" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/temperature_hi"
-            android:text="@{weather.hi}"
-            android:textColor="@color/red"
-            app:layout_constraintEnd_toStartOf="@+id/temperature_low"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/weather_icon"
-            tools:text="55"
-            style="@style/forecast_temp_style" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView2"
-            android:layout_width="@dimen/forecast_hi_low_icon_dim"
-            android:layout_height="@dimen/forecast_hi_low_icon_dim"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_hi_low"
-            app:layout_constraintStart_toEndOf="@+id/temperature_hi"
-            app:layout_constraintTop_toTopOf="@+id/temperature_hi" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/temperature_low"
-            style="@style/forecast_temp_style"
-            android:text="@{weather.low}"
-            android:textColor="@color/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-            tools:text="33" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/day_of_week"
+            tools:src="@drawable/ic_01d" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hi_low_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weather_icon">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/temperature_hi"
+                style="@style/forecast_temp_style"
+                android:layout_marginBottom="4dp"
+                android:text="@{weather.hi}"
+                android:textColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="55" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView2"
+                android:layout_width="@dimen/forecast_hi_low_icon_dim"
+                android:layout_height="@dimen/forecast_hi_low_icon_dim"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_hi_low"
+                app:layout_constraintStart_toEndOf="@+id/temperature_hi"
+                app:layout_constraintTop_toTopOf="@+id/temperature_hi" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/temperature_low"
+                style="@style/forecast_temp_style"
+                android:text="@{weather.low}"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                tools:text="33" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
