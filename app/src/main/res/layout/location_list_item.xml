@@ -33,7 +33,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/location_line_item"
-            android:layout_width="wrap_content"
+            android:layout_width="296dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -55,8 +55,8 @@
             android:layout_width="@dimen/search_close_icon_size"
             android:layout_height="@dimen/search_close_icon_size"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_close"
             android:onClick="@{() -> clickListener.delete(location)}"
+            android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="@+id/location_line_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.966"
