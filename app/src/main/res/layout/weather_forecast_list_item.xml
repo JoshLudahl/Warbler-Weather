@@ -63,8 +63,9 @@
             android:id="@+id/temperature_low"
             style="@style/forecast_temp_style"
             android:text="@{weather.low}"
-            android:textColor="@color/low"
+            android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
             tools:text="33" />
 
