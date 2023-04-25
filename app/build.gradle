@@ -30,6 +30,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv('WEATHER_API_KEY') ?: getProperty("WEATHER_API_KEY")}\"")
+            signingConfig signingConfigs.debug
         }
         debug {
             minifyEnabled false
