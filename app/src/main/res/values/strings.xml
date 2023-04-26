@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weatheruous</string>
+    <string name="app_name">Warbler Weather</string>
 
     <string name="current_temp_high_string">75˚</string>
     <string name="current_temp_low_string">40˚</string>

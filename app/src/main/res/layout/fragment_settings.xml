@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.weatheruous.ui.settings.SettingsViewModel" />
+            type="com.warbler.ui.settings.SettingsViewModel" />
     </data>
 
     <ScrollView

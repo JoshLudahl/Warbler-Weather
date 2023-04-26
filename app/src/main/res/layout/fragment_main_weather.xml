@@ -8,19 +8,19 @@
 
         <variable
             name="location"
-            type="com.weatheruous.data.model.location.LocationEntity" />
+            type="com.warbler.data.model.location.LocationEntity" />
 
         <variable
             name="r"
-            type="com.weatheruous.data.model.weather.WeatherDataSource" />
+            type="com.warbler.data.model.weather.WeatherDataSource" />
 
         <variable
             name="resource"
-            type="com.weatheruous.utilities.Resource.Success" />
+            type="com.warbler.utilities.Resource.Success" />
 
         <variable
             name="viewModel"
-            type="com.weatheruous.ui.MainWeatherViewModel" />
+            type="com.warbler.ui.MainWeatherViewModel" />
 
     </data>
 

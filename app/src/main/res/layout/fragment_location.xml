@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.weatheruous.ui.location.LocationViewModel" />
+            type="com.warbler.ui.location.LocationViewModel" />
     </data>
 
     <ScrollView

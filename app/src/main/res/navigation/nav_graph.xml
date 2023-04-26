@@ -6,7 +6,7 @@
     app:startDestination="@id/mainWeatherFragment">
     <fragment
         android:id="@+id/mainWeatherFragment"
-        android:name="com.weatheruous.ui.MainWeatherFragment"
+        android:name="com.warbler.ui.MainWeatherFragment"
         android:label="fragment_main_weather"
         tools:layout="@layout/fragment_main_weather" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.weatheruous.ui.settings.SettingsFragment"
+        android:name="com.warbler.ui.settings.SettingsFragment"
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.weatheruous.ui.location.LocationFragment"
+        android:name="com.warbler.ui.location.LocationFragment"
         android:label="LocationFragment" >
         <action
             android:id="@+id/action_locationFragment_to_mainWeatherFragment"

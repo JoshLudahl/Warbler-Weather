@@ -6,7 +6,7 @@
     <data>
         <variable
             name="weather"
-            type="com.weatheruous.data.model.weather.WeatherForecast" />
+            type="com.warbler.data.model.weather.WeatherForecast" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

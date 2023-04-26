@@ -8,11 +8,11 @@
 
         <variable
             name="clickListener"
-            type="com.weatheruous.utilities.ClickListener" />
+            type="com.warbler.utilities.ClickListener" />
 
         <variable
             name="location"
-            type="com.weatheruous.data.model.location.LocationEntity" />
+            type="com.warbler.data.model.location.LocationEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,19 +7,19 @@
 
         <variable
             name="clickListener"
-            type="com.weatheruous.utilities.ClickListenerInterface" />
+            type="com.warbler.utilities.ClickListenerInterface" />
 
         <variable
             name="adapter"
-            type="com.weatheruous.ui.location.LocationAdapter" />
+            type="com.warbler.ui.location.LocationAdapter" />
 
         <variable
             name="viewModel"
-            type="com.weatheruous.ui.location.LocationViewModel" />
+            type="com.warbler.ui.location.LocationViewModel" />
 
         <variable
             name="location"
-            type="com.weatheruous.data.model.location.LocationEntity" />
+            type="com.warbler.data.model.location.LocationEntity" />
 
     </data>
 
