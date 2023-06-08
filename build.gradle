@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        coroutine = '1.6.4'
-        dagger_hilt = '2.45'
+        coroutine = '1.7.1'
+        dagger_hilt = '2.46.1'
         hilt_lifecycle_viewmodel = '1.0.0'
-        kotlin = '1.8.10'
+        kotlin = '1.8.21'
         moshi = "1.14.0"
         navigation = '2.5.3'
         retrofit = '2.9.0'
@@ -16,7 +16,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.android.tools.build:gradle:8.0.1'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$dagger_hilt"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
