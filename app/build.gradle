@@ -13,7 +13,7 @@ android {
     def target = 33
     compileSdkVersion target
     defaultConfig {
-        applicationId "com.warbler"
+        applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
         versionCode 1

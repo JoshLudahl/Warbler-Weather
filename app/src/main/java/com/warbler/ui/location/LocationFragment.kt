@@ -144,7 +144,6 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
                 s?.let {
                     if (it.length >= 3) {
                         Log.d("LocationFragment", "Searching for string: $s")
