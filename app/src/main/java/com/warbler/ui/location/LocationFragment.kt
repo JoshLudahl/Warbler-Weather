@@ -144,10 +144,14 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (count >= 3) {
-                    Log.d("LocationFragment", "Searching for string: $s")
-                    viewModel.searchForLocation(s.toString())
-                } else {
+
+                s?.let {
+                    if (it.length >= 3) {
+                        Log.d("LocationFragment", "Searching for string: $s")
+                        viewModel.searchForLocation(s.toString())
+                    }
+                } ?: {
+                    Log.d("LocationFragment", "Not enough chars to perform search.")
                     clearLocationSearchList()
                 }
             }

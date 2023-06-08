@@ -21,7 +21,7 @@
     <string name="settings_temperature">Temperature</string>
     <string name="settings_speed">Speed</string>
     <string name="settings_about_heading">About</string>
-    <string name="settings_about_this_app">About Weatheruous</string>
+    <string name="settings_about_this_app">About Warbler Weather</string>
     <string name="settings_privacy_policy_text">Privacy Policy</string>
     <string name="km_h">MPS</string>
     <string name="meters_per_second">Meters Per Second</string>
