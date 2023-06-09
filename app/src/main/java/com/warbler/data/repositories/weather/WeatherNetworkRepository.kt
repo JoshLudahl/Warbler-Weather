@@ -15,6 +15,7 @@ class WeatherNetworkRepository @Inject constructor(
 ) {
 
     fun getCurrentWeather(location: LocationEntity): Flow<WeatherDataSource> = flow {
+        Log.d("WeatherNetworkRepository", "Making request to API service to fetch weather.")
         val weather = weatherApiService.getWeather(location.lat, location.lon)
         Log.d("WeatherNetworkRepository", "getCurrentWeather: $weather")
         emit(weather)
