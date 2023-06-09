@@ -113,7 +113,7 @@
                         android:layout_width="@dimen/radio_size"
                         android:animateLayoutChanges="true"
                         android:layout_height="@dimen/radio_size"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view)}"
+                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent"
                         android:checked="true" />
@@ -122,7 +122,7 @@
                         android:id="@+id/radio_fahrenheit"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view)}"
+                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
                         android:animateLayoutChanges="true"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
@@ -132,7 +132,7 @@
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
                         android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view)}"
+                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
 

@@ -41,6 +41,29 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.aboutIcon.setOnClickListener {
             handleOnClickLink(Constants.ABOUT_URL)
         }
+        binding.settingsSubheadingOptionCelsiusText.setOnClickListener {
+            updateRadioGroup(
+                R.id.radio_celsius
+            )
+        }
+        binding.settingsSubheadingOptionFahrenheitText.setOnClickListener {
+            updateRadioGroup(R.id.radio_fahrenheit)
+        }
+        binding.settingsSubheadingOptionKelvinText.setOnClickListener {
+            updateRadioGroup(R.id.radio_kelvin)
+        }
+    }
+
+    private fun updateRadioGroup(itemId: Int) {
+        when (itemId) {
+            R.id.radio_celsius -> binding.radioCelsius
+            R.id.radio_fahrenheit -> binding.radioFahrenheit
+            R.id.radio_kelvin -> binding.radioKelvin
+            else -> throw Exception()
+        }.let {
+            it.isChecked = true
+            viewModel.handleTemperatureRadioClick(it.id)
+        }
     }
 
     private fun handleOnClickLink(url: String) {

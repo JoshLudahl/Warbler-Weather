@@ -58,8 +58,8 @@ class SettingsViewModel @Inject constructor(
         }.id
     }
 
-    fun handleTemperatureRadioClick(view: View) {
-        when (view.id) {
+    fun handleTemperatureRadioClick(viewId: Int) {
+        when (viewId) {
             R.id.radio_celsius -> Temperature.CELSIUS
             R.id.radio_fahrenheit -> Temperature.FAHRENHEIT
             R.id.radio_kelvin -> Temperature.KELVIN
@@ -69,7 +69,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun saveTemperatureUnit(unit: Temperature) {
+    fun saveTemperatureUnit(unit: Temperature) {
         viewModelScope.launch {
             when (unit) {
                 Temperature.CELSIUS -> 0
