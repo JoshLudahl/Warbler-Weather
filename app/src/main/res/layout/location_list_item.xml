@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="48dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
             android:onClick="@{() -> clickListener.onClick(location)}"
@@ -46,7 +45,7 @@
             android:textSize="@dimen/title_text_option_size"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/delete_location"
             app:layout_constraintHorizontal_bias="0.071"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -62,8 +61,6 @@
             android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="@+id/location_line_item"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.966"
-            app:layout_constraintStart_toEndOf="@+id/location_line_item"
             app:layout_constraintTop_toTopOf="@+id/location_line_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
