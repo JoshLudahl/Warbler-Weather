@@ -33,10 +33,11 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/location_line_item"
-            android:layout_width="296dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
             android:onClick="@{() -> clickListener.onClick(location)}"
@@ -45,9 +46,11 @@
             android:textSize="@dimen/title_text_option_size"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.071"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Location Name" />
 
         <androidx.appcompat.widget.AppCompatImageView
