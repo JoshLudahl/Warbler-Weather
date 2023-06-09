@@ -186,7 +186,7 @@
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
                         android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view)}"
+                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent"
                         android:checked="true" />
@@ -196,7 +196,7 @@
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
                         android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view)}"
+                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
                         android:background="@drawable/custom_radio"
                         android:button="@android:color/transparent" />
 

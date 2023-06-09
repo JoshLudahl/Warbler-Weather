@@ -42,19 +42,23 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             handleOnClickLink(Constants.ABOUT_URL)
         }
         binding.settingsSubheadingOptionCelsiusText.setOnClickListener {
-            updateRadioGroup(
-                R.id.radio_celsius
-            )
+            updateTemperatureRadioGroup(R.id.radio_celsius)
         }
         binding.settingsSubheadingOptionFahrenheitText.setOnClickListener {
-            updateRadioGroup(R.id.radio_fahrenheit)
+            updateTemperatureRadioGroup(R.id.radio_fahrenheit)
         }
         binding.settingsSubheadingOptionKelvinText.setOnClickListener {
-            updateRadioGroup(R.id.radio_kelvin)
+            updateTemperatureRadioGroup(R.id.radio_kelvin)
+        }
+        binding.settingsSubheadingOptionKmhText.setOnClickListener {
+            updateSpeedRadioGroup(R.id.radio_kmh)
+        }
+        binding.settingsSubheadingOptionMphText.setOnClickListener {
+            updateSpeedRadioGroup(R.id.radio_mph)
         }
     }
 
-    private fun updateRadioGroup(itemId: Int) {
+    private fun updateTemperatureRadioGroup(itemId: Int) {
         when (itemId) {
             R.id.radio_celsius -> binding.radioCelsius
             R.id.radio_fahrenheit -> binding.radioFahrenheit
@@ -63,6 +67,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }.let {
             it.isChecked = true
             viewModel.handleTemperatureRadioClick(it.id)
+        }
+    }
+
+    private fun updateSpeedRadioGroup(itemId: Int) {
+        when (itemId) {
+            R.id.radio_kmh -> binding.radioKmh
+            R.id.radio_mph -> binding.radioMph
+            else -> throw Exception()
+        }.let {
+            it.isChecked = true
+            viewModel.handleSpeedRadioClick(it.id)
         }
     }
 

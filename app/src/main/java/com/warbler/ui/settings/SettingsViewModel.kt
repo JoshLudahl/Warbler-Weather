@@ -1,6 +1,5 @@
 package com.warbler.ui.settings
 
-import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -69,7 +68,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun saveTemperatureUnit(unit: Temperature) {
+    private fun saveTemperatureUnit(unit: Temperature) {
         viewModelScope.launch {
             when (unit) {
                 Temperature.CELSIUS -> 0
@@ -81,8 +80,8 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun handleSpeedRadioClick(view: View) {
-        when (view.id) {
+    fun handleSpeedRadioClick(viewId: Int) {
+        when (viewId) {
             R.id.radio_mph -> Speed.MPH
             R.id.radio_kmh -> Speed.KPH
             else -> Speed.MPH // Default
