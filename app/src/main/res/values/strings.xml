@@ -40,4 +40,8 @@
     <string name="forecast">Forecast</string>
     <string name="locations">Locations</string>
     <string name="search_location">Search for location</string>
+    <string name="humidity">Humidity</string>
+    <string name="humidity_icon">Humidity Icon</string>
+    <string name="uv_index">UV Index</string>
+    <string name="uv_index_icon">UV Index Icon</string>
 </resources>

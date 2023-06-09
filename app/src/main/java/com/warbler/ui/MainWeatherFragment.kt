@@ -20,6 +20,7 @@ import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.Resource
+import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 import kotlinx.coroutines.Dispatchers
@@ -145,6 +146,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.searchIcon.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+        }
+
+        binding.humidityIcon.setOnClickListener {
+            requireContext().showToast("Humidity")
+        }
+        binding.uvIndexIcon.setOnClickListener {
+            requireContext().showToast("UV Index")
         }
     }
 
