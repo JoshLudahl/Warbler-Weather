@@ -41,6 +41,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.aboutIcon.setOnClickListener {
             handleOnClickLink(Constants.ABOUT_URL)
         }
+        binding.settingsSubheadingAboutThisAppText.setOnClickListener {
+            handleOnClickLink(Constants.ABOUT_URL)
+        }
+        binding.settingsSubheadingPrivacyPolicyText.setOnClickListener {
+            handleOnClickLink(Constants.PRIVACY_POLICY_URL)
+        }
         binding.settingsSubheadingOptionCelsiusText.setOnClickListener {
             updateTemperatureRadioGroup(R.id.radio_celsius)
         }
