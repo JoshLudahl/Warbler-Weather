@@ -15,7 +15,6 @@ import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.DataPref
 import com.warbler.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.Date
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,7 +41,7 @@ class MainWeatherViewModel @Inject constructor(
         get() = _locationState
 
     private val _dateTitle =
-        MutableStateFlow(Conversion.getFormattedDateFromTimeStamp(Date().toInstant()))
+        MutableStateFlow(Conversion.currentDate)
     val dateTitle: StateFlow<String>
         get() = _dateTitle
 

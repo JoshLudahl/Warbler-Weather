@@ -1,6 +1,7 @@
 package com.warbler.data.model.weather
 
 import com.warbler.ui.settings.Temperature
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -26,6 +27,9 @@ object Conversion {
     val String.capitalizeEachFirst
         get() = this.split(" ")
             .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
+
+    val currentDate
+        get() = SimpleDateFormat("EEEE, MMMM dd", Locale.getDefault()).format(Date())
 
     /**
      * Formats a date of 2023-03-27T19:32:43.978Z to 'Day-of-week, Month day-of-month-suffix'
