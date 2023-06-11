@@ -114,7 +114,8 @@
                     android:backgroundTint="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/date_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/date_title"
+                    tools:src="@drawable/ic_01d" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/current_temperature"
@@ -249,10 +250,10 @@
 
                     <ImageView
                         android:id="@+id/uv_index_icon"
-                        android:contentDescription="@string/uv_index_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
+                        android:contentDescription="@string/uv_index_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/uv_index_label"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -277,9 +278,9 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/uv_index_value"
-                        android:contentDescription="@string/uv_index"
                         style="@style/weather_detail_text"
                         android:backgroundTint="@android:color/transparent"
+                        android:contentDescription="@string/uv_index"
                         android:text="@string/mdash"
                         app:layout_constraintBottom_toBottomOf="@+id/uv_index_label"
                         app:layout_constraintEnd_toStartOf="@+id/humidity_icon"
@@ -294,11 +295,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:backgroundTint="@android:color/transparent"
+                        android:contentDescription="@string/humidity_icon"
                         android:src="@drawable/ic_water_drop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/humidity_text_value"
                         app:layout_constraintHorizontal_bias="0.5"
-                        android:contentDescription="@string/humidity_icon"
                         app:layout_constraintStart_toEndOf="@+id/uv_index_value"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/blue" />
@@ -306,9 +307,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/humidity_text_value"
                         style="@style/weather_detail_text"
-                        android:contentDescription="@string/humidity"
                         android:layout_marginStart="8dp"
                         android:backgroundTint="@android:color/transparent"
+                        android:contentDescription="@string/humidity"
                         android:text="@string/mdash"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -324,9 +325,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                     tools:itemCount="8"
-                    android:orientation="horizontal"
                     tools:listitem="@layout/weather_forecast_list_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
