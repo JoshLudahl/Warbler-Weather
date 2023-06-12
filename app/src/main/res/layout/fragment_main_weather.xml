@@ -51,7 +51,7 @@
                     android:src="@drawable/ic_location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorPrimaryDark" />
+                    app:tint="@color/colorAccent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/location_text"
