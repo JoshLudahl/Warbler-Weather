@@ -149,12 +149,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         binding.humidityIcon.setOnClickListener {
-            requireContext().showToast("Humidity")
+            toast("Humidity")
         }
         binding.uvIndexIcon.setOnClickListener {
-            requireContext().showToast("UV Index")
+            toast("UV Index")
         }
     }
+
+    private fun toast(message: String) = requireContext().showToast(message)
 
     override fun onDestroyView() {
         super.onDestroyView()
