@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.warbler.BuildConfig
 import com.warbler.R
 import com.warbler.utilities.DataPref
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class SettingsViewModel @Inject constructor(
     private val _speedUnit = MutableStateFlow(R.id.radio_mph)
     val speedUnit: StateFlow<Int>
         get() = _speedUnit
+
+    private val _appVersion = MutableStateFlow("Beta Version ${BuildConfig.VERSION_NAME}")
+    val appVersion get() = _appVersion
 
     init {
         viewModelScope.launch {
