@@ -1,5 +1,6 @@
 package com.warbler.ui
 
+import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,12 +9,14 @@ import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
+import com.warbler.data.network.ConnectionHandler
 import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.DataPref
 import com.warbler.utilities.Resource
+import com.warbler.utilities.showToast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -103,30 +106,21 @@ class MainWeatherViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    fun updateWeatherData() {
+    fun updateWeatherData(context: Context) {
         Log.d("MainWeatherViewModel", "Setting to Loading state.")
         _weatherState.value = Resource.Loading
         when (val location = _locationState.value) {
             is Resource.Success -> {
                 Log.d("MainWeatherViewModel", "Setting to Success state")
                 viewModelScope.launch {
-                    val currentLocation: LocationEntity = location.data as LocationEntity
-                    weatherNetworkRepository.getCurrentWeather(currentLocation)
-                        .catch { e ->
-                            _weatherState.value = Resource.Error(
-                                message = e.message ?: "An error occurred."
-                            )
-                            Log.d("MainWeatherViewModel", "Caught error: $e")
-                        }
-                        .collect {
-                            Log.d(
-                                "MainWeatherViewModel",
-                                "Updating ViewModel with data: $it"
-                            )
+                    if (ConnectionHandler.isOnline(context)) {
+                        handleGetWeather(location.data)
+                    } else {
+                        Log.d("MainWeatherViewModel", "No Internet")
+                        _weatherState.value = Resource.Error(message = "No Internet Available")
+                        context.showToast("No internet connection.")
 
-                            _weatherState.value = Resource.Success(it)
-                            _weatherObject.value = it
-                        }
+                    }
                 }
             }
             is Resource.Error -> {
@@ -136,5 +130,25 @@ class MainWeatherViewModel @Inject constructor(
                 Log.d("MainWeatherViewModel", "Loading Weather")
             }
         }
+    }
+
+    private suspend fun handleGetWeather(locationEntity: LocationEntity) {
+        val currentLocation: LocationEntity = locationEntity as LocationEntity
+        weatherNetworkRepository.getCurrentWeather(currentLocation)
+            .catch { e ->
+                _weatherState.value = Resource.Error(
+                    message = e.message ?: "An error occurred."
+                )
+                Log.d("MainWeatherViewModel", "Caught error: $e")
+            }
+            .collect {
+                Log.d(
+                    "MainWeatherViewModel",
+                    "Updating ViewModel with data: $it"
+                )
+
+                _weatherState.value = Resource.Success(it)
+                _weatherObject.value = it
+            }
     }
 }

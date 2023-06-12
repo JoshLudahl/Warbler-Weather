@@ -60,14 +60,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private fun setupObservers() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.updateWeatherData()
+            viewModel.updateWeatherData(requireContext())
         }
 
         lifecycleScope.launch(Dispatchers.Main + job) {
             viewModel.locationState.collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        viewModel.updateWeatherData()
+                        viewModel.updateWeatherData(requireContext())
                     }
                     is Resource.Error -> {
                         // TODO
