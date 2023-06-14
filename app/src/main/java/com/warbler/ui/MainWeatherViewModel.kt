@@ -119,7 +119,6 @@ class MainWeatherViewModel @Inject constructor(
                         Log.d("MainWeatherViewModel", "No Internet")
                         _weatherState.value = Resource.Error(message = "No Internet Available")
                         context.showToast("No internet connection.")
-
                     }
                 }
             }

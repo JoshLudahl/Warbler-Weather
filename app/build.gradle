@@ -7,6 +7,9 @@ plugins {
     id 'org.jlleitschuh.gradle.ktlint'
     id 'kotlinx-serialization'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
 }
 
 android {
@@ -16,8 +19,8 @@ android {
         applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
-        versionCode 4
-        versionName "0.4"
+        versionCode 5
+        versionName "0.5"
         testInstrumentationRunner "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
         vectorDrawables.useSupportLibrary = true
@@ -93,23 +96,23 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt"
     kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_viewmodel"
 
-    // Firebase
-//    // Import the BoM for the Firebase platform
-//    implementation platform('com.google.firebase:firebase-bom:31.0.2')
-//
-//    // Add the dependencies for the Crashlytics and Analytics libraries
-//    // When using the BoM, you don't specify versions in Firebase library dependencies
-//    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-//
-//    // Add the dependency for the Realtime Database library
-//    // When using the BoM, you don't specify versions in Firebase library dependencies
-//    implementation 'com.google.firebase:firebase-database-ktx'
-//
-//    // Add the dependency for the Firebase SDK for Google Analytics
-//    implementation 'com.google.firebase:firebase-analytics-ktx'
-//
-//    // Add Performance lib
-//    implementation 'com.google.firebase:firebase-perf-ktx'
+    //Firebase
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-database-ktx'
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Add Performance lib
+    implementation 'com.google.firebase:firebase-perf-ktx'
 
     // For instrumented tests.
     androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt"
