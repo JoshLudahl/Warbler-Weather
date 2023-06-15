@@ -11,7 +11,7 @@ import com.warbler.data.model.weather.Alert
 import com.warbler.databinding.FragmentDialogWeatherAlertBinding
 
 class WeatherAlertDialogFragment(
-    val alert: Alert
+    private val alert: Alert
 ) : DialogFragment() {
     private var _binding: FragmentDialogWeatherAlertBinding? = null
     private val binding get() = _binding!!
