@@ -60,6 +60,20 @@ object Conversion {
             Temperature.KELVIN -> value
         }
 
+    fun getTimeFromTimeStamp(timeStamp: Long, offset: Long): String {
+        val timeStampWithOffset = timeStamp + offset
+        val hour = Instant.ofEpochSecond(timeStampWithOffset)
+            .atZone(ZoneId.of("UTC"))
+            .hour.toString()
+
+        val minute = Instant.ofEpochSecond(timeStampWithOffset)
+            .atZone(ZoneId.of("UTC"))
+            .minute
+        if (minute < 10) return "$hour:0$minute"
+
+        return "$hour:$minute"
+    }
+
     private val Int.appendSuffix
         get() = "$this${getSuffix(this)}"
 

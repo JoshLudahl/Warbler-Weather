@@ -2,6 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -70,7 +71,6 @@
                     android:id="@+id/settings_icon"
                     android:layout_width="@dimen/default_icon_size"
                     android:layout_height="@dimen/default_icon_size"
-
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:contentDescription="@string/settings_icon_description"
@@ -109,7 +109,7 @@
                     android:id="@+id/current_weather_icon"
                     android:layout_width="@dimen/weather_icon_size"
                     android:layout_height="@dimen/weather_icon_size"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:animateLayoutChanges="true"
                     android:backgroundTint="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -319,14 +319,47 @@
                         tools:text="45%" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
+                    android:id="@+id/additional_details_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/top_rounded_rectangle"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/weather_detail_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/details_icon"
+                    android:layout_width="@dimen/expand_down_icon"
+                    android:layout_height="@dimen/expand_down_icon"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_expand_down"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/details_icon"
                     tools:itemCount="8"
                     tools:listitem="@layout/weather_forecast_list_item" />
 

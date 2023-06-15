@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.warbler.R
 import com.warbler.data.model.weather.Conversion
@@ -15,6 +16,7 @@ import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
+import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
@@ -35,6 +37,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private val viewModel: MainWeatherViewModel by viewModels()
     private val job = Job()
     private val adapter = MainAdapter()
+    private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,17 +47,89 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         setupObservers()
         setUpListeners()
-        setUpRecyclerView()
+        setUpWeatherRecyclerView()
+        setupWeatherDetailRecyclerView()
     }
 
-    private fun setUpRecyclerView() {
+    private fun setUpWeatherRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = layoutManager
     }
 
-    private fun updateRecyclerView(weatherForecastList: List<WeatherForecast>) {
+    private fun setupWeatherDetailRecyclerView() {
+        val layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.weatherDetailRecyclerView.adapter = weatherDetailAdapter
+        binding.weatherDetailRecyclerView.layoutManager = layoutManager
+    }
+
+    private fun buildWeatherDetailList(result: WeatherDataSource): List<WeatherDetailItem> {
+        val list = ArrayList<WeatherDetailItem>()
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_sunrise,
+                value = Conversion.getTimeFromTimeStamp(
+                    timeStamp = result.current.sunrise.toLong(),
+                    offset = result.timezoneOffset.toLong()
+                )
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_sunset,
+                value = Conversion.getTimeFromTimeStamp(
+                    timeStamp = result.current.sunset.toLong(),
+                    offset = result.timezoneOffset.toLong()
+                )
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_thermostat,
+                value = Conversion.fromKelvinToProvidedUnit(
+                    result.current.feelsLike,
+                    viewModel.temperatureUnit.value
+                ).toInt().toDegrees
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_compress,
+                value = getString(R.string.pressure, result.current.pressure.toString())
+
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_water,
+                value = Conversion.fromKelvinToProvidedUnit(
+                    value = result.current.dewPoint,
+                    unit = viewModel.temperatureUnit.value
+                ).toInt().toDegrees
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_cloud,
+                value = getString(R.string.cloudy, result.current.clouds.toString())
+            )
+        )
+
+        return list
+    }
+
+    private fun updateWeatherDetailRecyclerView(weatherDetailItemList: List<WeatherDetailItem>) {
+        weatherDetailAdapter.setItems(weatherDetailItemList)
+    }
+
+    private fun updateWeatherRecyclerView(weatherForecastList: List<WeatherForecast>) {
         adapter.setItems(weatherForecastList)
     }
 
@@ -89,7 +164,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                                 viewModel.temperatureUnit.value
                             )
 
-                            updateRecyclerView(list)
+                            updateWeatherRecyclerView(list)
+                            val weatherDetailList = buildWeatherDetailList(result.data)
+                            updateWeatherDetailRecyclerView(weatherDetailList)
                             setUiElements(result.data, viewModel.temperatureUnit.value)
 
                             binding.swipeRefreshLayout.isRefreshing = false
@@ -153,6 +230,17 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
         binding.uvIndexIcon.setOnClickListener {
             toast("UV Index")
+        }
+
+        binding.detailsIcon.setOnClickListener {
+            val state = binding.additionalDetailsLayout.visibility
+            if (state == View.VISIBLE) {
+                binding.additionalDetailsLayout.visibility = View.GONE
+                binding.detailsIcon.setImageResource(R.drawable.ic_expand_down)
+            } else {
+                binding.additionalDetailsLayout.visibility = View.VISIBLE
+                binding.detailsIcon.setImageResource(R.drawable.ic_expand_up)
+            }
         }
     }
 

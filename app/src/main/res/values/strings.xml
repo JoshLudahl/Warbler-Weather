@@ -44,4 +44,6 @@
     <string name="humidity_icon">Humidity Icon</string>
     <string name="uv_index">UV Index</string>
     <string name="uv_index_icon">UV Index Icon</string>
+    <string name="pressure">%1$s hPa</string>
+    <string name="cloudy">%1$s%\u0025</string>
 </resources>

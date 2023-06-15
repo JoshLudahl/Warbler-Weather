@@ -5,10 +5,11 @@
     <dimen name="icon_dim">90dp</dimen>
     <dimen name="hi_low_icon_dim">48dp</dimen>
     <dimen name="forecast_hi_low_icon_dim">28dp</dimen>
+    <dimen name="expand_down_icon">32dp</dimen>
     <dimen name="default_icon_size">40dp</dimen>
     <dimen name="title_text_size">24sp</dimen>
     <dimen name="date_title_text_size">25sp</dimen>
-    <dimen name="default_temperature_text_size">96sp</dimen>
+    <dimen name="default_temperature_text_size">72sp</dimen>
     <dimen name="hi_low_temperature_text_size">26sp</dimen>
     <dimen name="weather_icon_size">140dp</dimen>
     <dimen name="current_weather_description_text_size">22sp</dimen>
@@ -17,4 +18,5 @@
     <dimen name="title_text_option_size">18sp</dimen>
     <dimen name="radio_size">32dp</dimen>
     <dimen name="search_close_icon_size">28dp</dimen>
+    <dimen name="weather_details_expanded_icon_size">32dp</dimen>
 </resources>
