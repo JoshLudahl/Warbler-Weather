@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.warbler.R
+import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.toDegrees
@@ -38,6 +39,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private val job = Job()
     private val adapter = MainAdapter()
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
+    private var alert: Alert? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -243,12 +245,19 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 binding.detailsIcon.setImageResource(R.drawable.ic_expand_up)
             }
         }
+
+        binding.weatherAlertIcon.setOnClickListener {
+            alert?.let {
+                WeatherAlertDialogFragment(it).show(parentFragmentManager, "Weather Alert")
+            }
+        }
     }
 
     private fun checkForWeatherAlerts(weatherDataSource: WeatherDataSource) {
         weatherDataSource.alerts?.let {
+            alert = it[0]
             binding.weatherAlertIcon.visibility = View.VISIBLE
-        }
+        } ?: { alert = null }
     }
     private fun toast(message: String) = requireContext().showToast(message)
 
