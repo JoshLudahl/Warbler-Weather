@@ -73,7 +73,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunrise.toLong(),
                     offset = result.timezoneOffset.toLong()
-                )
+                ) + " AM"
             )
         )
 
@@ -83,7 +83,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunset.toLong(),
                     offset = result.timezoneOffset.toLong()
-                )
+                ) + " PM"
             )
         )
 

@@ -64,14 +64,23 @@ object Conversion {
         val timeStampWithOffset = timeStamp + offset
         val hour = Instant.ofEpochSecond(timeStampWithOffset)
             .atZone(ZoneId.of("UTC"))
-            .hour.toString()
+            .hour
 
         val minute = Instant.ofEpochSecond(timeStampWithOffset)
             .atZone(ZoneId.of("UTC"))
             .minute
-        if (minute < 10) return "$hour:0$minute"
 
-        return "$hour:$minute"
+        val minuteFormatted = when {
+            minute < 10 -> "0$minute"
+            else -> "$minute"
+        }
+
+        val hourFormatted = when {
+            hour > 12 -> (hour - 12).toString()
+            else -> "$hour"
+        }
+
+        return "$hourFormatted:$minuteFormatted"
     }
 
     private val Int.appendSuffix
