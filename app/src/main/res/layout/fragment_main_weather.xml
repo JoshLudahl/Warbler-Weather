@@ -103,7 +103,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/location_icon"
-                    tools:text="Friday, Match 12th" />
+                    tools:text="Friday, September 12th" />
 
                 <ImageView
                     android:id="@+id/current_weather_icon"
@@ -362,6 +362,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/details_icon"
                     tools:itemCount="8"
                     tools:listitem="@layout/weather_forecast_list_item" />
+
+                <ImageView
+                    android:id="@+id/weather_alert_icon"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/current_weather_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/current_weather_icon"
+                    app:layout_constraintTop_toTopOf="@+id/current_weather_icon"
+                    card_view:srcCompat="@drawable/ic_warning" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

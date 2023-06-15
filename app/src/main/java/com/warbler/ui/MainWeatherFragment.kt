@@ -168,6 +168,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                             val weatherDetailList = buildWeatherDetailList(result.data)
                             updateWeatherDetailRecyclerView(weatherDetailList)
                             setUiElements(result.data, viewModel.temperatureUnit.value)
+                            checkForWeatherAlerts(result.data)
 
                             binding.swipeRefreshLayout.isRefreshing = false
                         }
@@ -244,6 +245,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
     }
 
+    private fun checkForWeatherAlerts(weatherDataSource: WeatherDataSource) {
+        weatherDataSource.alerts?.let {
+            binding.weatherAlertIcon.visibility = View.VISIBLE
+        }
+    }
     private fun toast(message: String) = requireContext().showToast(message)
 
     override fun onDestroyView() {
