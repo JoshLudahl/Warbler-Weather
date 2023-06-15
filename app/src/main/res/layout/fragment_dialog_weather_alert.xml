@@ -34,6 +34,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/alert_event"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         style="@style/settings_subheading_style"
         android:layout_marginStart="16dp"
