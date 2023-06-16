@@ -39,7 +39,7 @@
     <string name="mdash">&#8211;</string>
     <string name="forecast">Forecast</string>
     <string name="locations">Locations</string>
-    <string name="search_location">Search for location</string>
+    <string name="search_location">Search for city</string>
     <string name="humidity">Humidity</string>
     <string name="humidity_icon">Humidity Icon</string>
     <string name="uv_index">UV Index</string>

@@ -248,7 +248,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.weatherAlertIcon.setOnClickListener {
             alert?.let {
-                WeatherAlertDialogFragment(it).show(parentFragmentManager, "Weather Alert")
+                WeatherAlertDialogFragment(it)
+                    .show(childFragmentManager, WeatherAlertDialogFragment.TAG)
             }
         }
     }

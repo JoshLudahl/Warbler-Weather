@@ -42,4 +42,8 @@ class WeatherAlertDialogFragment(
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null or empty.")
     }
+
+    companion object {
+        const val TAG = "WeatherAlertDialog"
+    }
 }

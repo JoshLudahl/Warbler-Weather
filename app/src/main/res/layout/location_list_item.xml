@@ -36,8 +36,8 @@
             android:id="@+id/location_line_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:onClick="@{() -> clickListener.onClick(location)}"
             android:text="@{location.toDisplayString}"
@@ -60,6 +60,7 @@
             android:layout_marginBottom="8dp"
             android:onClick="@{() -> clickListener.delete(location)}"
             android:src="@drawable/ic_close"
+            android:tint="@color/red"
             app:layout_constraintBottom_toBottomOf="@+id/location_line_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/location_line_item" />
@@ -70,6 +71,7 @@
             android:layout_height="@dimen/default_icon_size"
             android:layout_marginStart="8dp"
             android:visibility="gone"
+            tools:visibility="visible"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="@{() -> clickListener.onClick(location)}"
@@ -77,7 +79,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_location"
-            android:contentDescription="@string/current_location" />
+            android:contentDescription="@string/current_location"
+            app:tint="@color/colorAccent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
