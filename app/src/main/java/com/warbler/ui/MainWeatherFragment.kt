@@ -40,6 +40,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private val adapter = MainAdapter()
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
     private var alert: Alert? = null
+    private var description: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +76,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunrise.toLong(),
                     offset = result.timezoneOffset.toLong()
-                ) + " AM"
+                ) + " AM",
+                label = R.string.sunrise
             )
         )
 
@@ -85,7 +87,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunset.toLong(),
                     offset = result.timezoneOffset.toLong()
-                ) + " PM"
+                ) + " PM",
+                label = R.string.sunset
             )
         )
 
@@ -95,15 +98,16 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.fromKelvinToProvidedUnit(
                     result.current.feelsLike,
                     viewModel.temperatureUnit.value
-                ).toInt().toDegrees
+                ).toInt().toDegrees,
+                label = R.string.feels_like
             )
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_compress,
-                value = getString(R.string.pressure, result.current.pressure.toString())
-
+                value = getString(R.string.pressure, result.current.pressure.toString()),
+                label = R.string.pressure_text
             )
         )
 
@@ -113,14 +117,16 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 value = Conversion.fromKelvinToProvidedUnit(
                     value = result.current.dewPoint,
                     unit = viewModel.temperatureUnit.value
-                ).toInt().toDegrees
+                ).toInt().toDegrees,
+                label = R.string.dew_point
             )
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_cloud,
-                value = getString(R.string.cloudy, result.current.clouds.toString())
+                value = getString(R.string.cloudy, result.current.clouds.toString()),
+                label = R.string.clouds
             )
         )
 
@@ -146,9 +152,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     is Resource.Success -> {
                         viewModel.updateWeatherData(requireContext())
                     }
+
                     is Resource.Error -> {
                         // TODO
                     }
+
                     is Resource.Loading -> {
                         // TODO
                     }
@@ -174,10 +182,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
                             binding.swipeRefreshLayout.isRefreshing = false
                         }
+
                         is Resource.Error -> {
                             binding.swipeRefreshLayout.isRefreshing = false
                             // TODO add error view
                         }
+
                         is Resource.Loading -> {
                             binding.swipeRefreshLayout.isRefreshing = true
                         }
@@ -217,6 +227,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             )
             humidityTextValue.text = humidityString
         }
+        description = result.daily[0].summary
     }
 
     private fun setUpListeners() {
@@ -252,6 +263,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     .show(childFragmentManager, WeatherAlertDialogFragment.TAG)
             }
         }
+
+        binding.weatherDescription.setOnClickListener {
+            description?.let { toast("Forecast: $it") }
+        }
     }
 
     private fun checkForWeatherAlerts(weatherDataSource: WeatherDataSource) {
@@ -260,6 +275,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             binding.weatherAlertIcon.visibility = View.VISIBLE
         } ?: { alert = null }
     }
+
     private fun toast(message: String) = requireContext().showToast(message)
 
     override fun onDestroyView() {

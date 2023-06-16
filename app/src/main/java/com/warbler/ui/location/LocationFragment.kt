@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -24,6 +26,10 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.fragment_location) {
+
+    enum class KeyBoardVisibility {
+        HIDDEN, VISIBLE
+    }
 
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
@@ -132,10 +138,12 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
                 .forEach { it.visibility = View.VISIBLE }
             binding.searchBarEditText.requestFocus()
+            toggleKeyboardVisibility(binding.searchBarEditText)
         }
 
         binding.closeSearch.setOnClickListener {
             closeAndClearSearch()
+            toggleKeyboardVisibility1(binding.searchBarEditText)
         }
 
         binding.searchBarEditText.addTextChangedListener(object : TextWatcher {
@@ -159,6 +167,20 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                 /* Do nothing */
             }
         })
+    }
+
+    private fun toggleKeyboardVisibility(view: View) {
+        activity?.let {
+            val imm = it.getSystemService(InputMethodManager::class.java)
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    private fun toggleKeyboardVisibility1(view: View) {
+        activity?.let {
+            val imm = it.getSystemService(InputMethodManager::class.java)
+            imm.showSoftInput(view, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        }
     }
 
     private fun saveLocationSearchResultToDatabase(location: LocationEntity) {

@@ -211,7 +211,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="@android:color/transparent"
+
+                    android:background="@drawable/dashed_background"
                     android:text="@string/mdash"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/current_weather_description_text_size"

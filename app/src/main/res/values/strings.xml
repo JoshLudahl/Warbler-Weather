@@ -48,4 +48,10 @@
     <string name="cloudy">%1$s%%</string>
     <string name="weather_alert">Weather Alert</string>
     <string name="current_location">Current Location</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="dew_point">Dew Point</string>
+    <string name="clouds">Clouds</string>
+    <string name="pressure_text">Pressure</string>
 </resources>

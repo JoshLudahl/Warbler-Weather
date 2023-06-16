@@ -48,7 +48,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/ic_water" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/sunrise_info_text"
                     android:layout_width="match_parent"
                     android:background="@android:color/transparent"
@@ -61,6 +61,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_icon"
                     tools:text="day" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/weather_detail_text_label"
+                    android:text="@{detail.label}"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sunrise_info_text"
+                    tools:text="Something" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

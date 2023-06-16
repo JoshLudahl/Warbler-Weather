@@ -92,6 +92,8 @@ data class Daily(
     val rain: Double? = null,
     @SerialName("snow")
     val snow: Double? = null,
+    @SerialName("summary")
+    val summary: String,
     @SerialName("sunrise")
     val sunrise: Int,
     @SerialName("sunset")
