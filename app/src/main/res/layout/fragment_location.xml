@@ -62,7 +62,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_bar_edit_text"
                     style="@style/SearchViewStyle"
                     android:layout_width="match_parent"
@@ -70,6 +70,8 @@
                     android:animateLayoutChanges="true"
                     android:hint="@string/search_location"
                     android:visibility="visible"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

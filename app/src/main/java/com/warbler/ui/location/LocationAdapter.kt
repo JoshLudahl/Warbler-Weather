@@ -2,6 +2,7 @@ package com.warbler.ui.location
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -19,10 +20,15 @@ class LocationAdapter(
 
     class ViewHolder(private val itemBinding: LocationListItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(location: LocationEntity, clickListener: ClickListenerInterface<LocationEntity>) {
+        fun bind(
+            location: LocationEntity,
+            clickListener: ClickListenerInterface<LocationEntity>,
+            position: Int
+        ) {
             itemBinding.location = location
             itemBinding.clickListener = clickListener
             itemBinding.executePendingBindings()
+            if (position == 0) itemBinding.locationIndicatorIcon.visibility = View.VISIBLE
         }
     }
 
@@ -39,16 +45,12 @@ class LocationAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = locationList[position]
         if (position == 0) {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
         }
-        holder.bind(currentItem, clickListener)
+        holder.bind(currentItem, clickListener, position)
     }
 
     fun setItems(list: List<LocationEntity>) {

@@ -47,4 +47,5 @@
     <string name="pressure">%1$s hPa</string>
     <string name="cloudy">%1$s%%</string>
     <string name="weather_alert">Weather Alert</string>
+    <string name="current_location">Current Location</string>
 </resources>

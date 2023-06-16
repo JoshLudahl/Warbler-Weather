@@ -68,7 +68,7 @@ class LocationViewModel @Inject constructor(
             locationNetworkRepository.getLocationsFromGeoService(query).catch { error ->
                 Log.d("LocationViewModel", "searchForLocation error: ${error.message}")
             }.collect {
-                Log.i("LocationViewModel", "searchForLocation success: $it")
+                Log.i("LocationViewModel", "searchForLocation success: ${it.size}")
                 _locationSearchList.value = Resource.Success(it)
             }
         }
