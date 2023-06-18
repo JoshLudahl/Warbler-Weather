@@ -83,6 +83,8 @@ object Conversion {
         return "$hourFormatted:$minuteFormatted"
     }
 
+    val Double.fromDoubleToPercentage get() = (this * 100).toInt()
+
     private val Int.appendSuffix
         get() = "$this${getSuffix(this)}"
 

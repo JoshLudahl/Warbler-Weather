@@ -14,6 +14,7 @@ import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
+import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
@@ -102,14 +103,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 label = R.string.feels_like
             )
         )
-
-        list.add(
-            WeatherDetailItem(
-                icon = R.drawable.ic_compress,
-                value = getString(R.string.pressure, result.current.pressure.toString()),
-                label = R.string.pressure_text
-            )
-        )
+//
+//        list.add(
+//            WeatherDetailItem(
+//                icon = R.drawable.ic_compress,
+//                value = getString(R.string.pressure, result.current.pressure.toString()),
+//                label = R.string.pressure_text
+//            )
+//        )
 
         list.add(
             WeatherDetailItem(
@@ -127,6 +128,17 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 icon = R.drawable.ic_cloud,
                 value = getString(R.string.cloudy, result.current.clouds.toString()),
                 label = R.string.clouds
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_pop,
+                value = getString(
+                    R.string.percentage,
+                    "${result.daily[0].pop.fromDoubleToPercentage}"
+                ),
+                label = R.string.chance_of_rain
             )
         )
 
