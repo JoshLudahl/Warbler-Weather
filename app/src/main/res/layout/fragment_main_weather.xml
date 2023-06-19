@@ -339,6 +339,7 @@
                         android:id="@+id/weather_detail_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@color/colorPrimaryDark"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
