@@ -19,8 +19,8 @@ android {
         applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
-        versionCode 11
-        versionName "0.11"
+        versionCode 12
+        versionName "0.12"
         testInstrumentationRunner "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
         vectorDrawables.useSupportLibrary = true
