@@ -60,7 +60,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:onClick="@{() -> clickListener.delete(location)}"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_round_close"
             android:tint="@color/red"
             app:layout_constraintBottom_toBottomOf="@+id/location_line_item"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_location"
+            app:srcCompat="@drawable/ic_round_location_on"
             android:contentDescription="@string/current_location"
             app:tint="@color/colorAccent" />
 

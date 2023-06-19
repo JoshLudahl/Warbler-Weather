@@ -262,7 +262,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             val state = binding.additionalDetailsLayout.visibility
             if (state == View.VISIBLE) {
                 binding.additionalDetailsLayout.visibility = View.GONE
-                binding.detailsIcon.setImageResource(R.drawable.ic_expand_down)
+                binding.detailsIcon.setImageResource(R.drawable.ic_round_expand_circle_down)
             } else {
                 binding.additionalDetailsLayout.visibility = View.VISIBLE
                 binding.detailsIcon.setImageResource(R.drawable.ic_expand_up)

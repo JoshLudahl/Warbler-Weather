@@ -25,7 +25,7 @@
                 android:layout_height="@dimen/default_icon_size"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/ic_navigate_before"
+                android:src="@drawable/ic_round_arrow_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +44,7 @@
                 android:layout_width="@dimen/default_icon_size"
                 android:layout_height="@dimen/default_icon_size"
                 android:layout_marginEnd="32dp"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/ic_round_add"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_title_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_title_text" />
@@ -80,7 +80,7 @@
                     android:layout_width="@dimen/search_close_icon_size"
                     android:layout_height="@dimen/search_close_icon_size"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_close"
+                    android:src="@drawable/ic_round_close"
                     app:layout_constraintBottom_toBottomOf="@+id/search_bar_edit_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/search_bar_edit_text" />

@@ -3,15 +3,15 @@
     <item
         android:state_pressed="true"
         android:state_checked="true"
-        android:drawable="@drawable/ic_done"/>
+        android:drawable="@drawable/ic_round_done"/>
 
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/ic_done"/>
+        android:drawable="@drawable/ic_round_done"/>
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/ic_done"/>
+        android:drawable="@drawable/ic_round_done"/>
 
     <item
         android:state_checked="false"

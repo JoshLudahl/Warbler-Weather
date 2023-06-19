@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/default_icon_size"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/ic_navigate_before"
+                android:src="@drawable/ic_round_arrow_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -247,7 +247,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_about_this_app_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/settings_subheading_about_this_app_text"
-                    app:srcCompat="@drawable/ic_open" />
+                    app:srcCompat="@drawable/ic_round_open_in_browser" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/privacy_policy_icon"
@@ -257,7 +257,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_privacy_policy_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/settings_subheading_privacy_policy_text"
-                    app:srcCompat="@drawable/ic_open" />
+                    app:srcCompat="@drawable/ic_round_open_in_browser" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

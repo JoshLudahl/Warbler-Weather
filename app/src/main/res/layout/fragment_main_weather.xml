@@ -49,7 +49,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:contentDescription="@string/location_icon_description"
-                    android:src="@drawable/ic_location"
+                    android:src="@drawable/ic_round_location_on"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/colorAccent" />
@@ -74,7 +74,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:contentDescription="@string/settings_icon_description"
-                    android:src="@drawable/ic_settings"
+                    android:src="@drawable/ic_round_settings"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +85,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:contentDescription="@string/search_icon_description"
-                    android:src="@drawable/ic_search_globe"
+                    android:src="@drawable/ic_round_add_location_alt"
                     app:layout_constraintEnd_toStartOf="@+id/settings_icon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,7 +145,7 @@
                         android:layout_width="@dimen/hi_low_icon_dim"
                         android:layout_height="@dimen/hi_low_icon_dim"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_up"
+                        android:src="@drawable/ic_round_expand_less"
                         android:tint="@color/red"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/temperature_hi_text"
@@ -177,7 +177,7 @@
                         android:layout_width="@dimen/hi_low_icon_dim"
                         android:layout_height="@dimen/hi_low_icon_dim"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/ic_arrow_down"
+                        android:src="@drawable/ic_round_expand_more"
                         android:tint="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/temperature_low_text"
@@ -349,7 +349,7 @@
                     android:layout_width="@dimen/expand_down_icon"
                     android:layout_height="@dimen/expand_down_icon"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_expand_down"
+                    android:src="@drawable/ic_round_expand_circle_down"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
