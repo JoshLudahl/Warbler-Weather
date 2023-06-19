@@ -39,7 +39,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/title"
                     style="@style/settings_heading_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/weather_alert"
                     app:layout_constraintEnd_toEndOf="parent"
