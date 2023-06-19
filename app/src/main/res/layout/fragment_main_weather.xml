@@ -321,7 +321,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:visibility="gone"
                     android:id="@+id/additional_details_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -331,6 +330,7 @@
                     android:background="@drawable/top_rounded_rectangle"
                     android:paddingTop="12dp"
                     android:paddingBottom="22dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -358,25 +358,25 @@
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorBackground"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/details_icon"
                     tools:itemCount="8"
-                    android:background="@color/colorBackground"
                     tools:listitem="@layout/weather_forecast_list_item" />
 
                 <ImageView
                     android:id="@+id/weather_alert_icon"
-                    android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/default_icon_size"
+                    android:layout_height="@dimen/default_icon_size"
                     android:layout_marginStart="55dp"
                     android:layout_marginEnd="32dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/current_weather_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/current_weather_icon"
                     app:layout_constraintTop_toTopOf="@+id/current_weather_icon"
-                    card_view:srcCompat="@drawable/ic_warning" />
+                    card_view:srcCompat="@drawable/ic_round_warning" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
