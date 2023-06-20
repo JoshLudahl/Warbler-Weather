@@ -23,6 +23,7 @@ import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
 import com.warbler.ui.settings.Temperature
+import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +39,22 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
     private val job = Job()
-    private val adapter = MainAdapter()
+    private val adapter = MainAdapter(
+        object : ClickListenerInterface<WeatherForecast> {
+            override fun onClick(item: WeatherForecast) {
+                handleOnForecastItemClicked(item)
+            }
+
+            override fun delete(item: WeatherForecast) {
+                // Not used
+            }
+        }
+    )
+
+    private fun handleOnForecastItemClicked(item: WeatherForecast) {
+        // toast("clicked on ${item.dayOfWeek}")
+    }
+
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
     private var alert: Alert? = null
     private var description: String? = null

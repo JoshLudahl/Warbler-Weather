@@ -7,6 +7,10 @@
         <variable
             name="weather"
             type="com.warbler.data.model.weather.WeatherForecast" />
+
+        <variable
+            name="clickListener"
+            type="com.warbler.utilities.ClickListenerInterface" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +19,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/top_rounded_rectangle"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:onClick="@{() -> clickListener.onClick(weather)}"
         android:padding="8dp">
 
         <com.google.android.material.textview.MaterialTextView

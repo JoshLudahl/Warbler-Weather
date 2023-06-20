@@ -7,15 +7,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.databinding.WeatherForecastListItemBinding
+import com.warbler.utilities.ClickListenerInterface
 
-class MainAdapter : ListAdapter<WeatherForecast, MainAdapter.ViewHolder>(MainDiffViewCallback) {
+class MainAdapter(
+    private val clickListener: ClickListenerInterface<WeatherForecast>
+) : ListAdapter<WeatherForecast, MainAdapter.ViewHolder>(MainDiffViewCallback) {
 
     private var weatherData = emptyList<WeatherForecast>()
 
     class ViewHolder(private val itemBinding: WeatherForecastListItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(weatherForecast: WeatherForecast) {
+        fun bind(
+            clickListener: ClickListenerInterface<WeatherForecast>,
+            weatherForecast: WeatherForecast
+        ) {
             itemBinding.weather = weatherForecast
+            itemBinding.clickListener = clickListener
             itemBinding.executePendingBindings()
             itemBinding.weatherIcon.setImageResource(weatherForecast.icon as Int)
         }
@@ -36,7 +43,7 @@ class MainAdapter : ListAdapter<WeatherForecast, MainAdapter.ViewHolder>(MainDif
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = weatherData[position]
-        holder.bind(currentItem)
+        holder.bind(clickListener = clickListener, weatherForecast = currentItem)
     }
 
     fun setItems(list: List<WeatherForecast>) {
