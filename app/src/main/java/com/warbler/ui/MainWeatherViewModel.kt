@@ -9,20 +9,18 @@ import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
-import com.warbler.data.network.ConnectionHandler
 import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.DataPref
 import com.warbler.utilities.Resource
-import com.warbler.utilities.showToast
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MainWeatherViewModel @Inject constructor(
@@ -113,18 +111,14 @@ class MainWeatherViewModel @Inject constructor(
             is Resource.Success -> {
                 Log.d("MainWeatherViewModel", "Setting to Success state")
                 viewModelScope.launch {
-                    if (ConnectionHandler.isOnline(context)) {
-                        handleGetWeather(location.data)
-                    } else {
-                        Log.d("MainWeatherViewModel", "No Internet")
-                        _weatherState.value = Resource.Error(message = "No Internet Available")
-                        context.showToast("No internet connection.")
-                    }
+                    handleGetWeather(location.data)
                 }
             }
+
             is Resource.Error -> {
                 Log.d("MainWeatherViewModel", "Error getting location.")
             }
+
             is Resource.Loading -> {
                 Log.d("MainWeatherViewModel", "Loading Weather")
             }
@@ -132,7 +126,7 @@ class MainWeatherViewModel @Inject constructor(
     }
 
     private suspend fun handleGetWeather(locationEntity: LocationEntity) {
-        val currentLocation: LocationEntity = locationEntity as LocationEntity
+        val currentLocation: LocationEntity = locationEntity
         weatherNetworkRepository.getCurrentWeather(currentLocation)
             .catch { e ->
                 _weatherState.value = Resource.Error(
