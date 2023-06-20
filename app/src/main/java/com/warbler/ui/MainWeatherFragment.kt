@@ -73,7 +73,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_sunrise,
+                icon = R.drawable.ic_wi_sunrise,
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunrise.toLong(),
                     offset = result.timezoneOffset.toLong()
@@ -84,7 +84,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_sunset,
+                icon = R.drawable.ic_wi_sunset,
                 value = Conversion.getTimeFromTimeStamp(
                     timeStamp = result.current.sunset.toLong(),
                     offset = result.timezoneOffset.toLong()
@@ -95,7 +95,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_thermostat,
+                icon = R.drawable.ic_wi_thermometer,
                 value = Conversion.fromKelvinToProvidedUnit(
                     result.current.feelsLike,
                     viewModel.temperatureUnit.value
@@ -114,7 +114,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_water,
+                icon = R.drawable.ic_wi_raindrops,
                 value = Conversion.fromKelvinToProvidedUnit(
                     value = result.current.dewPoint,
                     unit = viewModel.temperatureUnit.value
@@ -125,7 +125,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_cloud,
+                icon = R.drawable.ic_wi_cloud,
                 value = getString(R.string.cloudy, result.current.clouds.toString()),
                 label = R.string.clouds
             )
@@ -133,7 +133,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_pop,
+                icon = R.drawable.ic_wi_umbrella,
                 value = getString(
                     R.string.percentage,
                     "${result.daily[0].pop.fromDoubleToPercentage}"
