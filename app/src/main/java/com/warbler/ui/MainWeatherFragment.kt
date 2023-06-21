@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.warbler.R
@@ -52,7 +51,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     )
 
     private fun handleOnForecastItemClicked(item: WeatherForecast) {
-        // toast("clicked on ${item.dayOfWeek}")
+        viewModel.weatherObject.value?.let {
+            val action =
+                MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastFragment(
+                    it.daily[item.index]
+                )
+
+            findNavController().navigate(action)
+        } ?: toast("Error getting forecast.")
     }
 
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
@@ -175,7 +181,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         lifecycleScope.launch(Dispatchers.Main + job) {
-            viewModel.locationState.collect { result ->
+            viewModel.locationState.collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
                         viewModel.updateWeatherData(requireContext())
@@ -193,32 +199,30 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         lifecycleScope.launch(Dispatchers.Main + job) {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.weatherState.collectLatest { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            val list = WeatherDataSourceDto.buildWeatherForecast(
-                                result.data,
-                                viewModel.temperatureUnit.value
-                            )
+            viewModel.weatherState.collectLatest { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        val list = WeatherDataSourceDto.buildWeatherForecast(
+                            result.data,
+                            viewModel.temperatureUnit.value
+                        )
 
-                            updateWeatherRecyclerView(list)
-                            val weatherDetailList = buildWeatherDetailList(result.data)
-                            updateWeatherDetailRecyclerView(weatherDetailList)
-                            setUiElements(result.data, viewModel.temperatureUnit.value)
-                            checkForWeatherAlerts(result.data)
+                        updateWeatherRecyclerView(list)
+                        val weatherDetailList = buildWeatherDetailList(result.data)
+                        updateWeatherDetailRecyclerView(weatherDetailList)
+                        setUiElements(result.data, viewModel.temperatureUnit.value)
+                        checkForWeatherAlerts(result.data)
 
-                            binding.swipeRefreshLayout.isRefreshing = false
-                        }
+                        binding.swipeRefreshLayout.isRefreshing = false
+                    }
 
-                        is Resource.Error -> {
-                            binding.swipeRefreshLayout.isRefreshing = false
-                            // TODO add error view
-                        }
+                    is Resource.Error -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        // TODO add error view
+                    }
 
-                        is Resource.Loading -> {
-                            binding.swipeRefreshLayout.isRefreshing = true
-                        }
+                    is Resource.Loading -> {
+                        binding.swipeRefreshLayout.isRefreshing = true
                     }
                 }
             }

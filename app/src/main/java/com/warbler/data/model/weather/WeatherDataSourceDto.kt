@@ -28,14 +28,15 @@ object WeatherDataSourceDto {
 
     fun buildWeatherForecast(weatherDataSource: WeatherDataSource, units: Temperature):
         List<WeatherForecast> {
-        return weatherDataSource.daily.map {
+        return weatherDataSource.daily.mapIndexed { index, daily ->
             WeatherForecast(
-                dayOfWeek = getDatOfWeekFromUnixUTC(it.dt.toLong()),
-                hi = Conversion.fromKelvinToProvidedUnit(it.temp.max, units).roundToInt()
+                dayOfWeek = getDatOfWeekFromUnixUTC(daily.dt.toLong()),
+                hi = Conversion.fromKelvinToProvidedUnit(daily.temp.max, units).roundToInt()
                     .toString(),
-                low = Conversion.fromKelvinToProvidedUnit(it.temp.min, units)
+                index = index,
+                low = Conversion.fromKelvinToProvidedUnit(daily.temp.min, units)
                     .roundToInt().toString(),
-                icon = it.weather[0].icon.getIconForCondition
+                icon = daily.weather[0].icon.getIconForCondition
             )
         }
     }

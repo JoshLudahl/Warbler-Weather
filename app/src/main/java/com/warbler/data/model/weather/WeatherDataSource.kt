@@ -1,10 +1,13 @@
 package com.warbler.data.model.weather
+import android.os.Parcelable
 import androidx.annotation.Keep
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Keep
 @Serializable
+@Parcelize
 data class WeatherDataSource(
     @SerialName("alerts")
     val alerts: List<Alert>? = null,
@@ -24,10 +27,11 @@ data class WeatherDataSource(
     val timezone: String,
     @SerialName("timezone_offset")
     val timezoneOffset: Int
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Current(
     @SerialName("clouds")
     val clouds: Int,
@@ -63,10 +67,11 @@ data class Current(
     val windGust: Double? = null,
     @SerialName("wind_speed")
     val windSpeed: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Daily(
     @SerialName("clouds")
     val clouds: Int,
@@ -110,10 +115,11 @@ data class Daily(
     val windGust: Double? = null,
     @SerialName("wind_speed")
     val windSpeed: Double? = null
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Hourly(
     @SerialName("clouds")
     val clouds: Int,
@@ -147,19 +153,21 @@ data class Hourly(
     val windGust: Double,
     @SerialName("wind_speed")
     val windSpeed: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Minutely(
     @SerialName("dt")
     val dt: Int,
     @SerialName("precipitation")
     val precipitation: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Weather(
     @SerialName("description")
     val description: String,
@@ -169,10 +177,11 @@ data class Weather(
     val id: Int,
     @SerialName("main")
     val main: String
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class FeelsLike(
     @SerialName("day")
     val day: Double,
@@ -182,10 +191,11 @@ data class FeelsLike(
     val morn: Double,
     @SerialName("night")
     val night: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Temp(
     @SerialName("day")
     val day: Double,
@@ -199,24 +209,27 @@ data class Temp(
     val morn: Double,
     @SerialName("night")
     val night: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Rain(
     @SerialName("1h")
     val h: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Snow(
     @SerialName("1h")
     val h: Double
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Alert(
     @SerialName("description")
     val description: String,
@@ -230,4 +243,4 @@ data class Alert(
     val start: Int,
     @SerialName("tags")
     val tags: List<String>
-)
+) : Parcelable

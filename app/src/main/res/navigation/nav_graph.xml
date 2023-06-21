@@ -23,6 +23,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainWeatherFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -45,5 +52,18 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popUpTo="@id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.warbler.ui.forecast.ForecastFragment"
+        android:label="ForecastFragment" >
+        <action
+            android:id="@+id/action_forecastFragment_to_mainWeatherFragment"
+            app:destination="@id/mainWeatherFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <argument
+            android:name="weatherForecast"
+            app:argType="com.warbler.data.model.weather.Daily" />
     </fragment>
 </navigation>

@@ -16,11 +16,11 @@ import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.DataPref
 import com.warbler.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class MainWeatherViewModel @Inject constructor(
