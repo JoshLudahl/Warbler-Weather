@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.warbler.data.model.weather.Daily
 
 class ForecastViewModelFactory(
-    private val daily: Daily
-) : ViewModelProvider.AndroidViewModelFactory() {
+    val daily: Daily
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(
         modelClass: Class<T>
     ): T {

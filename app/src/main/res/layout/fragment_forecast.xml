@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.warbler.ui.forecast.ForecastViewModelFactory" />
+            type="com.warbler.ui.forecast.ForecastViewModel" />
     </data>
 
     <ScrollView
@@ -23,7 +23,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forecast"
+                android:text="@{viewModel.daily.summary}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
