@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/temperature_hi_low_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_temperature">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/temperature_hi_icon"
+            android:layout_width="@dimen/hi_low_icon_dim"
+            android:layout_height="@dimen/hi_low_icon_dim"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_round_expand_less"
+            android:tint="@color/red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/temperature_hi_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/temperature_hi_text"
+            style="@style/font_family"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:text="@string/mdash"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/hi_low_temperature_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/temperature_low_icon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/temperature_hi_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="66\u00B0" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/temperature_low_icon"
+            android:layout_width="@dimen/hi_low_icon_dim"
+            android:layout_height="@dimen/hi_low_icon_dim"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_round_expand_more"
+            android:tint="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/temperature_low_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/temperature_hi_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/temperature_low_text"
+            style="@style/font_family"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:text="@string/mdash"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/hi_low_temperature_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/temperature_low_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="15\u00B0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

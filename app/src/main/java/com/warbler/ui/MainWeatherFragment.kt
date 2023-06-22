@@ -54,7 +54,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         viewModel.weatherObject.value?.let {
             val action =
                 MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastFragment(
-                    it.daily[item.index]
+                    it.daily[item.index],
+                    viewModel.temperatureUnit.value,
+                    viewModel.speedUnit.value
                 )
 
             findNavController().navigate(action)

@@ -65,5 +65,11 @@
         <argument
             android:name="weatherForecast"
             app:argType="com.warbler.data.model.weather.Daily" />
+        <argument
+            android:name="tempUnits"
+            app:argType="com.warbler.ui.settings.Temperature"/>
+        <argument
+            android:name="speed"
+            app:argType="com.warbler.ui.settings.Speed"/>
     </fragment>
 </navigation>
