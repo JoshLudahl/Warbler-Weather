@@ -8,7 +8,7 @@ buildscript {
         moshi = "1.14.0"
         navigation = '2.6.0'
         retrofit = '2.9.0'
-        room = "2.5.1"
+        room = "2.5.2"
     }
 
     repositories {
