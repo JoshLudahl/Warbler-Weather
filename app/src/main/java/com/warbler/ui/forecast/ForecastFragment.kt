@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -166,8 +167,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     }
 
     private fun setupListeners() {
-        binding.backIcon.setOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.backIcon.setOnClickListener {
+            findNavController(it).navigateUp()
         }
     }
 
