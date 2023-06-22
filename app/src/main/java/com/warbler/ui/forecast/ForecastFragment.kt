@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.warbler.R
 import com.warbler.data.model.weather.Conversion
+import com.warbler.data.model.weather.Conversion.formatSpeedUnitsWithUnits
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Daily
@@ -37,7 +38,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forecast, container, false)
         return binding.root
     }
@@ -108,6 +109,44 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             )
         )
 
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_humidity,
+                value = getString(
+                    R.string.percentage,
+                    "${daily.humidity}"
+                ),
+                label = R.string.humidity
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_day_sunny,
+                value = daily.uvi.toString(),
+                label = R.string.uv_index
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_barometer,
+                value = daily.pressure.toString(),
+                label = R.string.pressure_text
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_strong_wind,
+                value = formatSpeedUnitsWithUnits(
+                    value = daily.windSpeed ?: 0.00,
+                    speed = viewModel.forecast.speed
+                ),
+                label = R.string.wind
+            )
+        )
+
         return list
     }
 
@@ -117,7 +156,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         binding.weatherDetailRecyclerView.layoutManager = layoutManager
     }
 
-    fun updateAdapter(weatherDetailItem: List<WeatherDetailItem>) {
+    private fun updateAdapter(weatherDetailItem: List<WeatherDetailItem>) {
         weatherDetailAdapter.setItems(weatherDetailItem)
     }
 

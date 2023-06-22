@@ -1,5 +1,6 @@
 package com.warbler.data.model.weather
 
+import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -7,7 +8,9 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 object Conversion {
@@ -20,6 +23,18 @@ object Conversion {
 
     val Double.roundToTwoDecimalPlaces
         get() = (this * 100.0).roundToInt() / 100.0
+
+    val Double.roundToUpperInt: Int
+        get() = ceil(this).toInt()
+    val Double.metersPerSecondToMilesPerHour: Double
+        get() = this * 2.23694
+
+    fun formatSpeedUnitsWithUnits(value: Double, speed: Speed): String {
+        return when (speed) {
+            Speed.KPH -> "$value m/s"
+            Speed.MPH -> "${value.metersPerSecondToMilesPerHour.roundToUpperInt} MPH"
+        }
+    }
 
     val Int.toDegrees
         get() = "$this°"

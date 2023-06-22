@@ -8,7 +8,7 @@
         android:id="@+id/mainWeatherFragment"
         android:name="com.warbler.ui.MainWeatherFragment"
         android:label="fragment_main_weather"
-        tools:layout="@layout/fragment_main_weather" >
+        tools:layout="@layout/fragment_main_weather">
         <action
             android:id="@+id/action_mainWeatherFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.warbler.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.warbler.ui.location.LocationFragment"
-        android:label="LocationFragment" >
+        android:label="LocationFragment">
         <action
             android:id="@+id/action_locationFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
@@ -56,12 +56,13 @@
     <fragment
         android:id="@+id/forecastFragment"
         android:name="com.warbler.ui.forecast.ForecastFragment"
-        android:label="ForecastFragment" >
+        android:label="ForecastFragment">
         <action
             android:id="@+id/action_forecastFragment_to_mainWeatherFragment"
             app:destination="@id/mainWeatherFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/mainWeatherFragment" />
         <argument
             android:name="forecast"
             app:argType="com.warbler.data.model.weather.Forecast" />
