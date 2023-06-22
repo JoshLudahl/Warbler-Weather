@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -305,10 +304,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         binding.weatherDescription.setOnClickListener {
             viewModel.weatherObject
                 .value
-                ?.current
-                ?.weather
+                ?.daily
                 ?.get(0)
-                ?.description
+                ?.summary
                 .let { toast("Forecast: $it") }
         }
     }
