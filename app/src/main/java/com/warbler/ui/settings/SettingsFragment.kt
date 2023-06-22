@@ -98,4 +98,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 .show()
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

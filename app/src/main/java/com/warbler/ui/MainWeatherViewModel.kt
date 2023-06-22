@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
@@ -27,7 +28,7 @@ class MainWeatherViewModel @Inject constructor(
     private val dataStore: DataStore<Preferences>,
     private val locationRepository: LocationRepository,
     private val weatherNetworkRepository: WeatherNetworkRepository
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
 
     private val _currentLocation = MutableStateFlow(locationRepository.getDefaultLocation())
     val currentLocation: StateFlow<LocationEntity>

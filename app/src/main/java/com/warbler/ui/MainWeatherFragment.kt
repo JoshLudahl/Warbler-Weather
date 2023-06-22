@@ -28,8 +28,6 @@ import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -38,7 +36,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private var _binding: FragmentMainWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
-    private val job = Job()
     private val adapter = MainAdapter(
         object : ClickListenerInterface<WeatherForecast> {
             override fun onClick(item: WeatherForecast) {
@@ -75,7 +72,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainWeatherBinding.bind(view)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         setupObservers()
         setUpListeners()
@@ -186,7 +183,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             viewModel.updateWeatherData(requireContext())
         }
 
-        lifecycleScope.launch(Dispatchers.Main + job) {
+        lifecycleScope.launch {
             viewModel.locationState.collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
@@ -204,7 +201,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             }
         }
 
-        lifecycleScope.launch(Dispatchers.Main + job) {
+        lifecycleScope.launch {
             viewModel.weatherState.collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
@@ -269,12 +266,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setUpListeners() {
-        binding.settingsIcon.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_mainWeatherFragment_to_settingsFragment)
+        binding.settingsIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_mainWeatherFragment_to_settingsFragment)
         }
 
-        binding.searchIcon.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+        binding.searchIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
         }
 
         binding.humidityIcon.setOnClickListener {

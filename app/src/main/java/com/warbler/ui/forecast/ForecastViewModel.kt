@@ -1,6 +1,7 @@
 package com.warbler.ui.forecast
 
 import android.util.Log
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
@@ -12,7 +13,7 @@ import kotlin.math.roundToInt
 
 class ForecastViewModel(
     val forecast: Forecast
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
     val maxTemperature = Conversion.fromKelvinToProvidedUnit(
         forecast.daily.temp.max,
         forecast.temperature

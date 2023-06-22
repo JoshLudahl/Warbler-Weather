@@ -46,7 +46,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         setupListeners()
         setUi()
@@ -131,7 +131,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_barometer,
-                value = daily.pressure.toString(),
+                value = getString(R.string.pressure, "${daily.pressure}"),
                 label = R.string.pressure_text
             )
         )
@@ -169,5 +169,10 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         binding.backIcon.setOnClickListener { view ->
             view.findNavController().navigateUp()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
