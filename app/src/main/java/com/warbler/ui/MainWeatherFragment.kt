@@ -9,8 +9,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.warbler.R
-import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
@@ -65,8 +65,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
-    private var alert: Alert? = null
-    private var description: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -214,7 +212,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         val weatherDetailList = buildWeatherDetailList(result.data)
                         updateWeatherDetailRecyclerView(weatherDetailList)
                         setUiElements(result.data, viewModel.temperatureUnit.value)
-                        checkForWeatherAlerts(result.data)
 
                         binding.swipeRefreshLayout.isRefreshing = false
                     }
@@ -262,7 +259,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             )
             humidityTextValue.text = humidityString
         }
-        description = result.daily[0].summary
     }
 
     private fun setUpListeners() {
@@ -293,22 +289,28 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
 
         binding.weatherAlertIcon.setOnClickListener {
-            alert?.let {
-                WeatherAlertDialogFragment(it)
-                    .show(childFragmentManager, WeatherAlertDialogFragment.TAG)
+            viewModel.weatherObject.value?.alerts?.get(0)?.let {
+                val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                    .setTitle("Alert: ${it.event}")
+                    .setMessage(it.description)
+                    .setNegativeButton(getText(R.string.close)) { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
+
+                dialog.show()
             }
         }
 
         binding.weatherDescription.setOnClickListener {
-            description?.let { toast("Forecast: $it") }
+            viewModel.weatherObject
+                .value
+                ?.current
+                ?.weather
+                ?.get(0)
+                ?.description
+                .let { toast("Forecast: $it") }
         }
-    }
-
-    private fun checkForWeatherAlerts(weatherDataSource: WeatherDataSource) {
-        weatherDataSource.alerts?.let {
-            alert = it[0]
-            binding.weatherAlertIcon.visibility = View.VISIBLE
-        } ?: { alert = null }
     }
 
     private fun toast(message: String) = requireContext().showToast(message)

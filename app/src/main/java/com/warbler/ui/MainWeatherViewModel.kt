@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
+import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.repositories.location.LocationRepository
@@ -59,6 +60,9 @@ class MainWeatherViewModel @Inject constructor(
     val weatherObject: StateFlow<WeatherDataSource?>
         get() = _weatherObject
 
+    private val _alert = MutableStateFlow<Alert?>(null)
+    val alert: StateFlow<Alert?>
+        get() = _alert
     init {
         viewModelScope.launch {
             locationRepository.getCurrentLocationFromDatabase().catch { e ->

@@ -118,4 +118,34 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="AlertDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <!-- Background Color-->
+        <item name="android:background">@color/colorBackground</item>
+        <!-- Text Color for title and message -->
+        <item name="colorOnSurface">@color/colorPrimaryDark</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/alert_title_style</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/alert_body_style</item>
+        <!-- Text Color for buttons -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Negative</item>
+    </style>
+
+    <style name="Alert.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="rippleColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:spacing">@dimen/icon_dim</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="alert_title_style" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="alert_body_style" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
