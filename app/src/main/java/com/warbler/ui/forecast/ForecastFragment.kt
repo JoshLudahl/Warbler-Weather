@@ -9,8 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.warbler.R
+import com.warbler.data.model.weather.Conversion
+import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
+import com.warbler.data.model.weather.Conversion.toDegrees
+import com.warbler.data.model.weather.Daily
+import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.databinding.FragmentForecastBinding
+import com.warbler.ui.MainWeatherDetailItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,12 +25,11 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
     private val args: ForecastFragmentArgs by navArgs()
+    private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
 
     private val viewModel: ForecastViewModel by viewModels {
         ForecastViewModelFactory(
-            daily = args.weatherForecast,
-            speedUnits = args.speed,
-            args.tempUnits
+            args.forecast
         )
     }
 
@@ -43,6 +49,76 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         setupListeners()
         setUi()
+        setupWeatherDetailRecyclerView()
+        updateAdapter(buildWeatherDetailList(viewModel.forecast.daily))
+    }
+
+    private fun buildWeatherDetailList(daily: Daily): List<WeatherDetailItem> {
+        val list = ArrayList<WeatherDetailItem>()
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_sunrise,
+                value = Conversion.getTimeFromTimeStamp(
+                    timeStamp = viewModel.forecast.daily.sunrise.toLong(),
+                    offset = viewModel.forecast.timeZoneOffset.toLong()
+                ) + " AM",
+                label = R.string.sunrise
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_sunset,
+                value = Conversion.getTimeFromTimeStamp(
+                    timeStamp = viewModel.forecast.daily.sunset.toLong(),
+                    offset = viewModel.forecast.timeZoneOffset.toLong()
+                ) + " PM",
+                label = R.string.sunset
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_raindrops,
+                value = Conversion.fromKelvinToProvidedUnit(
+                    value = daily.dewPoint,
+                    unit = viewModel.forecast.temperature
+                ).toInt().toDegrees,
+                label = R.string.dew_point
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_cloud,
+                value = getString(R.string.cloudy, daily.clouds.toString()),
+                label = R.string.clouds
+            )
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_umbrella,
+                value = getString(
+                    R.string.percentage,
+                    "${daily.pop.fromDoubleToPercentage}"
+                ),
+                label = R.string.chance_of_rain
+            )
+        )
+
+        return list
+    }
+
+    private fun setupWeatherDetailRecyclerView() {
+        val layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.weatherDetailRecyclerView.adapter = weatherDetailAdapter
+        binding.weatherDetailRecyclerView.layoutManager = layoutManager
+    }
+
+    fun updateAdapter(weatherDetailItem: List<WeatherDetailItem>) {
+        weatherDetailAdapter.setItems(weatherDetailItem)
     }
 
     private fun setUi() {

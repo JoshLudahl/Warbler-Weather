@@ -15,6 +15,7 @@ import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
+import com.warbler.data.model.weather.Forecast
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
 import com.warbler.data.model.weather.WeatherDetailItem
@@ -54,9 +55,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         viewModel.weatherObject.value?.let {
             val action =
                 MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastFragment(
-                    it.daily[item.index],
-                    viewModel.temperatureUnit.value,
-                    viewModel.speedUnit.value
+                    Forecast(
+                        daily = it.daily[item.index],
+                        temperature = viewModel.temperatureUnit.value,
+                        timeZoneOffset = it.timezoneOffset,
+                        speed = viewModel.speedUnit.value
+                    )
                 )
 
             findNavController().navigate(action)

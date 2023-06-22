@@ -63,13 +63,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
         <argument
-            android:name="weatherForecast"
-            app:argType="com.warbler.data.model.weather.Daily" />
-        <argument
-            android:name="tempUnits"
-            app:argType="com.warbler.ui.settings.Temperature"/>
-        <argument
-            android:name="speed"
-            app:argType="com.warbler.ui.settings.Speed"/>
+            android:name="forecast"
+            app:argType="com.warbler.data.model.weather.Forecast" />
+
     </fragment>
 </navigation>
