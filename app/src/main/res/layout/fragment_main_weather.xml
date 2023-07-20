@@ -16,10 +16,6 @@
             type="com.warbler.data.model.weather.WeatherDataSource" />
 
         <variable
-            name="resource"
-            type="com.warbler.utilities.Resource.Success" />
-
-        <variable
             name="viewModel"
             type="com.warbler.ui.MainWeatherViewModel" />
 
@@ -78,8 +74,9 @@
                         android:layout_marginEnd="16dp"
                         android:text="@string/no_internet_or_error"
                         android:textAlignment="center"
-
                         android:textColor="@color/colorPrimaryDark"
+
+                        android:textSize="@dimen/error_text_size"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +86,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_content"
-                    android:visibility="@{viewModel.errorView ? view.GONE : view.VISIBLE}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.errorView ? view.GONE : view.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
