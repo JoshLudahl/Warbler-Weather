@@ -13,17 +13,17 @@ import kotlinx.coroutines.flow.Flow
 interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLocation(location: LocationEntity)
+    fun insertLocation(location: LocationEntity)
 
     @Query("SELECT * FROM location_table ORDER by updated DESC LIMIT 1")
     fun getCurrentLocation(): LocationEntity?
 
     @Update
-    suspend fun updateCurrentLocation(location: LocationEntity)
+    fun updateCurrentLocation(location: LocationEntity)
 
     @Query("SELECT * FROM location_table ORDER BY updated DESC")
     fun getAllLocations(): Flow<List<LocationEntity>>
 
     @Delete
-    suspend fun deleteLocation(location: LocationEntity)
+    fun deleteLocation(location: LocationEntity)
 }

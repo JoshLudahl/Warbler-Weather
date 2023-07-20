@@ -4,7 +4,7 @@ buildscript {
         coroutine = '1.7.2'
         dagger_hilt = '2.46.1'
         hilt_lifecycle_viewmodel = '1.0.0'
-        kotlin = '1.9.0'
+        kotlin = '1.8.0'
         moshi = "1.14.0"
         navigation = '2.6.0'
         retrofit = '2.9.0'
@@ -22,7 +22,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
         classpath 'com.google.gms:google-services:4.3.15'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.6'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.7'
         classpath 'com.google.firebase:perf-plugin:1.4.2'
     }
 }

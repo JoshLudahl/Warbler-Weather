@@ -63,6 +63,11 @@ class MainWeatherViewModel @Inject constructor(
     private val _alert = MutableStateFlow<Alert?>(null)
     val alert: StateFlow<Alert?>
         get() = _alert
+
+    private val _errorView = MutableStateFlow(false)
+    val errorView: StateFlow<Boolean>
+        get() = _errorView
+
     init {
         viewModelScope.launch {
             locationRepository.getCurrentLocationFromDatabase().catch { e ->
@@ -137,7 +142,8 @@ class MainWeatherViewModel @Inject constructor(
                 _weatherState.value = Resource.Error(
                     message = e.message ?: "An error occurred."
                 )
-                Log.d("MainWeatherViewModel", "Caught error: $e")
+                _errorView.value = true
+                Log.d("MainWeatherViewModel", "error view: ${_errorView.value} Caught error3e: $e")
             }
             .collect {
                 Log.d(
@@ -145,6 +151,7 @@ class MainWeatherViewModel @Inject constructor(
                     "Updating ViewModel with data: $it"
                 )
 
+                _errorView.value = false
                 _weatherState.value = Resource.Success(it)
                 _weatherObject.value = it
             }

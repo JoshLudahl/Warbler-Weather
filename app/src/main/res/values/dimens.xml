@@ -20,4 +20,5 @@
     <dimen name="radio_size">32dp</dimen>
     <dimen name="search_close_icon_size">28dp</dimen>
     <dimen name="weather_details_expanded_icon_size">32dp</dimen>
+    <dimen name="error_icon_size">64dp</dimen>
 </resources>

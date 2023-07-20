@@ -60,4 +60,5 @@
     <string name="details">Details</string>
     <string name="summary">Summary</string>
     <string name="close">Close</string>
+    <string name="no_internet_or_error">There was an error, please make sure you have an internet connection and try again.</string>
 </resources>
