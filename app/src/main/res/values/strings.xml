@@ -61,4 +61,7 @@
     <string name="summary">Summary</string>
     <string name="close">Close</string>
     <string name="no_internet_or_error">There was an error, please make sure you have an internet connection and try again.</string>
+    <string name="error_text_view_content_description">Error text view.</string>
+    <string name="error_icon_warning_content_description">Error Icon</string>
+    <string name="the_current_conditions_weather_icon_content_description">The current conditions weather icon.</string>
 </resources>
