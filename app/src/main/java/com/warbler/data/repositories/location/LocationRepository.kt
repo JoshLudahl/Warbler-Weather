@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.flowOn
 class LocationRepository @Inject constructor(
     private val locationDao: LocationDao
 ) {
-    fun getCurrentLocationFromDatabase(): Flow<LocationEntity> = flow {
+    suspend fun getCurrentLocationFromDatabase(): Flow<LocationEntity> = flow {
         val currentLocation = locationDao.getCurrentLocation()
         currentLocation?.let {
             emit(it)
         } ?: emit(getDefaultLocation())
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.Main)
 
     fun getAllLocationsFromDatabase(): Flow<List<LocationEntity>> = locationDao.getAllLocations()
 

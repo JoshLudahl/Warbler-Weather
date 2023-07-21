@@ -9,6 +9,7 @@ import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -56,7 +57,7 @@ class LocationViewModel @Inject constructor(
     }
 
     suspend fun updateCurrentLocation(location: LocationEntity) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             locationRepository.updateToCurrentLocation(location)
         }
     }

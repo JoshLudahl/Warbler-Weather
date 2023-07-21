@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -26,10 +25,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.fragment_location) {
-
-    enum class KeyBoardVisibility {
-        HIDDEN, VISIBLE
-    }
 
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
@@ -184,7 +179,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     }
 
     private fun saveLocationSearchResultToDatabase(location: LocationEntity) {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.saveToDatabase(location)
         }
         closeAndClearSearch()

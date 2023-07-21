@@ -98,7 +98,7 @@ dependencies {
 
     //Firebase
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+    implementation platform('com.google.firebase:firebase-bom:32.2.0')
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -152,7 +152,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
-    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
     implementation "androidx.browser:browser:1.5.0"
 
     //  testing
