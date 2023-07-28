@@ -1,4 +1,3 @@
 package com.warbler.screens
 
-class Location {
-}
+class Location
