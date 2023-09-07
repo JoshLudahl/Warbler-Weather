@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/settings_title_text"
+                android:id="@+id/location_title_text"
                 style="@style/title_style"
                 android:text="@string/settings"
                 app:layout_constrainedWidth="true"
