@@ -6,8 +6,9 @@ import com.warbler.R
 import org.hamcrest.Matcher
 
 class Main {
-    val currentLocationIcon: Matcher<View> = view(R.id.location_icon)
-    val locationText: Matcher<View> = view(R.id.location_text)
     val addLocationIcon: Matcher<View> = view(R.id.search_icon)
+    val currentLocationIcon: Matcher<View> = view(R.id.location_icon)
+    val errorView: Matcher<View> = view(R.id.error_view)
+    val locationText: Matcher<View> = view(R.id.location_text)
     val settingsIcon: Matcher<View> = view(R.id.settings_icon)
 }

@@ -22,6 +22,13 @@ class MainScreenTest : BaseTest() {
     }
 
     @Test
+    fun verifyErrorView() {
+        screen<Main> {
+            errorView.isDisplayed()
+        }
+    }
+
+    @Test
     fun verifyMainScreenAddLocationIcon() {
         screen<Main> {
             addLocationIcon.isDisplayed()
