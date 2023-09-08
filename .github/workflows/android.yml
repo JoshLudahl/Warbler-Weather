@@ -30,7 +30,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        api-level: [31]
+        api-level: [33]
         target: [default]
     steps:
       - name: Checkout Code
@@ -49,7 +49,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           arch: x86_64
-          profile: pixel_5
+          profile: pixel_6
           script: avdmanager list device && ./gradlew connectedAndroidTest --stacktrace
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
