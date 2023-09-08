@@ -9,10 +9,16 @@ import com.warbler.screens.Main
 import com.warbler.screens.Settings
 import com.warbler.tests.BaseTest
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Before
 import org.junit.Test
 
 @HiltAndroidTest
 class MainScreenTest : BaseTest() {
+
+    @Before
+    fun waitForLoaded() {
+        Thread.sleep(1500)
+    }
 
     @Test
     fun verifyMainScreen() {
