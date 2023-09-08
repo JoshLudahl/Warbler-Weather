@@ -22,24 +22,44 @@ class MainScreenTest : BaseTest() {
     }
 
     @Test
-    fun verifyMainScreen() {
+    fun verifyMainScreenAddLocationIcon() {
         screen<Main> {
             addLocationIcon.isDisplayed()
-            currentLocationIcon.isDisplayed()
-            locationText.isDisplayed()
-            settingsIcon.isDisplayed()
         }
     }
 
     @Test
     fun verifyNavigationToSettings() {
         screen<Main> { click on settingsIcon }
+        Thread.sleep(1500)
         screen<Settings> { settingsTitle.isDisplayed() }
     }
 
     @Test
     fun verifyNavigationToSearchLocation() {
         screen<Main> { click on addLocationIcon }
+        Thread.sleep(1500)
         screen<Location> { locationTitle.isDisplayed() }
+    }
+
+    @Test
+    fun verifyMainScreenCurrentLocationIcon() {
+        screen<Main> {
+            currentLocationIcon.isDisplayed()
+        }
+    }
+
+    @Test
+    fun verifyMainScreenLocationText() {
+        screen<Main> {
+            locationText.isDisplayed()
+        }
+    }
+
+    @Test
+    fun verifyMainScreenSettingsIcon() {
+        screen<Main> {
+            settingsIcon.isDisplayed()
+        }
     }
 }
