@@ -17,6 +17,7 @@ class MainScreenTest : BaseTest() {
 
     @Before
     fun waitForLoaded() {
+        // TODO Handle loading indicator
         Thread.sleep(1500)
     }
 
