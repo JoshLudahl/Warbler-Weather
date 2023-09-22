@@ -28,12 +28,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-
     private lateinit var appUpdateManager: AppUpdateManager
 
     // Returns an intent object that you use to check for an update.
     private lateinit var aut: Task<AppUpdateInfo>
-
     private val updateType = AppUpdateType.FLEXIBLE
 
     val listener = InstallStateUpdatedListener { state ->
