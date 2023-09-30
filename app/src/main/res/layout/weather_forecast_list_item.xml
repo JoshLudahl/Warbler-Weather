@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:background="@drawable/top_rounded_rectangle"
         android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="@{() -> clickListener.onClick(weather)}"

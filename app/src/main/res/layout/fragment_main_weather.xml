@@ -142,15 +142,15 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/top_rounded_rectangle"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -162,10 +162,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:backgroundTint="@android:color/transparent"
                             android:text="@{viewModel.dateTitle}"
                             android:textAlignment="center"
                             android:textColor="@color/colorAccent"
-                            android:backgroundTint="@android:color/transparent"
                             android:textSize="@dimen/date_title_text_size"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -178,6 +178,7 @@
                             android:layout_width="@dimen/weather_icon_size"
                             android:layout_height="@dimen/weather_icon_size"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
                             android:animateLayoutChanges="true"
@@ -185,8 +186,8 @@
                             android:contentDescription="@string/the_current_conditions_weather_icon_content_description"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/current_temperature"
-                            app:layout_constraintHorizontal_bias="0.5"
 
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/date_title"
@@ -226,22 +227,28 @@
                             app:layout_constraintTop_toTopOf="@+id/current_temperature"
                             card_view:srcCompat="@drawable/ic_round_warning" />
 
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/weather_description"
+                            style="@style/font_family"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:backgroundTint="@android:color/transparent"
+                            android:text="@string/mdash"
+                            android:textColor="@color/colorBackground"
+                            android:textSize="@dimen/current_weather_description_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/current_weather_icon"
+                            tools:text="Cloudy" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/weather_description"
-                        style="@style/font_family"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/dashed_background"
-                        android:text="@string/mdash"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/current_weather_description_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                        tools:text="Cloudy" />
+
 
                     <ProgressBar
                         android:id="@+id/progress_bar"
@@ -269,12 +276,15 @@
                         android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/weather_description">
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                         <ImageView
                             android:id="@+id/uv_index_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:backgroundTint="@android:color/transparent"
                             android:contentDescription="@string/uv_index_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -290,6 +300,8 @@
                             android:id="@+id/uv_index_label"
                             style="@style/weather_detail_text"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:backgroundTint="@android:color/transparent"
                             android:text="@string/uv_index_label"
                             app:layout_constraintBottom_toBottomOf="@+id/uv_index_icon"
@@ -317,6 +329,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:backgroundTint="@android:color/transparent"
                             android:contentDescription="@string/humidity_icon"
                             android:src="@drawable/ic_water_drop"
@@ -331,10 +345,11 @@
                             android:id="@+id/humidity_text_value"
                             style="@style/weather_detail_text"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:backgroundTint="@android:color/transparent"
                             android:contentDescription="@string/humidity"
                             android:text="@string/mdash"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/humidity_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/humidity_icon"
