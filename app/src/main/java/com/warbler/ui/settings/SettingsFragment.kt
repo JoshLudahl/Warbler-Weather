@@ -41,24 +41,39 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.aboutIcon.setOnClickListener {
             handleOnClickLink(Constants.ABOUT_URL)
         }
+
         binding.settingsSubheadingAboutThisAppText.setOnClickListener {
             handleOnClickLink(Constants.ABOUT_URL)
         }
+
         binding.settingsSubheadingPrivacyPolicyText.setOnClickListener {
             handleOnClickLink(Constants.PRIVACY_POLICY_URL)
         }
+
+        binding.yellowRumpedWarblerIcon.setOnClickListener {
+            handleOnClickLink(Constants.WARBLER_AUDUBON)
+        }
+
+        binding.yellowRumpedWarblerText.setOnClickListener {
+            handleOnClickLink(Constants.WARBLER_AUDUBON)
+        }
+
         binding.settingsSubheadingOptionCelsiusText.setOnClickListener {
             updateTemperatureRadioGroup(R.id.radio_celsius)
         }
+
         binding.settingsSubheadingOptionFahrenheitText.setOnClickListener {
             updateTemperatureRadioGroup(R.id.radio_fahrenheit)
         }
+
         binding.settingsSubheadingOptionKelvinText.setOnClickListener {
             updateTemperatureRadioGroup(R.id.radio_kelvin)
         }
+
         binding.settingsSubheadingOptionKmhText.setOnClickListener {
             updateSpeedRadioGroup(R.id.radio_kmh)
         }
+
         binding.settingsSubheadingOptionMphText.setOnClickListener {
             updateSpeedRadioGroup(R.id.radio_mph)
         }
