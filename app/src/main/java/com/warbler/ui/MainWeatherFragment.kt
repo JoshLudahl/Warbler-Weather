@@ -241,15 +241,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 result.current.weather[0].icon.getIconForCondition
             )
 
-            temperatureLowText.text =
-                Conversion.fromKelvinToProvidedUnit(result.daily[0].temp.min, value)
-                    .roundToInt().toDegrees
-
-            temperatureHiText.text = Conversion.fromKelvinToProvidedUnit(
-                result.daily[0].temp.max,
-                value
-            ).roundToInt().toDegrees
-
             uvIndexValue.text = result.current.uvi.toString()
 
             val humidityString = String.format(
