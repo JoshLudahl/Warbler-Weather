@@ -2,6 +2,7 @@
 
 # Warbler Weather
 [About](https://softklass.com/weatheruous/)
+
 [Privacy Policy](https://softklass.com/privacy-policy/weatheruous.html)
 
 ## A simple app for weather
