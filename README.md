@@ -7,7 +7,7 @@
 
 ## A simple app for weather
 The purpose of this app is to offer an unbiased view of weather data without all the fuss (ads, tracking, data mining). 
-The app is themed after the Yellow-rumped Warbler bird.
+The app is themed after the [Yellow-rumped Warbler](https://www.audubon.org/field-guide/bird/yellow-rumped-warbler) bird.
 
 ### Libraries used
 * Written in [Kotlin](https://kotlinlang.org/)
