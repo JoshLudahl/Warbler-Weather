@@ -1,6 +1,8 @@
 [![Android CI](https://github.com/JoshLudahl/Warbler-Weather/actions/workflows/android.yml/badge.svg)](https://github.com/JoshLudahl/Warbler-Weather/actions/workflows/android.yml)
 
 # Warbler Weather
+[About](https://softklass.com/weatheruous/)
+[Privacy Policy](https://softklass.com/privacy-policy/weatheruous.html)
 
 ## A simple app for weather
 The purpose of this app is to offer an unbiased view of weather data without all the fuss (ads, tracking, data mining). 
