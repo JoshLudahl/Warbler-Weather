@@ -2,7 +2,7 @@
 buildscript {
     ext {
         coroutine = '1.7.3'
-        dagger_hilt = '2.48'
+        dagger_hilt = '2.48.1'
         datastore = '1.0.0'
         hilt_lifecycle_viewmodel = '1.0.0'
         kotlin = '1.9.10'
