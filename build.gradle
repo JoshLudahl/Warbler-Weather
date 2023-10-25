@@ -3,12 +3,13 @@ buildscript {
     ext {
         coroutine = '1.7.3'
         dagger_hilt = '2.48'
+        datastore = '1.0.0'
         hilt_lifecycle_viewmodel = '1.0.0'
         kotlin = '1.9.10'
         moshi = "1.14.0"
         navigation = '2.7.4'
         retrofit = '2.9.0'
-        room = "2.5.2"
+        room = "2.6.0"
     }
 
     repositories {
