@@ -164,7 +164,7 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test:rules:1.5.0'
-    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.0.0'
+    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.1.0'
     androidTestImplementation 'com.github.JoshLudahl:espresso-library-kotlin:2023.9.01'
 
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
