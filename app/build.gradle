@@ -132,7 +132,7 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1"
 
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation"
