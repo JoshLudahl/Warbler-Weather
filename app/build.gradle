@@ -154,7 +154,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
-    implementation "androidx.browser:browser:1.6.0"
+    implementation "androidx.browser:browser:1.7.0"
 
     //  testing
     testImplementation 'junit:junit:4.13.2'
