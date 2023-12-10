@@ -162,7 +162,7 @@
                     tools:text="Miles Per Hour" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_kmh_text"
+                    android:id="@+id/settings_subheading_option_mps_text"
                     style="@style/settings_subheading_option_style"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="48dp"
@@ -170,14 +170,25 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mph_text"
-                    tools:text="Kilometers Per Hour" />
+                    tools:text="Meters Per Second" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_kph_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="48dp"
+                    android:text="@string/kilometers_per_hour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mps_text"
+                    tools:text="Kilometers Per hour" />
 
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:checkedButton="@{viewModel.speedUnit}"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kmh_text"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kph_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mph_text">
 
@@ -192,7 +203,16 @@
                         android:checked="true" />
 
                     <RadioButton
-                        android:id="@+id/radio_kmh"
+                        android:id="@+id/radio_mps"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
+                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/radio_kph"
                         android:layout_width="@dimen/radio_size"
                         android:layout_height="@dimen/radio_size"
                         android:animateLayoutChanges="true"

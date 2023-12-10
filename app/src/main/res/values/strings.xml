@@ -23,9 +23,11 @@
     <string name="settings_about_heading">About</string>
     <string name="settings_about_this_app">About Warbler Weather</string>
     <string name="settings_privacy_policy_text">Privacy Policy</string>
-    <string name="km_h">MPS</string>
+    <string name="mps">MPS</string>
     <string name="meters_per_second">Meters Per Second</string>
+    <string name="kilometers_per_hour">Kilometers Per Hour</string>
     <string name="mph">MPH</string>
+    <string name="km_h">KPH</string>
     <string name="miles_per_hour">Miles Per Hour</string>
     <string name="celsius">C\u00B0</string>
     <string name="fahrenheit">F\u00B0</string>

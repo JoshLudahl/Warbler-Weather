@@ -70,12 +70,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             updateTemperatureRadioGroup(R.id.radio_kelvin)
         }
 
-        binding.settingsSubheadingOptionKmhText.setOnClickListener {
-            updateSpeedRadioGroup(R.id.radio_kmh)
+        binding.settingsSubheadingOptionMpsText.setOnClickListener {
+            updateSpeedRadioGroup(R.id.radio_mps)
         }
 
         binding.settingsSubheadingOptionMphText.setOnClickListener {
             updateSpeedRadioGroup(R.id.radio_mph)
+        }
+
+        binding.settingsSubheadingOptionKphText.setOnClickListener {
+            updateSpeedRadioGroup(R.id.radio_kph)
         }
     }
 
@@ -93,9 +97,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun updateSpeedRadioGroup(itemId: Int) {
         when (itemId) {
-            R.id.radio_kmh -> binding.radioKmh
+            R.id.radio_mps -> binding.radioMps
             R.id.radio_mph -> binding.radioMph
-            else -> throw Exception()
+            R.id.radio_kph -> binding.radioKph
+            else -> throw Exception("Invalid speed selection.")
         }.let {
             it.isChecked = true
             viewModel.handleSpeedRadioClick(it.id)

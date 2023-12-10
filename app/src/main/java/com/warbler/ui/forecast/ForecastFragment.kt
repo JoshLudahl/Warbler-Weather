@@ -1,6 +1,7 @@
 package com.warbler.ui.forecast
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.warbler.R
@@ -136,7 +136,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                 label = R.string.pressure_text
             )
         )
-
+        Log.i("Speed Unit", "${viewModel.forecast.speed}")
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_strong_wind,

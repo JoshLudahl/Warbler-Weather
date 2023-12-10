@@ -1,6 +1,7 @@
 package com.warbler.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,6 +50,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private fun handleOnForecastItemClicked(item: WeatherForecast) {
         viewModel.weatherObject.value?.let {
+            Log.i("Speed Unit", "Speed Unit is: ${viewModel.speedUnit.value}")
             val action =
                 MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastFragment(
                     Forecast(
@@ -177,14 +179,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private fun setupObservers() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.updateWeatherData(requireContext())
+            viewModel.updateWeatherData()
         }
 
         lifecycleScope.launch {
             viewModel.locationState.collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
-                        viewModel.updateWeatherData(requireContext())
+                        viewModel.updateWeatherData()
                     }
 
                     is Resource.Error -> {

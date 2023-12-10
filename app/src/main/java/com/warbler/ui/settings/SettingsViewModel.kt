@@ -1,8 +1,8 @@
 package com.warbler.ui.settings
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.BuildConfig
@@ -54,9 +54,11 @@ class SettingsViewModel @Inject constructor(
     }
 
     private fun updateSpeedUnit(speedUnit: Int) {
+        Log.i("Speed Unit", "Speed Unit is: $speedUnit")
         _speedUnit.value = when (speedUnit) {
             0 -> Speed.MPH
-            1 -> Speed.KPH
+            1 -> Speed.MPS
+            2 -> Speed.KPH
             else -> Speed.MPH
         }.id
     }
@@ -87,20 +89,23 @@ class SettingsViewModel @Inject constructor(
     fun handleSpeedRadioClick(viewId: Int) {
         when (viewId) {
             R.id.radio_mph -> Speed.MPH
-            R.id.radio_kmh -> Speed.KPH
+            R.id.radio_kph -> Speed.KPH
+            R.id.radio_mps -> Speed.MPS
             else -> Speed.MPH // Default
         }.let { speed ->
+            Log.i("Speed Unit", "Handle Speed Unit Function: ${speed.name}")
             saveSpeedUnit(speed)
         }
     }
 
     private fun saveSpeedUnit(unit: Speed) {
         viewModelScope.launch {
-            dataStore.edit { preferences ->
-                preferences[DataPref.SPEED_UNIT_PREFERENCES] = when (unit) {
-                    Speed.MPH -> 0
-                    Speed.KPH -> 1
-                }
+            when (unit) {
+                Speed.MPH -> 0
+                Speed.MPS -> 1
+                Speed.KPH -> 2
+            }.let { value ->
+                DataPref.saveIntDataStore(DataPref.SPEED_UNIT, value, dataStore)
             }
         }
     }

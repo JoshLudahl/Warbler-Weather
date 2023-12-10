@@ -7,5 +7,6 @@ enum class Speed(
     @IdRes val id: Int
 ) {
     MPH(R.id.radio_mph),
-    KPH(R.id.radio_kmh)
+    KPH(R.id.radio_kph),
+    MPS(R.id.radio_mps)
 }

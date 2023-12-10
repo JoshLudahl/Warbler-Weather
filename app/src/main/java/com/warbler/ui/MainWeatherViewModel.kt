@@ -1,6 +1,5 @@
 package com.warbler.ui
 
-import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,7 +7,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
-import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.repositories.location.LocationRepository
@@ -60,10 +58,6 @@ class MainWeatherViewModel @Inject constructor(
     val weatherObject: StateFlow<WeatherDataSource?>
         get() = _weatherObject
 
-    private val _alert = MutableStateFlow<Alert?>(null)
-    val alert: StateFlow<Alert?>
-        get() = _alert
-
     private val _errorView = MutableStateFlow(false)
     val errorView: StateFlow<Boolean>
         get() = _errorView
@@ -98,7 +92,8 @@ class MainWeatherViewModel @Inject constructor(
             DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore).collect {
                 _speedUnit.value = when (it) {
                     0 -> Speed.MPH
-                    1 -> Speed.KPH
+                    1 -> Speed.MPS
+                    2 -> Speed.KPH
                     else -> Speed.MPH
                 }
             }
@@ -114,7 +109,7 @@ class MainWeatherViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    fun updateWeatherData(context: Context) {
+    fun updateWeatherData() {
         Log.d("MainWeatherViewModel", "Setting to Loading state.")
         _weatherState.value = Resource.Loading
         when (val location = _locationState.value) {
