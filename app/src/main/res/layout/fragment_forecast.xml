@@ -93,7 +93,7 @@
                 tools:text="Cloudy" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/details_label"
+                android:id="@+id/forecast_label"
                 style="@style/font_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_label">
+                app:layout_constraintTop_toBottomOf="@+id/forecast_label">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/weather_detail_recycler_view"
@@ -134,7 +134,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/summary_label"
+                android:id="@+id/currently_label"
                 style="@style/font_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/summary_label">
+                app:layout_constraintTop_toBottomOf="@+id/currently_label">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/font_family"
