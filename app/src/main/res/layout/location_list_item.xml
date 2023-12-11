@@ -42,7 +42,7 @@
             android:background="@android:color/transparent"
             android:onClick="@{() -> clickListener.onClick(location)}"
             android:text="@{location.toDisplayString}"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorCityListItemText"
             android:textSize="@dimen/title_text_option_size"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@+id/location_indicator_icon"

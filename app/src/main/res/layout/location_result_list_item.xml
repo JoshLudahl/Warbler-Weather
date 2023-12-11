@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent">
+        android:background="@color/colorCitySearchBox">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/location_name"

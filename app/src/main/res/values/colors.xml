@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#393E46</color>
-    <color name="colorPrimaryDark">#222831</color>
-    <color name="colorAccent">#FFD369</color>
-    <color name="colorBackground">#EEEEEE</color>
+    <color name="colorPrimary">@color/colorDarkGray</color>
+    <color name="colorPrimaryDark">@color/colorDark</color>
+    <color name="colorAccent">@color/colorYellow</color>
+    <color name="colorBackground">@color/colorLight</color>
+    <color name="colorPrimarySwap">@color/colorDark</color>
+    <color name="colorSecondarySwap">@color/colorLight</color>
+    <color name="colorTertiarySwap">@color/colorDarkGray</color>
+
+    <color name="colorIcons">@color/colorDark</color>
+    <color name="colorWeatherGrid">@color/colorLight</color>
+    <color name="colorRadioOption">@color/colorDarkGray</color>
+    <color name="colorSettingTitle">@color/colorDark</color>
+    <color name="colorCitySearchBox">@color/colorYellow</color>
+    <color name="colorCitySearchText">@color/colorDark</color>
+    <color name="colorCityListItemText">@color/colorDark</color>
+    <color name="colorCityListItemBox">@color/colorYellow</color>
 
     <color name="red">#EA5455</color>
     <color name="blue">#146C94</color>
     <color name="low">#38A1E8</color>
     <color name="yellow">#F0A04B</color>
+
+    <color name="colorDarkGray">#393E46</color>
+    <color name="colorDark">#222831</color>
+    <color name="colorYellow">#FFD369</color>
+    <color name="colorLight">#EEEEEE</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>

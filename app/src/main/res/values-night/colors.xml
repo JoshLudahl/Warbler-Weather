@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FFD369</color>
-    <color name="colorPrimaryDark">#EEEEEE</color>
-    <color name="colorAccent">#393E46</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#EEEEEE</color>
     <color name="colorBackground">#222831</color>
+    <color name="colorPrimarySwap">@color/colorYellow</color>
+    <color name="colorSecondarySwap">@color/colorDarkGray</color>
+    <color name="colorTertiarySwap">@color/colorLight</color>
+
+
+    <color name="colorIcons">@color/colorYellow</color>
+    <color name="colorWeatherGrid">@color/colorYellow</color>
+    <color name="colorRadioOption">@color/colorYellow</color>
+    <color name="colorSettingTitle">@color/colorLight</color>
+    <color name="colorCitySearchBox">@color/colorYellow</color>
+    <color name="colorCitySearchText">@color/colorDark</color>
+    <color name="colorCityListItemText">@color/colorYellow</color>
+    <color name="colorCityListItemBox">@color/colorBlack</color>
+
 
     <color name="blue">#19A7CE</color>
     <color name="low">#38A1E8</color>
