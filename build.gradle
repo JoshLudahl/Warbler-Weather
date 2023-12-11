@@ -9,7 +9,7 @@ buildscript {
         moshi = "1.14.0"
         navigation = '2.7.5'
         retrofit = '2.9.0'
-        room = "2.6.0"
+        room = "2.6.1"
     }
 
     repositories {
