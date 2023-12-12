@@ -26,6 +26,7 @@
             android:id="@+id/day_of_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
             android:text="@{weather.dayOfWeek}"
             android:textColor="@color/colorAccent"
@@ -82,6 +83,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/temperature_low"
                 style="@style/forecast_temp_style"
+                android:layout_marginBottom="8dp"
                 android:text="@{weather.low}"
                 android:textColor="@color/blue"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
