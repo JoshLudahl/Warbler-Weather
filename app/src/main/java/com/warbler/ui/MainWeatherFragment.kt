@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.warbler.R
+import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
@@ -297,14 +298,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.weatherAlertIcon.setOnClickListener {
             viewModel.weatherObject.value?.alerts?.let { alerts ->
-                val message = StringBuilder()
-                alerts.forEach { alert ->
-                    message.append(alert.event)
-                    message.append("\n")
-                    message.append(alert.description)
-                    message.append("\n")
-                }
-
+                val message = buildAlertMessage(alerts)
                 val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                     .setTitle("Alert: Weather Alert")
                     .setMessage(message)
@@ -327,6 +321,17 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun toast(message: String) = requireContext().showToast(message)
+
+    private fun buildAlertMessage(alerts: List<Alert>): String {
+        val message = StringBuilder()
+        alerts.forEach { alert ->
+            message.append(alert.event)
+            message.append("\n")
+            message.append(alert.description)
+            message.append("\n")
+        }
+        return message.toString()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
