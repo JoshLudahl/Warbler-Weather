@@ -309,15 +309,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 dialog.show()
             }
         }
-
-        binding.weatherDescription.setOnClickListener {
-            viewModel.weatherObject
-                .value
-                ?.daily
-                ?.get(0)
-                ?.summary
-                .let { toast("Forecast: $it") }
-        }
     }
 
     private fun toast(message: String) = requireContext().showToast(message)
@@ -328,7 +319,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             message.append(alert.event)
             message.append("\n")
             message.append(alert.description)
-            message.append("\n")
+            message.append("\n\n")
         }
         return message.toString()
     }
