@@ -27,6 +27,7 @@ import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.StringBuilder
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -290,6 +291,27 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     }
                     .create()
 
+                dialog.show()
+            }
+        }
+
+        binding.weatherAlertIcon.setOnClickListener {
+            viewModel.weatherObject.value?.alerts?.let { alerts ->
+                val message = StringBuilder()
+                alerts.forEach { alert ->
+                    message.append(alert.event)
+                    message.append("\n")
+                    message.append(alert.description)
+                    message.append("\n")
+                }
+
+                val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                    .setTitle("Alert: Weather Alert")
+                    .setMessage(message)
+                    .setNegativeButton(getText(R.string.close)) { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
                 dialog.show()
             }
         }
