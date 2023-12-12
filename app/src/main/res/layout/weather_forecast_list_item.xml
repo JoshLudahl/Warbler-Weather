@@ -59,7 +59,6 @@
                 style="@style/forecast_temp_style"
                 android:text="@{weather.hi}"
                 android:textColor="@color/red"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatImageView2"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -74,17 +73,20 @@
                 android:layout_height="@dimen/forecast_hi_low_icon_dim"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_hi_low"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/temperature_hi"
                 app:layout_constraintTop_toTopOf="@+id/temperature_hi" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/temperature_low"
                 style="@style/forecast_temp_style"
+                android:layout_marginTop="8dp"
                 android:text="@{weather.low}"
                 android:textColor="@color/blue"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="33" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
