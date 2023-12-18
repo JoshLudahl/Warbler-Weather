@@ -120,6 +120,9 @@ dependencies {
     // For Kotlin users also add the Kotlin extensions library for Play In-App Update:
     implementation 'com.google.android.play:app-update-ktx:2.1.0'
 
+    // Graphs and charts
+    implementation "com.patrykandpatrick.vico:views:1.13.1"
+
     // For instrumented tests.
     androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt"
     // ...with Kotlin.
