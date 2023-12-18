@@ -149,13 +149,23 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <color name="chart_1_color_1">#a485e0</color>
-
-    <style name="Chart1Line1Style">
-        <item name="color">@color/chart_1_color_1</item>
+    <style name="chart_line_style">
+        <item name="color">@color/colorPrimarySwap</item>
     </style>
 
-    <style name="Chart1LineLayerStyle">
-        <item name="line1Spec">@style/Chart1Line1Style</item>
+    <style name="chart_style">
+        <item name="line1Spec">@style/chart_line_style</item>
+        <item name="column1">@style/chart_line_style</item>
+    </style>
+
+    <color name="chart_2_color_1">#ff5500</color>
+
+    <style name="Chart2Column1Style">
+        <item name="color">@color/chart_2_color_1</item>
+        <item name="thickness">16dp</item>
+    </style>
+
+    <style name="Chart2ColumnLayerStyle">
+        <item name="column1">@style/Chart2Column1Style</item>
     </style>
 </resources>

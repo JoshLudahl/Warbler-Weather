@@ -441,7 +441,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/recycler_view">
@@ -451,6 +451,7 @@
                             style="@style/font_family"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="@string/hourly"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary"
@@ -464,11 +465,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            app:chart="line"
+                            android:padding="16dp"
+                            android:background="@drawable/top_rounded_rectangle"
+                            app:chart="column"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_label"
-                            app:lineChartStyle="@style/Chart1Line1Style"
+                            app:columnChartStyle="@style/chart_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true" />
 

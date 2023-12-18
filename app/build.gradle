@@ -121,7 +121,12 @@ dependencies {
     implementation 'com.google.android.play:app-update-ktx:2.1.0'
 
     // Graphs and charts
+    // Houses the core logic for charts and other elements. Included in all other modules.
+    implementation "com.patrykandpatrick.vico:core:1.13.1"
+
+    // For the view system.
     implementation "com.patrykandpatrick.vico:views:1.13.1"
+
 
     // For instrumented tests.
     androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt"
