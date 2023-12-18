@@ -104,7 +104,7 @@
                         android:src="@drawable/ic_round_location_on"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/colorAccent" />
+                        app:tint="@color/colorIconsDisabled" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/location_text"

@@ -8,6 +8,7 @@
     <color name="colorSecondarySwap">@color/colorLight</color>
     <color name="colorTertiarySwap">@color/colorDarkGray</color>
     <color name="colorIcons">@color/colorDark</color>
+    <color name="colorIconsDisabled">@color/colorGray</color>
     <color name="colorWeatherGrid">@color/colorLight</color>
     <color name="colorRadioOption">@color/colorDarkGray</color>
     <color name="colorSettingTitle">@color/colorDark</color>
@@ -25,5 +26,6 @@
     <color name="colorDark">#222831</color>
     <color name="colorYellow">#FFD369</color>
     <color name="colorLight">#EEEEEE</color>
+    <color name="colorGray">#B6BBC4</color>
     <color name="colorBlack">#000000</color>
 </resources>
