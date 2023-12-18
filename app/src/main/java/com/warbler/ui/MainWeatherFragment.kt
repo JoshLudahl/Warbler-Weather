@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
+import com.patrykandpatrick.vico.core.entry.entryOf
 import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
@@ -30,6 +32,7 @@ import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
 import kotlin.math.roundToInt
+import kotlin.random.Random
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -252,8 +255,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 result.current.humidity.toString()
             )
             humidityTextValue.text = humidityString
+
+            val chartEntryModelProducer = ChartEntryModelProducer(getRandomEntries())
+            chartView.entryProducer = chartEntryModelProducer
         }
     }
+
+    fun getRandomEntries() = List(1) { entryOf(it, Random.nextFloat() * 16f) }
 
     private fun setUpListeners() {
         binding.settingsIcon.setOnClickListener {

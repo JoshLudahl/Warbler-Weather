@@ -132,7 +132,7 @@
 
     <style name="Alert.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="rippleColor">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorTertiarySwap</item>
         <item name="android:spacing">@dimen/icon_dim</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
@@ -145,7 +145,7 @@
     </style>
 
     <style name="alert_body_style" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimarySwap</item>
         <item name="android:textSize">14sp</item>
     </style>
 </resources>

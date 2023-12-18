@@ -69,4 +69,5 @@
     <string name="yellow_rumped_warbler">Yellow-Rumped Warbler</string>
     <string name="currently">Currently</string>
     <string name="hi_low_icon_description">Icon for hi and low temperatures.</string>
+    <string name="hourly">Hourly</string>
 </resources>
