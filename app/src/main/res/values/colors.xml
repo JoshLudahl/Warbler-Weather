@@ -7,7 +7,6 @@
     <color name="colorPrimarySwap">@color/colorDark</color>
     <color name="colorSecondarySwap">@color/colorLight</color>
     <color name="colorTertiarySwap">@color/colorDarkGray</color>
-
     <color name="colorIcons">@color/colorDark</color>
     <color name="colorWeatherGrid">@color/colorLight</color>
     <color name="colorRadioOption">@color/colorDarkGray</color>
@@ -17,15 +16,14 @@
     <color name="colorCityListItemText">@color/colorDark</color>
     <color name="colorCityListItemBox">@color/colorYellow</color>
 
+    <!-- Raw colors -->
     <color name="red">#EA5455</color>
     <color name="blue">#146C94</color>
     <color name="low">#38A1E8</color>
     <color name="yellow">#F0A04B</color>
-
     <color name="colorDarkGray">#393E46</color>
     <color name="colorDark">#222831</color>
     <color name="colorYellow">#FFD369</color>
     <color name="colorLight">#EEEEEE</color>
     <color name="colorBlack">#000000</color>
-
 </resources>
