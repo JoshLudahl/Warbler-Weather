@@ -261,7 +261,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
     }
 
-    fun getRandomEntries() = List(1) { entryOf(it, Random.nextFloat() * 16f) }
+    fun getRandomEntries() = List(24) { entryOf(it, Random.nextFloat() * 16f) }
 
     private fun setUpListeners() {
         binding.settingsIcon.setOnClickListener {
