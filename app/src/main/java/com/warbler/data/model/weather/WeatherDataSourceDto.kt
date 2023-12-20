@@ -46,6 +46,7 @@ object WeatherDataSourceDto {
         weather.hourly.forEach { hour ->
             map[hour.dt.toLong()] = hour.rain?.h?.toFloat() ?: 0.0f
         }
+
         return map
     }
 }
