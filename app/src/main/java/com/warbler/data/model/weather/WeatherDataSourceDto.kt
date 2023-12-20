@@ -40,4 +40,12 @@ object WeatherDataSourceDto {
             )
         }
     }
+
+    fun buildHourlyMap(weather: WeatherDataSource): Map<Long, Float> {
+        val map = mutableMapOf<Long, Float>()
+        weather.hourly.forEach { hour ->
+            map[hour.dt.toLong()] = hour.rain?.h?.toFloat() ?: 0.0f
+        }
+        return map
+    }
 }

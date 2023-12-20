@@ -10,17 +10,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.patrykandpatrick.vico.core.entry.entryModelOf
 import com.patrykandpatrick.vico.core.entry.entryOf
 import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
+import com.warbler.data.model.weather.Conversion.getTimeFromTimeStamp
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
+import com.warbler.data.model.weather.WeatherDataSourceDto.buildHourlyMap
 import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
@@ -31,6 +35,8 @@ import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 import kotlin.random.Random
 import kotlinx.coroutines.flow.collectLatest
@@ -256,8 +262,23 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             )
             humidityTextValue.text = humidityString
 
-            val chartEntryModelProducer = ChartEntryModelProducer(getRandomEntries())
-            chartView.entryProducer = chartEntryModelProducer
+            val data = buildHourlyMap(result).toList()
+                .associate { (dateString, yValue) ->
+                    LocalDate.ofEpochDay(dateString) to yValue
+                }
+
+            val xValuesToDates = data.keys.associateBy { it.toEpochDay().toFloat() }
+
+            val chartEntryModel = entryModelOf(xValuesToDates.keys.zip(data.values, ::entryOf))
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("H")
+            val horizontalAxisValueFormatter =
+                AxisValueFormatter<AxisPosition.Horizontal> { value, _ ->
+                    (xValuesToDates[value] ?: LocalDate.ofEpochDay(value.toLong())).format(
+                        dateTimeFormatter
+                    )
+                }
+
+            chartView.setModel(chartEntryModel)
         }
     }
 
