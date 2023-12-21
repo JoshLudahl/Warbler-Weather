@@ -1,6 +1,7 @@
 package com.warbler.ui
 
 import android.os.Bundle
+import android.text.format.DateFormat.format
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
+import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import com.patrykandpatrick.vico.core.entry.entryOf
 import com.warbler.R
@@ -24,7 +27,7 @@ import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
-import com.warbler.data.model.weather.WeatherDataSourceDto.buildHourlyMap
+import com.warbler.data.model.weather.WeatherDataSourceDto.buildHourlyRainMap
 import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
@@ -35,10 +38,9 @@ import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.time.Instant
+import java.time.ZoneId
 import kotlin.math.roundToInt
-import kotlin.random.Random
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -262,27 +264,50 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             )
             humidityTextValue.text = humidityString
 
-            val data = buildHourlyMap(result).toList()
+            val data = listOf(
+                1703119477 - 28800 to 2f,
+                1703123077 - 28800 to 6f,
+                1703126677 - 28800 to 4f
+            )
                 .associate { (dateString, yValue) ->
-                    LocalDate.ofEpochDay(dateString) to yValue
+                    Instant.ofEpochSecond(dateString.toLong()) to yValue
                 }
 
-            val xValuesToDates = data.keys.associateBy { it.toEpochDay().toFloat() }
+            // Get the hourly wind
+            val hourlyWind = buildHourlyRainMap(result).asIterable().associate {
+                    (dateString, yValue) ->
+                Instant.ofEpochSecond(dateString) to yValue
+            }
 
-            val chartEntryModel = entryModelOf(xValuesToDates.keys.zip(data.values, ::entryOf))
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("H")
+            // Associate the keys to the date mapping to float
+            val xValuesToDates = data.keys
+                .associateBy { it.epochSecond.toFloat() }
+
+            xValuesToDates.forEach {
+                Log.i("Log", "Item: Key ${it.key.toLong()}, Value: ${it.value}")
+                Log.i("Log", "${result.timezoneOffset}")
+            }
+
+            // create a chart entry model of the data, mapping the  values
+            val chartEntryModel = entryModelOf(
+                xValuesToDates.keys.zip(data.values, ::entryOf)
+            )
+
             val horizontalAxisValueFormatter =
-                AxisValueFormatter<AxisPosition.Horizontal> { value, _ ->
-                    (xValuesToDates[value] ?: LocalDate.ofEpochDay(value.toLong())).format(
-                        dateTimeFormatter
-                    )
+                AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
+                    (xValuesToDates[value] ?: Instant.ofEpochSecond(value.toLong()))
+                        .atZone(ZoneId.of("UTC")).hour.let { it - 12 }.toString()
                 }
 
+            (chartView.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = horizontalAxisValueFormatter
+
+            val chartEntryModelProducer = ChartEntryModelProducer()
+
+            chartEntryModelProducer.setEntries(chartEntryModel.entries)
             chartView.setModel(chartEntryModel)
         }
     }
-
-    fun getRandomEntries() = List(24) { entryOf(it, Random.nextFloat() * 16f) }
 
     private fun setUpListeners() {
         binding.settingsIcon.setOnClickListener {

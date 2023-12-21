@@ -5,6 +5,7 @@ import com.warbler.ui.settings.Temperature
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
@@ -82,4 +83,6 @@ object Conversion {
     }
 
     val Double.fromDoubleToPercentage get() = (this * 100).toInt()
+
+    val hour: DateTimeFormatter get() = DateTimeFormatter.ofPattern("H")
 }
