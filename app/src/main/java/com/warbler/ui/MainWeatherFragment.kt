@@ -13,9 +13,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
-import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
-import com.patrykandpatrick.vico.core.entry.entryModelOf
-import com.patrykandpatrick.vico.core.entry.entryOf
 import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.warbler.R
@@ -277,36 +274,30 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 )
             humidityTextValue.text = humidityString
 
-            buildCharts(result)
+            setUpNewChart(result)
         }
     }
 
-    private fun buildCharts(result: WeatherDataSource) {
-        // Create the list from the weather data source for the hourly data
-        // Associate the date object with the rain precipitation
-        val list =
-            result.hourly.toList().associate {
-                it.dt to ((it.rain?.h ?: 0).toDouble())
+    private fun setUpNewChart(result: WeatherDataSource) {
+        val data =
+            result.hourly.associate {
+                it.dt.toFloat() to (it.rain?.h ?: 0.0)
             }
 
-        // Associate the keys to the date
-        val xValuesToDates =
-            list.keys
-                .associateBy { it }
+        val xValuesToDates = data.keys.associateBy { it.toFloat() }
 
-        // Create a chart entry model of the data, mapping the  values
-        val chartEntryValues = CartesianChartModel(
-            ColumnCartesianLayerModel.build { series(x = xValuesToDates.keys, y = list.values) }
-        )
+        val model =
+            CartesianChartModel(
+                ColumnCartesianLayerModel
+                    .build { series(x = xValuesToDates.keys, y = data.values) },
+            )
 
-        // Create a axis formatter
-        val horizontalAxisValueFormatter =
-            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _, _ ->
-
+        val bottomAxisValueFormatter =
+            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
                 // Convert the Int value to a date object
                 var hour =
                     Instant.ofEpochSecond(
-                        (value.toLong()) +
+                        (xValuesToDates[x]?.toLong() ?: x.toLong()) +
                             result
                                 .timezoneOffset,
                     )
@@ -319,14 +310,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 hour.toString()
             }
 
-        (binding.chartView.bottom as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-            .valueFormatter = horizontalAxisValueFormatter
+        binding.chartView.setModel(model)
 
-        val chartEntryModelProducer = ChartEntryModelProducer()
-
-        val chartEntryModel = entryModelOf(chartEntryValues)
-        chartEntryModelProducer.setEntries(chartEntryModel.entries)
-        binding.chartView.setModel(chartEntryModel)
+        (binding.chartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+            .valueFormatter = bottomAxisValueFormatter
     }
 
     private fun setUpListeners() {
