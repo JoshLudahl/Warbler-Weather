@@ -27,7 +27,6 @@ import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
-import com.warbler.data.model.weather.WeatherDataSourceDto.buildHourlyRainMap
 import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
@@ -264,49 +263,44 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             )
             humidityTextValue.text = humidityString
 
-            val data = listOf(
-                1703119477 - 28800 to 2f,
-                1703123077 - 28800 to 6f,
-                1703126677 - 28800 to 4f
-            )
-                .associate { (dateString, yValue) ->
-                    Instant.ofEpochSecond(dateString.toLong()) to yValue
-                }
-
-            // Get the hourly wind
-            val hourlyWind = buildHourlyRainMap(result).asIterable().associate {
-                    (dateString, yValue) ->
-                Instant.ofEpochSecond(dateString) to yValue
-            }
-
-            // Associate the keys to the date mapping to float
-            val xValuesToDates = data.keys
-                .associateBy { it.epochSecond.toFloat() }
-
-            xValuesToDates.forEach {
-                Log.i("Log", "Item: Key ${it.key.toLong()}, Value: ${it.value}")
-                Log.i("Log", "${result.timezoneOffset}")
-            }
-
-            // create a chart entry model of the data, mapping the  values
-            val chartEntryModel = entryModelOf(
-                xValuesToDates.keys.zip(data.values, ::entryOf)
-            )
-
-            val horizontalAxisValueFormatter =
-                AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
-                    (xValuesToDates[value] ?: Instant.ofEpochSecond(value.toLong()))
-                        .atZone(ZoneId.of("UTC")).hour.let { it - 12 }.toString()
-                }
-
-            (chartView.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-                .valueFormatter = horizontalAxisValueFormatter
-
-            val chartEntryModelProducer = ChartEntryModelProducer()
-
-            chartEntryModelProducer.setEntries(chartEntryModel.entries)
-            chartView.setModel(chartEntryModel)
+            buildCharts(result)
         }
+    }
+
+    private fun buildCharts(result: WeatherDataSource) {
+        // Create the list from the weather data source for the hourly data
+        // Associate the date object with the rain precipitation
+        val list = result.hourly
+            .associate {
+                it.dt to (it.humidity ?: 0)
+            }
+
+        // Associate the keys to the date
+        val xValuesToDates = list.keys
+            .associateBy { entry: Int -> entry }
+
+        // Create a chart entry model of the data, mapping the  values
+        val chartEntryValues = xValuesToDates.keys.zip(list.values, ::entryOf)
+
+        // Create a axis formatter
+        val horizontalAxisValueFormatter =
+            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
+
+                Instant.ofEpochSecond(
+                    value.toLong()
+                )
+                    .atZone(ZoneId.of("UTC"))
+                    .hour
+                    .toString()
+            }
+
+        val chartEntryModelProducer = ChartEntryModelProducer()
+        val chartEntryModel = entryModelOf(chartEntryValues)
+        chartEntryModelProducer.setEntries(chartEntryModel.entries)
+        binding.chartView.setModel(chartEntryModel)
+
+        (binding.chartView.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+            .valueFormatter = horizontalAxisValueFormatter
     }
 
     private fun setUpListeners() {

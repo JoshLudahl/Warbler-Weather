@@ -1,8 +1,10 @@
 package com.warbler.data.model.weather
 
+import com.patrykandpatrick.vico.core.extension.mutableListOf
 import com.warbler.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.ui.settings.Temperature
+import java.time.Instant
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
@@ -41,12 +43,20 @@ object WeatherDataSourceDto {
         }
     }
 
-    fun buildHourlyRainMap(weather: WeatherDataSource): Map<Long, Float> {
-        val map = mutableMapOf<Long, Float>()
+    fun buildHourlyRainMap(weather: WeatherDataSource): List<Pair<Long, Float>> {
+        val list = mutableListOf<Pair<Long, Float>>()
         weather.hourly.forEach { hour ->
-            map[hour.dt.toLong() + weather.timezoneOffset] = hour.rain?.h?.toFloat() ?: 0.0f
+            val time = Instant.ofEpochSecond(
+                (hour.dt + weather.timezoneOffset)
+                    .toLong()
+            )
+                .toEpochMilli()
+
+            val rain = hour.rain?.h?.toFloat() ?: 0f
+
+            list.add(time to rain)
         }
 
-        return map
+        return list
     }
 }
