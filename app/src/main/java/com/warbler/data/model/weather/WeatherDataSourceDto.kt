@@ -19,26 +19,33 @@ object WeatherDataSourceDto {
             low = weatherDataSource.daily[0].temp.min,
             pressure = weatherDataSource.current.pressure,
             temp = weatherDataSource.current.temp,
-            wind = weatherDataSource.current.windSpeed
+            wind = weatherDataSource.current.windSpeed,
         )
     }
 
-    private fun getCityNameFromLatLon(lat: Double, lon: Double): String {
+    private fun getCityNameFromLatLon(
+        lat: Double,
+        lon: Double,
+    ): String {
         // TODO: Build out location service
         return ""
     }
 
-    fun buildWeatherForecast(weatherDataSource: WeatherDataSource, units: Temperature):
-        List<WeatherForecast> {
+    fun buildWeatherForecast(
+        weatherDataSource: WeatherDataSource,
+        units: Temperature,
+    ): List<WeatherForecast> {
         return weatherDataSource.daily.mapIndexed { index, daily ->
             WeatherForecast(
                 dayOfWeek = getDatOfWeekFromUnixUTC(daily.dt.toLong()),
-                hi = Conversion.fromKelvinToProvidedUnit(daily.temp.max, units).roundToInt()
-                    .toString(),
+                hi =
+                    Conversion.fromKelvinToProvidedUnit(daily.temp.max, units).roundToInt()
+                        .toString(),
                 index = index,
-                low = Conversion.fromKelvinToProvidedUnit(daily.temp.min, units)
-                    .roundToInt().toString(),
-                icon = daily.weather[0].icon.getIconForCondition
+                low =
+                    Conversion.fromKelvinToProvidedUnit(daily.temp.min, units)
+                        .roundToInt().toString(),
+                icon = daily.weather[0].icon.getIconForCondition,
             )
         }
     }
@@ -46,11 +53,12 @@ object WeatherDataSourceDto {
     fun buildHourlyRainMap(weather: WeatherDataSource): List<Pair<Long, Float>> {
         val list = mutableListOf<Pair<Long, Float>>()
         weather.hourly.forEach { hour ->
-            val time = Instant.ofEpochSecond(
-                (hour.dt + weather.timezoneOffset)
-                    .toLong()
-            )
-                .toEpochMilli()
+            val time =
+                Instant.ofEpochSecond(
+                    (hour.dt + weather.timezoneOffset)
+                        .toLong(),
+                )
+                    .toEpochMilli()
 
             val rain = hour.rain?.h?.toFloat() ?: 0f
 

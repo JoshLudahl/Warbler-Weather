@@ -9,19 +9,19 @@ import org.junit.runners.Suite.SuiteClasses
 
 @RunWith(Suite::class)
 @SuiteClasses(
-    LocationTest::class
+    LocationTest::class,
 )
 class LocationScreenTestSuite
 
 @RunWith(Suite::class)
 @SuiteClasses(
-    MainScreenTest::class
+    MainScreenTest::class,
 )
 class MainScreenTestSuite
 
 @RunWith(Suite::class)
 @SuiteClasses(
-    SettingsTest::class
+    SettingsTest::class,
 )
 class SettingsScreenTestSuite
 
@@ -29,6 +29,6 @@ class SettingsScreenTestSuite
 @SuiteClasses(
     LocationScreenTestSuite::class,
     MainScreenTestSuite::class,
-    SettingsScreenTestSuite::class
+    SettingsScreenTestSuite::class,
 )
 class TestSuite

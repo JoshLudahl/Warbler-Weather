@@ -25,21 +25,21 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.fragment_location) {
-
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LocationViewModel by viewModels()
-    private val locationDatabaseAdapter = LocationAdapter(
-        object : ClickListenerInterface<LocationEntity> {
-            override fun onClick(item: LocationEntity) {
-                setLocationFromDatabaseAsCurrent(item)
-            }
+    private val locationDatabaseAdapter =
+        LocationAdapter(
+            object : ClickListenerInterface<LocationEntity> {
+                override fun onClick(item: LocationEntity) {
+                    setLocationFromDatabaseAsCurrent(item)
+                }
 
-            override fun delete(item: LocationEntity) {
-                deleteLocationFromDatabase(item)
-            }
-        }
-    )
+                override fun delete(item: LocationEntity) {
+                    deleteLocationFromDatabase(item)
+                }
+            },
+        )
 
     private fun deleteLocationFromDatabase(item: LocationEntity) {
         lifecycleScope.launch {
@@ -47,11 +47,15 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         }
     }
 
-    private val locationNetworkAdapter = LocationNetworkAdapter(
-        ClickListener { location -> saveLocationSearchResultToDatabase(location) }
-    )
+    private val locationNetworkAdapter =
+        LocationNetworkAdapter(
+            ClickListener { location -> saveLocationSearchResultToDatabase(location) },
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLocationBinding.bind(view)
         binding.viewModel = viewModel
@@ -74,7 +78,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
                             Log.d(
                                 "LocationFragment",
-                                "locationList Success: ${locationDatabaseAdapter.itemCount}"
+                                "locationList Success: ${locationDatabaseAdapter.itemCount}",
                             )
                             binding.locationRecyclerView.visibility = View.VISIBLE
                         }
@@ -141,27 +145,39 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             toggleKeyboardVisibility1(binding.searchBarEditText)
         }
 
-        binding.searchBarEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                /* Do nothing */
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                s?.let {
-                    if (it.length >= 3) {
-                        Log.d("LocationFragment", "Searching for string: $s")
-                        viewModel.searchForLocation(s.toString())
-                    }
-                } ?: {
-                    Log.d("LocationFragment", "Not enough chars to perform search.")
-                    clearLocationSearchList()
+        binding.searchBarEditText.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    // Do nothing
                 }
-            }
 
-            override fun afterTextChanged(p0: Editable?) {
-                /* Do nothing */
-            }
-        })
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    s?.let {
+                        if (it.length >= 3) {
+                            Log.d("LocationFragment", "Searching for string: $s")
+                            viewModel.searchForLocation(s.toString())
+                        }
+                    } ?: {
+                        Log.d("LocationFragment", "Not enough chars to perform search.")
+                        clearLocationSearchList()
+                    }
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    // Do nothing
+                }
+            },
+        )
     }
 
     private fun toggleKeyboardVisibility(view: View) {
@@ -192,6 +208,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         }
         findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
     }
+
     private fun closeAndClearSearch() {
         listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
             .forEach { it.visibility = View.GONE }
@@ -199,6 +216,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         binding.locationRecyclerView.visibility = View.VISIBLE
         clearLocationSearchList()
     }
+
     private fun clearLocationSearchList() = locationNetworkAdapter.setItems(arrayListOf())
 
     override fun onDestroyView() {

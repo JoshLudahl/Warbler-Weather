@@ -10,16 +10,15 @@ import com.warbler.databinding.WeatherForecastListItemBinding
 import com.warbler.utilities.ClickListenerInterface
 
 class MainAdapter(
-    private val clickListener: ClickListenerInterface<WeatherForecast>
+    private val clickListener: ClickListenerInterface<WeatherForecast>,
 ) : ListAdapter<WeatherForecast, MainAdapter.ViewHolder>(MainDiffViewCallback) {
-
     private var weatherData = emptyList<WeatherForecast>()
 
     class ViewHolder(private val itemBinding: WeatherForecastListItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(
             clickListener: ClickListenerInterface<WeatherForecast>,
-            weatherForecast: WeatherForecast
+            weatherForecast: WeatherForecast,
         ) {
             itemBinding.weather = weatherForecast
             itemBinding.clickListener = clickListener
@@ -30,18 +29,21 @@ class MainAdapter(
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolder {
         return WeatherForecastListItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         ).let {
             ViewHolder(it)
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val currentItem = weatherData[position]
         holder.bind(clickListener = clickListener, weatherForecast = currentItem)
     }
@@ -53,11 +55,17 @@ class MainAdapter(
 }
 
 object MainDiffViewCallback : DiffUtil.ItemCallback<WeatherForecast>() {
-    override fun areItemsTheSame(oldItem: WeatherForecast, newItem: WeatherForecast): Boolean {
+    override fun areItemsTheSame(
+        oldItem: WeatherForecast,
+        newItem: WeatherForecast,
+    ): Boolean {
         return oldItem.dayOfWeek == newItem.dayOfWeek
     }
 
-    override fun areContentsTheSame(oldItem: WeatherForecast, newItem: WeatherForecast): Boolean {
+    override fun areContentsTheSame(
+        oldItem: WeatherForecast,
+        newItem: WeatherForecast,
+    ): Boolean {
         return oldItem == newItem
     }
 }

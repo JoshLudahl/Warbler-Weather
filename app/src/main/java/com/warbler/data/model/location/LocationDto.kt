@@ -7,7 +7,7 @@ object LocationDto {
             lat = location.lat,
             lon = location.lon,
             name = location.name,
-            state = location.state
+            state = location.state,
         )
     }
 }

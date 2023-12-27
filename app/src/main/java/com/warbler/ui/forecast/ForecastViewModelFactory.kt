@@ -5,13 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.warbler.data.model.weather.Forecast
 
 class ForecastViewModelFactory(
-    val forecast: Forecast
+    val forecast: Forecast,
 ) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(
-        modelClass: Class<T>
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ForecastViewModel(
-            forecast
+            forecast,
         ) as T
     }
 }

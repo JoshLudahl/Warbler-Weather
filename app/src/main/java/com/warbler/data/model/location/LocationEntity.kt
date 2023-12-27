@@ -12,7 +12,7 @@ data class LocationEntity(
     val lon: Double,
     val name: String,
     val state: String? = null,
-    val updated: Long = System.currentTimeMillis()
+    val updated: Long = System.currentTimeMillis(),
 ) {
     val toDisplayString
         get() =

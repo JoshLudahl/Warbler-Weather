@@ -12,5 +12,5 @@ data class WeatherForecast(
     val hi: String,
     val index: Int,
     val low: String,
-    @IdRes val icon: Int
+    @IdRes val icon: Int,
 ) : Parcelable

@@ -3,7 +3,6 @@ import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 
 @Keep
-
 data class LocationDataSource(
     @SerialName("country")
     val country: String,
@@ -14,5 +13,5 @@ data class LocationDataSource(
     @SerialName("name")
     val name: String,
     @SerialName("state")
-    val state: String? = null
+    val state: String? = null,
 )

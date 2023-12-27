@@ -11,19 +11,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkSourceModule {
-
     @Singleton
     @Provides
-    fun providesHttpClientWithInterceptor(@ApplicationContext context: Context): OkHttpClient {
+    fun providesHttpClientWithInterceptor(
+        @ApplicationContext context: Context,
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(NetworkInterceptor(context))
             .build()
@@ -31,9 +32,7 @@ object NetworkSourceModule {
 
     @Singleton
     @Provides
-    fun providesRetrofitService(
-        okHttpClient: OkHttpClient
-    ): Retrofit {
+    fun providesRetrofitService(okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
         val json = Json { ignoreUnknownKeys = true }
 

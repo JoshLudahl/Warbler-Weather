@@ -26,7 +26,7 @@ data class WeatherDataSource(
     @SerialName("timezone")
     val timezone: String,
     @SerialName("timezone_offset")
-    val timezoneOffset: Int
+    val timezoneOffset: Int,
 ) : Parcelable
 
 @Keep
@@ -66,7 +66,7 @@ data class Current(
     @SerialName("wind_gust")
     val windGust: Double? = null,
     @SerialName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double,
 ) : Parcelable
 
 @Keep
@@ -114,7 +114,7 @@ data class Daily(
     @SerialName("wind_gust")
     val windGust: Double? = null,
     @SerialName("wind_speed")
-    val windSpeed: Double? = null
+    val windSpeed: Double? = null,
 ) : Parcelable
 
 @Keep
@@ -152,7 +152,7 @@ data class Hourly(
     @SerialName("wind_gust")
     val windGust: Double,
     @SerialName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double,
 ) : Parcelable
 
 @Keep
@@ -162,7 +162,7 @@ data class Minutely(
     @SerialName("dt")
     val dt: Int,
     @SerialName("precipitation")
-    val precipitation: Double
+    val precipitation: Double,
 ) : Parcelable
 
 @Keep
@@ -176,7 +176,7 @@ data class Weather(
     @SerialName("id")
     val id: Int,
     @SerialName("main")
-    val main: String
+    val main: String,
 ) : Parcelable
 
 @Keep
@@ -190,7 +190,7 @@ data class FeelsLike(
     @SerialName("morn")
     val morn: Double,
     @SerialName("night")
-    val night: Double
+    val night: Double,
 ) : Parcelable
 
 @Keep
@@ -208,7 +208,7 @@ data class Temp(
     @SerialName("morn")
     val morn: Double,
     @SerialName("night")
-    val night: Double
+    val night: Double,
 ) : Parcelable
 
 @Keep
@@ -216,7 +216,7 @@ data class Temp(
 @Parcelize
 data class Rain(
     @SerialName("1h")
-    val h: Double
+    val h: Double,
 ) : Parcelable
 
 @Keep
@@ -224,7 +224,7 @@ data class Rain(
 @Parcelize
 data class Snow(
     @SerialName("1h")
-    val h: Double
+    val h: Double,
 ) : Parcelable
 
 @Keep
@@ -242,5 +242,5 @@ data class Alert(
     @SerialName("start")
     val start: Int,
     @SerialName("tags")
-    val tags: List<String>
+    val tags: List<String>,
 ) : Parcelable

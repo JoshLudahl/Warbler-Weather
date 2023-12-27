@@ -31,20 +31,23 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
     private val viewModel: ForecastViewModel by viewModels {
         ForecastViewModelFactory(
-            args.forecast
+            args.forecast,
         )
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forecast, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
@@ -61,91 +64,97 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunrise,
-                value = Conversion.getTimeFromTimeStamp(
-                    timeStamp = viewModel.forecast.daily.sunrise.toLong(),
-                    offset = viewModel.forecast.timeZoneOffset.toLong()
-                ) + " AM",
-                label = R.string.sunrise
-            )
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = viewModel.forecast.daily.sunrise.toLong(),
+                        offset = viewModel.forecast.timeZoneOffset.toLong(),
+                    ) + " AM",
+                label = R.string.sunrise,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunset,
-                value = Conversion.getTimeFromTimeStamp(
-                    timeStamp = viewModel.forecast.daily.sunset.toLong(),
-                    offset = viewModel.forecast.timeZoneOffset.toLong()
-                ) + " PM",
-                label = R.string.sunset
-            )
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = viewModel.forecast.daily.sunset.toLong(),
+                        offset = viewModel.forecast.timeZoneOffset.toLong(),
+                    ) + " PM",
+                label = R.string.sunset,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
-                value = Conversion.fromKelvinToProvidedUnit(
-                    value = daily.dewPoint,
-                    unit = viewModel.forecast.temperature
-                ).toInt().toDegrees,
-                label = R.string.dew_point
-            )
+                value =
+                    Conversion.fromKelvinToProvidedUnit(
+                        value = daily.dewPoint,
+                        unit = viewModel.forecast.temperature,
+                    ).toInt().toDegrees,
+                label = R.string.dew_point,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_cloud,
                 value = getString(R.string.cloudy, daily.clouds.toString()),
-                label = R.string.clouds
-            )
+                label = R.string.clouds,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_umbrella,
-                value = getString(
-                    R.string.percentage,
-                    "${daily.pop.fromDoubleToPercentage}"
-                ),
-                label = R.string.chance_of_rain
-            )
+                value =
+                    getString(
+                        R.string.percentage,
+                        "${daily.pop.fromDoubleToPercentage}",
+                    ),
+                label = R.string.chance_of_rain,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_humidity,
-                value = getString(
-                    R.string.percentage,
-                    "${daily.humidity}"
-                ),
-                label = R.string.humidity
-            )
+                value =
+                    getString(
+                        R.string.percentage,
+                        "${daily.humidity}",
+                    ),
+                label = R.string.humidity,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_day_sunny,
                 value = daily.uvi.toString(),
-                label = R.string.uv_index
-            )
+                label = R.string.uv_index,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_barometer,
                 value = getString(R.string.pressure, "${daily.pressure}"),
-                label = R.string.pressure_text
-            )
+                label = R.string.pressure_text,
+            ),
         )
         Log.i("Speed Unit", "${viewModel.forecast.speed}")
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_strong_wind,
-                value = formatSpeedUnitsWithUnits(
-                    value = daily.windSpeed ?: 0.00,
-                    speed = viewModel.forecast.speed
-                ),
-                label = R.string.wind
-            )
+                value =
+                    formatSpeedUnitsWithUnits(
+                        value = daily.windSpeed ?: 0.00,
+                        speed = viewModel.forecast.speed,
+                    ),
+                label = R.string.wind,
+            ),
         )
 
         return list

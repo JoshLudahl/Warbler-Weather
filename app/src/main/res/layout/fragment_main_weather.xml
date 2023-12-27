@@ -457,7 +457,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.patrykandpatrick.vico.views.chart.ChartView
+                        <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/chart_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

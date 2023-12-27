@@ -11,16 +11,16 @@ import org.junit.rules.RuleChain
 
 @HiltAndroidTest
 abstract class BaseTest {
-
     private val hiltAndroidRule = HiltAndroidRule(this)
     private val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
     private val espressoRule = EspressoSetupRule(activityScenarioRule)
 
     @get:Rule
-    val ruleChain: RuleChain = RuleChain
-        .outerRule(hiltAndroidRule)
-        .around(espressoRule)
-        .around(activityScenarioRule)
+    val ruleChain: RuleChain =
+        RuleChain
+            .outerRule(hiltAndroidRule)
+            .around(espressoRule)
+            .around(activityScenarioRule)
 
     @Before
     fun init() = hiltAndroidRule.inject()

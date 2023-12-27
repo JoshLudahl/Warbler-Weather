@@ -9,13 +9,12 @@ import com.warbler.data.model.weather.WeatherDataEntity
 @Database(
     entities = [
         LocationEntity::class,
-        WeatherDataEntity::class
+        WeatherDataEntity::class,
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class WeatherDatabase : RoomDatabase() {
-
     abstract fun weatherDao(): WeatherDatabaseDao
 
     abstract fun locationDao(): LocationDao

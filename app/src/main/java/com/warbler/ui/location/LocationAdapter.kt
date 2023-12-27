@@ -12,10 +12,10 @@ import com.warbler.databinding.LocationListItemBinding
 import com.warbler.utilities.ClickListenerInterface
 
 class LocationAdapter(
-    private val clickListener: ClickListenerInterface<LocationEntity>
+    private val clickListener: ClickListenerInterface<LocationEntity>,
 ) : ListAdapter<LocationEntity, LocationAdapter.ViewHolder>(
-    LocationDiffUtilCallback
-) {
+        LocationDiffUtilCallback,
+    ) {
     private var locationList = emptyList<LocationEntity>()
 
     class ViewHolder(private val itemBinding: LocationListItemBinding) :
@@ -23,7 +23,7 @@ class LocationAdapter(
         fun bind(
             location: LocationEntity,
             clickListener: ClickListenerInterface<LocationEntity>,
-            position: Int
+            position: Int,
         ) {
             itemBinding.location = location
             itemBinding.clickListener = clickListener
@@ -34,18 +34,21 @@ class LocationAdapter(
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolder {
         return LocationListItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         ).let {
             ViewHolder(it)
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val currentItem = locationList[position]
         if (position == 0) {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
@@ -60,11 +63,17 @@ class LocationAdapter(
 }
 
 object LocationDiffUtilCallback : DiffUtil.ItemCallback<LocationEntity>() {
-    override fun areItemsTheSame(oldItem: LocationEntity, newItem: LocationEntity): Boolean {
+    override fun areItemsTheSame(
+        oldItem: LocationEntity,
+        newItem: LocationEntity,
+    ): Boolean {
         return "${oldItem.lat}${oldItem.lon}" == "${newItem.lat}${newItem.lon}"
     }
 
-    override fun areContentsTheSame(oldItem: LocationEntity, newItem: LocationEntity): Boolean {
+    override fun areContentsTheSame(
+        oldItem: LocationEntity,
+        newItem: LocationEntity,
+    ): Boolean {
         return oldItem == newItem
     }
 }

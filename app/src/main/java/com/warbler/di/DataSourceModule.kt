@@ -20,17 +20,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
-
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     @Singleton
     @Provides
     fun providesWeatherDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ) = Room.databaseBuilder(
         context,
         WeatherDatabase::class.java,
-        "weather_database"
+        "weather_database",
     ).build()
 
     @Singleton
@@ -39,8 +38,7 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun providesWeatherDatabaseRepository(weatherDatabaseDao: WeatherDatabaseDao) =
-        WeatherDatabaseRepository(weatherDatabaseDao)
+    fun providesWeatherDatabaseRepository(weatherDatabaseDao: WeatherDatabaseDao) = WeatherDatabaseRepository(weatherDatabaseDao)
 
     @Singleton
     @Provides
@@ -52,6 +50,7 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        context.dataStore
+    fun providesDataStore(
+        @ApplicationContext context: Context,
+    ): DataStore<Preferences> = context.dataStore
 }

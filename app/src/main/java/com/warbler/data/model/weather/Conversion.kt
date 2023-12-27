@@ -12,7 +12,6 @@ import java.util.Locale
 import kotlin.math.ceil
 
 object Conversion {
-
     val Double.toCelsiusFromKelvin: Double
         get() = (this - 273.15)
 
@@ -27,7 +26,10 @@ object Conversion {
     val Double.metersPerSecondToKilometersPerHour: Double
         get() = this * 18 / 5
 
-    fun formatSpeedUnitsWithUnits(value: Double, speed: Speed): String {
+    fun formatSpeedUnitsWithUnits(
+        value: Double,
+        speed: Speed,
+    ): String {
         return when (speed) {
             Speed.MPS -> "$value m/s"
             Speed.KPH -> "${value.metersPerSecondToKilometersPerHour.roundToUpperInt} KMH"
@@ -39,8 +41,9 @@ object Conversion {
         get() = "$this°"
 
     val String.capitalizeEachFirst
-        get() = this.split(" ")
-            .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
+        get() =
+            this.split(" ")
+                .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 
     val currentDate
         get() = SimpleDateFormat("EEEE, MMMM dd", Locale.getDefault()).format(Date())
@@ -52,32 +55,41 @@ object Conversion {
             .getDisplayName(TextStyle.FULL, Locale.US)
     }
 
-    fun fromKelvinToProvidedUnit(value: Double, unit: Temperature) =
-        when (unit) {
-            Temperature.CELSIUS -> value.toCelsiusFromKelvin
-            Temperature.FAHRENHEIT -> value.toFahrenheitFromKelvin
-            Temperature.KELVIN -> value
-        }
+    fun fromKelvinToProvidedUnit(
+        value: Double,
+        unit: Temperature,
+    ) = when (unit) {
+        Temperature.CELSIUS -> value.toCelsiusFromKelvin
+        Temperature.FAHRENHEIT -> value.toFahrenheitFromKelvin
+        Temperature.KELVIN -> value
+    }
 
-    fun getTimeFromTimeStamp(timeStamp: Long, offset: Long): String {
+    fun getTimeFromTimeStamp(
+        timeStamp: Long,
+        offset: Long,
+    ): String {
         val timeStampWithOffset = timeStamp + offset
-        val hour = Instant.ofEpochSecond(timeStampWithOffset)
-            .atZone(ZoneId.of("UTC"))
-            .hour
+        val hour =
+            Instant.ofEpochSecond(timeStampWithOffset)
+                .atZone(ZoneId.of("UTC"))
+                .hour
 
-        val minute = Instant.ofEpochSecond(timeStampWithOffset)
-            .atZone(ZoneId.of("UTC"))
-            .minute
+        val minute =
+            Instant.ofEpochSecond(timeStampWithOffset)
+                .atZone(ZoneId.of("UTC"))
+                .minute
 
-        val minuteFormatted = when {
-            minute < 10 -> "0$minute"
-            else -> "$minute"
-        }
+        val minuteFormatted =
+            when {
+                minute < 10 -> "0$minute"
+                else -> "$minute"
+            }
 
-        val hourFormatted = when {
-            hour > 12 -> (hour - 12).toString()
-            else -> "$hour"
-        }
+        val hourFormatted =
+            when {
+                hour > 12 -> (hour - 12).toString()
+                else -> "$hour"
+            }
 
         return "$hourFormatted:$minuteFormatted"
     }

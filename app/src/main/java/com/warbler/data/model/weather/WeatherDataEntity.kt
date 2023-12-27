@@ -18,5 +18,5 @@ data class WeatherDataEntity(
     val pressure: Int,
     val temp: Double,
     val updated: String = DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
-    val wind: Double
+    val wind: Double,
 )

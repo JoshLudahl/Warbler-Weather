@@ -10,7 +10,7 @@ import com.warbler.databinding.GridLayoutItemBinding
 
 class MainWeatherDetailItemAdapter :
     ListAdapter<WeatherDetailItem, MainWeatherDetailItemAdapter.ViewHolder>(
-        MainWeatherDetailItemDiffUtil
+        MainWeatherDetailItemDiffUtil,
     ) {
     private var weatherDetailList = emptyList<WeatherDetailItem>()
 
@@ -22,17 +22,23 @@ class MainWeatherDetailItemAdapter :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         return GridLayoutItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         ).let {
             ViewHolder(it)
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val currentItem = weatherDetailList[position]
         holder.bind(currentItem)
     }
@@ -44,13 +50,16 @@ class MainWeatherDetailItemAdapter :
 }
 
 object MainWeatherDetailItemDiffUtil : DiffUtil.ItemCallback<WeatherDetailItem>() {
-    override fun areItemsTheSame(oldItem: WeatherDetailItem, newItem: WeatherDetailItem): Boolean {
+    override fun areItemsTheSame(
+        oldItem: WeatherDetailItem,
+        newItem: WeatherDetailItem,
+    ): Boolean {
         return oldItem.value == newItem.value
     }
 
     override fun areContentsTheSame(
         oldItem: WeatherDetailItem,
-        newItem: WeatherDetailItem
+        newItem: WeatherDetailItem,
     ): Boolean {
         return oldItem == newItem
     }

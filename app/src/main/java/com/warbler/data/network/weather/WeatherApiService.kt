@@ -10,6 +10,6 @@ interface WeatherApiService {
     suspend fun getWeather(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY
+        @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY,
     ): WeatherDataSource
 }

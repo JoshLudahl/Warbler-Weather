@@ -8,7 +8,6 @@ import org.junit.Test
 
 @HiltAndroidTest
 class LocationTest : BaseTest() {
-
     @Test
     fun checkLocation() {
         screen<Main> {

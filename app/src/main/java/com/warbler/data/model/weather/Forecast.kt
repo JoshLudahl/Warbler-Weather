@@ -12,5 +12,5 @@ data class Forecast(
     val daily: Daily,
     val speed: Speed,
     val temperature: Temperature,
-    val timeZoneOffset: Int
+    val timeZoneOffset: Int,
 ) : Parcelable

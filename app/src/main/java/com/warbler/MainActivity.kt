@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
@@ -34,21 +33,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var aut: Task<AppUpdateInfo>
     private val updateType = AppUpdateType.FLEXIBLE
 
-    val listener = InstallStateUpdatedListener { state ->
-        if (state.installStatus() == InstallStatus.DOWNLOADED) {
-            // After the update is downloaded, show a notification
-            // and request user confirmation to restart the app.
-            Log.i("MainActivity", "Update has been downloaded.")
-            Toast.makeText(
-                this,
-                "Update Completed. Restarting application.",
-                Toast.LENGTH_SHORT
-            ).show()
-            lifecycleScope.launch {
-                appUpdateManager.completeUpdate()
+    val listener =
+        InstallStateUpdatedListener { state ->
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                // After the update is downloaded, show a notification
+                // and request user confirmation to restart the app.
+                Log.i("MainActivity", "Update has been downloaded.")
+                Toast.makeText(
+                    this,
+                    "Update Completed. Restarting application.",
+                    Toast.LENGTH_SHORT,
+                ).show()
+                lifecycleScope.launch {
+                    appUpdateManager.completeUpdate()
+                }
             }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +58,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Main)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
 
         navController = navHostFragment.navController
     }
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkIsUpdateAvailable() {
         val activityResultLauncher =
             registerForActivityResult(
-                ActivityResultContracts.StartIntentSenderForResult()
+                ActivityResultContracts.StartIntentSenderForResult(),
             ) { result ->
                 if (result.resultCode != RESULT_OK) {
                     Log.i("MainActivity", "The Update has failed.")
@@ -89,8 +90,7 @@ class MainActivity : AppCompatActivity() {
                     activityResultLauncher,
                     // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
                     // flexible updates.
-                    AppUpdateOptions.newBuilder(updateType).build()
-
+                    AppUpdateOptions.newBuilder(updateType).build(),
                 )
             } else {
                 Log.i("MainActivity", "No Update Available.")

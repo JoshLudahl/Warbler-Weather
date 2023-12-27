@@ -16,6 +16,8 @@ import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import com.patrykandpatrick.vico.core.entry.entryOf
+import com.patrykandpatrick.vico.core.model.CartesianChartModel
+import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
@@ -34,28 +36,29 @@ import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.math.roundToInt
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private var _binding: FragmentMainWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
-    private val adapter = MainAdapter(
-        object : ClickListenerInterface<WeatherForecast> {
-            override fun onClick(item: WeatherForecast) {
-                handleOnForecastItemClicked(item)
-            }
+    private val adapter =
+        MainAdapter(
+            object : ClickListenerInterface<WeatherForecast> {
+                override fun onClick(item: WeatherForecast) {
+                    handleOnForecastItemClicked(item)
+                }
 
-            override fun delete(item: WeatherForecast) {
-                // Not used
-            }
-        }
-    )
+                override fun delete(item: WeatherForecast) {
+                    // Not used
+                }
+            },
+        )
 
     private fun handleOnForecastItemClicked(item: WeatherForecast) {
         viewModel.weatherObject.value?.let {
@@ -66,8 +69,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         daily = it.daily[item.index],
                         temperature = viewModel.temperatureUnit.value,
                         timeZoneOffset = it.timezoneOffset,
-                        speed = viewModel.speedUnit.value
-                    )
+                        speed = viewModel.speedUnit.value,
+                    ),
                 )
 
             findNavController().navigate(action)
@@ -76,7 +79,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainWeatherBinding.bind(view)
         binding.viewModel = viewModel
@@ -107,34 +113,37 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunrise,
-                value = Conversion.getTimeFromTimeStamp(
-                    timeStamp = result.current.sunrise.toLong(),
-                    offset = result.timezoneOffset.toLong()
-                ) + " AM",
-                label = R.string.sunrise
-            )
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = result.current.sunrise.toLong(),
+                        offset = result.timezoneOffset.toLong(),
+                    ) + " AM",
+                label = R.string.sunrise,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunset,
-                value = Conversion.getTimeFromTimeStamp(
-                    timeStamp = result.current.sunset.toLong(),
-                    offset = result.timezoneOffset.toLong()
-                ) + " PM",
-                label = R.string.sunset
-            )
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = result.current.sunset.toLong(),
+                        offset = result.timezoneOffset.toLong(),
+                    ) + " PM",
+                label = R.string.sunset,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_thermometer,
-                value = Conversion.fromKelvinToProvidedUnit(
-                    result.current.feelsLike,
-                    viewModel.temperatureUnit.value
-                ).toInt().toDegrees,
-                label = R.string.feels_like
-            )
+                value =
+                    Conversion.fromKelvinToProvidedUnit(
+                        result.current.feelsLike,
+                        viewModel.temperatureUnit.value,
+                    ).toInt().toDegrees,
+                label = R.string.feels_like,
+            ),
         )
 //
 //        list.add(
@@ -148,31 +157,33 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
-                value = Conversion.fromKelvinToProvidedUnit(
-                    value = result.current.dewPoint,
-                    unit = viewModel.temperatureUnit.value
-                ).toInt().toDegrees,
-                label = R.string.dew_point
-            )
+                value =
+                    Conversion.fromKelvinToProvidedUnit(
+                        value = result.current.dewPoint,
+                        unit = viewModel.temperatureUnit.value,
+                    ).toInt().toDegrees,
+                label = R.string.dew_point,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_cloud,
                 value = getString(R.string.cloudy, result.current.clouds.toString()),
-                label = R.string.clouds
-            )
+                label = R.string.clouds,
+            ),
         )
 
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_umbrella,
-                value = getString(
-                    R.string.percentage,
-                    "${result.daily[0].pop.fromDoubleToPercentage}"
-                ),
-                label = R.string.chance_of_rain
-            )
+                value =
+                    getString(
+                        R.string.percentage,
+                        "${result.daily[0].pop.fromDoubleToPercentage}",
+                    ),
+                label = R.string.chance_of_rain,
+            ),
         )
 
         return list
@@ -213,10 +224,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             viewModel.weatherState.collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
-                        val list = WeatherDataSourceDto.buildWeatherForecast(
-                            result.data,
-                            viewModel.temperatureUnit.value
-                        )
+                        val list =
+                            WeatherDataSourceDto.buildWeatherForecast(
+                                result.data,
+                                viewModel.temperatureUnit.value,
+                            )
 
                         updateWeatherRecyclerView(list)
                         val weatherDetailList = buildWeatherDetailList(result.data)
@@ -239,25 +251,30 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         }
     }
 
-    private fun setUiElements(result: WeatherDataSource, value: Temperature) {
+    private fun setUiElements(
+        result: WeatherDataSource,
+        value: Temperature,
+    ) {
         with(binding) {
-            currentTemperature.text = Conversion.fromKelvinToProvidedUnit(
-                result.current.temp,
-                value
-            ).roundToInt().toDegrees
+            currentTemperature.text =
+                Conversion.fromKelvinToProvidedUnit(
+                    result.current.temp,
+                    value,
+                ).roundToInt().toDegrees
 
             weatherDescription.text = result.current.weather[0].description.capitalizeEachFirst
 
             currentWeatherIcon.setImageResource(
-                result.current.weather[0].icon.getIconForCondition
+                result.current.weather[0].icon.getIconForCondition,
             )
 
             uvIndexValue.text = result.current.uvi.toString()
 
-            val humidityString = String.format(
-                getString(R.string.percent),
-                result.current.humidity.toString()
-            )
+            val humidityString =
+                String.format(
+                    getString(R.string.percent),
+                    result.current.humidity.toString(),
+                )
             humidityTextValue.text = humidityString
 
             buildCharts(result)
@@ -267,28 +284,34 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private fun buildCharts(result: WeatherDataSource) {
         // Create the list from the weather data source for the hourly data
         // Associate the date object with the rain precipitation
-        val list = result.hourly.toList().associate {
-            it.dt to ((it.rain?.h ?: 0).toDouble())
-        }
+        val list =
+            result.hourly.toList().associate {
+                it.dt to ((it.rain?.h ?: 0).toDouble())
+            }
 
         // Associate the keys to the date
-        val xValuesToDates = list.keys
-            .associateBy { it }
+        val xValuesToDates =
+            list.keys
+                .associateBy { it }
 
         // Create a chart entry model of the data, mapping the  values
-        val chartEntryValues = xValuesToDates.keys.zip(list.values, ::entryOf)
+        val chartEntryValues = CartesianChartModel(
+            ColumnCartesianLayerModel.build { series(x = xValuesToDates.keys, y = list.values) }
+        )
 
         // Create a axis formatter
         val horizontalAxisValueFormatter =
-            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
+            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _, _ ->
 
                 // Convert the Int value to a date object
-                var hour = Instant.ofEpochSecond(
-                    (value.toLong()) + result
-                        .timezoneOffset
-                )
-                    .atZone(ZoneId.of("UTC"))
-                    .hour
+                var hour =
+                    Instant.ofEpochSecond(
+                        (value.toLong()) +
+                            result
+                                .timezoneOffset,
+                    )
+                        .atZone(ZoneId.of("UTC"))
+                        .hour
 
                 if (hour > 12) hour -= 12
                 if (hour == 0) hour = 12
@@ -296,7 +319,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 hour.toString()
             }
 
-        (binding.chartView.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+        (binding.chartView.bottom as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
             .valueFormatter = horizontalAxisValueFormatter
 
         val chartEntryModelProducer = ChartEntryModelProducer()
@@ -335,13 +358,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.weatherAlertIcon.setOnClickListener {
             viewModel.weatherObject.value?.alerts?.get(0)?.let {
-                val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                    .setTitle("Alert: ${it.event}")
-                    .setMessage(it.description)
-                    .setNegativeButton(getText(R.string.close)) { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    .create()
+                val dialog =
+                    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                        .setTitle("Alert: ${it.event}")
+                        .setMessage(it.description)
+                        .setNegativeButton(getText(R.string.close)) { dialog, _ ->
+                            dialog.cancel()
+                        }
+                        .create()
 
                 dialog.show()
             }
@@ -350,13 +374,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         binding.weatherAlertIcon.setOnClickListener {
             viewModel.weatherObject.value?.alerts?.let { alerts ->
                 val message = buildAlertMessage(alerts)
-                val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                    .setTitle("Alert: Weather Alert")
-                    .setMessage(message)
-                    .setNegativeButton(getText(R.string.close)) { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    .create()
+                val dialog =
+                    MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                        .setTitle("Alert: Weather Alert")
+                        .setMessage(message)
+                        .setNegativeButton(getText(R.string.close)) { dialog, _ ->
+                            dialog.cancel()
+                        }
+                        .create()
                 dialog.show()
             }
         }

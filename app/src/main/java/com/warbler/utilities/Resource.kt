@@ -3,7 +3,7 @@ package com.warbler.utilities
 sealed class Resource<out T> {
     data class Error(
         val exception: Exception? = null,
-        val message: String? = null
+        val message: String? = null,
     ) : Resource<Nothing>()
 
     data object Loading : Resource<Nothing>()
