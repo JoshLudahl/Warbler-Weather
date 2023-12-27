@@ -56,7 +56,7 @@ jobs:
           WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
 
       - name: Upload Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test-Reports
           path: app/build/reports
