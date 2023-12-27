@@ -1,7 +1,6 @@
 package com.warbler.ui
 
 import android.os.Bundle
-import android.text.format.DateFormat.format
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -22,7 +21,6 @@ import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
-import com.warbler.data.model.weather.Conversion.getTimeFromTimeStamp
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
 import com.warbler.data.model.weather.WeatherDataSource
@@ -36,7 +34,6 @@ import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.StringBuilder
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.math.roundToInt
@@ -270,14 +267,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     private fun buildCharts(result: WeatherDataSource) {
         // Create the list from the weather data source for the hourly data
         // Associate the date object with the rain precipitation
-        val list = result.hourly
-            .associate {
-                it.dt to (it.humidity ?: 0)
-            }
+        val list = result.hourly.toList().associate {
+            it.dt to ((it.rain?.h ?: 0).toDouble())
+        }
 
         // Associate the keys to the date
         val xValuesToDates = list.keys
-            .associateBy { entry: Int -> entry }
+            .associateBy { it }
 
         // Create a chart entry model of the data, mapping the  values
         val chartEntryValues = xValuesToDates.keys.zip(list.values, ::entryOf)
@@ -286,21 +282,28 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         val horizontalAxisValueFormatter =
             AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
 
-                Instant.ofEpochSecond(
-                    value.toLong()
+                // Convert the Int value to a date object
+                var hour = Instant.ofEpochSecond(
+                    (value.toLong()) + result
+                        .timezoneOffset
                 )
                     .atZone(ZoneId.of("UTC"))
                     .hour
-                    .toString()
-            }
 
-        val chartEntryModelProducer = ChartEntryModelProducer()
-        val chartEntryModel = entryModelOf(chartEntryValues)
-        chartEntryModelProducer.setEntries(chartEntryModel.entries)
-        binding.chartView.setModel(chartEntryModel)
+                if (hour > 12) hour -= 12
+                if (hour == 0) hour = 12
+
+                hour.toString()
+            }
 
         (binding.chartView.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
             .valueFormatter = horizontalAxisValueFormatter
+
+        val chartEntryModelProducer = ChartEntryModelProducer()
+
+        val chartEntryModel = entryModelOf(chartEntryValues)
+        chartEntryModelProducer.setEntries(chartEntryModel.entries)
+        binding.chartView.setModel(chartEntryModel)
     }
 
     private fun setUpListeners() {
