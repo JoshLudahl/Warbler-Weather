@@ -19,6 +19,7 @@ import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
+import com.warbler.data.model.weather.Conversion.decimal
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
@@ -280,7 +281,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setUpNewChart(result: WeatherDataSource) {
-        val data = result.hourly.map { (it.rain?.h ?: 0.0) / 25.4 }
+        val data = result.hourly.map { it.rain?.h ?: 0.0 }
+
+        result.hourly.forEach { hour ->
+            Log.d("Log", "drip: ${(hour.rain?.h ?: 0.0).decimal }")
+        }
 
         val model =
             CartesianChartModel(

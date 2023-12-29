@@ -2,6 +2,8 @@ package com.warbler.data.model.weather
 
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -97,4 +99,6 @@ object Conversion {
     val Double.fromDoubleToPercentage get() = (this * 100).toInt()
 
     val hour: DateTimeFormatter get() = DateTimeFormatter.ofPattern("H")
+
+    val Double.decimal get() = BigDecimal(this).setScale(2, RoundingMode.HALF_EVEN)
 }
