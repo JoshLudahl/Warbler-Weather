@@ -1,8 +1,10 @@
 package com.warbler.data.model.location
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Keep
+@Serializable
 data class LocationDataSource(
     @SerialName("country")
     val country: String,
