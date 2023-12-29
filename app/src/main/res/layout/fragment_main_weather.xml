@@ -468,6 +468,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_label"
                             app:layers="column"
+                            app:axisStyle="@style/chart_column_axis_style"
                             app:columnLayerStyle="@style/chart_column_axis_line_style"
                             app:startAxisStyle="@style/chart_column_style"
                             app:showBottomAxis="true"

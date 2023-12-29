@@ -151,6 +151,10 @@
 
     <style name="chart_line_style">
         <item name="color">@color/colorWeatherGrid</item>
+        <item name="titleTextColor">#ff6600</item>
+        <item name="labelColor">#FF6600</item>
+
+
     </style>
 
     <style name="chart_style">
@@ -173,6 +177,13 @@
 
     <style name="chart_bottom_axis_style">
         <item name="labelColor">@color/colorWeatherGrid</item>
+        <item name="showGuideline">false</item>
+        <item name="titleTextColor">#ff6600</item>
+        <item name="color">#ff6600</item>
+    </style>
+
+    <style name="chart_column_axis_style">
+
     </style>
 
 </resources>
