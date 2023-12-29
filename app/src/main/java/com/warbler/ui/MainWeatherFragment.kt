@@ -30,6 +30,7 @@ import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.ClickListenerInterface
+import com.warbler.utilities.Constants
 import com.warbler.utilities.Resource
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -279,35 +280,38 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setUpNewChart(result: WeatherDataSource) {
-        val data =
-            result.hourly.associate {
-                it.dt.toFloat() to (it.rain?.h ?: 0.0)
-            }
+        val data = result.hourly.map { (it.rain?.h ?: 0.0) / 25.4 }
 
-        val xValuesToDates = data.keys.associateBy { it.toFloat() }
+        result.hourly.forEach { hour ->
+            Log.i("Log", "Hour: ${hour.dt}")
+        }
 
         val model =
             CartesianChartModel(
                 ColumnCartesianLayerModel
-                    .build { series(x = xValuesToDates.keys, y = data.values) },
+                    .build { series(data) },
             )
 
         val bottomAxisValueFormatter =
             AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
                 // Convert the Int value to a date object
+                val addHourlyMilli = (x.toInt() * Constants.HOUR).toLong()
                 var hour =
                     Instant.ofEpochSecond(
-                        (xValuesToDates[x]?.toLong() ?: x.toLong()) +
+                        addHourlyMilli +
                             result
                                 .timezoneOffset,
                     )
                         .atZone(ZoneId.of("UTC"))
                         .hour
-
-                if (hour > 12) hour -= 12
+                var suffix = "AM"
+                if (hour > 12) {
+                    hour = hour % 12
+                    suffix = "PM"
+                }
                 if (hour == 0) hour = 12
 
-                hour.toString()
+                "$hour$suffix"
             }
 
         binding.chartView.setModel(model)
