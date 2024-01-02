@@ -28,6 +28,7 @@ The app is themed after the [Yellow-rumped Warbler](https://www.audubon.org/fiel
 * Testing includes
   * [Mockito](https://developer.android.com/training/testing/local-tests) for unit testing
   * [Espresso](https://developer.android.com/training/testing/espresso) for UI testing
+* Charts by [Vico](https://github.com/patrykandpatrick/vico)
 
 ### Features
 * City Finder
