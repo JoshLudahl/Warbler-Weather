@@ -306,7 +306,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         .atZone(ZoneId.of("UTC"))
                         .hour
                 var suffix = "AM"
-                if (hour > 12) {
+                if (hour >= 12) {
                     hour %= 12
                     suffix = "PM"
                 }
