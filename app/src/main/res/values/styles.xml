@@ -170,11 +170,7 @@
         <item name="axisLabelStyle">@style/axis_label_style</item>
         <item name="axisGuidelineStyle">@style/start_axis_guideline_style</item>
         <item name="showAxisLine">false</item>
-        <item name="marginEnd">8dp</item>
-        <item name="android:paddingStart">6dp</item>
-        <item name="android:paddingEnd">6dp</item>
-        <item name="android:paddingTop">2dp</item>
-        <item name="android:paddingBottom">2dp</item>
+
     </style>
 
     <style name="chart_column_axis_line_style">
@@ -198,7 +194,6 @@
     <style name="axis_label_style">
         <item name="labelColor">@color/colorWeatherGrid</item>
         <item name="titleTextColor">@color/colorWeatherGrid</item>
-
     </style>
 
     <style name="chart_title_style">

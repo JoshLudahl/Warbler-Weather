@@ -325,6 +325,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         (binding.chartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
             .itemPlacer =
             AxisItemPlacer.Vertical.default(maxItemCount = { 4 })
+
+        (binding.chartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+            .axisLine?.margins?.setVertical(5f)
     }
 
     private fun setUpListeners() {
