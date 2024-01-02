@@ -9,7 +9,8 @@
     <color name="colorTertiarySwap">@color/colorDarkGray</color>
     <color name="colorIcons">@color/colorDark</color>
     <color name="colorIconsDisabled">@color/colorGray</color>
-    <color name="colorWeatherGrid">@color/colorLight</color>
+    <color name="colorWeatherGrid">@color/colorYellow</color>
+    <color name="colorWeatherGridGuideLine">@color/colorGray</color>
     <color name="colorRadioOption">@color/colorDarkGray</color>
     <color name="colorSettingTitle">@color/colorDark</color>
     <color name="colorCitySearchBox">@color/colorYellow</color>

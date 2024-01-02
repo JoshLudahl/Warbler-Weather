@@ -10,6 +10,7 @@
     <color name="colorIcons">@color/colorYellow</color>
     <color name="colorIconsDisabled">@color/colorLight</color>
     <color name="colorWeatherGrid">@color/colorYellow</color>
+    <color name="colorWeatherGridGuideLine">@color/colorGray</color>
     <color name="colorRadioOption">@color/colorYellow</color>
     <color name="colorSettingTitle">@color/colorLight</color>
     <color name="colorCitySearchBox">@color/colorYellow</color>

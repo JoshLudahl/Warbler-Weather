@@ -10,9 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
+import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
 import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.warbler.R
@@ -319,6 +321,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         (binding.chartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
             .valueFormatter = bottomAxisValueFormatter
+
+        (binding.chartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+            .itemPlacer =
+            AxisItemPlacer.Vertical.default(maxItemCount = { 4 })
     }
 
     private fun setUpListeners() {
