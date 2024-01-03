@@ -10,18 +10,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
 import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
 import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
+import com.patrykandpatrick.vico.core.model.LineCartesianLayerModel
 import com.warbler.R
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
+import com.warbler.data.model.weather.Conversion.bottomAxisValueFormatter
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
-import com.warbler.data.model.weather.Conversion.decimal
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
@@ -39,8 +38,6 @@ import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.ZoneId
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -278,16 +275,44 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 )
             humidityTextValue.text = humidityString
 
-            setUpNewChart(result)
+            setUpHourlyRainChart(result)
+            setUpHourlyTemperatureChart(result, value)
         }
     }
 
-    private fun setUpNewChart(result: WeatherDataSource) {
-        val data = result.hourly.map { it.rain?.h ?: 0.0 }
+    private fun setUpHourlyTemperatureChart(
+        result: WeatherDataSource,
+        value: Temperature,
+    ) {
+        val data =
+            result.hourly.map {
+                Conversion.fromKelvinToProvidedUnit(
+                    it.temp,
+                    value,
+                ).roundToInt()
+            }
 
-        result.hourly.forEach { hour ->
-            Log.d("Log", "drip: ${(hour.rain?.h ?: 0.0).decimal }")
+        data.forEach { value ->
+            Log.i("Log", "Value: $value")
         }
+
+        val model =
+            CartesianChartModel(
+                LineCartesianLayerModel
+                    .build { series(data) },
+            )
+
+        binding.hourlyTemperatureChartView.setModel(model)
+
+        (binding.hourlyTemperatureChartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+            .valueFormatter = result.bottomAxisValueFormatter
+
+        (binding.hourlyTemperatureChartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+            .itemPlacer = Constants.CHART_LINE_DEFAULT
+    }
+
+    private fun setUpHourlyRainChart(result: WeatherDataSource) {
+        val data = result.hourly.map { it.rain?.h ?: 0.0 }
 
         val model =
             CartesianChartModel(
@@ -295,39 +320,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     .build { series(data) },
             )
 
-        val bottomAxisValueFormatter =
-            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
-                // Convert the Int value to a date object
-                val addHourlyMilli = (result.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
-                var hour =
-                    Instant.ofEpochSecond(
-                        addHourlyMilli +
-                            result
-                                .timezoneOffset,
-                    )
-                        .atZone(ZoneId.of("UTC"))
-                        .hour
-                var suffix = "AM"
-                if (hour >= 12) {
-                    hour %= 12
-                    suffix = "PM"
-                }
-                if (hour == 0) hour = 12
+        binding.hourlyRainChartView.setModel(model)
 
-                "$hour$suffix"
-            }
+        (binding.hourlyRainChartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+            .valueFormatter = result.bottomAxisValueFormatter
 
-        binding.chartView.setModel(model)
-
-        (binding.chartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-            .valueFormatter = bottomAxisValueFormatter
-
-        (binding.chartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
-            .itemPlacer =
-            AxisItemPlacer.Vertical.default(maxItemCount = { 4 })
-
-        (binding.chartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
-            .axisLine?.margins?.setVertical(5f)
+        (binding.hourlyRainChartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+            .itemPlacer = Constants.CHART_COLUMN_DEFAULT
     }
 
     private fun setUpListeners() {

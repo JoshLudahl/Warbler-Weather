@@ -458,22 +458,42 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
-                            android:id="@+id/chart_view"
+                            android:id="@+id/hourly_rain_chart_view"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="200dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_label"
                             app:layers="column"
-                            app:axisStyle="@style/chart_column_axis_style"
                             app:columnLayerStyle="@style/chart_column_axis_line_style"
                             app:startAxisStyle="@style/chart_column_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
                             app:bottomAxisStyle="@style/chart_bottom_axis_style"
+                            />
+
+                        <com.patrykandpatrick.vico.views.chart.CartesianChartView
+                            android:id="@+id/hourly_temperature_chart_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="8dp"
+                            android:padding="16dp"
+                            android:background="@drawable/top_rounded_rectangle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/hourly_rain_chart_view"
+                            app:layers="line"
+                            app:horizontalLayout="fullWidth"
+                            app:axisStyle="@style/chart_line_axis_style"
+                            app:startAxisStyle="@style/chart_line_start_axis_style"
+                            app:lineLayerStyle="@style/Chart1LineLayerStyle"
+                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            app:showBottomAxis="true"
+                            app:showStartAxis="true"
                             />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

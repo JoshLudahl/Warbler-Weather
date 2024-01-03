@@ -1,7 +1,10 @@
 package com.warbler.data.model.weather
 
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
+import com.warbler.utilities.Constants
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
@@ -101,4 +104,22 @@ object Conversion {
     val hour: DateTimeFormatter get() = DateTimeFormatter.ofPattern("H")
 
     val Double.decimal get() = BigDecimal(this).setScale(2, RoundingMode.HALF_EVEN)
+
+    val WeatherDataSource.bottomAxisValueFormatter get() =
+        AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
+
+            val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
+            var hour =
+                Instant.ofEpochSecond(addHourlyMilli + this.timezoneOffset)
+                    .atZone(ZoneId.of("UTC"))
+                    .hour
+            var suffix = "AM"
+            if (hour >= 12) {
+                hour %= 12
+                suffix = "PM"
+            }
+            if (hour == 0) hour = 12
+
+            "$hour$suffix"
+        }
 }
