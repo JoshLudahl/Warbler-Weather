@@ -302,10 +302,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         val min = data.min() - Constants.TEMP_RANGE
         val max = data.max() + Constants.TEMP_RANGE
-        val valueOverrider = AxisValueOverrider.fixed<LineCartesianLayerModel>(
-            minY = min.toFloat(),
-            maxY = max.toFloat()
-        )
+        val valueOverrider =
+            AxisValueOverrider.fixed<LineCartesianLayerModel>(
+                minY = min.toFloat(),
+                maxY = max.toFloat(),
+            )
 
         with(binding.hourlyTemperatureChartView) {
             (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
