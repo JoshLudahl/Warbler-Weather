@@ -208,7 +208,7 @@
 
     <style name="chart_bottom_line_axis_style" parent="chart_bottom_axis_style">
         <item name="axisLabelStyle">@style/axis_bottom_label_style</item>
-        <item name="axisTickLength">110dp</item>
+
     </style>
 
     <style name="axis_bottom_label_style">

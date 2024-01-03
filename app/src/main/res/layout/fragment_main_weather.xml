@@ -493,8 +493,7 @@
                             app:lineLayerStyle="@style/Chart1LineLayerStyle"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:showBottomAxis="true"
-                            app:showStartAxis="true"
-                            />
+                            app:showStartAxis="true" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

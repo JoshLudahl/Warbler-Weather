@@ -13,6 +13,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
+import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
+import com.patrykandpatrick.vico.core.chart.values.AxisValueOverrider
 import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.patrykandpatrick.vico.core.model.LineCartesianLayerModel
@@ -282,19 +284,15 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private fun setUpHourlyTemperatureChart(
         result: WeatherDataSource,
-        value: Temperature,
+        temperatureUnit: Temperature,
     ) {
         val data =
             result.hourly.map {
                 Conversion.fromKelvinToProvidedUnit(
                     it.temp,
-                    value,
+                    temperatureUnit,
                 ).roundToInt()
             }
-
-        data.forEach { value ->
-            Log.i("Log", "Value: $value")
-        }
 
         val model =
             CartesianChartModel(
@@ -302,13 +300,21 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     .build { series(data) },
             )
 
-        binding.hourlyTemperatureChartView.setModel(model)
+        val min = data.min() - Constants.TEMP_RANGE
+        val max = data.max() + Constants.TEMP_RANGE
+        val valueOverrider = AxisValueOverrider.fixed<LineCartesianLayerModel>(minY = min.toFloat())
 
-        (binding.hourlyTemperatureChartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-            .valueFormatter = result.bottomAxisValueFormatter
+        with(binding.hourlyTemperatureChartView) {
+            setModel(model)
+            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = result.bottomAxisValueFormatter
 
-        (binding.hourlyTemperatureChartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
-            .itemPlacer = Constants.CHART_LINE_DEFAULT
+            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                .itemPlacer = Constants.CHART_LINE_DEFAULT
+
+            (chart?.layers?.get(0) as LineCartesianLayer).axisValueOverrider =
+                valueOverrider
+        }
     }
 
     private fun setUpHourlyRainChart(result: WeatherDataSource) {
