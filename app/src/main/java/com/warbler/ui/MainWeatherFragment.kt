@@ -151,7 +151,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     Conversion.fromKelvinToProvidedUnit(
                         result.current.feelsLike,
                         viewModel.temperatureUnit.value,
-                    ).toInt().toDegrees,
+                    ).roundToInt().toDegrees,
                 label = R.string.feels_like,
             ),
         )
@@ -283,6 +283,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     value,
                 ).roundToInt().toDegrees
 
+            val feelsLikeTemp =
+                Conversion.fromKelvinToProvidedUnit(
+                    result.current.feelsLike,
+                    value,
+                ).roundToInt().toDegrees
+
+            feelsLike.text = getString(R.string.feels_like_temp, feelsLikeTemp)
+
             weatherDescription.text = result.current.weather[0].description.capitalizeEachFirst
 
             currentWeatherIcon.setImageResource(
@@ -344,7 +352,13 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setUpHourlyRainChart(result: WeatherDataSource) {
-        val data = result.hourly.map { Conversion.convertOrReturnAccumulationByUnit(it.rain?.h ?: 0.0, viewModel.accumulationUnit.value) }
+        val data =
+            result.hourly.map {
+                Conversion.convertOrReturnAccumulationByUnit(
+                    it.rain?.h ?: 0.0,
+                    viewModel.accumulationUnit.value,
+                )
+            }
 
         val model =
             CartesianChartModel(
