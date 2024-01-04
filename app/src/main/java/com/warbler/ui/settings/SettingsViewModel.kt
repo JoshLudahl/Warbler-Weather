@@ -28,6 +28,10 @@ class SettingsViewModel
         val speedUnit: StateFlow<Int>
             get() = _speedUnit
 
+        private val _accumulationUnit = MutableStateFlow(R.id.radio_mmph)
+        val accumulationUnit: StateFlow<Int>
+            get() = _accumulationUnit
+
         private val _appVersion = MutableStateFlow("Beta Version ${BuildConfig.VERSION_NAME}")
         val appVersion get() = _appVersion
 
@@ -43,6 +47,21 @@ class SettingsViewModel
                     updateSpeedUnit(unit)
                 }
             }
+
+            viewModelScope.launch {
+                DataPref.readIntDataStoreFlow(DataPref.ACCUMULATION_UNIT, dataStore).collect { unit ->
+                    updateAccumulationUnit(unit)
+                }
+            }
+        }
+
+        private fun updateAccumulationUnit(unit: Int) {
+            _accumulationUnit.value =
+                when (unit) {
+                    0 -> Accumulation.INCHES_PER_HOUR
+                    1 -> Accumulation.MILLIMETERS_PER_HOUR
+                    else -> Accumulation.MILLIMETERS_PER_HOUR
+                }.id
         }
 
         private fun updateTemperatureUnit(temperatureUnit: Int) {
@@ -109,6 +128,25 @@ class SettingsViewModel
                     Speed.KPH -> 2
                 }.let { value ->
                     DataPref.saveIntDataStore(DataPref.SPEED_UNIT, value, dataStore)
+                }
+            }
+        }
+
+        fun handleAccumulationClick(viewId: Int) {
+            when (viewId) {
+                R.id.radio_inph -> Accumulation.INCHES_PER_HOUR
+                R.id.radio_mmph -> Accumulation.MILLIMETERS_PER_HOUR
+                else -> Accumulation.MILLIMETERS_PER_HOUR
+            }.let { accumulation -> saveAccumulationUnit(accumulation) }
+        }
+
+        private fun saveAccumulationUnit(accumulation: Accumulation) {
+            viewModelScope.launch {
+                when (accumulation) {
+                    Accumulation.INCHES_PER_HOUR -> 0
+                    Accumulation.MILLIMETERS_PER_HOUR -> 1
+                }.let { value ->
+                    DataPref.saveIntDataStore(DataPref.ACCUMULATION_UNIT, value, dataStore)
                 }
             }
         }

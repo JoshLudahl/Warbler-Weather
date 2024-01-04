@@ -140,4 +140,5 @@ object Conversion {
             this == 0 -> "12AM"
             else -> "${this}AM"
         }
+    val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
 }

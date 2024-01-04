@@ -16,6 +16,8 @@ object DataPref {
     const val SPEED_UNIT = "speed_unit"
     val SPEED_UNIT_PREFERENCES = intPreferencesKey(SPEED_UNIT)
 
+    const val ACCUMULATION_UNIT = "accumulation_unit"
+
     fun readIntDataStoreFlow(
         key: String,
         dataStore: DataStore<Preferences>,

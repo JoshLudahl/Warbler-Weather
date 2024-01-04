@@ -222,6 +222,67 @@
 
                 </RadioGroup>
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_accumulation_text"
+                    style="@style/settings_subheading_style"
+                    android:text="@string/settings_accumulation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kph_text"
+                    tools:text="Accumulation" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_mmph_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="48dp"
+                    android:text="@string/millimeters_per_hour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_accumulation_text"
+                    tools:text="Millimeters Per hour" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/settings_subheading_option_inph_text"
+                    style="@style/settings_subheading_option_style"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="48dp"
+                    android:text="@string/inches_per_hour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mmph_text"
+                    tools:text="Inches Per hour" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:checkedButton="@{viewModel.accumulationUnit}"
+                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_inph_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mmph_text">
+
+                    <RadioButton
+                        android:id="@+id/radio_mmph"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
+                        android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radio_inph"
+                        android:layout_width="@dimen/radio_size"
+                        android:layout_height="@dimen/radio_size"
+                        android:animateLayoutChanges="true"
+                        android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}"
+                        android:background="@drawable/custom_radio"
+                        android:button="@android:color/transparent" />
+
+                </RadioGroup>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
