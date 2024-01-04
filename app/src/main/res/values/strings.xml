@@ -39,7 +39,7 @@
     <string name="percent">%1$s%\u0025</string>
 
     <string name="mdash">&#8211;</string>
-    <string name="forecast">Forecast</string>
+    <string name="forecast">8 day Forecast</string>
     <string name="locations">Locations</string>
     <string name="search_location">Search for city</string>
     <string name="humidity">Humidity</string>
@@ -69,7 +69,7 @@
     <string name="yellow_rumped_warbler">Yellow-Rumped Warbler</string>
     <string name="currently">Currently</string>
     <string name="hi_low_icon_description">Icon for hi and low temperatures.</string>
-    <string name="hourly">Hourly</string>
+    <string name="hourly">Next 48 hours</string>
     <string name="chart_rain_title">Rain (mm/hr)</string>
     <string name="chart_temp_title">Temperature</string>
 
