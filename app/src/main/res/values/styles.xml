@@ -203,6 +203,7 @@
         <item name="lineThickness">1dp</item>
         <item name="cubicStrength">75%</item>
         <item name="showDataLabels">true</item>
+        <item name="dataLabelStyle">@style/data_label_style</item>
     </style>
 
     <style name="Chart1LineLayerStyle">
@@ -216,6 +217,10 @@
 
     <style name="axis_bottom_label_style">
         <item name="labelColor">@color/colorWeatherGrid</item>
+    </style>
+
+    <style name="data_label_style">
+        <item name="labelColor">@color/colorGray</item>
     </style>
 
 </resources>
