@@ -213,8 +213,6 @@
 
     <style name="axis_bottom_label_style">
         <item name="labelColor">@color/colorWeatherGrid</item>
-        <item name="android:layout_marginEnd">10dp</item>
-        <item name="android:titleMarginStart">10dp</item>
     </style>
 
 </resources>

@@ -1,10 +1,12 @@
 package com.warbler.data.model.weather
 
 import com.patrykandpatrick.vico.core.extension.mutableListOf
+import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
 import com.warbler.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
+import com.warbler.data.model.weather.Conversion.toDegrees
+import com.warbler.data.model.weather.Conversion.toReadableHour
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.ui.settings.Temperature
-import java.time.Instant
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
@@ -50,19 +52,28 @@ object WeatherDataSourceDto {
         }
     }
 
-    fun buildHourlyRainMap(weather: WeatherDataSource): List<Pair<Long, Float>> {
-        val list = mutableListOf<Pair<Long, Float>>()
-        weather.hourly.forEach { hour ->
-            val time =
-                Instant.ofEpochSecond(
-                    (hour.dt + weather.timezoneOffset)
-                        .toLong(),
-                )
-                    .toEpochMilli()
+    fun buildHourlyForecastList(
+        weatherDataSource: WeatherDataSource,
+        units: Temperature,
+    ): List<HourlyForecastItem> {
+        val list = mutableListOf<HourlyForecastItem>()
 
-            val rain = hour.rain?.h?.toFloat() ?: 0f
+        weatherDataSource.hourly.forEach { hour ->
 
-            list.add(time to rain)
+            val computedHour = hour.dt + weatherDataSource.timezoneOffset
+            val temperature =
+                Conversion.fromKelvinToProvidedUnit(hour.temp, units)
+                    .roundToInt()
+                    .toDegrees
+
+            list.add(
+                HourlyForecastItem(
+                    hour = computedHour.toReadableHour.fromHourWithSuffix,
+                    description = hour.weather[0].description,
+                    formattedTemp = temperature,
+                    icon = hour.weather[0].icon.getIconForCondition,
+                ),
+            )
         }
 
         return list

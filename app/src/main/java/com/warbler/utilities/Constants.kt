@@ -13,5 +13,5 @@ object Constants {
     const val HOUR = 3600
     val CHART_COLUMN_DEFAULT = AxisItemPlacer.Vertical.default(maxItemCount = { 4 })
     val CHART_LINE_DEFAULT = AxisItemPlacer.Vertical.default(maxItemCount = { 6 })
-    const val TEMP_RANGE = 10
+    const val TEMP_RANGE = 5
 }

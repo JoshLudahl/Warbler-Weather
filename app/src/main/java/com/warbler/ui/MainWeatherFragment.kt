@@ -26,6 +26,7 @@ import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
+import com.warbler.data.model.weather.HourlyForecastItem
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
 import com.warbler.data.model.weather.WeatherDetailItem
@@ -78,6 +79,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
+    private val weatherHourlyForecastAdapter = MainWeatherHourlyForecastAdapter()
 
     override fun onViewCreated(
         view: View,
@@ -92,6 +94,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         setUpListeners()
         setUpWeatherRecyclerView()
         setupWeatherDetailRecyclerView()
+        setupWeatherHourlyForecastRecyclerView()
+    }
+
+    private fun setupWeatherHourlyForecastRecyclerView() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.hourlyRecyclerView.adapter = weatherHourlyForecastAdapter
+        binding.hourlyRecyclerView.layoutManager = layoutManager
     }
 
     private fun setUpWeatherRecyclerView() {
@@ -197,6 +207,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         adapter.setItems(weatherForecastList)
     }
 
+    private fun updateHourlyForecastRecyclerView(hourlyForecastItem: List<HourlyForecastItem>) {
+        weatherHourlyForecastAdapter.setItems(hourlyForecastItem)
+    }
+
     private fun setupObservers() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.updateWeatherData()
@@ -232,7 +246,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
                         updateWeatherRecyclerView(list)
                         val weatherDetailList = buildWeatherDetailList(result.data)
+
                         updateWeatherDetailRecyclerView(weatherDetailList)
+                        updateHourlyForecastRecyclerView(
+                            WeatherDataSourceDto.buildHourlyForecastList(
+                                result.data,
+                                viewModel.temperatureUnit.value,
+                            ),
+                        )
                         setUiElements(result.data, viewModel.temperatureUnit.value)
 
                         binding.swipeRefreshLayout.isRefreshing = false
@@ -331,13 +352,15 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     .build { series(data) },
             )
 
-        binding.hourlyRainChartView.setModel(model)
+        with(binding.hourlyRainChartView) {
+            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = result.bottomAxisValueFormatter
 
-        (binding.hourlyRainChartView.chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-            .valueFormatter = result.bottomAxisValueFormatter
+            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
-        (binding.hourlyRainChartView.chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
-            .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+            setModel(model)
+        }
     }
 
     private fun setUpListeners() {

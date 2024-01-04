@@ -71,6 +71,6 @@
     <string name="hi_low_icon_description">Icon for hi and low temperatures.</string>
     <string name="hourly">Hourly</string>
     <string name="chart_rain_title">Rain (mm/hr)</string>
-    <string name="chart_temp_title">Temp</string>
+    <string name="chart_temp_title">Temperature</string>
 
 </resources>

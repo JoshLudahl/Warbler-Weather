@@ -109,10 +109,12 @@ object Conversion {
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
 
             val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
+
             var hour =
                 Instant.ofEpochSecond(addHourlyMilli + this.timezoneOffset)
                     .atZone(ZoneId.of("UTC"))
                     .hour
+
             var suffix = "AM"
             if (hour >= 12) {
                 hour %= 12
@@ -121,5 +123,21 @@ object Conversion {
             if (hour == 0) hour = 12
 
             "$hour$suffix"
+        }
+
+    val Int.toReadableHour get() =
+        Instant.ofEpochSecond(this.toLong())
+            .atZone(ZoneId.of("UTC"))
+            .hour
+
+    val Int.fromHourWithSuffix get() =
+        when {
+            this > 12 -> {
+                val hour = this % 12
+                "${hour}PM"
+            }
+            this == 12 -> "${this}PM"
+            this == 0 -> "12AM"
+            else -> "${this}AM"
         }
 }
