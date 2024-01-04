@@ -58,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:gravity="center"
+                    android:textColor="@color/colorLight"
                     android:paddingBottom="6dp"
                     android:text="@{detail.value}"
                     app:layout_constraintEnd_toEndOf="parent"
