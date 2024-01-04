@@ -11,6 +11,7 @@ import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
+import com.warbler.ui.settings.Accumulation
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.DataPref
@@ -55,6 +56,10 @@ class MainWeatherViewModel
         val speedUnit: StateFlow<Speed>
             get() = _speedUnit
 
+        private val _accumulationUnit = MutableStateFlow(Accumulation.MILLIMETERS_PER_HOUR)
+        val accumulationUnit: StateFlow<Accumulation>
+            get() = _accumulationUnit
+
         private val _weatherObject = MutableStateFlow<WeatherDataSource?>(null)
         val weatherObject: StateFlow<WeatherDataSource?>
             get() = _weatherObject
@@ -88,7 +93,6 @@ class MainWeatherViewModel
                             else -> Temperature.FAHRENHEIT
                         }
                 }
-                updateTemperatureUnitToReflectUnitChange()
             }
 
             viewModelScope.launch {
@@ -101,16 +105,18 @@ class MainWeatherViewModel
                             else -> Speed.MPH
                         }
                 }
-                updateSpeedUnitToReflectUnitChange()
             }
-        }
 
-        private fun updateTemperatureUnitToReflectUnitChange() {
-            TODO("Not yet implemented")
-        }
-
-        private fun updateSpeedUnitToReflectUnitChange() {
-            TODO("Not yet implemented")
+            viewModelScope.launch {
+                DataPref.readIntDataStoreFlow(DataPref.ACCUMULATION_UNIT, dataStore).collect {
+                    _accumulationUnit.value =
+                        when (it) {
+                            0 -> Accumulation.INCHES_PER_HOUR
+                            1 -> Accumulation.MILLIMETERS_PER_HOUR
+                            else -> Accumulation.MILLIMETERS_PER_HOUR
+                        }
+                }
+            }
         }
 
         fun updateWeatherData() {

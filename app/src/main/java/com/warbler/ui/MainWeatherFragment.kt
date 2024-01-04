@@ -344,7 +344,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     }
 
     private fun setUpHourlyRainChart(result: WeatherDataSource) {
-        val data = result.hourly.map { it.rain?.h ?: 0.0 }
+        val data = result.hourly.map { Conversion.convertOrReturnAccumulationByUnit(it.rain?.h ?: 0.0, viewModel.accumulationUnit.value) }
 
         val model =
             CartesianChartModel(

@@ -2,6 +2,7 @@ package com.warbler.data.model.weather
 
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.warbler.ui.settings.Accumulation
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.Constants
@@ -141,4 +142,14 @@ object Conversion {
             else -> "${this}AM"
         }
     val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
+
+    fun convertOrReturnAccumulationByUnit(
+        accumulation: Double,
+        unit: Accumulation,
+    ): Double {
+        return when (unit) {
+            Accumulation.MILLIMETERS_PER_HOUR -> accumulation
+            Accumulation.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
+        }
+    }
 }
