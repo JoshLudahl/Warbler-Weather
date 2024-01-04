@@ -9,7 +9,6 @@ import com.warbler.utilities.Constants
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
@@ -108,43 +107,45 @@ object Conversion {
 
     val Double.fromDoubleToPercentage get() = (this * 100).toInt()
 
-    val hour: DateTimeFormatter get() = DateTimeFormatter.ofPattern("H")
+    val WeatherDataSource.bottomAxisValueFormatter
+        get() =
+            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
 
-    val WeatherDataSource.bottomAxisValueFormatter get() =
-        AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
+                val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
 
-            val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
+                var hour =
+                    Instant.ofEpochSecond(addHourlyMilli + this.timezoneOffset)
+                        .atZone(ZoneId.of("UTC"))
+                        .hour
 
-            var hour =
-                Instant.ofEpochSecond(addHourlyMilli + this.timezoneOffset)
-                    .atZone(ZoneId.of("UTC"))
-                    .hour
+                var suffix = "AM"
+                if (hour >= 12) {
+                    hour %= 12
+                    suffix = "PM"
+                }
+                if (hour == 0) hour = 12
 
-            var suffix = "AM"
-            if (hour >= 12) {
-                hour %= 12
-                suffix = "PM"
+                "$hour$suffix"
             }
-            if (hour == 0) hour = 12
 
-            "$hour$suffix"
-        }
+    val Int.toReadableHour
+        get() =
+            Instant.ofEpochSecond(this.toLong())
+                .atZone(ZoneId.of("UTC"))
+                .hour
 
-    val Int.toReadableHour get() =
-        Instant.ofEpochSecond(this.toLong())
-            .atZone(ZoneId.of("UTC"))
-            .hour
+    val Int.fromHourWithSuffix
+        get() =
+            when {
+                this > 12 -> {
+                    val hour = this % 12
+                    "${hour}PM"
+                }
 
-    val Int.fromHourWithSuffix get() =
-        when {
-            this > 12 -> {
-                val hour = this % 12
-                "${hour}PM"
+                this == 12 -> "${this}PM"
+                this == 0 -> "12AM"
+                else -> "${this}AM"
             }
-            this == 12 -> "${this}PM"
-            this == 0 -> "12AM"
-            else -> "${this}AM"
-        }
     private val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
 
     fun convertOrReturnAccumulationByUnit(
