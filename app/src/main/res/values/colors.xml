@@ -17,6 +17,7 @@
     <color name="colorCitySearchText">@color/colorDark</color>
     <color name="colorCityListItemText">@color/colorDark</color>
     <color name="colorCityListItemBox">@color/colorYellow</color>
+    <color name="colorClickableBox">@color/clickableBox</color>
 
     <!-- Raw colors -->
     <color name="red">#EA5455</color>
@@ -25,6 +26,7 @@
     <color name="yellow">#F0A04B</color>
     <color name="colorDarkGray">#393E46</color>
     <color name="colorDark">#222831</color>
+    <color name="clickableBox">#040D12</color>
     <color name="colorYellow">#FFD369</color>
     <color name="colorLight">#EEEEEE</color>
     <color name="colorGray">#B6BBC4</color>

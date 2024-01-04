@@ -17,8 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
+        android:elevation="4dp"
         android:background="@drawable/top_rounded_rectangle"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorClickableBox"
         android:onClick="@{() -> clickListener.onClick(weather)}"
         android:padding="8dp">
 
