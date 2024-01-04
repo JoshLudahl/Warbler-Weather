@@ -54,6 +54,7 @@
     <string name="sunset">Sunset</string>
     <string name="feels_like">Feels Like</string>
     <string name="feels_like_temp">Feels like <b>%1$s</b></string>
+    <string name="temperature_formatted">%1$s<small>%2$s</small></string>
     <string name="dew_point">Dew Point</string>
     <string name="clouds">Clouds</string>
     <string name="pressure_text">Pressure</string>

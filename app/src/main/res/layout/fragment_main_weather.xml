@@ -484,7 +484,7 @@
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_rain_chart_view"
                             android:layout_width="wrap_content"
-                            android:layout_height="200dp"
+                            android:layout_height="150dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             android:padding="16dp"

@@ -6,8 +6,6 @@ import com.warbler.ui.settings.Accumulation
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.Constants
-import java.math.BigDecimal
-import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -18,18 +16,18 @@ import java.util.Locale
 import kotlin.math.ceil
 
 object Conversion {
-    val Double.toCelsiusFromKelvin: Double
+    private val Double.toCelsiusFromKelvin: Double
         get() = (this - 273.15)
 
-    val Double.toFahrenheitFromKelvin: Double
+    private val Double.toFahrenheitFromKelvin: Double
         get() = (this - 273.15) * 9 / 5 + 32
 
-    val Double.roundToUpperInt: Int
+    private val Double.roundToUpperInt: Int
         get() = ceil(this).toInt()
 
-    val Double.metersPerSecondToMilesPerHour: Double
+    private val Double.metersPerSecondToMilesPerHour: Double
         get() = this * 2.23694
-    val Double.metersPerSecondToKilometersPerHour: Double
+    private val Double.metersPerSecondToKilometersPerHour: Double
         get() = this * 18 / 5
 
     fun formatSpeedUnitsWithUnits(
@@ -46,12 +44,20 @@ object Conversion {
     val Int.toDegrees
         get() = "$this°"
 
+    val Temperature.temperatureSymbol
+        get() =
+            when (this) {
+                Temperature.CELSIUS -> "c"
+                Temperature.FAHRENHEIT -> "f"
+                Temperature.KELVIN -> "k"
+            }
+
     val String.capitalizeEachFirst
         get() =
             this.split(" ")
                 .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 
-    val currentDate
+    val currentDate: String
         get() = SimpleDateFormat("EEEE, MMMM dd", Locale.getDefault()).format(Date())
 
     fun getDatOfWeekFromUnixUTC(unixUTC: Long): String {
@@ -104,8 +110,6 @@ object Conversion {
 
     val hour: DateTimeFormatter get() = DateTimeFormatter.ofPattern("H")
 
-    val Double.decimal get() = BigDecimal(this).setScale(2, RoundingMode.HALF_EVEN)
-
     val WeatherDataSource.bottomAxisValueFormatter get() =
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
 
@@ -141,7 +145,7 @@ object Conversion {
             this == 0 -> "12AM"
             else -> "${this}AM"
         }
-    val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
+    private val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
 
     fun convertOrReturnAccumulationByUnit(
         accumulation: Double,
