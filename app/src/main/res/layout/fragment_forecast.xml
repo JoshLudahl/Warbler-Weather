@@ -10,6 +10,9 @@
             name="viewModel"
             type="com.warbler.ui.forecast.ForecastViewModel" />
 
+        <variable
+            name="forecast"
+            type="com.warbler.data.model.weather.Forecast" />
     </data>
 
     <ScrollView
