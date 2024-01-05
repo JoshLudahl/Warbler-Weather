@@ -216,7 +216,7 @@
 
     <style name="chart_bottom_line_axis_style" parent="chart_bottom_axis_style">
         <item name="axisLabelStyle">@style/axis_bottom_label_style</item>
-
+        <item name="title">@string/chart_humidity_title</item>
     </style>
 
     <style name="axis_bottom_label_style">
@@ -239,6 +239,12 @@
         <item name="title">@string/chart_wind_title</item>
     </style>
 
-    <string name="chart_uvi_title">UV Index</string>
-    <string name="chart_wind_title">Wind Speed</string>
+    <style name="chart_line_start_axis_style_humidity" parent="chart_column_style">
+        <item name="title">@string/chart_humidity_title</item>
+    </style>
+
+    <style name="chart_top_axis_style_humidity" parent="chart_column_style">
+        <item name="title">@string/chart_humidity_title</item>
+    </style>
+
 </resources>

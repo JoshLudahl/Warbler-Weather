@@ -77,6 +77,7 @@
     <string name="settings_accumulation">Accumulation</string>
     <string name="millimeters_per_hour">Millimeters Per hour</string>
     <string name="inches_per_hour">Inches Per Hour</string>
-
-
+    <string name="chart_humidity_title">Humidity %</string>
+    <string name="chart_uvi_title">UV Index</string>
+    <string name="chart_wind_title">Wind Speed</string>
 </resources>

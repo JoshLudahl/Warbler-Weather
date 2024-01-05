@@ -311,6 +311,30 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             setUpHourlyTemperatureChart(result, value)
             setupHourlyUviChart(result)
             setupHourlyWindChart(result, viewModel?.speedUnit?.value ?: Speed.MPS)
+            setUpHourlyHumidityChart(result)
+        }
+    }
+
+    private fun setUpHourlyHumidityChart(result: WeatherDataSource) {
+        val data =
+            result.hourly.map {
+                it.humidity.toInt()
+            }
+
+        val model =
+            CartesianChartModel(
+                LineCartesianLayerModel
+                    .build { series(data) },
+            )
+
+        with(binding.hourlyHumidityChartView) {
+            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = result.bottomAxisValueFormatter
+
+            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+
+            setModel(model)
         }
     }
 

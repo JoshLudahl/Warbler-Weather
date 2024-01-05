@@ -22,4 +22,6 @@
     <dimen name="weather_details_expanded_icon_size">32dp</dimen>
     <dimen name="error_icon_size">64dp</dimen>
     <dimen name="error_text_size">24sp</dimen>
+    <dimen name="default_chart_height">150dp</dimen>
+    <dimen name="tall_chart_height">200dp</dimen>
 </resources>
