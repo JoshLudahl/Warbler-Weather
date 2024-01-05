@@ -14,379 +14,384 @@
             type="com.warbler.ui.settings.SettingsViewModel" />
     </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.settings.SettingsFragment">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/back_icon"
-                android:layout_width="@dimen/default_icon_size"
-                android:layout_height="@dimen/default_icon_size"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_round_arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/location_title_text"
-                style="@style/title_style"
-                android:text="@string/settings"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="@+id/back_icon"
-                app:layout_constraintStart_toEndOf="@+id/back_icon"
-                app:layout_constraintTop_toTopOf="@+id/back_icon"
-                tools:text="Settings" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/settings_units_of_measurement_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/back_icon">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_heading_text"
-                    style="@style/settings_heading_style"
-                    android:text="@string/settings_units_of_measurement"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Units of Measurement" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_temperature_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/settings_temperature"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_heading_text"
-                    tools:text="Temperature" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_celsius_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/settings_celsius"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_temperature_text"
-                    tools:text="Celsius" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_fahrenheit_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/settings_fahrenheit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_celsius_text"
-                    tools:text="Fahrenheit" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_kelvin_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/settings_kelvin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_fahrenheit_text"
-                    tools:text="Kelvin" />
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kelvin_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:checkedButton="@{viewModel.temperatureUnit}"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_celsius_text">
-
-                    <RadioButton
-                        android:id="@+id/radio_celsius"
-                        android:layout_width="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:layout_height="@dimen/radio_size"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent"
-                        android:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/radio_fahrenheit"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
-                        android:animateLayoutChanges="true"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent" />
-
-                    <RadioButton
-                        android:id="@+id/radio_kelvin"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent" />
-
-                </RadioGroup>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_speed_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/settings_speed"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kelvin_text"
-                    tools:text="Speed" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_mph_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/miles_per_hour"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_speed_text"
-                    tools:text="Miles Per Hour" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_mps_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/meters_per_second"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mph_text"
-                    tools:text="Meters Per Second" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_kph_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/kilometers_per_hour"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mps_text"
-                    tools:text="Kilometers Per hour" />
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:checkedButton="@{viewModel.speedUnit}"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kph_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mph_text">
-
-                    <RadioButton
-                        android:id="@+id/radio_mph"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent"
-                        android:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/radio_mps"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent" />
-
-                    <RadioButton
-                        android:id="@+id/radio_kph"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent" />
-
-                </RadioGroup>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_accumulation_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/settings_accumulation"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kph_text"
-                    tools:text="Accumulation" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_mmph_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/millimeters_per_hour"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_accumulation_text"
-                    tools:text="Millimeters Per hour" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_option_inph_text"
-                    style="@style/settings_subheading_option_style"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="@string/inches_per_hour"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mmph_text"
-                    tools:text="Inches Per hour" />
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:checkedButton="@{viewModel.accumulationUnit}"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_inph_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mmph_text">
-
-                    <RadioButton
-                        android:id="@+id/radio_mmph"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent"
-                        android:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/radio_inph"
-                        android:layout_width="@dimen/radio_size"
-                        android:layout_height="@dimen/radio_size"
-                        android:animateLayoutChanges="true"
-                        android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}"
-                        android:background="@drawable/custom_radio"
-                        android:button="@android:color/transparent" />
-
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/settings_units_of_measurement_layout">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_about_heading_text"
-                    style="@style/settings_heading_style"
-                    android:text="@string/settings_about_heading"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="About" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_about_this_app_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/settings_about_this_app"
-                    app:layout_constraintEnd_toStartOf="@+id/about_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_about_heading_text"
-                    tools:text="About Weatheruous" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/settings_subheading_privacy_policy_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/settings_privacy_policy_text"
-                    app:layout_constraintEnd_toStartOf="@+id/privacy_policy_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_about_this_app_text"
-                    tools:text="Privacy Policy" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/about_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_about_this_app_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_about_this_app_text"
-                    app:srcCompat="@drawable/ic_round_open_in_browser" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/privacy_policy_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_privacy_policy_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/settings_subheading_privacy_policy_text"
-                    app:srcCompat="@drawable/ic_round_open_in_browser" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/yellow_rumped_warbler_text"
-                    style="@style/settings_subheading_style"
-                    android:text="@string/yellow_rumped_warbler"
-                    app:layout_constraintEnd_toStartOf="@+id/yellow_rumped_warbler_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_subheading_privacy_policy_text"
-                    tools:text="Yellow-rumped Warbler" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/yellow_rumped_warbler_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/yellow_rumped_warbler_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/yellow_rumped_warbler_text"
-                    app:srcCompat="@drawable/ic_round_open_in_browser" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/version_layout"
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/version_layout_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@{viewModel.appVersion}"
-                    android:paddingBottom="32dp"
-                    tools:text="Version 2.1" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <include
+                    android:id="@+id/action_bar_include"
+                    layout="@layout/app_bar" />
 
+            </androidx.appcompat.widget.Toolbar>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            tools:context=".ui.settings.SettingsFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_units_of_measurement_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_heading_text"
+                        style="@style/settings_heading_style"
+                        android:text="@string/settings_units_of_measurement"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Units of Measurement" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_temperature_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/settings_temperature"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_heading_text"
+                        tools:text="Temperature" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_celsius_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/settings_celsius"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_temperature_text"
+                        tools:text="Celsius" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_fahrenheit_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/settings_fahrenheit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_celsius_text"
+                        tools:text="Fahrenheit" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_kelvin_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/settings_kelvin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_fahrenheit_text"
+                        tools:text="Kelvin" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:checkedButton="@{viewModel.temperatureUnit}"
+                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kelvin_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_celsius_text">
+
+                        <RadioButton
+                            android:id="@+id/radio_celsius"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}" />
+
+                        <RadioButton
+                            android:id="@+id/radio_fahrenheit"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}" />
+
+                        <RadioButton
+                            android:id="@+id/radio_kelvin"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:onClick="@{(view) -> viewModel.handleTemperatureRadioClick(view.id)}" />
+
+                    </RadioGroup>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_speed_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/settings_speed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kelvin_text"
+                        tools:text="Speed" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_mph_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/miles_per_hour"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_speed_text"
+                        tools:text="Miles Per Hour" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_mps_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/meters_per_second"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mph_text"
+                        tools:text="Meters Per Second" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_kph_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/kilometers_per_hour"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mps_text"
+                        tools:text="Kilometers Per hour" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:checkedButton="@{viewModel.speedUnit}"
+                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_kph_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mph_text">
+
+                        <RadioButton
+                            android:id="@+id/radio_mph"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}" />
+
+                        <RadioButton
+                            android:id="@+id/radio_mps"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}" />
+
+                        <RadioButton
+                            android:id="@+id/radio_kph"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:onClick="@{(view) -> viewModel.handleSpeedRadioClick(view.id)}" />
+
+                    </RadioGroup>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_accumulation_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/settings_accumulation"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_kph_text"
+                        tools:text="Accumulation" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_mmph_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/millimeters_per_hour"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_accumulation_text"
+                        tools:text="Millimeters Per hour" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_option_inph_text"
+                        style="@style/settings_subheading_option_style"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/inches_per_hour"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_option_mmph_text"
+                        tools:text="Inches Per hour" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:checkedButton="@{viewModel.accumulationUnit}"
+                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_option_inph_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_option_mmph_text">
+
+                        <RadioButton
+                            android:id="@+id/radio_mmph"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}" />
+
+                        <RadioButton
+                            android:id="@+id/radio_inph"
+                            android:layout_width="@dimen/radio_size"
+                            android:layout_height="@dimen/radio_size"
+                            android:animateLayoutChanges="true"
+                            android:background="@drawable/custom_radio"
+                            android:button="@android:color/transparent"
+                            android:onClick="@{(view) -> viewModel.handleAccumulationClick(view.id)}" />
+
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_units_of_measurement_layout">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_about_heading_text"
+                        style="@style/settings_heading_style"
+                        android:text="@string/settings_about_heading"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="About" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_about_this_app_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/settings_about_this_app"
+                        app:layout_constraintEnd_toStartOf="@+id/about_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_about_heading_text"
+                        tools:text="About Weatheruous" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settings_subheading_privacy_policy_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/settings_privacy_policy_text"
+                        app:layout_constraintEnd_toStartOf="@+id/privacy_policy_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_about_this_app_text"
+                        tools:text="Privacy Policy" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/about_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_about_this_app_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_about_this_app_text"
+                        app:srcCompat="@drawable/ic_round_open_in_browser" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/privacy_policy_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_privacy_policy_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_privacy_policy_text"
+                        app:srcCompat="@drawable/ic_round_open_in_browser" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/yellow_rumped_warbler_text"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/yellow_rumped_warbler"
+                        app:layout_constraintEnd_toStartOf="@+id/yellow_rumped_warbler_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_privacy_policy_text"
+                        tools:text="Yellow-rumped Warbler" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/yellow_rumped_warbler_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/yellow_rumped_warbler_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/yellow_rumped_warbler_text"
+                        app:srcCompat="@drawable/ic_round_open_in_browser" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/version_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/version_layout_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="32dp"
+                        android:text="@{viewModel.appVersion}"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Version 2.1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 </layout>

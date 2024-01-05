@@ -80,4 +80,5 @@
     <string name="chart_humidity_title">Humidity %</string>
     <string name="chart_uvi_title">UV Index</string>
     <string name="chart_wind_title">Wind Speed</string>
+    <string name="back_arrow_icon_content_description">Back button icon</string>
 </resources>

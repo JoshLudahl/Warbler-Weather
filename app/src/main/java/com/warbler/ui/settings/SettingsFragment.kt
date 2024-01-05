@@ -29,10 +29,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupListeners()
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        binding.actionBarInclude.actionBarTitle.text = getString(R.string.settings)
     }
 
     private fun setupListeners() {
-        binding.backIcon.setOnClickListener { view ->
+
+        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
             view.findNavController().navigateUp()
         }
 
