@@ -33,6 +33,7 @@ import com.warbler.data.model.weather.WeatherDetailItem
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
+import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Constants
@@ -308,6 +309,55 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
             setUpHourlyRainChart(result)
             setUpHourlyTemperatureChart(result, value)
+            setupHourlyUviChart(result)
+            setupHourlyWindChart(result, viewModel?.speedUnit?.value ?: Speed.MPS)
+        }
+    }
+
+    private fun setupHourlyWindChart(
+        result: WeatherDataSource,
+        value: Speed,
+    ) {
+        val data =
+            result.hourly.map {
+                Conversion.formatSpeedUnitsWithUnits(it.windSpeed, value).toInt()
+            }
+
+        val model =
+            CartesianChartModel(
+                LineCartesianLayerModel
+                    .build { series(data) },
+            )
+
+        with(binding.hourlyWindChartView) {
+            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = result.bottomAxisValueFormatter
+
+            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+
+            setModel(model)
+        }
+    }
+
+    private fun setupHourlyUviChart(result: WeatherDataSource) {
+        val data =
+            result.hourly.map { it.uvi }
+
+        val model =
+            CartesianChartModel(
+                LineCartesianLayerModel
+                    .build { series(data) },
+            )
+
+        with(binding.hourlyUviChartView) {
+            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                .valueFormatter = result.bottomAxisValueFormatter
+
+            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+
+            setModel(model)
         }
     }
 

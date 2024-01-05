@@ -29,7 +29,7 @@ object Conversion {
     private val Double.metersPerSecondToKilometersPerHour: Double
         get() = this * 18 / 5
 
-    fun formatSpeedUnitsWithUnits(
+    fun formatSpeedUnitsWithUnitsToString(
         value: Double,
         speed: Speed,
     ): String {
@@ -37,6 +37,17 @@ object Conversion {
             Speed.MPS -> "$value m/s"
             Speed.KPH -> "${value.metersPerSecondToKilometersPerHour.roundToUpperInt} KMH"
             Speed.MPH -> "${value.metersPerSecondToMilesPerHour.roundToUpperInt} MPH"
+        }
+    }
+
+    fun formatSpeedUnitsWithUnits(
+        value: Double,
+        speed: Speed,
+    ): Double {
+        return when (speed) {
+            Speed.MPS -> value
+            Speed.KPH -> value.metersPerSecondToKilometersPerHour
+            Speed.MPH -> value.metersPerSecondToMilesPerHour
         }
     }
 

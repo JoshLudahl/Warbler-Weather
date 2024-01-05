@@ -170,8 +170,8 @@
 
     <style name="chart_line_start_axis_style" parent="chart_column_style">
         <item name="title">@string/chart_temp_title</item>
-
     </style>
+
     <style name="chart_column_axis_line_style">
         <item name="column1">@style/chart_line_style</item>
         <item name="labelColor">@color/colorWeatherGrid</item>
@@ -206,8 +206,12 @@
         <item name="dataLabelStyle">@style/data_label_style</item>
     </style>
 
-    <style name="Chart1LineLayerStyle">
+    <style name="chart_line_layer_style">
         <item name="line1Spec">@style/chart_line_axis_style</item>
+    </style>
+
+    <style name="chart_line_layer_style_without_labels">
+        <item name="line1Spec">@style/chart_line_axis_style_secondary</item>
     </style>
 
     <style name="chart_bottom_line_axis_style" parent="chart_bottom_axis_style">
@@ -223,4 +227,18 @@
         <item name="labelColor">@color/colorGray</item>
     </style>
 
+    <style name="chart_line_axis_style_secondary" parent="chart_line_axis_style">
+        <item name="showDataLabels">false</item>
+    </style>
+
+    <style name="chart_line_start_axis_style_uvi" parent="chart_column_style">
+        <item name="title">@string/chart_uvi_title</item>
+    </style>
+
+    <style name="chart_line_start_axis_style_wind" parent="chart_column_style">
+        <item name="title">@string/chart_wind_title</item>
+    </style>
+
+    <string name="chart_uvi_title">UV Index</string>
+    <string name="chart_wind_title">Wind Speed</string>
 </resources>

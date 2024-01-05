@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.warbler.R
 import com.warbler.data.model.weather.Conversion
-import com.warbler.data.model.weather.Conversion.formatSpeedUnitsWithUnits
+import com.warbler.data.model.weather.Conversion.formatSpeedUnitsWithUnitsToString
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Daily
@@ -149,7 +149,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_strong_wind,
                 value =
-                    formatSpeedUnitsWithUnits(
+                    formatSpeedUnitsWithUnitsToString(
                         value = daily.windSpeed ?: 0.00,
                         speed = viewModel.forecast.speed,
                     ),
