@@ -40,7 +40,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="@dimen/default_toolbar_height"
             tools:context=".ui.settings.SettingsFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -24,4 +24,5 @@
     <dimen name="error_text_size">24sp</dimen>
     <dimen name="default_chart_height">150dp</dimen>
     <dimen name="tall_chart_height">200dp</dimen>
+    <dimen name="default_toolbar_height">72dp</dimen>
 </resources>

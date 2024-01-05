@@ -225,11 +225,11 @@
                             android:id="@+id/feels_like"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="@android:color/transparent"
+                            android:text="@string/mdash"
+                            android:textColor="@color/colorGray"
                             app:layout_constraintStart_toStartOf="@+id/current_temperature"
                             app:layout_constraintTop_toBottomOf="@+id/current_temperature"
-                            android:backgroundTint="@android:color/transparent"
-                            android:textColor="@color/colorGray"
-                            android:text="@string/mdash"
                             tools:text="Feels Like" />
 
                         <ImageView
@@ -446,8 +446,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -487,96 +485,97 @@
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:padding="16dp"
+                            app:bottomAxisStyle="@style/chart_bottom_axis_style"
+                            app:columnLayerStyle="@style/chart_column_axis_line_style"
+                            app:layers="column"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_recycler_view"
-                            app:layers="column"
-                            app:columnLayerStyle="@style/chart_column_axis_line_style"
-                            app:startAxisStyle="@style/chart_column_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
-                            app:bottomAxisStyle="@style/chart_bottom_axis_style"
-                            />
+                            app:startAxisStyle="@style/chart_column_style" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_temperature_chart_view"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/tall_chart_height"
                             android:layout_marginTop="8dp"
-                            android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:padding="16dp"
+                            app:axisStyle="@style/chart_line_axis_style"
+                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            app:layers="line"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_rain_chart_view"
-                            app:layers="line"
-                            app:axisStyle="@style/chart_line_axis_style"
-                            app:startAxisStyle="@style/chart_line_start_axis_style"
                             app:lineLayerStyle="@style/chart_line_layer_style"
-                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:showBottomAxis="true"
-                            app:showStartAxis="true" />
+                            app:showStartAxis="true"
+                            app:startAxisStyle="@style/chart_line_start_axis_style" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_uvi_chart_view"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
-                            android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:padding="16dp"
+                            app:axisStyle="@style/chart_line_axis_style"
+                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            app:layers="line"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_temperature_chart_view"
-                            app:layers="line"
-                            app:axisStyle="@style/chart_line_axis_style"
-                            app:startAxisStyle="@style/chart_line_start_axis_style_uvi"
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
-                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:showBottomAxis="true"
-                            app:showStartAxis="true" />
+                            app:showStartAxis="true"
+                            app:startAxisStyle="@style/chart_line_start_axis_style_uvi" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_wind_chart_view"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
-                            android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:padding="16dp"
+                            app:axisStyle="@style/chart_line_axis_style"
+                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            app:layers="line"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_uvi_chart_view"
-                            app:layers="line"
-                            app:axisStyle="@style/chart_line_axis_style"
-                            app:startAxisStyle="@style/chart_line_start_axis_style_wind"
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
-                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:showBottomAxis="true"
-                            app:showStartAxis="true" />
+                            app:showStartAxis="true"
+                            app:startAxisStyle="@style/chart_line_start_axis_style_wind" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_humidity_chart_view"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
-                            android:padding="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:padding="16dp"
+                            app:axisStyle="@style/chart_line_axis_style"
+                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            app:layers="line"
+                            android:layout_marginBottom="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_wind_chart_view"
-                            app:layers="line"
-                            app:axisStyle="@style/chart_line_axis_style"
-                            app:topAxisStyle="@style/chart_top_axis_style_humidity"
-                            app:startAxisStyle="@style/chart_line_start_axis_style_humidity"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
-                            app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:showBottomAxis="true"
-                            app:showStartAxis="true" />
+                            app:showStartAxis="true"
+                            app:startAxisStyle="@style/chart_line_start_axis_style_humidity"
+                            app:topAxisStyle="@style/chart_top_axis_style_humidity" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
