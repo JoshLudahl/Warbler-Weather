@@ -31,4 +31,5 @@
     <color name="colorLight">#EEEEEE</color>
     <color name="colorGray">#B6BBC4</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

@@ -150,12 +150,17 @@
     </style>
 
     <style name="chart_line_style">
-        <item name="color">@color/colorWeatherGrid</item>
+        <item name="color">@color/low</item>
+    </style>
+
+    <style name="chart_line_style_two">
+        <item name="color">@color/colorWhite</item>
     </style>
 
     <style name="chart_style">
         <item name="line1Spec">@style/chart_line_style</item>
         <item name="column1">@style/chart_line_style</item>
+        <item name="column2">@style/chart_line_style_two</item>
     </style>
 
     <style name="chart_column_style">

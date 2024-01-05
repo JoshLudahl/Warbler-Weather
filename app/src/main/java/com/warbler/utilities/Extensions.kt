@@ -16,3 +16,17 @@ inline fun <reified R : Any> String.convertToDataClass(): R {
     val json = Json { ignoreUnknownKeys = true }
     return json.decodeFromString(this)
 }
+
+fun areNonZeroValuesFound(values: List<Double>): Boolean {
+    values.forEach { value ->
+        if (value != 0.0) return true
+    }
+    return false
+}
+
+fun doesAnyListContainValues(list: List<List<Double>>): Boolean {
+    list.forEach { item ->
+        if (areNonZeroValuesFound(item)) return true
+    }
+    return false
+}

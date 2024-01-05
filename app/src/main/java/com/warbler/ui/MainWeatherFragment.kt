@@ -38,6 +38,8 @@ import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Constants
 import com.warbler.utilities.Resource
+import com.warbler.utilities.areNonZeroValuesFound
+import com.warbler.utilities.doesAnyListContainValues
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -300,6 +302,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
             uvIndexValue.text = result.current.uvi.toString()
 
+            binding.noDataInclude.title.text = getString(R.string.precipitation)
+            binding.noDataInclude.message.text = getString(R.string.no_rain_in_forecast)
+
             val humidityString =
                 String.format(
                     getString(R.string.percent),
@@ -335,6 +340,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
             setModel(model)
+            visibility = View.VISIBLE
         }
     }
 
@@ -361,6 +367,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
             setModel(model)
+            visibility = View.VISIBLE
         }
     }
 
@@ -382,6 +389,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
             setModel(model)
+            visibility = View.VISIBLE
         }
     }
 
@@ -422,11 +430,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 valueOverrider
 
             setModel(model)
+            visibility = View.VISIBLE
         }
     }
 
     private fun setUpHourlyRainChart(result: WeatherDataSource) {
-        val data =
+        val hourlyRainFall =
             result.hourly.map {
                 Conversion.convertOrReturnAccumulationByUnit(
                     it.rain?.h ?: 0.0,
@@ -434,20 +443,38 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 )
             }
 
-        val model =
-            CartesianChartModel(
-                ColumnCartesianLayerModel
-                    .build { series(data) },
-            )
+        val hourlySnowFall =
+            result.hourly.map {
+                Conversion.convertOrReturnAccumulationByUnit(
+                    it.snow?.h ?: 0.0,
+                    viewModel.accumulationUnit.value,
+                )
+            }
 
-        with(binding.hourlyRainChartView) {
-            (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
-                .valueFormatter = result.bottomAxisValueFormatter
+        val list = listOf(hourlyRainFall, hourlySnowFall)
 
-            (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
-                .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+        if (doesAnyListContainValues(list)) {
+            binding.noDataInclude.root.visibility = View.GONE
+            val model =
+                CartesianChartModel(
+                    ColumnCartesianLayerModel
+                        .build {
+                            list.forEach {
+                                if (areNonZeroValuesFound(it)) series(it)
+                            }
+                        },
+                )
 
-            setModel(model)
+            with(binding.hourlyRainChartView) {
+                (chart?.bottomAxis as HorizontalAxis<AxisPosition.Horizontal.Bottom>)
+                    .valueFormatter = result.bottomAxisValueFormatter
+
+                (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
+                    .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+
+                setModel(model)
+                visibility = View.VISIBLE
+            }
         }
     }
 

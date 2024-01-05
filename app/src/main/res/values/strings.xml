@@ -81,4 +81,6 @@
     <string name="chart_uvi_title">UV Index</string>
     <string name="chart_wind_title">Wind Speed</string>
     <string name="back_arrow_icon_content_description">Back button icon</string>
+    <string name="no_rain_in_forecast">No precipitation in the forecast for the next 48 hours.</string>
+    <string name="precipitation">Precipitation</string>
 </resources>

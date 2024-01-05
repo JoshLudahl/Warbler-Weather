@@ -479,37 +479,55 @@
                             app:layout_constraintTop_toBottomOf="@id/hourly_label"
                             tools:listitem="@layout/hourly_forecast_list_item" />
 
-                        <com.patrykandpatrick.vico.views.chart.CartesianChartView
-                            android:id="@+id/hourly_rain_chart_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/default_chart_height"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/rain_layout"
+                            android:layout_width="match_parent"
                             android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/top_rounded_rectangle"
-                            android:padding="16dp"
-                            app:bottomAxisStyle="@style/chart_bottom_axis_style"
-                            app:columnLayerStyle="@style/chart_column_axis_line_style"
-                            app:layers="column"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/hourly_recycler_view"
-                            app:showBottomAxis="true"
-                            app:showStartAxis="true"
-                            app:startAxisStyle="@style/chart_column_style" />
+                            app:layout_constraintTop_toBottomOf="@+id/hourly_recycler_view">
+
+                            <include
+                                android:id="@+id/no_data_include"
+                                layout="@layout/no_chart_data"
+                                android:visibility="visible"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.patrykandpatrick.vico.views.chart.CartesianChartView
+                                android:id="@+id/hourly_rain_chart_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/default_chart_height"
+                                android:background="@drawable/top_rounded_rectangle"
+                                android:visibility="gone"
+                                android:padding="16dp"
+                                app:bottomAxisStyle="@style/chart_bottom_axis_style"
+                                app:columnLayerStyle="@style/chart_column_axis_line_style"
+                                app:layers="column"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:showBottomAxis="true"
+                                app:showStartAxis="true"
+                                app:startAxisStyle="@style/chart_column_style" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_temperature_chart_view"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/tall_chart_height"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"
                             android:padding="16dp"
+                            android:layout_marginRight="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:layers="line"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/hourly_rain_chart_view"
+                            app:layout_constraintTop_toBottomOf="@+id/rain_layout"
                             app:lineLayerStyle="@style/chart_line_layer_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
@@ -517,8 +535,9 @@
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_uvi_chart_view"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/default_chart_height"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"
                             android:padding="16dp"
@@ -535,13 +554,14 @@
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_wind_chart_view"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"
                             android:padding="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
+                            android:layout_marginRight="16dp"
                             app:layers="line"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -553,8 +573,9 @@
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_humidity_chart_view"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/default_chart_height"
+                            android:layout_marginRight="16dp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"
                             android:padding="16dp"
