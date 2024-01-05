@@ -28,4 +28,15 @@
         app:layout_constraintTop_toTopOf="@+id/back_arrow_icon"
         tools:text="TITLE" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/right_icon"
+        android:layout_width="@dimen/default_icon_size"
+        android:layout_height="@dimen/default_icon_size"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_round_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

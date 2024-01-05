@@ -10,44 +10,29 @@
             type="com.warbler.ui.location.LocationViewModel" />
     </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.settings.SettingsFragment">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+        <include
+            android:id="@+id/action_bar_include"
+            layout="@layout/app_bar" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/back_icon"
-                android:layout_width="@dimen/default_icon_size"
-                android:layout_height="@dimen/default_icon_size"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_round_arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/location_title_text"
-                style="@style/title_style"
-                android:text="@string/locations"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="@+id/back_icon"
-                app:layout_constraintStart_toEndOf="@+id/back_icon"
-                app:layout_constraintTop_toTopOf="@+id/back_icon"
-                tools:text="Locations" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        tools:context=".ui.settings.SettingsFragment">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/add_location"
-                android:layout_width="@dimen/default_icon_size"
-                android:layout_height="@dimen/default_icon_size"
-                android:layout_marginEnd="32dp"
-                android:src="@drawable/ic_round_add"
-                app:layout_constraintBottom_toBottomOf="@+id/location_title_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/location_title_text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/search_bar_layout_container"
@@ -100,14 +85,15 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/location_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintTop_toBottomOf="@+id/location_title_text"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/location_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 </layout>

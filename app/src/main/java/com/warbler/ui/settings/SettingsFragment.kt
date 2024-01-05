@@ -37,7 +37,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun setupListeners() {
-
         binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
             view.findNavController().navigateUp()
         }

@@ -64,6 +64,12 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         setUpListeners()
         setUpObservers()
         setUpRecyclerView()
+        setUpAppBar()
+    }
+
+    private fun setUpAppBar() {
+        binding.actionBarInclude.actionBarTitle.text = getString(R.string.locations)
+        binding.actionBarInclude.rightIcon.visibility = View.VISIBLE
     }
 
     private fun setUpObservers() {
@@ -129,13 +135,14 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     }
 
     private fun setUpListeners() {
-        binding.backIcon.setOnClickListener { view ->
+        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
             view.findNavController().navigateUp()
         }
 
-        binding.addLocation.setOnClickListener {
+        binding.actionBarInclude.rightIcon.setOnClickListener {
             listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
                 .forEach { it.visibility = View.VISIBLE }
+            binding.locationRecyclerView.visibility = View.GONE
             binding.searchBarEditText.requestFocus()
             toggleKeyboardVisibility(binding.searchBarEditText)
         }
