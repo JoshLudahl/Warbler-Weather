@@ -14,7 +14,6 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/temperature_hi_text"
-            style="@style/font_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
@@ -33,7 +32,6 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/temperature_low_text"
-            style="@style/font_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"

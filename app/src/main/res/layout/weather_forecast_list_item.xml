@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/dashed_background"
             android:text="@{weather.dayOfWeek}"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"

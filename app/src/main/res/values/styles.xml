@@ -9,10 +9,6 @@
 
     <style name="large_font_size">36sp</style>
 
-    <style name="font_family">
-
-    </style>
-
     <style name="title_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -164,7 +160,7 @@
     </style>
 
     <style name="chart_column_style">
-        <item name="title">@string/chart_rain_title</item>
+        <item name="title">@string/precipitation</item>
         <item name="titleStyle">@style/chart_title_style</item>
         <item name="showTitle">true</item>
         <item name="titleTextColor">@color/colorWeatherGrid</item>

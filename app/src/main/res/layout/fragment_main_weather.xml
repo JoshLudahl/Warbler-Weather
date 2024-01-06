@@ -143,7 +143,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/currently_label"
-                        style="@style/font_family"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -172,14 +171,18 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/date_title"
-                            style="@style/font_family"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:backgroundTint="@android:color/transparent"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:background="@drawable/search_bg"
+                            android:backgroundTint="@color/colorYellow"
                             android:text="@{viewModel.dateTitle}"
                             android:textAlignment="center"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/date_title_text_size"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +209,6 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/current_temperature"
-                            style="@style/font_family"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -227,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@android:color/transparent"
                             android:text="@string/mdash"
-                            android:textColor="@color/colorGray"
+                            android:textColor="@color/colorSecondary"
                             app:layout_constraintStart_toStartOf="@+id/current_temperature"
                             app:layout_constraintTop_toBottomOf="@+id/current_temperature"
                             tools:text="Feels Like" />
@@ -250,7 +252,6 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/weather_description"
-                            style="@style/font_family"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -414,7 +415,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/forecast_label"
-                        style="@style/font_family"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -454,7 +454,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/hourly_label"
-                            style="@style/font_family"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -499,7 +498,7 @@
                             <com.patrykandpatrick.vico.views.chart.CartesianChartView
                                 android:id="@+id/hourly_rain_chart_view"
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/default_chart_height"
+                                android:layout_height="@dimen/tall_chart_height"
                                 android:background="@drawable/top_rounded_rectangle"
                                 android:visibility="gone"
                                 android:padding="16dp"
