@@ -101,7 +101,7 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="32dp"
                         android:contentDescription="@string/location_icon_description"
-                        android:src="@drawable/ic_round_location_on"
+                        android:src="@drawable/ic_home_pin"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/colorIconsDisabled" />

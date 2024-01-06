@@ -80,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_round_location_on"
+            app:srcCompat="@drawable/ic_home_pin"
             android:background="@android:color/transparent"
             android:contentDescription="@string/current_location"
             app:tint="@color/colorAccent" />
