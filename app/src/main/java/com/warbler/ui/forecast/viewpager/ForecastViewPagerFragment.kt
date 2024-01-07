@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ForecastViewPagerFragment : Fragment(R.layout.fragment_forecast_viewpager) {
     private var _binding: FragmentForecastViewpagerBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ForeCastViewPagerViewModel by viewModels()
+    private val viewModel: ForecastViewPagerViewModel by viewModels()
 
     private lateinit var adapter: ViewPagerAdapter
 

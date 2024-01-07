@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.warbler.ui.forecast.viewpager.ForeCastViewPagerViewModel" />
+            type="com.warbler.ui.forecast.viewpager.ForecastViewPagerViewModel" />
 
         <variable
             name="forecast"
