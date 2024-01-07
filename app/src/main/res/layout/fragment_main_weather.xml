@@ -95,13 +95,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/location_icon"
+                        android:id="@+id/current_location_icon"
                         android:layout_width="@dimen/default_icon_size"
                         android:layout_height="@dimen/default_icon_size"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="32dp"
                         android:contentDescription="@string/location_icon_description"
-                        android:src="@drawable/ic_home_pin"
+                        android:src="@drawable/ic_my_location"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/colorIconsDisabled" />
@@ -112,11 +112,11 @@
                         android:layout_marginStart="16dp"
                         android:text="@{viewModel.currentLocation.name}"
                         app:layout_constrainedWidth="true"
-                        app:layout_constraintBottom_toBottomOf="@+id/location_icon"
+                        app:layout_constraintBottom_toBottomOf="@+id/current_location_icon"
                         app:layout_constraintEnd_toStartOf="@+id/search_icon"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/location_icon"
-                        app:layout_constraintTop_toTopOf="@+id/location_icon"
+                        app:layout_constraintStart_toEndOf="@+id/current_location_icon"
+                        app:layout_constraintTop_toTopOf="@+id/current_location_icon"
                         tools:text="Location, OR" />
 
                     <ImageView
@@ -153,7 +153,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/location_icon" />
+                        app:layout_constraintTop_toBottomOf="@+id/current_location_icon" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
@@ -174,15 +174,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
                             android:background="@drawable/search_bg"
-                            android:backgroundTint="@color/colorYellow"
+                            android:backgroundTint="@color/blue"
                             android:text="@{viewModel.dateTitle}"
                             android:textAlignment="center"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorWhite"
                             android:textSize="@dimen/date_title_text_size"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -536,7 +536,7 @@
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_uvi_chart_view"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/default_chart_height"
+                            android:layout_height="@dimen/small_chart_height"
                             android:layout_marginEnd="16dp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"
@@ -566,7 +566,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_uvi_chart_view"
-                            app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
+                            app:lineLayerStyle="@style/chart_line_layer_style_without_labels_wind"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
                             app:startAxisStyle="@style/chart_line_start_axis_style_wind" />
@@ -574,7 +574,7 @@
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_humidity_chart_view"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/default_chart_height"
+                            android:layout_height="@dimen/small_chart_height"
                             android:layout_marginEnd="16dp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/top_rounded_rectangle"

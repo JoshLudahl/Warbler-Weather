@@ -175,6 +175,7 @@
 
     <style name="chart_column_axis_line_style">
         <item name="column1">@style/chart_line_style</item>
+        <item name="column2">@style/chart_line_style_two</item>
         <item name="labelColor">@color/colorWeatherGrid</item>
         <item name="color">@color/colorWeatherGrid</item>
     </style>
@@ -215,6 +216,11 @@
         <item name="line1Spec">@style/chart_line_axis_style_secondary</item>
     </style>
 
+    <style name="chart_line_layer_style_without_labels_wind">
+        <item name="line1Spec">@style/chart_line_axis_style_secondary_wind</item>
+        <item name="line2Spec">@style/chart_line_axis_style_secondary_wind_2</item>
+    </style>
+
     <style name="chart_bottom_line_axis_style" parent="chart_bottom_axis_style">
         <item name="axisLabelStyle">@style/axis_bottom_label_style</item>
         <item name="title">@string/chart_humidity_title</item>
@@ -246,6 +252,15 @@
 
     <style name="chart_top_axis_style_humidity" parent="chart_column_style">
         <item name="title">@string/chart_humidity_title</item>
+    </style>
+
+    <style name="chart_line_axis_style_secondary_wind" parent="chart_line_axis_style">
+        <item name="color">@color/low</item>
+
+    </style>
+
+    <style name="chart_line_axis_style_secondary_wind_2" parent="chart_line_axis_style">
+        <item name="color">@color/colorLight</item>
     </style>
 
 </resources>

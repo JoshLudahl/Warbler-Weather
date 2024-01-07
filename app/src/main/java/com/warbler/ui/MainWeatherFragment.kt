@@ -1,5 +1,6 @@
 package com.warbler.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +16,12 @@ import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
 import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
 import com.patrykandpatrick.vico.core.chart.values.AxisValueOverrider
+import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
+import com.patrykandpatrick.vico.core.component.text.TextComponent
+import com.patrykandpatrick.vico.core.dimensions.MutableDimensions
+import com.patrykandpatrick.vico.core.legend.HorizontalLegend
+import com.patrykandpatrick.vico.core.legend.Legend
+import com.patrykandpatrick.vico.core.legend.LegendItem
 import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.patrykandpatrick.vico.core.model.LineCartesianLayerModel
@@ -38,7 +45,6 @@ import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Constants
 import com.warbler.utilities.Resource
-import com.warbler.utilities.areNonZeroValuesFound
 import com.warbler.utilities.doesAnyListContainValues
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -374,6 +380,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
+            chart?.legend =
+                getLegendsForRain(
+                    Color.rgb(20, 108, 148) to "Wind",
+                    Color.rgb(182, 187, 196) to "Gust",
+                )
+
             setModel(model)
             visibility = View.VISIBLE
         }
@@ -467,9 +479,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 CartesianChartModel(
                     ColumnCartesianLayerModel
                         .build {
-                            list.forEach {
-                                if (areNonZeroValuesFound(it)) series(it)
-                            }
+                            series(hourlyRainFall)
+                            series(hourlySnowFall)
                         },
                 )
 
@@ -480,13 +491,46 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
                     .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
+                chart?.legend =
+                    getLegendsForRain(
+                        Color.rgb(56, 161, 232) to "Rain",
+                        Color.rgb(255, 255, 255) to "Snow",
+                    )
+
                 setModel(model)
                 visibility = View.VISIBLE
             }
         }
     }
 
+    private fun getLegendsForRain(vararg legendItem: Pair<Int, String>): Legend {
+        // Build a text component
+        val textComponent = TextComponent.Builder()
+        textComponent.color = Color.rgb(255, 211, 105)
+        val tcbuilder = textComponent.build()
+
+        // Add the legend item to the list
+        val legendItems: MutableList<LegendItem> = ArrayList()
+        legendItem.forEach { legend ->
+            legendItems.add(LegendItem(ShapeComponent(color = legend.first), tcbuilder, legend.second))
+        }
+
+        // Return the legend item
+        return HorizontalLegend(
+            legendItems,
+            10f,
+            10f,
+            10f,
+            10f,
+            MutableDimensions(10f, 10f),
+        )
+    }
+
     private fun setUpListeners() {
+        binding.currentLocationIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+        }
+
         binding.settingsIcon.setOnClickListener {
             findNavController().navigate(R.id.action_mainWeatherFragment_to_settingsFragment)
         }
