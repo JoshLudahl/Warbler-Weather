@@ -162,6 +162,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
+                        android:elevation="4dp"
                         android:background="@drawable/top_rounded_rectangle"
                         android:backgroundTint="@color/colorPrimaryDark"
                         android:padding="8dp"
@@ -293,6 +294,7 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="32dp"
+                        android:elevation="4dp"
                         android:background="@drawable/top_rounded_rectangle"
                         android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -509,6 +511,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                android:elevation="4dp"
                                 app:showBottomAxis="true"
                                 app:showStartAxis="true"
                                 app:startAxisStyle="@style/chart_column_style" />
@@ -531,6 +534,7 @@
                             app:lineLayerStyle="@style/chart_line_layer_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
+                            android:elevation="4dp"
                             app:startAxisStyle="@style/chart_line_start_axis_style" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
@@ -550,6 +554,8 @@
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
+                            android:elevation="4dp"
+
                             app:startAxisStyle="@style/chart_line_start_axis_style_uvi" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
@@ -563,6 +569,8 @@
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             android:layout_marginEnd="16dp"
                             app:layers="line"
+                            android:elevation="4dp"
+
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_uvi_chart_view"
@@ -590,6 +598,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
                             app:showBottomAxis="true"
+                            android:elevation="4dp"
+
                             app:showStartAxis="true"
                             app:startAxisStyle="@style/chart_line_start_axis_style_humidity"
                             app:topAxisStyle="@style/chart_top_axis_style_humidity" />
