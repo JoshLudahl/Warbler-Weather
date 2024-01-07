@@ -348,15 +348,23 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         result: WeatherDataSource,
         value: Speed,
     ) {
-        val data =
+        val windSpeedData =
             result.hourly.map {
                 Conversion.formatSpeedUnitsWithUnits(it.windSpeed, value).toInt()
+            }
+
+        val windGustData =
+            result.hourly.map {
+                Conversion.formatSpeedUnitsWithUnits(it.windGust, value).toInt()
             }
 
         val model =
             CartesianChartModel(
                 LineCartesianLayerModel
-                    .build { series(data) },
+                    .build {
+                        series(windSpeedData)
+                        series(windGustData)
+                    },
             )
 
         with(binding.hourlyWindChartView) {
