@@ -528,15 +528,15 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
     private fun setUpListeners() {
         binding.currentLocationIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+            handleSafeClick(R.id.action_mainWeatherFragment_to_locationFragment)
         }
 
         binding.settingsIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_mainWeatherFragment_to_settingsFragment)
+            handleSafeClick(R.id.action_mainWeatherFragment_to_settingsFragment)
         }
 
         binding.searchIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_mainWeatherFragment_to_locationFragment)
+            handleSafeClick(R.id.action_mainWeatherFragment_to_locationFragment)
         }
 
         binding.humidityIcon.setOnClickListener {
@@ -586,6 +586,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 dialog.show()
             }
         }
+    }
+
+    private fun handleSafeClick(direction: Int) {
+        if (!viewModel.isDisabled.value) findNavController().navigate(direction)
     }
 
     private fun toast(message: String) = requireContext().showToast(message)

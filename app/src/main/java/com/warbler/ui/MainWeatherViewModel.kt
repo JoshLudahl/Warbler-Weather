@@ -20,6 +20,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -67,6 +68,10 @@ class MainWeatherViewModel
         private val _errorView = MutableStateFlow(false)
         val errorView: StateFlow<Boolean>
             get() = _errorView
+
+        private val _isDisabled = MutableStateFlow(false)
+        val isDisabled: StateFlow<Boolean>
+            get() = _isDisabled
 
         init {
             viewModelScope.launch {
@@ -117,6 +122,10 @@ class MainWeatherViewModel
                         }
                 }
             }
+
+            viewModelScope.launch {
+                _isDisabled.collect()
+            }
         }
 
         fun updateWeatherData() {
@@ -141,6 +150,9 @@ class MainWeatherViewModel
         }
 
         private suspend fun handleGetWeather(locationEntity: LocationEntity) {
+            Log.i("Log", "isDisabled Before: ${isDisabled.value}")
+            _isDisabled.value = true
+            Log.i("Log", "isDisabled After: ${isDisabled.value}")
             val currentLocation: LocationEntity = locationEntity
             weatherNetworkRepository.getCurrentWeather(currentLocation)
                 .catch { e ->
@@ -161,5 +173,6 @@ class MainWeatherViewModel
                     _weatherState.value = Resource.Success(it)
                     _weatherObject.value = it
                 }
+            _isDisabled.value = false
         }
     }
