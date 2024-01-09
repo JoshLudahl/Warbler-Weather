@@ -46,6 +46,7 @@ import com.warbler.ui.settings.Temperature
 import com.warbler.utilities.ClickListenerInterface
 import com.warbler.utilities.Constants
 import com.warbler.utilities.Resource
+import com.warbler.utilities.areNonZeroValuesFound
 import com.warbler.utilities.doesAnyListContainValues
 import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -525,10 +526,16 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
                 chart?.legend =
-                    getLegendsForRain(
-                        Color.rgb(56, 161, 232) to "Rain",
-                        Color.rgb(255, 255, 255) to "Snow",
-                    )
+                    if (areNonZeroValuesFound(hourlySnowFall)) {
+                        getLegendsForRain(
+                            Color.rgb(56, 161, 232) to "Rain",
+                            Color.rgb(255, 255, 255) to "Snow",
+                        )
+                    } else {
+                        getLegendsForRain(
+                            Color.rgb(56, 161, 232) to "Rain",
+                        )
+                    }
 
                 setModel(model)
                 visibility = View.VISIBLE
