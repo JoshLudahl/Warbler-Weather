@@ -8,7 +8,6 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.warbler.R
 import com.warbler.databinding.FragmentForecastViewpagerBinding
-import com.warbler.ui.MainWeatherDetailItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
