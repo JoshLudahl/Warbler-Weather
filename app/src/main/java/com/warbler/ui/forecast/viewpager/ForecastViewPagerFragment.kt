@@ -21,7 +21,7 @@ class ForecastViewPagerFragment : Fragment(R.layout.fragment_forecast_viewpager)
             args.forecasts,
         )
     }
-    private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
+
     private lateinit var adapter: ViewPagerAdapter
 
     override fun onViewCreated(
