@@ -96,7 +96,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     buildWeatherForecastForViewPager(),
                     item.index,
                 )
-            findNavController().navigate(action)
+            if (!binding.swipeRefreshLayout.isRefreshing) findNavController().navigate(action)
         } ?: toast("Error getting forecast.")
     }
 
