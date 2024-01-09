@@ -33,6 +33,7 @@ import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Forecast
+import com.warbler.data.model.weather.Forecasts
 import com.warbler.data.model.weather.HourlyForecastItem
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherDataSourceDto
@@ -61,7 +62,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         MainAdapter(
             object : ClickListenerInterface<WeatherForecast> {
                 override fun onClick(item: WeatherForecast) {
-                    handleOnForecastItemClicked(item)
+                    // handleOnForecastItemClicked(item)
+                    handleForecastClickForViewPager(item)
                 }
 
                 override fun delete(item: WeatherForecast) {
@@ -85,6 +87,33 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
             findNavController().navigate(action)
         } ?: toast("Error getting forecast.")
+    }
+
+    fun handleForecastClickForViewPager(item: WeatherForecast) {
+        viewModel.weatherObject.value?.let {
+            val action =
+                MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastViewPagerFragment(
+                    buildWeatherForecastForViewPager(),
+                    item.index,
+                )
+            findNavController().navigate(action)
+        } ?: toast("Error getting forecast.")
+    }
+
+    private fun buildWeatherForecastForViewPager(): Forecasts {
+        val list = mutableListOf<Forecast>()
+        viewModel.weatherObject.value?.daily?.forEachIndexed { index, daily ->
+            list.add(
+                Forecast(
+                    daily = daily,
+                    temperature = viewModel.temperatureUnit.value,
+                    timeZoneOffset = viewModel.weatherObject.value?.timezoneOffset ?: 0,
+                    speed = viewModel.speedUnit.value,
+                ),
+            )
+        }
+
+        return Forecasts(list)
     }
 
     private val weatherDetailAdapter = MainWeatherDetailItemAdapter()
@@ -239,6 +268,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     is Resource.Loading -> {
                         // TODO
                     }
+
+                    else -> {}
                 }
             }
         }
@@ -276,6 +307,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     is Resource.Loading -> {
                         binding.swipeRefreshLayout.isRefreshing = true
                     }
+
+                    else -> {}
                 }
             }
         }

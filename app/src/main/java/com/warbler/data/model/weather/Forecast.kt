@@ -14,3 +14,9 @@ data class Forecast(
     val temperature: Temperature,
     val timeZoneOffset: Int,
 ) : Parcelable
+
+@Keep
+@Parcelize
+data class Forecasts(
+    val forecasts: List<Forecast>,
+) : Parcelable

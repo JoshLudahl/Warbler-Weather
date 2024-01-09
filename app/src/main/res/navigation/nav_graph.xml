@@ -30,6 +30,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainWeatherFragment_to_forecastViewPagerFragment"
+            app:destination="@id/forecastViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -67,5 +70,19 @@
             android:name="forecast"
             app:argType="com.warbler.data.model.weather.Forecast" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/forecastViewPagerFragment"
+        android:name="com.warbler.ui.forecast.viewpager.ForecastViewPagerFragment"
+        android:label="ForecastViewPagerFragment" >
+        <action
+            android:id="@+id/action_forecastViewPagerFragment_to_mainWeatherFragment"
+            app:destination="@id/mainWeatherFragment" />
+        <argument
+            android:name="forecasts"
+            app:argType="com.warbler.data.model.weather.Forecasts" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>

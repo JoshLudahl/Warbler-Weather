@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="forecast"
+            type="com.warbler.data.model.weather.Forecast" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.settings.SettingsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                formatDate="@{forecast}"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimarySwap"
+                android:textSize="@dimen/date_title_text_size"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Thursday, June 8" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/weather_icon"
+                weatherIcon="@{forecast.daily}"
+                android:layout_width="@dimen/weather_icon_size"
+                android:layout_height="@dimen/weather_icon_size"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date_title"
+                tools:src="@drawable/ic_02d" />
+
+            <include
+                android:id="@+id/hi_low"
+                layout="@layout/hi_low_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/weather_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/weather_description"
+                capitalizeEachFirst="@{forecast.daily.weather[0].description}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimarySwap"
+                android:textSize="@dimen/current_weather_description_text_size"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hi_low"
+                tools:text="Cloudy" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/details"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimarySwap"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weather_description" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/additional_details_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/top_rounded_rectangle"
+                android:paddingTop="12dp"
+                android:paddingBottom="22dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forecast_label">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/weather_detail_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="6"
+                    tools:layout_editor_absoluteX="8dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currently_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/summary"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimarySwap"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/top_rounded_rectangle"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currently_label">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:text="@{forecast.daily.summary}"
+                    android:textColor="@color/colorLight"
+                    android:textSize="22sp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Extensive weather description summary" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

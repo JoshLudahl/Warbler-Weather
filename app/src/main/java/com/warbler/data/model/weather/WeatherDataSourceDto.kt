@@ -1,6 +1,9 @@
 package com.warbler.data.model.weather
 
+import android.content.Context
 import com.patrykandpatrick.vico.core.extension.mutableListOf
+import com.warbler.R
+import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
 import com.warbler.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
 import com.warbler.data.model.weather.Conversion.toDegrees
@@ -75,6 +78,111 @@ object WeatherDataSourceDto {
                 ),
             )
         }
+
+        return list
+    }
+
+    fun buildWeatherDetailList(
+        context: Context,
+        forecast: Forecast,
+    ): List<WeatherDetailItem> {
+        val list = ArrayList<WeatherDetailItem>()
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_sunrise,
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = forecast.daily.sunrise.toLong(),
+                        offset = forecast.timeZoneOffset.toLong(),
+                    ) + " AM",
+                label = R.string.sunrise,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_sunset,
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = forecast.daily.sunset.toLong(),
+                        offset = forecast.timeZoneOffset.toLong(),
+                    ) + " PM",
+                label = R.string.sunset,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_raindrops,
+                value =
+                    Conversion.fromKelvinToProvidedUnit(
+                        value = forecast.daily.dewPoint,
+                        unit = forecast.temperature,
+                    ).toInt().toDegrees,
+                label = R.string.dew_point,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_cloud,
+                value = context.getString(R.string.cloudy, forecast.daily.clouds.toString()),
+                label = R.string.clouds,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_umbrella,
+                value =
+                    context.getString(
+                        R.string.percentage,
+                        "${forecast.daily.pop.fromDoubleToPercentage}",
+                    ),
+                label = R.string.chance_of_rain,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_humidity,
+                value =
+                    context.getString(
+                        R.string.percentage,
+                        "${forecast.daily.humidity}",
+                    ),
+                label = R.string.humidity,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_day_sunny,
+                value = forecast.daily.uvi.toString(),
+                label = R.string.uv_index,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_barometer,
+                value = context.getString(R.string.pressure, "${forecast.daily.pressure}"),
+                label = R.string.pressure_text,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_strong_wind,
+                value =
+                    Conversion.formatSpeedUnitsWithUnitsToString(
+                        value = forecast.daily.windSpeed ?: 0.00,
+                        speed = forecast.speed,
+                    ),
+                label = R.string.wind,
+            ),
+        )
 
         return list
     }
