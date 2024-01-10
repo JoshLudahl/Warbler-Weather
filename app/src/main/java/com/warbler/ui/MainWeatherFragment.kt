@@ -267,7 +267,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     }
 
                     is Resource.Loading -> {
-                        // TODO
                     }
 
                     else -> {}
@@ -298,15 +297,18 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         setUiElements(result.data, viewModel.temperatureUnit.value)
 
                         binding.swipeRefreshLayout.isRefreshing = false
+                        binding.loadingInclude.loadingPlaceholder.visibility = View.GONE
                     }
 
                     is Resource.Error -> {
                         binding.swipeRefreshLayout.isRefreshing = false
+                        binding.loadingInclude.loadingPlaceholder.visibility = View.GONE
                         // TODO add error view
                     }
 
                     is Resource.Loading -> {
                         binding.swipeRefreshLayout.isRefreshing = true
+                        binding.loadingInclude.loadingPlaceholder.visibility = View.VISIBLE
                     }
 
                     else -> {}

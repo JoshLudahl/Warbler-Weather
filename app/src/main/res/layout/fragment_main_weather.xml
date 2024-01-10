@@ -85,6 +85,8 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_content"
                     android:layout_width="match_parent"
@@ -606,8 +608,16 @@
                             app:topAxisStyle="@style/chart_top_axis_style_humidity" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <include
+                    android:id="@+id/loading_include"
+                    layout="@layout/loading"
+
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
