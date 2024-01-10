@@ -529,7 +529,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     ColumnCartesianLayerModel
                         .build {
                             series(hourlyRainFall)
-                            series(hourlySnowFall)
+                            if (areNonZeroValuesFound(hourlySnowFall)) series(hourlySnowFall)
                         },
                 )
 
