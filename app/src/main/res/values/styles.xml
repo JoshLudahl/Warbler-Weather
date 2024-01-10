@@ -203,7 +203,7 @@
     <style name="chart_line_axis_style">
         <item name="color">@color/colorYellow</item>
         <item name="lineThickness">1dp</item>
-        <item name="cubicStrength">75%</item>
+        <item name="cubicStrength">100%</item>
         <item name="showDataLabels">true</item>
         <item name="dataLabelStyle">@style/data_label_style</item>
     </style>
