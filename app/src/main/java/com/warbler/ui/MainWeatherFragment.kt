@@ -379,6 +379,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
 
+            setChartLineSpacingDp(chart?.layers?.get(0) as LineCartesianLayer)
+
             setModel(model)
             visibility = View.VISIBLE
         }
@@ -420,6 +422,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     Color.rgb(182, 187, 196) to "Gust",
                 )
 
+            setChartLineSpacingDp(chart?.layers?.get(0) as LineCartesianLayer)
+
             setModel(model)
             visibility = View.VISIBLE
         }
@@ -441,6 +445,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
             (chart?.startAxis as VerticalAxis<AxisPosition.Vertical.Start>)
                 .itemPlacer = Constants.CHART_COLUMN_DEFAULT
+
+            setChartLineSpacingDp(chart?.layers?.get(0) as LineCartesianLayer)
 
             setModel(model)
             visibility = View.VISIBLE
@@ -483,9 +489,18 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             (chart?.layers?.get(0) as LineCartesianLayer).axisValueOverrider =
                 valueOverrider
 
+            setChartLineSpacingDp(chart?.layers?.get(0) as LineCartesianLayer)
+
             setModel(model)
             visibility = View.VISIBLE
         }
+    }
+
+    private fun setChartLineSpacingDp(
+        layer: LineCartesianLayer,
+        dp: Float = 40.0f,
+    ) {
+        layer.spacingDp = dp
     }
 
     private fun setUpHourlyRainChart(result: WeatherDataSource) {
