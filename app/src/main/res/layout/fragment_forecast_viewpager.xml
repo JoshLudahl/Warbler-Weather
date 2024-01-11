@@ -19,38 +19,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/app_bar"
-            layout="@layout/app_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <FrameLayout
-            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/forecast_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/Widget.Design.TabLayout"
-            app:tabIndicatorColor="@color/colorYellow"
-            app:tabBackground="@drawable/tab_page_selector"
-            app:tabGravity="center"
-            android:layout_gravity="bottom"
-            app:tabIndicatorHeight="0dp" />
+            <include
+                android:id="@+id/app_bar"
+                layout="@layout/app_bar"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/forecast_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="top"
+                android:background="@android:color/transparent"
+                android:theme="@style/Widget.Design.TabLayout"
+                app:tabBackground="@drawable/tab_page_selector"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/colorYellow"
+                app:tabIndicatorHeight="0dp" />
 
         </FrameLayout>
 
