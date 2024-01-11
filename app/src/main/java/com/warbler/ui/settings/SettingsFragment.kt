@@ -88,6 +88,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.settingsSubheadingOptionKphText.setOnClickListener {
             updateSpeedRadioGroup(R.id.radio_kph)
         }
+
+        binding.settingsSubheadingOptionInphText.setOnClickListener {
+            updateAccumulationRadioGroup(R.id.radio_inph)
+        }
+
+        binding.settingsSubheadingOptionMmphText.setOnClickListener {
+            updateAccumulationRadioGroup(R.id.radio_mmph)
+        }
     }
 
     private fun updateTemperatureRadioGroup(itemId: Int) {
@@ -111,6 +119,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }.let {
             it.isChecked = true
             viewModel.handleSpeedRadioClick(it.id)
+        }
+    }
+
+    private fun updateAccumulationRadioGroup(itemId: Int) {
+        when (itemId) {
+            R.id.radio_mmph -> binding.radioMmph
+            R.id.radio_inph -> binding.radioInph
+            else -> throw Exception("Invalid accumulation selection.")
+        }.let {
+            it.isChecked = true
+            viewModel.handleAccumulationClick(it.id)
         }
     }
 
