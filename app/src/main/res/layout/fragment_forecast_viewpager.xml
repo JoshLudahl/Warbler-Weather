@@ -47,7 +47,7 @@
                 android:id="@+id/forecast_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="top"
+                android:layout_gravity="bottom"
                 android:background="@android:color/transparent"
                 android:theme="@style/Widget.Design.TabLayout"
                 app:tabBackground="@drawable/tab_page_selector"
