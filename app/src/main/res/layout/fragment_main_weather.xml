@@ -145,17 +145,11 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/currently_label"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
                         android:text="@string/currently"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/current_location_icon" />
+                        app:layout_constraintTop_toBottomOf="@+id/current_location_icon"
+                        style="@style/main_label_style" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
@@ -421,13 +415,8 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/forecast_label"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        style="@style/main_label_style"
                         android:text="@string/forecast"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/details_icon" />
@@ -460,13 +449,9 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/hourly_label"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            style="@style/main_label_style"
+                            android:layout_marginStart="0dp"
                             android:text="@string/hourly"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
