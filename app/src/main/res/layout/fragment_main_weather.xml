@@ -54,7 +54,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/appCompatImageView"
+                        android:id="@+id/error_icon"
                         android:layout_width="@dimen/error_icon_size"
                         android:layout_height="@dimen/error_icon_size"
                         android:layout_marginStart="24dp"
@@ -76,12 +76,12 @@
                         android:contentDescription="@string/error_text_view_content_description"
                         android:text="@string/no_internet_or_error"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimarySwap"
                         android:textSize="@dimen/error_text_size"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+                        app:layout_constraintTop_toBottomOf="@+id/error_icon" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
