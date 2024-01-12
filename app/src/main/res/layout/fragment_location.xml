@@ -25,87 +25,87 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <include
-                android:id="@+id/action_bar_include"
-                layout="@layout/app_bar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/action_bar_include"
+                    layout="@layout/app_bar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.appcompat.widget.Toolbar>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/default_toolbar_height"
-        tools:context=".ui.settings.SettingsFragment">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="16dp"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_toolbar_height"
+            tools:context=".ui.settings.SettingsFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/search_bar_layout_container"
-                style="@style/SearchViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/search_bar_edit_text"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/search_bar_layout_container"
                     style="@style/SearchViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:hint="@string/search_location"
-                    android:visibility="visible"
-                    android:cursorVisible="true"
-                    android:textCursorDrawable="@null"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/close_search"
-                    android:layout_width="@dimen/search_close_icon_size"
-                    android:layout_height="@dimen/search_close_icon_size"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_round_close"
-                    app:layout_constraintBottom_toBottomOf="@+id/search_bar_edit_text"
+                    android:layout_marginStart="62dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/search_bar_edit_text" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/search_bar_edit_text"
+                        style="@style/SearchViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:cursorVisible="true"
+                        android:hint="@string/search_location"
+                        android:textCursorDrawable="@null"
+                        android:visibility="visible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/close_search"
+                        android:layout_width="@dimen/search_close_icon_size"
+                        android:layout_height="@dimen/search_close_icon_size"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_round_close"
+                        app:layout_constraintBottom_toBottomOf="@+id/search_bar_edit_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/search_bar_edit_text" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/search_result_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@+id/search_bar_edit_text"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:listitem="@layout/recycler_view_item" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/search_result_recycler_view"
+                    android:id="@+id/location_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:background="@color/colorAccent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_bar_edit_text"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:listitem="@layout/recycler_view_item" />
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/location_list_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/location_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:nestedScrollingEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/location_list_item" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
     </FrameLayout>
 </layout>

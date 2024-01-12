@@ -3,7 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="weather"
             type="com.warbler.data.model.weather.WeatherForecast" />
@@ -17,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:elevation="4dp"
         android:background="@drawable/top_rounded_rectangle"
         android:backgroundTint="@color/colorClickableBox"
+        android:elevation="4dp"
         android:onClick="@{() -> clickListener.onClick(weather)}"
         android:padding="8dp">
 
