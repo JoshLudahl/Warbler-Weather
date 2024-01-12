@@ -25,9 +25,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:text="@string/mdash"
-            android:textColor="@color/colorPrimarySwap"
+            android:textColor="@color/colorSecondary"
             android:textSize="@dimen/hi_low_temperature_text_size"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -43,10 +42,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:text="@string/mdash"
-            android:textColor="@color/colorPrimarySwap"
+            android:textColor="@color/colorSecondary"
             android:textSize="@dimen/hi_low_temperature_text_size"
-
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
