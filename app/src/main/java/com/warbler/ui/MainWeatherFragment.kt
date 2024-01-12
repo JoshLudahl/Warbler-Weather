@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
+import com.patrykandpatrick.vico.core.chart.layer.ColumnCartesianLayer
 import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
 import com.patrykandpatrick.vico.core.chart.values.AxisValueOverrider
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
@@ -194,14 +195,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 label = R.string.feels_like,
             ),
         )
-//
-//        list.add(
-//            WeatherDetailItem(
-//                icon = R.drawable.ic_compress,
-//                value = getString(R.string.pressure, result.current.pressure.toString()),
-//                label = R.string.pressure_text
-//            )
-//        )
 
         list.add(
             WeatherDetailItem(
@@ -297,18 +290,17 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         setUiElements(result.data, viewModel.temperatureUnit.value)
 
                         binding.swipeRefreshLayout.isRefreshing = false
-                        binding.loadingInclude.loadingPlaceholder.visibility = View.GONE
+                        binding.loading.visibility = View.GONE
                     }
 
                     is Resource.Error -> {
                         binding.swipeRefreshLayout.isRefreshing = false
-                        binding.loadingInclude.loadingPlaceholder.visibility = View.GONE
-                        // TODO add error view
+                        binding.loading.visibility = View.GONE
                     }
 
                     is Resource.Loading -> {
                         binding.swipeRefreshLayout.isRefreshing = true
-                        binding.loadingInclude.loadingPlaceholder.visibility = View.VISIBLE
+                        binding.loading.visibility = View.VISIBLE
                     }
 
                     else -> {}
@@ -553,6 +545,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                             Color.rgb(56, 161, 232) to "Rain",
                         )
                     }
+
+                (chart?.layers?.get(0) as ColumnCartesianLayer).spacingDp = 20.0f
 
                 setModel(model)
                 visibility = View.VISIBLE

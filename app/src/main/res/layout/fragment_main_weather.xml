@@ -86,7 +86,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_content"
                     android:layout_width="match_parent"
@@ -145,11 +144,11 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/currently_label"
+                        style="@style/main_label_style"
                         android:text="@string/currently"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/current_location_icon"
-                        style="@style/main_label_style" />
+                        app:layout_constraintTop_toBottomOf="@+id/current_location_icon" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
@@ -158,13 +157,29 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:elevation="4dp"
                         android:background="@drawable/top_rounded_rectangle"
                         android:backgroundTint="@color/colorPrimaryDark"
+                        android:elevation="4dp"
                         android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/currently_label">
+
+                        <ImageView
+                            android:id="@+id/loading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/place_holder"
+                            android:translationZ="1dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/date_title"
@@ -291,8 +306,8 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="32dp"
-                        android:elevation="4dp"
                         android:background="@drawable/top_rounded_rectangle"
+                        android:elevation="4dp"
                         android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -472,8 +487,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/rain_layout"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="8dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -491,28 +506,29 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/tall_chart_height"
                                 android:background="@drawable/top_rounded_rectangle"
-                                android:visibility="gone"
+                                android:elevation="4dp"
                                 android:padding="16dp"
+                                android:visibility="gone"
                                 app:bottomAxisStyle="@style/chart_bottom_axis_style"
                                 app:columnLayerStyle="@style/chart_column_axis_line_style"
                                 app:layers="column"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:elevation="4dp"
                                 app:showBottomAxis="true"
                                 app:showStartAxis="true"
                                 app:startAxisStyle="@style/chart_column_style" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_temperature_chart_view"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/tall_chart_height"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/top_rounded_rectangle"
-                            android:padding="16dp"
                             android:layout_marginEnd="16dp"
+                            android:background="@drawable/top_rounded_rectangle"
+                            android:elevation="4dp"
+                            android:padding="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:layers="line"
@@ -522,16 +538,16 @@
                             app:lineLayerStyle="@style/chart_line_layer_style"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
-                            android:elevation="4dp"
                             app:startAxisStyle="@style/chart_line_start_axis_style" />
 
                         <com.patrykandpatrick.vico.views.chart.CartesianChartView
                             android:id="@+id/hourly_uvi_chart_view"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/small_chart_height"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:elevation="4dp"
                             android:padding="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
@@ -542,7 +558,6 @@
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
                             app:showBottomAxis="true"
                             app:showStartAxis="true"
-                            android:elevation="4dp"
 
                             app:startAxisStyle="@style/chart_line_start_axis_style_uvi" />
 
@@ -551,13 +566,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/default_chart_height"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:elevation="4dp"
                             android:padding="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
-                            android:layout_marginEnd="16dp"
                             app:layers="line"
-                            android:elevation="4dp"
 
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -571,22 +586,22 @@
                             android:id="@+id/hourly_humidity_chart_view"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/small_chart_height"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
                             android:background="@drawable/top_rounded_rectangle"
+                            android:elevation="4dp"
                             android:padding="16dp"
                             app:axisStyle="@style/chart_line_axis_style"
                             app:bottomAxisStyle="@style/chart_bottom_line_axis_style"
                             app:layers="line"
-                            android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hourly_wind_chart_view"
                             app:layout_constraintVertical_bias="0.0"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:lineLayerStyle="@style/chart_line_layer_style_without_labels"
                             app:showBottomAxis="true"
-                            android:elevation="4dp"
 
                             app:showStartAxis="true"
                             app:startAxisStyle="@style/chart_line_start_axis_style_humidity"
@@ -595,11 +610,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                <include
-                    android:id="@+id/loading_include"
-                    layout="@layout/loading"
 
-                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
