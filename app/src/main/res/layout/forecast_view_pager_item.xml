@@ -144,7 +144,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/summary_label"
                 style="@style/main_label_style"
-                android:text="@string/details"
+                android:text="@string/summary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />

@@ -114,6 +114,30 @@ object WeatherDataSourceDto {
 
         list.add(
             WeatherDetailItem(
+                icon = R.drawable.ic_wi_moonrise,
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = forecast.daily.moonrise.toLong(),
+                        offset = forecast.timeZoneOffset.toLong(),
+                    ) + " PM",
+                label = R.string.moonrise,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_moonset,
+                value =
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = forecast.daily.moonset.toLong(),
+                        offset = forecast.timeZoneOffset.toLong(),
+                    ) + " AM",
+                label = R.string.moonset,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
                 value =
                     Conversion.fromKelvinToProvidedUnit(
@@ -174,13 +198,25 @@ object WeatherDataSourceDto {
 
         list.add(
             WeatherDetailItem(
-                icon = R.drawable.ic_wi_strong_wind,
+                icon = R.drawable.ic_wind,
                 value =
                     Conversion.formatSpeedUnitsWithUnitsToString(
                         value = forecast.daily.windSpeed ?: 0.00,
                         speed = forecast.speed,
                     ),
                 label = R.string.wind,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_strong_wind,
+                value =
+                    Conversion.formatSpeedUnitsWithUnitsToString(
+                        value = forecast.daily.windGust ?: 0.00,
+                        speed = forecast.speed,
+                    ),
+                label = R.string.wind_gust,
             ),
         )
 

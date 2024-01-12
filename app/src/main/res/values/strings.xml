@@ -84,4 +84,7 @@
     <string name="no_rain_in_forecast">No precipitation in the forecast for the next 48 hours.</string>
     <string name="precipitation">Precipitation</string>
     <string name="loading">Loading</string>
+    <string name="wind_gust">Wind Gust</string>
+    <string name="moonrise">Moonrise</string>
+    <string name="moonset">Moonset</string>
 </resources>
