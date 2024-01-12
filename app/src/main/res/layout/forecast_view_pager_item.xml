@@ -20,70 +20,98 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/date_title"
                 formatDate="@{forecast}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@color/blue"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimarySwap"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/date_title_text_size"
+                android:textStyle="bold"
                 app:layout_constrainedWidth="true"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Thursday, June 8" />
+                tools:text="Friday, September 12th" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/weather_icon"
-                weatherIcon="@{forecast.daily}"
-                android:layout_width="@dimen/weather_icon_size"
-                android:layout_height="@dimen/weather_icon_size"
-                android:layout_marginStart="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date_title"
-                tools:src="@drawable/ic_02d" />
-
-            <include
-                android:id="@+id/hi_low"
-                layout="@layout/hi_low_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/weather_description"
-                app:layout_constraintStart_toEndOf="@+id/weather_icon"
-                app:layout_constraintTop_toTopOf="@+id/weather_icon"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/weather_description"
-                capitalizeEachFirst="@{forecast.daily.weather[0].description}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimarySwap"
-                android:textSize="@dimen/current_weather_description_text_size"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="@+id/weather_icon"
-                app:layout_constraintStart_toEndOf="@+id/weather_icon"
-                app:layout_constraintStart_toStartOf="@+id/hi_low"
-                app:layout_constraintTop_toBottomOf="@+id/hi_low"
-                tools:text="Cloudy" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/forecast_label"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_forecast_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/details"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimarySwap"
-                android:textSize="12sp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/top_rounded_rectangle"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:elevation="4dp"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weather_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/date_title">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/weather_icon"
+                    weatherIcon="@{forecast.daily}"
+                    android:layout_width="@dimen/weather_icon_size"
+                    android:layout_height="@dimen/weather_icon_size"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:animateLayoutChanges="true"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="@string/the_current_conditions_weather_icon_content_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_01d" />
+
+                <include
+                    android:id="@+id/hi_low"
+                    layout="@layout/hi_low_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/weather_description"
+                    app:layout_constraintStart_toEndOf="@+id/weather_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/weather_description"
+                    capitalizeEachFirst="@{forecast.daily.weather[0].description}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/mdash"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/current_weather_description_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weather_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/hi_low"
+                    tools:text="Cloudy" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/details_label"
+
+                android:text="@string/details"
+                style="@style/main_label_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_forecast_heading" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/additional_details_layout"
@@ -98,7 +126,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forecast_label">
+                app:layout_constraintTop_toBottomOf="@+id/details_label">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/weather_detail_recycler_view"
@@ -112,16 +140,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/currently_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/summary"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimarySwap"
-                android:textSize="12sp"
+                android:id="@+id/summary_label"
+                style="@style/main_label_style"
+                android:text="@string/details"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
@@ -133,24 +156,23 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+
+                android:layout_marginBottom="56dp"
                 android:background="@drawable/top_rounded_rectangle"
                 android:padding="8dp"
-                android:paddingBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currently_label">
+                app:layout_constraintTop_toBottomOf="@+id/summary_label">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
                     android:background="@android:color/transparent"
-
                     android:text="@{forecast.daily.summary}"
                     android:textColor="@color/colorLight"
-                    android:textSize="22sp"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
