@@ -14,7 +14,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.horizontal.HorizontalAxis
 import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
-import com.patrykandpatrick.vico.core.chart.layer.ColumnCartesianLayer
 import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
 import com.patrykandpatrick.vico.core.chart.values.AxisValueOverrider
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
@@ -546,7 +545,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         )
                     }
 
-                (chart?.layers?.get(0) as ColumnCartesianLayer).spacingDp = 20.0f
+                // (chart?.layers?.get(0) as ColumnCartesianLayer).spacingDp = 40.0f
 
                 setModel(model)
                 visibility = View.VISIBLE

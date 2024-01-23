@@ -1,7 +1,6 @@
 package com.warbler.data.model.weather
 
 import android.content.Context
-import com.patrykandpatrick.vico.core.extension.mutableListOf
 import com.warbler.R
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
