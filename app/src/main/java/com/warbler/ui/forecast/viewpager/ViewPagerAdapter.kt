@@ -24,11 +24,13 @@ import kotlin.math.roundToInt
 class ViewPagerAdapter(
     private val days: List<Forecast>,
     private val position: Int,
+    private val location: String,
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
     inner class ViewPagerViewHolder(
         private val itemBinding: ForecastViewPagerItemBinding,
     ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(forecastItem: Forecast) {
+            itemBinding.locationTitle.text = location
             itemBinding.forecast = forecastItem
             itemBinding.hiLow.temperatureLowText.text =
                 Conversion.fromKelvinToProvidedUnit(
@@ -65,8 +67,7 @@ class ViewPagerAdapter(
                 sharableView.draw(canvas)
 
                 itemBinding.shareIcon.visibility = View.VISIBLE
-                // save bitmap to cache directory
-                // save bitmap to cache directory
+
                 try {
                     val cachePath = File(context.cacheDir, "images")
                     cachePath.mkdirs() // don't forget to make the directory

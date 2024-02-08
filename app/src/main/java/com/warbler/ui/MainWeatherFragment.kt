@@ -26,6 +26,7 @@ import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.patrykandpatrick.vico.core.model.LineCartesianLayerModel
 import com.warbler.R
+import com.warbler.data.model.location.LocationEntity
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.bottomAxisValueFormatter
@@ -96,9 +97,14 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastViewPagerFragment(
                     buildWeatherForecastForViewPager(),
                     item.index,
+                    location = getFormattedLocation(viewModel.currentLocation.value),
                 )
             if (!binding.swipeRefreshLayout.isRefreshing) findNavController().navigate(action)
         } ?: toast("Error getting forecast.")
+    }
+
+    private fun getFormattedLocation(locationEntity: LocationEntity): String {
+        return locationEntity.state?.let { "${locationEntity.name}, ${locationEntity.state}" } ?: locationEntity.name
     }
 
     private fun buildWeatherForecastForViewPager(): Forecasts {

@@ -34,7 +34,7 @@ class ForecastViewPagerFragment : Fragment(R.layout.fragment_forecast_viewpager)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val list = args.forecasts.forecasts.sortedBy { it.daily.dt }
-        adapter = ViewPagerAdapter(list, args.position)
+        adapter = ViewPagerAdapter(list, args.position, args.location)
         binding.viewPager.adapter = adapter
 
         binding.appBar.backArrowIcon.setOnClickListener {

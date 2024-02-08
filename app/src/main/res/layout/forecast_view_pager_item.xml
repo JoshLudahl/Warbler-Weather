@@ -26,16 +26,18 @@
                 android:id="@+id/heading_constraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/date_title"
-                    formatDate="@{forecast}"
+                    android:id="@+id/location_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@android:color/transparent"
                     android:backgroundTint="@color/blue"
                     android:paddingLeft="16dp"
@@ -46,11 +48,14 @@
                     android:textColor="@color/colorPrimarySwap"
                     android:textSize="@dimen/date_title_text_size"
                     android:textStyle="bold"
+
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Friday, September 12th" />
+                    tools:text="Portland, Oregon" />
+
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_forecast_heading"
@@ -65,8 +70,45 @@
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/date_title">
+                    app:layout_constraintTop_toBottomOf="@+id/location_title">
 
+                    <ImageButton
+                        android:id="@+id/share_icon"
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/share_icon"
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toBottomOf="@+id/date_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/date_title"
+                        app:tint="@color/colorAccent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/date_title"
+                        formatDate="@{forecast}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@color/blue"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="4dp"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/date_title_text_size"
+
+
+                        android:textStyle="bold"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Friday, September 12th" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/weather_icon"
@@ -74,14 +116,13 @@
                         android:layout_width="@dimen/weather_icon_size"
                         android:layout_height="@dimen/weather_icon_size"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
                         android:animateLayoutChanges="true"
                         android:backgroundTint="@android:color/transparent"
                         android:contentDescription="@string/the_current_conditions_weather_icon_content_description"
 
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/date_title"
                         tools:src="@drawable/ic_01d" />
 
                     <include
@@ -92,7 +133,7 @@
                         android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toTopOf="@+id/weather_description"
                         app:layout_constraintStart_toEndOf="@+id/weather_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/weather_icon"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -105,7 +146,7 @@
                         android:text="@string/mdash"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/current_weather_description_text_size"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/weather_icon"
                         app:layout_constraintStart_toEndOf="@+id/weather_icon"
                         app:layout_constraintTop_toBottomOf="@+id/hi_low"
                         tools:text="Cloudy" />
@@ -129,29 +170,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/weather_icon"
                         tools:text="Summary text" />
 
-                    <ImageButton
-                        android:id="@+id/share_icon"
-                        android:layout_width="@dimen/default_icon_size"
-                        android:layout_height="@dimen/default_icon_size"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/share_icon"
-                        android:src="@drawable/ic_share"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/summary_text"
-                        app:tint="@color/colorAccent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/details_label"
-
                 style="@style/main_label_style"
                 android:text="@string/details"
+                android:layout_marginTop="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/heading_constraint" />
