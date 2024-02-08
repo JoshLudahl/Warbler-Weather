@@ -87,4 +87,5 @@
     <string name="wind_gust">Wind Gust</string>
     <string name="moonrise">Moonrise</string>
     <string name="moonset">Moonset</string>
+    <string name="share_icon">Share Icon</string>
 </resources>
