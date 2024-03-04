@@ -124,7 +124,7 @@ dependencies {
 
     // Graphs and charts
     // Houses the core logic for charts and other elements. Included in all other modules.
-    implementation "com.patrykandpatrick.vico:core:2.0.0-alpha.6"
+    implementation "com.patrykandpatrick.vico:core:2.0.0-alpha.9"
 
     // Vico for the view system.
     implementation "com.patrykandpatrick.vico:views:2.0.0-alpha.6"
