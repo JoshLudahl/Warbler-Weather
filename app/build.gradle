@@ -20,7 +20,7 @@ android {
         applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
-        versionCode 57
+        versionCode 58
         versionName "0.$versionCode"
         testInstrumentationRunner "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
@@ -88,7 +88,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'com.google.android.gms:play-services-location:21.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.2.0'
     implementation "com.google.android.material:material:1.11.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
@@ -101,7 +101,7 @@ dependencies {
 
     //Firebase
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:32.7.1')
+    implementation platform('com.google.firebase:firebase-bom:32.8.1')
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -163,7 +163,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.12'
-    implementation "androidx.browser:browser:1.7.0"
+    implementation "androidx.browser:browser:1.8.0"
 
     //  testing
     testImplementation 'junit:junit:4.13.2'
@@ -173,7 +173,7 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test:rules:1.5.0'
-    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.1.0'
+    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.1.1'
     androidTestImplementation 'com.github.JoshLudahl:espresso-library-kotlin:2023.9.01'
 
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
