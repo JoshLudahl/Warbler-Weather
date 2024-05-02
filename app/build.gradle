@@ -84,12 +84,12 @@ dependencies {
 
     //  Android specific
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.core:core-ktx:1.13.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.google.android.gms:play-services-location:21.2.0'
-    implementation "com.google.android.material:material:1.11.0"
+    implementation "com.google.android.material:material:1.12.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     // DI
@@ -101,7 +101,7 @@ dependencies {
 
     //Firebase
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:32.8.1')
+    implementation platform('com.google.firebase:firebase-bom:33.0.0')
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
