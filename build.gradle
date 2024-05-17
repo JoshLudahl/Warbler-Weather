@@ -1,7 +1,7 @@
 
 buildscript {
     ext {
-        coroutine = '1.8.0'
+        coroutine = '1.8.1'
         dagger_hilt = '2.51.1'
         datastore = '1.1.0'
         hilt_lifecycle_viewmodel = '1.1.0'
