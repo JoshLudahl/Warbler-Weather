@@ -20,7 +20,7 @@ android {
         applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
-        versionCode 60
+        versionCode 61
         versionName "0.$versionCode"
         testInstrumentationRunner "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'

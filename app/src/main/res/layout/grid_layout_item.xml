@@ -14,9 +14,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
+        android:background="@drawable/top_rounded_rectangle"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="true">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sunrise_card_view"
@@ -26,57 +27,67 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/top_rounded_rectangle"
             android:clipChildren="false"
-            android:clipToPadding="false"
-
+            android:clipToPadding="true"
             app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            card_view:cardCornerRadius="10dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/detail_icon"
-                    android:layout_width="@dimen/weather_details_expanded_icon_size"
-                    android:layout_height="@dimen/weather_details_expanded_icon_size"
-                    android:background="@android:color/transparent"
-                    android:tint="@color/colorWeatherGrid"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_water" />
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/sunrise_info_text"
                     style="@style/weather_detail_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:paddingBottom="6dp"
                     android:text="@{detail.value}"
                     android:textColor="@color/colorLight"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_icon"
                     tools:text="day" />
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/detail_icon"
+                    android:layout_width="@dimen/weather_details_expanded_icon_size"
+                    android:layout_height="@dimen/weather_details_expanded_icon_size"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/colorWeatherGrid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_label_text"
+                    tools:src="@drawable/ic_water" />
+
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title_label_text"
                     style="@style/weather_detail_text_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="4dp"
+                    android:background="@drawable/search_bg"
                     android:gravity="center"
                     android:text="@{detail.label}"
-                    android:textColor="@color/colorWeatherGrid"
+                    app:layout_constrainedWidth="true"
+                    android:textColor="@color/colorBlack"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sunrise_info_text"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="Something" />
 
 

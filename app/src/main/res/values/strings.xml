@@ -58,7 +58,7 @@
     <string name="dew_point">Dew Point</string>
     <string name="clouds">Clouds</string>
     <string name="pressure_text">Pressure</string>
-    <string name="chance_of_rain">Chance of Rain</string>
+    <string name="chance_of_rain">Rain %</string>
     <string name="percentage">%1$s%%</string>
     <string name="wind">Wind</string>
     <string name="details">Details</string>
