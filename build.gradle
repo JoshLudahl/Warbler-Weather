@@ -24,7 +24,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
         classpath 'com.google.gms:google-services:4.4.1'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9' // 3.0.1 is buggy, skip.
         classpath 'com.google.firebase:perf-plugin:1.4.2'
     }
 }
