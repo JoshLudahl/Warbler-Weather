@@ -335,15 +335,14 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/uv_index_value"
-                                style="@style/weather_detail_text"
+                                style="@style/weather_detail_text_aqi_value"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginBottom="8dp"
-                                android:background="@drawable/search_bg"
+                                android:background="@drawable/circle"
                                 android:contentDescription="@string/uv_index"
                                 android:includeFontPadding="false"
-                                android:padding="8dp"
                                 android:text="@{viewModel.aqiValue}"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorBlack"
