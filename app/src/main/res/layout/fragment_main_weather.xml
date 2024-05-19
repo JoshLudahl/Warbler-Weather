@@ -302,8 +302,8 @@
 
                             <ImageView
                                 android:id="@+id/uv_index_icon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/default_icon_size"
+                                android:layout_height="@dimen/default_icon_size"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="8dp"
@@ -333,14 +333,24 @@
                                 app:layout_constraintTop_toTopOf="@+id/uv_index_icon"
                                 tools:text="Air Quality Index:" />
 
-                            <com.google.android.material.textview.MaterialTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/uv_index_value"
                                 style="@style/weather_detail_text"
-                                android:layout_marginStart="8dp"
-                                android:backgroundTint="@android:color/transparent"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/search_bg"
                                 android:contentDescription="@string/uv_index"
+                                android:includeFontPadding="false"
+                                android:padding="8dp"
                                 android:text="@{viewModel.aqiValue}"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                app:aqiColorTextBackground="@{Integer.parseInt(viewModel.aqiValue)}"
                                 app:layout_constraintBottom_toBottomOf="@+id/uv_index_label"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/uv_index_label"
                                 app:layout_constraintTop_toTopOf="@+id/uv_index_label"
                                 tools:text="1 " />
