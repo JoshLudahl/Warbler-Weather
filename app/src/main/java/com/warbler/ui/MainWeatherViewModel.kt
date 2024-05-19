@@ -146,6 +146,7 @@ class MainWeatherViewModel
                     when (resource) {
                         Resource.Loading -> { // Do nothing
                             Log.d("MainWeatherViewModel", "Loading AQI.")
+                            _hasAqi.value = false
                         }
                         is Resource.Success -> {
                             resource.data.let {
@@ -158,6 +159,7 @@ class MainWeatherViewModel
                         is Resource.Error -> {
                             // Handle error
                             Log.d("MainWeatherViewModel", "AQI failed.")
+                            _hasAqi.value = false
                         }
                     }
                 }
