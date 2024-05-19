@@ -233,6 +233,23 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             ),
         )
 
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_wi_humidity,
+                value = getString(R.string.percent, result.current.humidity.toString()),
+                label = R.string.humidity,
+            ),
+        )
+
+        list.add(
+            WeatherDetailItem(
+                icon = R.drawable.ic_sun,
+                value =
+                    result.current.uvi.toString(),
+                label = R.string.uv_index,
+            ),
+        )
+
         return list
     }
 
@@ -339,17 +356,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 result.current.weather[0].icon.getIconForCondition,
             )
 
-            uvIndexValue.text = result.current.uvi.toString()
-
             binding.noDataInclude.title.text = getString(R.string.precipitation)
             binding.noDataInclude.message.text = getString(R.string.no_rain_in_forecast)
-
-            val humidityString =
-                String.format(
-                    getString(R.string.percent),
-                    result.current.humidity.toString(),
-                )
-            humidityTextValue.text = humidityString
 
             setUpHourlyRainChart(result)
             setUpHourlyTemperatureChart(result, value)
@@ -599,13 +607,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
         binding.searchIcon.setOnClickListener {
             handleSafeNavigationClick(R.id.action_mainWeatherFragment_to_locationFragment)
-        }
-
-        binding.humidityIcon.setOnClickListener {
-            toast("Humidity")
-        }
-        binding.uvIndexIcon.setOnClickListener {
-            toast("UV Index")
         }
 
         binding.detailsIcon.setOnClickListener {

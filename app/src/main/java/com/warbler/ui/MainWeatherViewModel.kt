@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.data.model.location.LocationEntity
+import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.repositories.location.LocationRepository
@@ -73,6 +74,16 @@ class MainWeatherViewModel
         val isDisabled: StateFlow<Boolean>
             get() = _isDisabled
 
+        private val aqi = MutableStateFlow<Resource<AirQualitySource>>(Resource.Loading)
+
+        private val _hasAqi = MutableStateFlow(false)
+        val hasAqi: StateFlow<Boolean>
+            get() = _hasAqi
+
+        private val _aqiValue = MutableStateFlow("0")
+        val aqiValue: StateFlow<String>
+            get() = _aqiValue
+
         init {
             viewModelScope.launch {
                 locationRepository.getCurrentLocationFromDatabase().catch { e ->
@@ -85,6 +96,7 @@ class MainWeatherViewModel
                     Log.d("MainWeatherViewModel", "Setting location to $it")
                     _locationState.value = Resource.Success(it)
                     _currentLocation.value = it
+                    getAqi()
                 }
             }
 
@@ -125,6 +137,30 @@ class MainWeatherViewModel
 
             viewModelScope.launch {
                 _isDisabled.collect()
+            }
+        }
+
+        private fun getAqi() {
+            viewModelScope.launch {
+                weatherNetworkRepository.getCurrentAqi(currentLocation.value).collect { resource ->
+                    when (resource) {
+                        Resource.Loading -> { // Do nothing
+                            Log.d("MainWeatherViewModel", "Loading AQI.")
+                        }
+                        is Resource.Success -> {
+                            resource.data.let {
+                                Log.d("MainWeatherViewModel", "Updating ViewModel with AQI: ${it.list[0].main.aqi}")
+                                aqi.value = Resource.Success(it)
+                                _aqiValue.value = it.list[0].main.aqi.toString()
+                                _hasAqi.value = true
+                            }
+                        }
+                        is Resource.Error -> {
+                            // Handle error
+                            Log.d("MainWeatherViewModel", "AQI failed.")
+                        }
+                    }
+                }
             }
         }
 

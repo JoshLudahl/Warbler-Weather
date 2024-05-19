@@ -36,4 +36,11 @@
     <color name="colorGray">#B6BBC4</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+
+    <!-- AQI colors -->
+    <color name="AQI_1">#A1DD70</color>
+    <color name="AQI_2">#FFDA78</color>
+    <color name="AQI_3">#FF7F3E</color>
+    <color name="AQI_4">#EE4E4E</color>
+    <color name="AQI_5">#A91D3A</color>
 </resources>

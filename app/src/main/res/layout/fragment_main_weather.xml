@@ -20,6 +20,10 @@
             type="com.warbler.ui.MainWeatherViewModel" />
 
         <variable
+            name="aqi"
+            type="com.warbler.data.model.weather.AirQualitySource" />
+
+        <variable
             name="view"
             type="android.view.View" />
 
@@ -151,7 +155,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/current_location_icon" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout3"
+                        android:id="@+id/current_weather_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -174,6 +178,7 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
                             android:background="@android:color/transparent"
+                            android:contentDescription="@string/location_icon_description"
                             android:src="@drawable/place_holder"
                             android:translationZ="1dp"
                             android:visibility="gone"
@@ -266,21 +271,81 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/weather_description"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
                             android:backgroundTint="@android:color/transparent"
                             android:text="@string/mdash"
+                            android:textAlignment="center"
                             android:textColor="@color/colorAccent"
                             android:textSize="@dimen/current_weather_description_text_size"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/current_weather_icon"
                             tools:text="Cloudy" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/air_quality_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@drawable/top_rounded_rectangle"
+                            android:elevation="4dp"
+                            android:padding="8dp"
+                            android:visibility="@{viewModel.hasAqi ? view.VISIBLE : view.GONE}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/weather_description">
+
+                            <ImageView
+                                android:id="@+id/uv_index_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:backgroundTint="@android:color/transparent"
+                                android:contentDescription="@string/uv_index_icon"
+                                app:aqiColor="@{Integer.parseInt(viewModel.aqiValue)}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/uv_index_label"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_relax" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/uv_index_label"
+                                style="@style/weather_detail_text"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:backgroundTint="@android:color/transparent"
+                                android:text="@string/aqi_label"
+                                app:layout_constraintBottom_toBottomOf="@+id/uv_index_icon"
+                                app:layout_constraintEnd_toStartOf="@+id/uv_index_value"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/uv_index_icon"
+                                app:layout_constraintTop_toTopOf="@+id/uv_index_icon"
+                                tools:text="Air Quality Index:" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/uv_index_value"
+                                style="@style/weather_detail_text"
+                                android:layout_marginStart="8dp"
+                                android:backgroundTint="@android:color/transparent"
+                                android:contentDescription="@string/uv_index"
+                                android:text="@{viewModel.aqiValue}"
+                                app:layout_constraintBottom_toBottomOf="@+id/uv_index_label"
+                                app:layout_constraintStart_toEndOf="@+id/uv_index_label"
+                                app:layout_constraintTop_toTopOf="@+id/uv_index_label"
+                                tools:text="1 " />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -301,99 +366,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:background="@drawable/top_rounded_rectangle"
-                        android:elevation="4dp"
-                        android:padding="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
-
-                        <ImageView
-                            android:id="@+id/uv_index_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:backgroundTint="@android:color/transparent"
-                            android:contentDescription="@string/uv_index_icon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/uv_index_label"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_sun"
-                            app:tint="@color/yellow" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/uv_index_label"
-                            style="@style/weather_detail_text"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:backgroundTint="@android:color/transparent"
-                            android:text="@string/uv_index_label"
-                            app:layout_constraintBottom_toBottomOf="@+id/uv_index_icon"
-                            app:layout_constraintEnd_toStartOf="@+id/uv_index_value"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/uv_index_icon"
-                            app:layout_constraintTop_toTopOf="@+id/uv_index_icon"
-                            tools:text="UV Index: " />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/uv_index_value"
-                            style="@style/weather_detail_text"
-                            android:backgroundTint="@android:color/transparent"
-                            android:contentDescription="@string/uv_index"
-                            android:text="@string/mdash"
-                            app:layout_constraintBottom_toBottomOf="@+id/uv_index_label"
-                            app:layout_constraintEnd_toStartOf="@+id/humidity_icon"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/uv_index_label"
-                            app:layout_constraintTop_toTopOf="@+id/uv_index_label"
-                            tools:text="1.0 " />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/humidity_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:backgroundTint="@android:color/transparent"
-                            android:contentDescription="@string/humidity_icon"
-                            android:src="@drawable/ic_water_drop"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/humidity_text_value"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/uv_index_value"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/blue" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/humidity_text_value"
-                            style="@style/weather_detail_text"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:backgroundTint="@android:color/transparent"
-                            android:contentDescription="@string/humidity"
-                            android:text="@string/mdash"
-                            app:layout_constraintBottom_toBottomOf="@+id/humidity_icon"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/humidity_icon"
-                            app:layout_constraintTop_toTopOf="@+id/humidity_icon"
-                            tools:text="45%" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/additional_details_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -405,7 +377,7 @@
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                        app:layout_constraintTop_toBottomOf="@+id/current_weather_layout">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/weather_detail_recycler_view"

@@ -1,5 +1,6 @@
 package com.warbler.data.network.weather
 
+import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.network.NetworkConstants
 import retrofit2.http.GET
@@ -12,4 +13,11 @@ interface WeatherApiService {
         @Query("lon") lon: Double,
         @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY,
     ): WeatherDataSource
+
+    @GET("data/2.5/air_pollution")
+    suspend fun getAirPollution(
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double,
+        @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY,
+    ): AirQualitySource
 }
