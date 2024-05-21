@@ -4,7 +4,7 @@ buildscript {
         coroutine = '1.8.1'
         dagger_hilt = '2.51.1'
         datastore = '1.1.1'
-        hilt_lifecycle_viewmodel = '1.1.0'
+        hilt_lifecycle_viewmodel = '1.2.0'
         kotlin = '2.0.0'
         material = '1.11.0'
         moshi = "1.14.0"
