@@ -127,7 +127,7 @@ dependencies {
     implementation "com.patrykandpatrick.vico:core:2.0.0-alpha.6"
 
     // Vico for the view system.
-    implementation "com.patrykandpatrick.vico:views:2.0.0-alpha.6"
+    implementation "com.patrykandpatrick.vico:views:2.0.0-alpha.20"
 
     // For instrumented tests.
     androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt"
