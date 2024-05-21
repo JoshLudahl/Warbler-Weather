@@ -88,5 +88,5 @@
     <string name="moonrise">Moonrise</string>
     <string name="moonset">Moonset</string>
     <string name="share_icon">Share Icon</string>
-    <string name="aqi_label">Air Quality Index:</string>
+    <string name="aqi_label">Air Quality Index</string>
 </resources>
