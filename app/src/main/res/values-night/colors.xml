@@ -4,7 +4,7 @@
     <color name="colorSecondary">@color/colorYellow</color>
     <color name="colorPrimaryDark">@color/colorBlack</color>
     <color name="colorAccent">@color/colorLight</color>
-    <color name="colorBackground">#282828</color>
+    <color name="colorBackground">@color/colorDark</color>
     <color name="colorPrimarySwap">@color/colorYellow</color>
     <color name="colorSecondarySwap">@color/colorDarkGray</color>
     <color name="colorTertiarySwap">@color/colorLight</color>
