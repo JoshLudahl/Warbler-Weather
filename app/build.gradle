@@ -83,98 +83,98 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //  Android specific
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'com.google.android.gms:play-services-location:21.2.0'
-    implementation "com.google.android.material:material:1.12.0"
-    implementation "androidx.viewpager2:viewpager2:1.1.0"
+    implementation libs.appcompat
+    implementation libs.core.ktx
+    implementation libs.constraintlayout
+    implementation libs.legacy.support.v4
+    implementation libs.lifecycle.extensions
+    implementation libs.play.services.location
+    implementation libs.material
+    implementation libs.viewpager2
 
     // DI
-    implementation "com.google.dagger:hilt-android:$dagger_hilt"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0'
-    kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt"
-    kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_viewmodel"
+    implementation libs.hilt.android
+    implementation libs.lifecycle.livedata.ktx
+    implementation libs.lifecycle.viewmodel.ktx
+    kapt libs.hilt.android.compiler
+    kapt libs.hilt.compiler
 
     //Firebase
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:33.0.0')
+    implementation platform(libs.firebase.bom)
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation libs.firebase.crashlytics.ktx
 
     // Add the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation libs.firebase.database.ktx
 
     // Add the dependency for the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation libs.firebase.analytics.ktx
 
     // Add Performance lib
-    implementation 'com.google.firebase:firebase-perf-ktx'
+    implementation libs.firebase.perf.ktx
 
     // In App Updates
-    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation libs.app.update
     // For Kotlin users also add the Kotlin extensions library for Play In-App Update:
-    implementation 'com.google.android.play:app-update-ktx:2.1.0'
+    implementation libs.app.update.ktx
 
     // Graphs and charts
     // Houses the core logic for charts and other elements. Included in all other modules.
-    implementation "com.patrykandpatrick.vico:core:2.0.0-alpha.6"
+    implementation libs.core
 
     // Vico for the view system.
-    implementation "com.patrykandpatrick.vico:views:2.0.0-alpha.6"
+    implementation libs.views
 
     // For instrumented tests.
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt"
+    androidTestImplementation libs.hilt.android.testing
     // ...with Kotlin.
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$dagger_hilt"
+    kaptAndroidTest libs.hilt.android.compiler
 
     //  Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.kotlinx.coroutines.android
 
     // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
+    implementation libs.kotlinx.serialization.json
 
     // Feature module Support
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation"
+    implementation libs.navigation.dynamic.features.fragment
 
     // Testing Navigation
-    androidTestImplementation "androidx.navigation:navigation-testing:$navigation"
+    androidTestImplementation libs.navigation.testing
 
     //  data
-    implementation "androidx.room:room-runtime:$room"
-    implementation "androidx.room:room-ktx:$room"
-    ksp "androidx.room:room-compiler:$room"
+    implementation libs.room.runtime
+    implementation libs.room.ktx
+    ksp libs.room.compiler
 
-    implementation "androidx.datastore:datastore-preferences:$datastore"
-    implementation "androidx.datastore:datastore-preferences-core:$datastore"
+    implementation libs.datastore.preferences
+    implementation libs.datastore.preferences.core
 
     // network
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
-    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.12'
-    implementation "androidx.browser:browser:1.8.0"
+    implementation libs.retrofit
+    implementation libs.converter.moshi
+    implementation libs.logging.interceptor
+    implementation libs.retrofit2.kotlinx.serialization.converter
+    implementation libs.okhttp
+    implementation libs.browser
 
     //  testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
-    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.1.1'
-    androidTestImplementation 'com.github.JoshLudahl:espresso-library-kotlin:2023.9.01'
+    androidTestImplementation libs.runner
+    androidTestImplementation libs.rules
+    androidTestImplementation libs.accessibility.test.framework
+    androidTestImplementation libs.espresso.library.kotlin
 
-    androidTestUtil 'androidx.test:orchestrator:1.4.2'
+    androidTestUtil libs.orchestrator
 }

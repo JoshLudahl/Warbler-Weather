@@ -1,17 +1,5 @@
 
 buildscript {
-    ext {
-        coroutine = '1.8.1'
-        dagger_hilt = '2.51.1'
-        datastore = '1.1.1'
-        hilt_lifecycle_viewmodel = '1.1.0'
-        kotlin = '2.0.0'
-        material = '1.11.0'
-        moshi = "1.14.0"
-        navigation = '2.7.7'
-        retrofit = '2.9.0'
-        room = "2.6.1"
-    }
 
     repositories {
         google()
@@ -19,13 +7,13 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.1'
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$dagger_hilt"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
-        classpath 'com.google.gms:google-services:4.4.1'
+        classpath libs.gradle
+        classpath libs.hilt.android.gradle.plugin
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.navigation.safe.args.gradle.plugin
+        classpath libs.google.services
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9' // 3.0.1 is buggy, skip.
-        classpath 'com.google.firebase:perf-plugin:1.4.2'
+        classpath libs.perf.plugin
     }
 }
 
