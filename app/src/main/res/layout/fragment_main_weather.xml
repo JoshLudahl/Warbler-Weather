@@ -378,6 +378,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/details_icon"
+                        android:layout_width="@dimen/expand_down_icon"
+                        android:layout_height="@dimen/expand_down_icon"
+                        android:layout_marginTop="8dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_round_expand_circle_down"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/current_weather_layout" />
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/additional_details_layout"
                         android:layout_width="match_parent"
@@ -391,7 +403,7 @@
                         android:animateLayoutChanges="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/current_weather_layout">
+                        app:layout_constraintTop_toBottomOf="@+id/details_icon">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/weather_detail_recycler_view"
@@ -402,16 +414,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/details_icon"
-                        android:layout_width="@dimen/expand_down_icon"
-                        android:layout_height="@dimen/expand_down_icon"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_round_expand_circle_down"
 
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/forecast_label"
@@ -419,7 +422,7 @@
                         android:text="@string/forecast"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/details_icon" />
+                        app:layout_constraintTop_toBottomOf="@+id/additional_details_layout" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
