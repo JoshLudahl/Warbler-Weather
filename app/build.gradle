@@ -20,7 +20,7 @@ android {
         applicationId "com.softklass.warbler"
         minSdkVersion 26
         targetSdkVersion target
-        versionCode 67
+        versionCode 68
         versionName "0.$versionCode"
         testInstrumentationRunner "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
@@ -116,6 +116,13 @@ dependencies {
 
     // Add Performance lib
     implementation libs.firebase.perf.ktx
+
+    // This dependency is downloaded from the Google’s Maven repository.
+    // Make sure you also include that repository in your project's build.gradle file.
+    implementation(libs.feature.delivery)
+
+    // For Kotlin users, also import the Kotlin extensions library for Play Feature Delivery:
+    implementation(libs.feature.delivery.ktx)
 
     // In App Updates
     implementation libs.app.update
