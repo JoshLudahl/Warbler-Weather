@@ -16,3 +16,4 @@
 *.aab
 .idea
 /.idea/
+/.kotlin/
