@@ -12,7 +12,7 @@ buildscript {
         classpath libs.kotlin.gradle.plugin
         classpath libs.navigation.safe.args.gradle.plugin
         classpath libs.google.services
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9' // 3.0.1 is buggy, skip.
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2' // 3.0.1 is buggy, skip.
         classpath libs.perf.plugin
     }
 }
