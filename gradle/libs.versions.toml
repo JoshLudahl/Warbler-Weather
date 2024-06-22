@@ -10,7 +10,8 @@ coreKtx = "1.13.1"
 datastorePreferences = "1.1.1"
 espressoCore = "3.5.1"
 espressoLibraryKotlin = "2023.9.01"
-firebaseBom = "33.1.0"
+firebaseBom = "33.1.1"
+firebaseCrashlyticsGradle = "3.0.2"
 googleServices = "4.4.2"
 gradle = "8.5.0"
 hiltAndroidGradlePlugin = "2.51.1"
@@ -64,6 +65,7 @@ feature-delivery = { module = "com.google.android.play:feature-delivery", versio
 feature-delivery-ktx = { module = "com.google.android.play:feature-delivery-ktx", version.ref = "appUpdate" }
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
 firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-perf-ktx = { module = "com.google.firebase:firebase-perf-ktx" }
