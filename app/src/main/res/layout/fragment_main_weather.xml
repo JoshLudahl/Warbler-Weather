@@ -294,7 +294,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="24dp"
                             android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/top_rounded_rectangle"
                             android:backgroundTint="@color/colorBackground"
                             android:elevation="4dp"
@@ -357,6 +357,18 @@
                                 app:layout_constraintStart_toEndOf="@+id/uv_index_label"
                                 app:layout_constraintTop_toTopOf="@+id/uv_index_label"
                                 tools:text="1 " />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/air_quality_expand_icon"
+                                android:layout_width="@dimen/expand_down_icon"
+                                android:layout_height="@dimen/expand_down_icon"
+                                android:layout_marginTop="8dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:tint="@color/colorIcons"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="@+id/uv_index_value"
+                                app:layout_constraintStart_toStartOf="@+id/uv_index_icon"
+                                app:layout_constraintTop_toBottomOf="@+id/uv_index_label" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
