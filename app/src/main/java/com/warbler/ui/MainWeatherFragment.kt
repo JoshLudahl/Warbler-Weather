@@ -64,32 +64,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         MainAdapter(
             object : ClickListenerInterface<WeatherForecast> {
                 override fun onClick(item: WeatherForecast) {
-                    // handleOnForecastItemClicked(item)
                     handleForecastClickForViewPager(item)
                 }
 
-                override fun delete(item: WeatherForecast) {
-                    // Not used
-                }
+                override fun delete(item: WeatherForecast) {/** Not used */}
             },
         )
-
-    private fun handleOnForecastItemClicked(item: WeatherForecast) {
-        viewModel.weatherObject.value?.let {
-            Log.i("Speed Unit", "Speed Unit is: ${viewModel.speedUnit.value}")
-            val action =
-                MainWeatherFragmentDirections.actionMainWeatherFragmentToForecastFragment(
-                    Forecast(
-                        daily = it.daily[item.index],
-                        temperature = viewModel.temperatureUnit.value,
-                        timeZoneOffset = it.timezoneOffset,
-                        speed = viewModel.speedUnit.value,
-                    ),
-                )
-
-            findNavController().navigate(action)
-        } ?: toast("Error getting forecast.")
-    }
 
     fun handleForecastClickForViewPager(item: WeatherForecast) {
         viewModel.weatherObject.value?.let {
