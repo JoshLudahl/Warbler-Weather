@@ -66,7 +66,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     handleForecastClickForViewPager(item)
                 }
 
-                override fun delete(item: WeatherForecast) {/** Not used */}
+                override fun delete(item: WeatherForecast) { /* Not used */ }
             },
         )
 
