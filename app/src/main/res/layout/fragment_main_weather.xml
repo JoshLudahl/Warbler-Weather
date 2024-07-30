@@ -363,9 +363,9 @@
                                 android:layout_width="@dimen/expand_down_icon"
                                 android:layout_height="@dimen/expand_down_icon"
                                 android:layout_marginTop="8dp"
-                                android:src="@drawable/ic_arrow_down"
+                                android:src="@drawable/ic_read_more"
                                 android:tint="@color/colorIcons"
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 app:layout_constraintEnd_toEndOf="@+id/uv_index_value"
                                 app:layout_constraintStart_toStartOf="@+id/uv_index_icon"
                                 app:layout_constraintTop_toBottomOf="@+id/uv_index_label" />
