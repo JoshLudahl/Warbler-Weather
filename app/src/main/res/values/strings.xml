@@ -88,5 +88,13 @@
     <string name="moonrise">Moonrise</string>
     <string name="moonset">Moonset</string>
     <string name="share_icon">Share Icon</string>
+
+    <!-- Air Quality Index Data -->
     <string name="aqi_label">Air Quality Index</string>
+    <string name="so2">SO<sub>2</sub></string>
+    <string name="no2">NO<sub>2</sub></string>
+    <string name="pm10">PM<sub>10</sub></string>
+    <string name="pm25">PM<sub>2.5</sub></string>
+    <string name="o3">O<sub>3</sub></string>
+    <string name="co">CO</string>
 </resources>
