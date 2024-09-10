@@ -9,6 +9,18 @@ enum class AQI {
     INVALID,
 }
 
+fun getIndexByCode(code: String, value: Int): AQI = when (code) {
+    "co" -> getC0Index(value)
+    "nh3" -> getNh3Index()
+    "no" -> getNoIndex()
+    "no2" -> getNo2Index(value)
+    "03" -> getO3Index(value)
+    "pm10" -> getPm10Index(value)
+    "pm25" -> getPm25Index(value)
+    "so2" -> getSo2Index(value)
+    else -> AQI.INVALID
+}
+
 fun getSo2Index(value: Int): AQI =
     when {
         value < 20 -> AQI.GOOD
@@ -69,6 +81,6 @@ fun getC0Index(value: Int): AQI =
         else -> AQI.INVALID
     }
 
-fun getNh3Index(value: Int): AQI = AQI.INVALID
+fun getNh3Index(): AQI = AQI.INVALID
 
-fun getNoIndex(value: Int): AQI = AQI.INVALID
+fun getNoIndex(): AQI = AQI.INVALID

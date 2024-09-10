@@ -97,4 +97,6 @@
     <string name="pm25">PM<sub>2.5</sub></string>
     <string name="o3">O<sub>3</sub></string>
     <string name="co">CO</string>
+    <string name="nh3">NH<sub>3</sub></string>
+    <string name="no">NO</string>
 </resources>
