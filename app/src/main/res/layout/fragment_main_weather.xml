@@ -365,7 +365,7 @@
                                 android:layout_marginTop="8dp"
                                 android:src="@drawable/ic_read_more"
                                 android:tint="@color/colorIcons"
-                                android:visibility="visible"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="@+id/uv_index_value"
                                 app:layout_constraintStart_toStartOf="@+id/uv_index_icon"
                                 app:layout_constraintTop_toBottomOf="@+id/uv_index_label" />

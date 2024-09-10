@@ -66,7 +66,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                     handleForecastClickForViewPager(item)
                 }
 
-                override fun delete(item: WeatherForecast) { /* Not used */
+                override fun delete(item: WeatherForecast) { // Not used
                 }
             },
         )
@@ -150,10 +150,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunrise,
                 value =
-                Conversion.getTimeFromTimeStamp(
-                    timeStamp = result.current.sunrise.toLong(),
-                    offset = result.timezoneOffset.toLong(),
-                ) + " AM",
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = result.current.sunrise.toLong(),
+                        offset = result.timezoneOffset.toLong(),
+                    ) + " AM",
                 label = R.string.sunrise,
             ),
         )
@@ -162,10 +162,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_sunset,
                 value =
-                Conversion.getTimeFromTimeStamp(
-                    timeStamp = result.current.sunset.toLong(),
-                    offset = result.timezoneOffset.toLong(),
-                ) + " PM",
+                    Conversion.getTimeFromTimeStamp(
+                        timeStamp = result.current.sunset.toLong(),
+                        offset = result.timezoneOffset.toLong(),
+                    ) + " PM",
                 label = R.string.sunset,
             ),
         )
@@ -174,10 +174,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_thermometer,
                 value =
-                Conversion.fromKelvinToProvidedUnit(
-                    result.current.feelsLike,
-                    viewModel.temperatureUnit.value,
-                ).roundToInt().toDegrees,
+                    Conversion.fromKelvinToProvidedUnit(
+                        result.current.feelsLike,
+                        viewModel.temperatureUnit.value,
+                    ).roundToInt().toDegrees,
                 label = R.string.feels_like,
             ),
         )
@@ -186,10 +186,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
                 value =
-                Conversion.fromKelvinToProvidedUnit(
-                    value = result.current.dewPoint,
-                    unit = viewModel.temperatureUnit.value,
-                ).toInt().toDegrees,
+                    Conversion.fromKelvinToProvidedUnit(
+                        value = result.current.dewPoint,
+                        unit = viewModel.temperatureUnit.value,
+                    ).toInt().toDegrees,
                 label = R.string.dew_point,
             ),
         )
@@ -206,10 +206,10 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_umbrella,
                 value =
-                getString(
-                    R.string.percentage,
-                    "${result.daily[0].pop.fromDoubleToPercentage}",
-                ),
+                    getString(
+                        R.string.percentage,
+                        "${result.daily[0].pop.fromDoubleToPercentage}",
+                    ),
                 label = R.string.chance_of_rain,
             ),
         )
@@ -226,7 +226,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_sun,
                 value =
-                result.current.uvi.toString(),
+                    result.current.uvi.toString(),
                 label = R.string.uv_index,
             ),
         )
