@@ -197,7 +197,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     private fun toggleKeyboardVisibility1(view: View) {
         activity?.let {
             val imm = it.getSystemService(InputMethodManager::class.java)
-            imm.showSoftInput(view, InputMethodManager.HIDE_IMPLICIT_ONLY)
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
     }
 
