@@ -32,6 +32,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent">
 
         <ScrollView
@@ -105,7 +106,7 @@
                         android:layout_width="@dimen/default_icon_size"
                         android:layout_height="@dimen/default_icon_size"
                         android:layout_marginStart="32dp"
-                        android:layout_marginTop="32dp"
+
                         android:contentDescription="@string/location_icon_description"
                         android:src="@drawable/ic_my_location"
                         app:layout_constraintStart_toStartOf="parent"
@@ -129,21 +130,21 @@
                         android:id="@+id/settings_icon"
                         android:layout_width="@dimen/default_icon_size"
                         android:layout_height="@dimen/default_icon_size"
-                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="32dp"
                         android:contentDescription="@string/settings_icon_description"
                         android:src="@drawable/ic_round_settings"
+                        app:layout_constraintBottom_toBottomOf="@+id/current_location_icon"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/current_location_icon" />
 
                     <ImageView
                         android:id="@+id/search_icon"
                         android:layout_width="@dimen/default_icon_size"
                         android:layout_height="@dimen/default_icon_size"
-                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="16dp"
                         android:contentDescription="@string/search_icon_description"
                         android:src="@drawable/ic_round_add_location_alt"
+                        app:layout_constraintBottom_toBottomOf="@+id/current_location_icon"
                         app:layout_constraintEnd_toStartOf="@+id/settings_icon"
                         app:layout_constraintTop_toTopOf="parent" />
 

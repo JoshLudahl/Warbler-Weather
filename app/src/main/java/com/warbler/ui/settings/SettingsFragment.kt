@@ -33,11 +33,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun setupActionBar() {
-        binding.actionBarInclude.actionBarTitle.text = getString(R.string.settings)
+//        binding.actionBarInclude.actionBarTitle.text = getString(R.string.settings)
     }
 
     private fun setupListeners() {
-        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
+//        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
+//            view.findNavController().navigateUp()
+//        }
+
+        binding.topAppBar.setNavigationOnClickListener { view ->
             view.findNavController().navigateUp()
         }
 
