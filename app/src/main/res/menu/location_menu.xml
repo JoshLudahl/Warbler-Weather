@@ -7,6 +7,5 @@
         android:contentDescription="@string/add_another_location_description"
         android:icon="@drawable/ic_add_40"
         android:title="@string/add_title"
-
         app:showAsAction="ifRoom" />
 </menu>

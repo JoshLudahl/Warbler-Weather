@@ -72,12 +72,9 @@
                         android:paddingTop="4dp"
                         android:paddingRight="16dp"
                         android:paddingBottom="4dp"
-
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/date_title_text_size"
-
-
                         android:textStyle="bold"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +172,6 @@
                     android:id="@+id/weather_detail_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="6"
                     tools:layout_editor_absoluteX="8dp" />
