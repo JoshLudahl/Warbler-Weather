@@ -7,5 +7,7 @@
         android:contentDescription="@string/share_icon"
         android:icon="@drawable/ic_share"
         android:title="@string/share_icon"
+        android:iconTint="@color/colorPrimary"
+        android:iconTintMode="screen"
         app:showAsAction="ifRoom" />
 </menu>
