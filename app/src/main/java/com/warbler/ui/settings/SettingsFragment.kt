@@ -1,5 +1,6 @@
 package com.warbler.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
@@ -29,17 +30,32 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupListeners()
-        setupActionBar()
     }
 
-    private fun setupActionBar() {
-//        binding.actionBarInclude.actionBarTitle.text = getString(R.string.settings)
+    private fun handleShareClick(info: String) {
+        val sendIntent =
+            Intent(
+                Intent.ACTION_SEND,
+            ).apply {
+                putExtra(Intent.EXTRA_TEXT, info)
+                type = "text/plain"
+            }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+
+        startActivity(shareIntent)
     }
 
     private fun setupListeners() {
-//        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
-//            view.findNavController().navigateUp()
-//        }
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.settings_share_icon -> {
+                    handleShareClick(Constants.WEATHER_WARBLER_URL)
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.topAppBar.setNavigationOnClickListener { view ->
             view.findNavController().navigateUp()

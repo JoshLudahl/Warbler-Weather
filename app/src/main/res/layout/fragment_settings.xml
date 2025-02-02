@@ -26,6 +26,7 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -35,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?attr/actionBarSize"
+                    app:menu="@menu/settings_menu"
                     app:navigationIcon="@drawable/ic_navigate_before"
                     app:navigationIconTint="@color/colorPrimary"
                     app:title="@string/settings" />

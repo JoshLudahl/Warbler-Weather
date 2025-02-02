@@ -7,6 +7,7 @@ object Constants {
     const val PRIVACY_POLICY_URL: String = "https://softklass.com/privacy-policy/weatheruous.html"
     const val WARBLER_AUDUBON: String =
         "https://www.audubon.org/field-guide/bird/yellow-rumped-warbler"
+    const val WEATHER_WARBLER_URL: String = "https://play.google.com/store/apps/details?id=com.softklass.warbler&pcampaignid=web_share"
 
     const val FLEXIBLE_UPDATE_COUNT: Int = 30
     const val UPDATE_TAG: Int = 1
