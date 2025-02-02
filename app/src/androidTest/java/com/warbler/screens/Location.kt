@@ -6,5 +6,5 @@ import com.warbler.R
 import org.hamcrest.Matcher
 
 class Location {
-    val locationTitle: Matcher<View> = view(R.id.location_title)
+    val locationTitle: Matcher<View> = view(R.id.location_text)
 }
