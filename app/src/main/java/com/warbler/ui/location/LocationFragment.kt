@@ -64,12 +64,6 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         setUpListeners()
         setUpObservers()
         setUpRecyclerView()
-        setUpAppBar()
-    }
-
-    private fun setUpAppBar() {
-        binding.actionBarInclude.actionBarTitle.text = getString(R.string.locations)
-        binding.actionBarInclude.rightIcon.visibility = View.VISIBLE
     }
 
     private fun setUpObservers() {
@@ -135,17 +129,31 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     }
 
     private fun setUpListeners() {
-        binding.actionBarInclude.backArrowIcon.setOnClickListener { view ->
+        binding.topAppBar.setNavigationOnClickListener { view ->
             view.findNavController().navigateUp()
         }
 
-        binding.actionBarInclude.rightIcon.setOnClickListener {
-            listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
-                .forEach { it.visibility = View.VISIBLE }
-            binding.locationRecyclerView.visibility = View.GONE
-            binding.searchBarEditText.requestFocus()
-            toggleKeyboardVisibility(binding.searchBarEditText)
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.add_location_icon -> {
+                    listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
+                        .forEach { it.visibility = View.VISIBLE }
+                    binding.locationRecyclerView.visibility = View.GONE
+                    binding.searchBarEditText.requestFocus()
+                    toggleKeyboardVisibility(binding.searchBarEditText)
+                    true
+                }
+                else -> false
+            }
         }
+
+//        binding.topAppBar.setOnClickListener {
+//            listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
+//                .forEach { it.visibility = View.VISIBLE }
+//            binding.locationRecyclerView.visibility = View.GONE
+//            binding.searchBarEditText.requestFocus()
+//            toggleKeyboardVisibility(binding.searchBarEditText)
+//        }
 
         binding.closeSearch.setOnClickListener {
             closeAndClearSearch()

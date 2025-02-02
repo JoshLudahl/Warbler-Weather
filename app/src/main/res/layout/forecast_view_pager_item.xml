@@ -14,6 +14,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,38 +32,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/location_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@color/blue"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="4dp"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="4dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimarySwap"
-                    android:textSize="@dimen/date_title_text_size"
-                    android:textStyle="bold"
-
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Portland, Oregon" />
-
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/main_forecast_heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/top_rounded_rectangle"
                     android:backgroundTint="@color/colorPrimaryDark"
@@ -70,7 +45,7 @@
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location_title">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageButton
                         android:id="@+id/share_icon"

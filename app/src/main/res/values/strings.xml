@@ -99,4 +99,6 @@
     <string name="co">CO</string>
     <string name="nh3">NH<sub>3</sub></string>
     <string name="no">NO</string>
+    <string name="add_another_location_description">Add another location by tapping the add icon.</string>
+    <string name="add_title">Add Location</string>
 </resources>

@@ -19,20 +19,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <include
-                    android:id="@+id/action_bar_include"
-                    layout="@layout/app_bar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.appcompat.widget.Toolbar>
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    app:menu="@menu/location_menu"
+                    app:navigationIcon="@drawable/ic_navigate_before"
+                    app:navigationIconTint="@color/colorPrimary"
+                    app:title="@string/locations" />
+
+            </com.google.android.material.appbar.AppBarLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

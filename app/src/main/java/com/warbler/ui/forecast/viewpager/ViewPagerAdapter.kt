@@ -30,7 +30,6 @@ class ViewPagerAdapter(
         private val itemBinding: ForecastViewPagerItemBinding,
     ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(forecastItem: Forecast) {
-            itemBinding.locationTitle.text = location
             itemBinding.forecast = forecastItem
             itemBinding.hiLow.temperatureLowText.text =
                 Conversion.fromKelvinToProvidedUnit(
