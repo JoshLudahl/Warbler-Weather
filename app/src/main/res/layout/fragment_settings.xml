@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="?attr/actionBarSize"
                     app:navigationIcon="@drawable/ic_navigate_before"
+                    app:navigationIconTint="@color/colorPrimary"
                     app:title="@string/settings" />
 
             </com.google.android.material.appbar.AppBarLayout>
