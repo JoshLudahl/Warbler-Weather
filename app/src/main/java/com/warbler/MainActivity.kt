@@ -29,15 +29,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appUpdateManager: AppUpdateManager
 
-    // Returns an intent object that you use to check for an update.
     private lateinit var aut: Task<AppUpdateInfo>
     private val updateType = AppUpdateType.FLEXIBLE
 
     val listener =
         InstallStateUpdatedListener { state ->
             if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                // After the update is downloaded, show a notification
-                // and request user confirmation to restart the app.
+
                 Log.i("MainActivity", "Update has been downloaded.")
                 Toast.makeText(
                     this,
@@ -84,12 +82,8 @@ class MainActivity : AppCompatActivity() {
                 appUpdateManager.registerListener(listener)
                 Log.i("MainActivity", "Starting Update.")
                 appUpdateManager.startUpdateFlowForResult(
-                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
                     appUpdateInfo,
-                    // an activity result launcher registered via registerForActivityResult
                     activityResultLauncher,
-                    // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
-                    // flexible updates.
                     AppUpdateOptions.newBuilder(updateType).build(),
                 )
             } else {
