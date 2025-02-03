@@ -1,5 +1,6 @@
 [versions]
 accessibilityTestFramework = "4.1.1"
+activityCompose = "1.10.0"
 appcompat = "1.7.0"
 appUpdate = "2.1.0"
 browser = "1.8.0"
@@ -19,6 +20,7 @@ hiltAndroidTesting = "2.55"
 hiltCompiler = "1.2.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
+kotlin = "2.1.10"
 kotlinGradlePlugin = "2.1.0"
 kotlinxCoroutinesAndroid = "1.10.1"
 kotlinxCoroutinesCore = "1.10.1"
@@ -26,8 +28,8 @@ kotlinxSerializationJson = "1.8.0"
 legacySupportV4 = "1.0.0"
 lifecycleExtensions = "2.2.0"
 lifecycleLivedataKtx = "2.8.7"
+lifecycleViewmodelCompose = "2.8.7"
 loggingInterceptor = "4.12.0"
-material = "1.12.0"
 navigationDynamicFeaturesFragment = "2.8.6"
 navigationFragmentKtx = "2.8.6"
 navigationSafeArgsGradlePlugin = "2.8.6"
@@ -48,6 +50,8 @@ viewpager2 = "1.1.0"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
 app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -84,9 +88,12 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4" }
 lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
 lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleLivedataKtx" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
-material = { module = "com.google.android.material:material", version.ref = "material" }
+material-icons-core = { module = "androidx.compose.material:material-icons-core" }
+material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+material3 = { module = "androidx.compose.material3:material3" }
 navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationDynamicFeaturesFragment" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
@@ -103,7 +110,14 @@ room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 rules = { module = "androidx.test:rules", version.ref = "rules" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
+runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
+runtime-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2" }
+ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 views = { module = "com.patrykandpatrick.vico:views", version.ref = "core" }
 
 [plugins]
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -13,6 +13,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
     id("com.google.devtools.ksp")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -22,24 +23,39 @@ android {
         applicationId = "com.softklass.warbler"
         minSdk = 26
         targetSdk = target
-        versionCode = 78
+        versionCode = 79
         versionName = "0.$versionCode"
         testInstrumentationRunner = "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(mutableMapOf("clearPackageData" to "true"))
         vectorDrawables.useSupportLibrary = true
-        buildConfigField("String", "WEATHER_BASE_URL", "\"${System.getenv("WEATHER_BASE_URL") ?: project.property("WEATHER_BASE_URL")}\"")
+        buildConfigField(
+            "String",
+            "WEATHER_BASE_URL",
+            "\"${System.getenv("WEATHER_BASE_URL") ?: project.property("WEATHER_BASE_URL")}\"",
+        )
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            buildConfigField(
+                "String",
+                "WEATHER_API_KEY",
+                "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
+            )
             signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = false
-            buildConfigField("String", "WEATHER_API_KEY", "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"")
+            buildConfigField(
+                "String",
+                "WEATHER_API_KEY",
+                "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
+            )
         }
     }
 
@@ -60,6 +76,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        compose = true
     }
     namespace = "com.warbler"
 
@@ -94,8 +111,39 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.lifecycle.extensions)
     implementation(libs.play.services.location)
-    implementation(libs.material)
     implementation(libs.viewpager2)
+    implementation(libs.material3)
+
+    // Compose
+    val composeBom = platform("androidx.compose:compose-bom:2025.01.01")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    // Android Studio Preview support
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+
+    // UI Tests
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.test.manifest)
+
+    // Optional - Included automatically by material, only add when you need
+    // the icons but not the material library (e.g. when using Material3 or a
+    // custom design system based on Foundation)
+    implementation(libs.material.icons.core)
+    // Optional - Add full set of material icons
+    implementation(libs.material.icons.extended)
+    // Optional - Add window size utils
+    implementation(libs.adaptive)
+
+    // Optional - Integration with activities
+    implementation(libs.activity.compose)
+    // Optional - Integration with ViewModels
+    implementation(libs.lifecycle.viewmodel.compose)
+    // Optional - Integration with LiveData
+    implementation(libs.runtime.livedata)
+    // Optional - Integration with RxJava
+    implementation(libs.runtime.rxjava2)
 
     // DI
     implementation(libs.hilt.android)
