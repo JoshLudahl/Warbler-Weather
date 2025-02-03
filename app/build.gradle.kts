@@ -6,7 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("org.jlleitschuh.gradle.ktlint")
+    alias(libs.plugins.ktlint)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
