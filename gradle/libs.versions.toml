@@ -25,6 +25,8 @@ kotlinGradlePlugin = "2.1.0"
 kotlinxCoroutinesAndroid = "1.10.1"
 kotlinxCoroutinesCore = "1.10.1"
 kotlinxSerializationJson = "1.8.0"
+ksp = "2.1.10-1.0.29"
+ktlint = "12.1.2"
 legacySupportV4 = "1.0.0"
 lifecycleExtensions = "2.2.0"
 lifecycleLivedataKtx = "2.8.7"
@@ -121,3 +123,7 @@ views = { module = "com.patrykandpatrick.vico:views", version.ref = "core" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

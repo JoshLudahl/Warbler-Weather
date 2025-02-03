@@ -7,12 +7,12 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("org.jlleitschuh.gradle.ktlint")
-    id("kotlinx-serialization")
+    alias(libs.plugins.kotlin.serialization)
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -77,6 +77,7 @@ android {
         dataBinding = true
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     namespace = "com.warbler"
 
