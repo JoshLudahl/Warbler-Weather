@@ -96,6 +96,12 @@ ktlint {
         reporter(ReporterType.JSON)
         reporter(ReporterType.HTML)
     }
+    additionalEditorconfig.set(
+        mapOf(
+            "max_line_length" to "off",
+            "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+        ),
+    )
 }
 
 tasks.named("preBuild") {

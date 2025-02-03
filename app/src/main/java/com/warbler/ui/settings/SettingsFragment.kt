@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,6 +32,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupListeners()
+
+//        binding.composeView.apply {
+//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+//            setContent {
+//                MaterialTheme {
+//                    SegmentedButtonSingleSelect()
+//                }
+//            }
+//        }
     }
 
     private fun handleShareClick(info: String) {
@@ -41,7 +52,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 type = "text/plain"
             }
 
-        val shareIntent = Intent.createChooser(sendIntent, null)
+        val shareIntent = Intent.createChooser(sendIntent, "Share Weather Warbler")
 
         startActivity(shareIntent)
     }
@@ -53,6 +64,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     handleShareClick(Constants.WEATHER_WARBLER_URL)
                     true
                 }
+
                 else -> false
             }
         }
