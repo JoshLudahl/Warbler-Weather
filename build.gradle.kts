@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
-    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
+    id("org.jetbrains.kotlin.android") version "2.1.10" apply false
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("com.google.devtools.ksp") version "2.1.0-1.0.29" apply false
     alias(libs.plugins.compose.compiler) apply false
