@@ -191,10 +191,10 @@ dependencies {
 
     // Graphs and charts
     // Houses the core logic for charts and other elements. Included in all other modules.
-    implementation(libs.core)
+    implementation(libs.vico.core)
 
     // Vico for the view system.
-    implementation(libs.views)
+    implementation(libs.vico.views)
 
     // For instrumented tests.
     androidTestImplementation(libs.hilt.android.testing)

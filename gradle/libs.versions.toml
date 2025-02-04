@@ -6,7 +6,7 @@ appUpdate = "2.1.0"
 browser = "1.8.0"
 constraintlayout = "2.2.0"
 converterMoshi = "2.11.0"
-core = "2.0.0-alpha.6"
+vicoCore = "2.0.0-alpha.6"
 coreKtx = "1.15.0"
 datastorePreferences = "1.1.2"
 espressoCore = "3.6.1"
@@ -60,7 +60,7 @@ appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
-core = { module = "com.patrykandpatrick.vico:core", version.ref = "core" }
+vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vicoCore" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastorePreferences" }
@@ -119,7 +119,7 @@ ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
-views = { module = "com.patrykandpatrick.vico:views", version.ref = "core" }
+vico-views = { module = "com.patrykandpatrick.vico:views", version.ref = "vicoCore" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
