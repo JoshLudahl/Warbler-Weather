@@ -1,16 +1,17 @@
 package com.warbler.ui.settings
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.Event.Log
 import com.warbler.R
 import com.warbler.databinding.FragmentSettingsBinding
 import com.warbler.utilities.Constants
@@ -62,6 +63,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             when (menuItem.itemId) {
                 R.id.settings_share_icon -> {
                     handleShareClick(Constants.WEATHER_WARBLER_URL)
+                    true
+                }
+                R.id.settings_language_icon -> {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    intent.data = Uri.parse("package:" + context?.packageName)
+                    startActivity(intent)
                     true
                 }
 
@@ -174,6 +181,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             Snackbar
                 .make(binding.root, "Error opening link", Snackbar.LENGTH_LONG)
                 .show()
+
+            Log.builder().setContent("Error opening link: ${exception.message}").build()
         }
     }
 

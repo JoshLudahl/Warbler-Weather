@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/settings_language_icon"
+        android:contentDescription="@string/share_icon"
+        android:icon="@drawable/ic_language"
+        android:title="@string/share_icon"
+        android:iconTint="@color/colorPrimary"
+        android:iconTintMode="screen"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/settings_share_icon"
         android:contentDescription="@string/share_icon"
         android:icon="@drawable/ic_share"
