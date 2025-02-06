@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "238697606950",
     "project_id": "weather-warbler",
-    "storage_bucket": "weather-warbler.appspot.com"
+    "storage_bucket": "weather-warbler.firebasestorage.app"
   },
   "client": [
     {
@@ -10,6 +10,35 @@
         "mobilesdk_app_id": "1:238697606950:android:a4743342c11f2e00ecdbe7",
         "android_client_info": {
           "package_name": "com.softklass.warbler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238697606950-0rktvn6jm1d8aaseimq7ced41t5fh8s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5dRTpTofwNV4yi7wYo6K7bo98fX4oigc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238697606950-0rktvn6jm1d8aaseimq7ced41t5fh8s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238697606950:android:a66f8baffda8fa4eecdbe7",
+        "android_client_info": {
+          "package_name": "com.softklass.warbler.debug"
         }
       },
       "oauth_client": [
