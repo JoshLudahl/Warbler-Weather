@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">Thời tiết chim họa mi</string>
+      
+  <string name="current_temp_high_string">75˚</string>
+      
+  <string name="current_temp_low_string">40˚</string>
+      
+  <string name="condition_text_string">Nhiều mây</string>
+      
+  <string name="city_label_string">Portland, OR</string>
+      
+  <string name="refreshed_at_label_string">9:25 sáng</string>
+      
+  <string name="current_weather_temp_string">67˚</string>
+      
+  <string name="current_weather_description">Thời tiết hiện tại</string>
+      
+  <string name="refresh">Làm cho khỏe lại</string>
+      
+  <string name="version">v0.0.5</string>
+      
+  <string name="updated_at_string">làm mới lúc 9:27 sáng</string>
+      
+  <string name="location_icon_description">Biểu tượng vị trí</string>
+      
+  <string name="settings_icon_description">Biểu tượng Cài đặt</string>
+      
+  <string name="search_icon_description">Biểu tượng tìm kiếm</string>
+      
+  <string name="text_temperature">36°</string>
+      
+  <string name="settings">Cài đặt</string>
+      
+  <string name="settings_units_of_measurement">Đơn vị đo lường</string>
+      
+  <string name="settings_temperature">Nhiệt độ</string>
+      
+  <string name="settings_speed">Tốc độ</string>
+      
+  <string name="settings_about_heading">Về</string>
+      
+  <string name="settings_about_this_app">Về Warbler Weather</string>
+      
+  <string name="settings_privacy_policy_text">Chính sách bảo mật</string>
+      
+  <string name="mps">MPS</string>
+      
+  <string name="meters_per_second">Mét trên giây</string>
+      
+  <string name="kilometers_per_hour">Kilômét trên giờ</string>
+      
+  <string name="mph">MPH</string>
+      
+  <string name="km_h">KPH</string>
+      
+  <string name="miles_per_hour">Dặm mỗi giờ</string>
+      
+  <string name="celsius">C°</string>
+      
+  <string name="fahrenheit">F°</string>
+      
+  <string name="settings_fahrenheit">độ F</string>
+      
+  <string name="settings_celsius">độ C</string>
+      
+  <string name="settings_kelvin">Kelvin</string>
+      
+  <string name="uv_index_label">Chỉ số UV: </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">–</string>
+      
+  <string name="forecast">Dự báo 8 ngày</string>
+      
+  <string name="locations">Địa điểm</string>
+      
+  <string name="search_location">Tìm kiếm thành phố</string>
+      
+  <string name="humidity">Độ ẩm</string>
+      
+  <string name="humidity_icon">Biểu tượng độ ẩm</string>
+      
+  <string name="uv_index">Chỉ số UV</string>
+      
+  <string name="uv_index_icon">Biểu tượng chỉ số UV</string>
+      
+  <string name="pressure">%1$s giờPa</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">Cảnh báo thời tiết</string>
+      
+  <string name="current_location">Vị trí hiện tại</string>
+      
+  <string name="sunrise">Mặt trời mọc</string>
+      
+  <string name="sunset">Hoàng hôn</string>
+      
+  <string name="feels_like">Cảm giác như</string>
+      
+  <string name="feels_like_temp">
+    Cảm giác như 
+    <b>%1$s</b>
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">Điểm sương</string>
+      
+  <string name="clouds">Mây</string>
+      
+  <string name="pressure_text">Áp lực</string>
+      
+  <string name="chance_of_rain">Cơn mưa %</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">Gió</string>
+      
+  <string name="details">Chi tiết</string>
+      
+  <string name="summary">Bản tóm tắt</string>
+      
+  <string name="close">Đóng</string>
+      
+  <string name="no_internet_or_error">Đã xảy ra lỗi, vui lòng đảm bảo bạn có kết nối Internet và thử lại.</string>
+      
+  <string name="error_text_view_content_description">Lỗi xem văn bản.</string>
+      
+  <string name="error_icon_warning_content_description">Biểu tượng lỗi</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">Biểu tượng thời tiết hiện tại.</string>
+      
+  <string name="yellow_rumped_warbler">Chim chích mông vàng</string>
+      
+  <string name="currently">Hiện nay</string>
+      
+  <string name="hi_low_icon_description">Biểu tượng cho nhiệt độ cao và thấp.</string>
+      
+  <string name="hourly">48 giờ tới</string>
+      
+  <string name="chart_rain_title">Cơn mưa</string>
+      
+  <string name="chart_temp_title">Nhiệt độ</string>
+      
+  <string name="settings_accumulation">Tích lũy</string>
+      
+  <string name="millimeters_per_hour">Milimet trên giờ</string>
+      
+  <string name="inches_per_hour">Inch mỗi giờ</string>
+      
+  <string name="chart_humidity_title">Độ ẩm %</string>
+      
+  <string name="chart_uvi_title">Chỉ số UV</string>
+      
+  <string name="chart_wind_title">Tốc độ gió</string>
+      
+  <string name="back_arrow_icon_content_description">Biểu tượng nút quay lại</string>
+      
+  <string name="no_rain_in_forecast">Dự báo sẽ không có mưa trong vòng 48 giờ tới.</string>
+      
+  <string name="precipitation">Sự kết tủa</string>
+      
+  <string name="loading">Đang tải</string>
+      
+  <string name="wind_gust">Gió giật</string>
+      
+  <string name="moonrise">Mặt trăng mọc</string>
+      
+  <string name="moonset">Trăng lặn</string>
+      
+  <string name="share_icon">Biểu tượng chia sẻ</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">Chỉ số chất lượng không khí</string>
+      
+  <string name="so2">
+    Vậy
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    SỐ
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    Chiều
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    Chiều
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    O
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">Đồng bằng</string>
+      
+  <string name="nh3">
+    NH
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">KHÔNG</string>
+      
+  <string name="add_another_location_description">Thêm vị trí khác bằng cách chạm vào biểu tượng thêm.</string>
+      
+  <string name="add_title">Thêm Vị Trí</string>
+  
+</resources>

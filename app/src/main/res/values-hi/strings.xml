@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">वार्बलर मौसम</string>
+      
+  <string name="current_temp_high_string">75˚</string>
+      
+  <string name="current_temp_low_string">40˚</string>
+      
+  <string name="condition_text_string">बादलों से घिरा</string>
+      
+  <string name="city_label_string">पोर्टलैंड, ओरेगन</string>
+      
+  <string name="refreshed_at_label_string">9:25 पूर्वाह्न</string>
+      
+  <string name="current_weather_temp_string">67˚</string>
+      
+  <string name="current_weather_description">वर्तमान मौसम</string>
+      
+  <string name="refresh">ताज़ा करना</string>
+      
+  <string name="version">v0.0.5</string>
+      
+  <string name="updated_at_string">9:27 AM पर ताज़ा किया गया</string>
+      
+  <string name="location_icon_description">स्थान चिह्न</string>
+      
+  <string name="settings_icon_description">सेटिंग्स आइकन</string>
+      
+  <string name="search_icon_description">खोज चिह्न</string>
+      
+  <string name="text_temperature">36°</string>
+      
+  <string name="settings">सेटिंग्स</string>
+      
+  <string name="settings_units_of_measurement">माप की इकाइयां</string>
+      
+  <string name="settings_temperature">तापमान</string>
+      
+  <string name="settings_speed">रफ़्तार</string>
+      
+  <string name="settings_about_heading">के बारे में</string>
+      
+  <string name="settings_about_this_app">वार्बलर मौसम के बारे में</string>
+      
+  <string name="settings_privacy_policy_text">गोपनीयता नीति</string>
+      
+  <string name="mps">एमपीएस</string>
+      
+  <string name="meters_per_second">मीटर प्रति सेकंड</string>
+      
+  <string name="kilometers_per_hour">किलोमीटर प्रति घंटा</string>
+      
+  <string name="mph">मील प्रति घंटे</string>
+      
+  <string name="km_h">किलोमीटर प्रति घंटा</string>
+      
+  <string name="miles_per_hour">मील प्रति घंटे</string>
+      
+  <string name="celsius">सी°</string>
+      
+  <string name="fahrenheit">एफ°</string>
+      
+  <string name="settings_fahrenheit">फ़ारेनहाइट</string>
+      
+  <string name="settings_celsius">सेल्सीयस</string>
+      
+  <string name="settings_kelvin">केल्विन</string>
+      
+  <string name="uv_index_label">यूवी सूचकांक: </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">–</string>
+      
+  <string name="forecast">8 दिन का पूर्वानुमान</string>
+      
+  <string name="locations">स्थानों</string>
+      
+  <string name="search_location">शहर खोजें</string>
+      
+  <string name="humidity">नमी</string>
+      
+  <string name="humidity_icon">आर्द्रता चिह्न</string>
+      
+  <string name="uv_index">यूवी सूचकांक</string>
+      
+  <string name="uv_index_icon">यूवी इंडेक्स आइकन</string>
+      
+  <string name="pressure">%1$s एचपीए</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">मौसम चेतावनी</string>
+      
+  <string name="current_location">वर्तमान स्थान</string>
+      
+  <string name="sunrise">सूर्योदय</string>
+      
+  <string name="sunset">सूर्यास्त</string>
+      
+  <string name="feels_like">की तरह लगना</string>
+      
+  <string name="feels_like_temp">
+    <b>%1$s</b>
+     जैसा लगता है
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">ओसांक</string>
+      
+  <string name="clouds">बादलों</string>
+      
+  <string name="pressure_text">दबाव</string>
+      
+  <string name="chance_of_rain">बारिश %</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">हवा</string>
+      
+  <string name="details">विवरण</string>
+      
+  <string name="summary">सारांश</string>
+      
+  <string name="close">बंद करना</string>
+      
+  <string name="no_internet_or_error">कोई त्रुटि हुई है, कृपया सुनिश्चित करें कि आपके पास इंटरनेट कनेक्शन है और पुनः प्रयास करें.</string>
+      
+  <string name="error_text_view_content_description">त्रुटि पाठ दृश्य.</string>
+      
+  <string name="error_icon_warning_content_description">त्रुटि चिह्न</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">वर्तमान स्थिति मौसम आइकन.</string>
+      
+  <string name="yellow_rumped_warbler">पीला-पूंछ वाला वार्बलर</string>
+      
+  <string name="currently">वर्तमान में</string>
+      
+  <string name="hi_low_icon_description">उच्च और निम्न तापमान के लिए चिह्न.</string>
+      
+  <string name="hourly">अगले 48 घंटे</string>
+      
+  <string name="chart_rain_title">बारिश</string>
+      
+  <string name="chart_temp_title">तापमान</string>
+      
+  <string name="settings_accumulation">संचय</string>
+      
+  <string name="millimeters_per_hour">मिलीमीटर प्रति घंटा</string>
+      
+  <string name="inches_per_hour">इंच प्रति घंटा</string>
+      
+  <string name="chart_humidity_title">नमी %</string>
+      
+  <string name="chart_uvi_title">यूवी सूचकांक</string>
+      
+  <string name="chart_wind_title">हवा की गति</string>
+      
+  <string name="back_arrow_icon_content_description">वापस बटन आइकन</string>
+      
+  <string name="no_rain_in_forecast">अगले 48 घंटों तक वर्षा का कोई पूर्वानुमान नहीं है.</string>
+      
+  <string name="precipitation">वर्षण</string>
+      
+  <string name="loading">लोड हो रहा है</string>
+      
+  <string name="wind_gust">हवा का झौंका</string>
+      
+  <string name="moonrise">चंद्रोदय</string>
+      
+  <string name="moonset">चंद्रास्त</string>
+      
+  <string name="share_icon">शेयर आइकन</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">वायु गुणवत्ता सूचकांक</string>
+      
+  <string name="so2">
+    एसओ
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    नहीं
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    अपराह्न
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    पीएम
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    ओ
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">सीओ</string>
+      
+  <string name="nh3">
+    एनएच
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">नहीं</string>
+      
+  <string name="add_another_location_description">जोड़ें आइकन पर टैप करके कोई अन्य स्थान जोड़ें.</string>
+      
+  <string name="add_title">स्थान जोड़ना</string>
+  
+</resources>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">สภาพอากาศของนกวอร์เบลอร์</string>
+      
+  <string name="current_temp_high_string">75˚</string>
+      
+  <string name="current_temp_low_string">40˚</string>
+      
+  <string name="condition_text_string">เมฆมาก</string>
+      
+  <string name="city_label_string">พอร์ตแลนด์, โอเรกอน</string>
+      
+  <string name="refreshed_at_label_string">09:25 น.</string>
+      
+  <string name="current_weather_temp_string">67˚</string>
+      
+  <string name="current_weather_description">สภาพอากาศปัจจุบัน</string>
+      
+  <string name="refresh">รีเฟรช</string>
+      
+  <string name="version">เวอร์ชัน 0.0.5</string>
+      
+  <string name="updated_at_string">รีเฟรชเมื่อเวลา 09:27 น.</string>
+      
+  <string name="location_icon_description">ไอคอนตำแหน่ง</string>
+      
+  <string name="settings_icon_description">ไอคอนการตั้งค่า</string>
+      
+  <string name="search_icon_description">ไอคอนค้นหา</string>
+      
+  <string name="text_temperature">36°</string>
+      
+  <string name="settings">การตั้งค่า</string>
+      
+  <string name="settings_units_of_measurement">หน่วยวัด</string>
+      
+  <string name="settings_temperature">อุณหภูมิ</string>
+      
+  <string name="settings_speed">ความเร็ว</string>
+      
+  <string name="settings_about_heading">เกี่ยวกับ</string>
+      
+  <string name="settings_about_this_app">เกี่ยวกับสภาพอากาศของ Warbler</string>
+      
+  <string name="settings_privacy_policy_text">นโยบายความเป็นส่วนตัว</string>
+      
+  <string name="mps">เอ็มพีเอส</string>
+      
+  <string name="meters_per_second">เมตรต่อวินาที</string>
+      
+  <string name="kilometers_per_hour">กิโลเมตรต่อชั่วโมง</string>
+      
+  <string name="mph">ไมล์ต่อชั่วโมง</string>
+      
+  <string name="km_h">กม./ชม.</string>
+      
+  <string name="miles_per_hour">ไมล์ต่อชั่วโมง</string>
+      
+  <string name="celsius">องศาเซลเซียส</string>
+      
+  <string name="fahrenheit">ฟ°</string>
+      
+  <string name="settings_fahrenheit">ฟาเรนไฮต์</string>
+      
+  <string name="settings_celsius">เซลเซียส</string>
+      
+  <string name="settings_kelvin">เคลวิน</string>
+      
+  <string name="uv_index_label">ดัชนี UV: </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">-</string>
+      
+  <string name="forecast">พยากรณ์อากาศ 8 วัน</string>
+      
+  <string name="locations">ตำแหน่งที่ตั้ง</string>
+      
+  <string name="search_location">ค้นหาเมือง</string>
+      
+  <string name="humidity">ความชื้น</string>
+      
+  <string name="humidity_icon">ไอคอนความชื้น</string>
+      
+  <string name="uv_index">ดัชนี UV</string>
+      
+  <string name="uv_index_icon">ไอคอนดัชนี UV</string>
+      
+  <string name="pressure">%1$s เฮกโตปาสคาล</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">การแจ้งเตือนสภาพอากาศ</string>
+      
+  <string name="current_location">ที่ตั้งปัจจุบัน</string>
+      
+  <string name="sunrise">พระอาทิตย์ขึ้น</string>
+      
+  <string name="sunset">พระอาทิตย์ตก</string>
+      
+  <string name="feels_like">รู้สึกเหมือน</string>
+      
+  <string name="feels_like_temp">
+    รู้สึกเหมือน
+    <b>%1$s</b>
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">จุดน้ำค้าง</string>
+      
+  <string name="clouds">เมฆ</string>
+      
+  <string name="pressure_text">ความดัน</string>
+      
+  <string name="chance_of_rain">ฝน %</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">ลม</string>
+      
+  <string name="details">รายละเอียด</string>
+      
+  <string name="summary">สรุป</string>
+      
+  <string name="close">ปิด</string>
+      
+  <string name="no_internet_or_error">เกิดข้อผิดพลาด โปรดตรวจสอบให้แน่ใจว่าคุณมีการเชื่อมต่ออินเทอร์เน็ตและลองอีกครั้ง</string>
+      
+  <string name="error_text_view_content_description">มุมมองข้อความแสดงข้อผิดพลาด</string>
+      
+  <string name="error_icon_warning_content_description">ไอคอนข้อผิดพลาด</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">ไอคอนสภาพอากาศในปัจจุบัน</string>
+      
+  <string name="yellow_rumped_warbler">นกปรอดหัวเหลือง</string>
+      
+  <string name="currently">ตอนนี้</string>
+      
+  <string name="hi_low_icon_description">ไอคอนสำหรับอุณหภูมิสูงและต่ำ</string>
+      
+  <string name="hourly">48 ชั่วโมงถัดไป</string>
+      
+  <string name="chart_rain_title">ฝน</string>
+      
+  <string name="chart_temp_title">อุณหภูมิ</string>
+      
+  <string name="settings_accumulation">การสะสม</string>
+      
+  <string name="millimeters_per_hour">มิลลิเมตรต่อชั่วโมง</string>
+      
+  <string name="inches_per_hour">นิ้วต่อชั่วโมง</string>
+      
+  <string name="chart_humidity_title">ความชื้น %</string>
+      
+  <string name="chart_uvi_title">ดัชนี UV</string>
+      
+  <string name="chart_wind_title">ความเร็วลม</string>
+      
+  <string name="back_arrow_icon_content_description">ไอคอนปุ่มย้อนกลับ</string>
+      
+  <string name="no_rain_in_forecast">ไม่มีฝนตกในช่วง 48 ชั่วโมงข้างหน้า</string>
+      
+  <string name="precipitation">ฝนตก</string>
+      
+  <string name="loading">กำลังโหลด</string>
+      
+  <string name="wind_gust">ลมกระโชก</string>
+      
+  <string name="moonrise">พระจันทร์ขึ้น</string>
+      
+  <string name="moonset">พระจันทร์ตก</string>
+      
+  <string name="share_icon">ไอคอนแชร์</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">ดัชนีคุณภาพอากาศ</string>
+      
+  <string name="so2">
+    ดังนั้น
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    เลขที่
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    นายกฯ
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    นายกฯ
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    โอ้
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">ซีโอ</string>
+      
+  <string name="nh3">
+    เอ็นเอช
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">เลขที่</string>
+      
+  <string name="add_another_location_description">เพิ่มตำแหน่งอื่นโดยแตะไอคอนเพิ่ม</string>
+      
+  <string name="add_title">เพิ่มตำแหน่งที่ตั้ง</string>
+  
+</resources>

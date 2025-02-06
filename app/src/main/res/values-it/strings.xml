@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">Meteo di Warbler</string>
+      
+  <string name="current_temp_high_string">75˚</string>
+      
+  <string name="current_temp_low_string">40˚</string>
+      
+  <string name="condition_text_string">Nuvoloso</string>
+      
+  <string name="city_label_string">Portland, Oregon</string>
+      
+  <string name="refreshed_at_label_string">9:25 AM</string>
+      
+  <string name="current_weather_temp_string">67˚</string>
+      
+  <string name="current_weather_description">Meteo attuale</string>
+      
+  <string name="refresh">Aggiornare</string>
+      
+  <string name="version">versione 0.0.5</string>
+      
+  <string name="updated_at_string">aggiornato alle 9:27 AM</string>
+      
+  <string name="location_icon_description">Icona della posizione</string>
+      
+  <string name="settings_icon_description">Icona Impostazioni</string>
+      
+  <string name="search_icon_description">Icona di ricerca</string>
+      
+  <string name="text_temperature">36°</string>
+      
+  <string name="settings">Impostazioni</string>
+      
+  <string name="settings_units_of_measurement">Unità di misura</string>
+      
+  <string name="settings_temperature">Temperatura</string>
+      
+  <string name="settings_speed">Velocità</string>
+      
+  <string name="settings_about_heading">Di</string>
+      
+  <string name="settings_about_this_app">Informazioni su Warbler Weather</string>
+      
+  <string name="settings_privacy_policy_text">politica sulla riservatezza</string>
+      
+  <string name="mps">MPS</string>
+      
+  <string name="meters_per_second">Metri al secondo</string>
+      
+  <string name="kilometers_per_hour">Chilometri all\'ora</string>
+      
+  <string name="mph">miglia orarie</string>
+      
+  <string name="km_h">km/h</string>
+      
+  <string name="miles_per_hour">Miglia all\'ora</string>
+      
+  <string name="celsius">C°</string>
+      
+  <string name="fahrenheit">E°</string>
+      
+  <string name="settings_fahrenheit">Fahrenheit</string>
+      
+  <string name="settings_celsius">Centigrado</string>
+      
+  <string name="settings_kelvin">Kelvin</string>
+      
+  <string name="uv_index_label">Indice UV: </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">–</string>
+      
+  <string name="forecast">Previsioni a 8 giorni</string>
+      
+  <string name="locations">Posizioni</string>
+      
+  <string name="search_location">Cerca per città</string>
+      
+  <string name="humidity">Umidità</string>
+      
+  <string name="humidity_icon">Icona umidità</string>
+      
+  <string name="uv_index">Indice UV</string>
+      
+  <string name="uv_index_icon">Icona indice UV</string>
+      
+  <string name="pressure">%1$s hPa</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">Allerta meteo</string>
+      
+  <string name="current_location">Posizione attuale</string>
+      
+  <string name="sunrise">Alba</string>
+      
+  <string name="sunset">Tramonto</string>
+      
+  <string name="feels_like">Sembra</string>
+      
+  <string name="feels_like_temp">
+    Sembra 
+    <b>%1$s</b>
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">Punto di rugiada</string>
+      
+  <string name="clouds">Nuvole</string>
+      
+  <string name="pressure_text">Pressione</string>
+      
+  <string name="chance_of_rain">Piovere %</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">Vento</string>
+      
+  <string name="details">Dettagli</string>
+      
+  <string name="summary">Riepilogo</string>
+      
+  <string name="close">Vicino</string>
+      
+  <string name="no_internet_or_error">Si è verificato un errore, assicurati di avere una connessione Internet e riprova.</string>
+      
+  <string name="error_text_view_content_description">Visualizzazione del testo di errore.</string>
+      
+  <string name="error_icon_warning_content_description">Icona di errore</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">L\'icona meteo delle condizioni attuali.</string>
+      
+  <string name="yellow_rumped_warbler">Parula dal groppone giallo</string>
+      
+  <string name="currently">Attualmente</string>
+      
+  <string name="hi_low_icon_description">Icona per temperature alte e basse.</string>
+      
+  <string name="hourly">Prossime 48 ore</string>
+      
+  <string name="chart_rain_title">Piovere</string>
+      
+  <string name="chart_temp_title">Temperatura</string>
+      
+  <string name="settings_accumulation">Accumulo</string>
+      
+  <string name="millimeters_per_hour">Millimetri all\'ora</string>
+      
+  <string name="inches_per_hour">Pollici all\'ora</string>
+      
+  <string name="chart_humidity_title">Umidità %</string>
+      
+  <string name="chart_uvi_title">Indice UV</string>
+      
+  <string name="chart_wind_title">Velocità del vento</string>
+      
+  <string name="back_arrow_icon_content_description">Icona del pulsante Indietro</string>
+      
+  <string name="no_rain_in_forecast">Nessuna precipitazione prevista per le prossime 48 ore.</string>
+      
+  <string name="precipitation">Precipitazione</string>
+      
+  <string name="loading">Caricamento</string>
+      
+  <string name="wind_gust">Raffica di vento</string>
+      
+  <string name="moonrise">Sorgere della luna</string>
+      
+  <string name="moonset">Tramonto della luna</string>
+      
+  <string name="share_icon">Condividi icona</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">Indice di qualità dell\'aria</string>
+      
+  <string name="so2">
+    Quindi
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    NO
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    Primo Ministro
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    Primo Ministro
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    Il
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">CO</string>
+      
+  <string name="nh3">
+    Nuovo Messico
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">NO</string>
+      
+  <string name="add_another_location_description">Aggiungi un\'altra posizione toccando l\'icona Aggiungi.</string>
+      
+  <string name="add_title">Aggiungi posizione</string>
+  
+</resources>

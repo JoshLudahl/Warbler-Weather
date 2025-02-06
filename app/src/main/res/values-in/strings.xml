@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">Cuaca Burung Warbler</string>
+      
+  <string name="current_temp_high_string">75 derajat</string>
+      
+  <string name="current_temp_low_string">40 derajat</string>
+      
+  <string name="condition_text_string">Berawan</string>
+      
+  <string name="city_label_string">Portland, OR</string>
+      
+  <string name="refreshed_at_label_string">Pukul 09.25 WIB</string>
+      
+  <string name="current_weather_temp_string">67 derajat</string>
+      
+  <string name="current_weather_description">Cuaca Saat Ini</string>
+      
+  <string name="refresh">Menyegarkan</string>
+      
+  <string name="version">Bahasa Inggris: v0.0.5</string>
+      
+  <string name="updated_at_string">diperbarui pada pukul 09:27</string>
+      
+  <string name="location_icon_description">Ikon Lokasi</string>
+      
+  <string name="settings_icon_description">Ikon Pengaturan</string>
+      
+  <string name="search_icon_description">Ikon Pencarian</string>
+      
+  <string name="text_temperature">36 derajat</string>
+      
+  <string name="settings">Pengaturan</string>
+      
+  <string name="settings_units_of_measurement">Satuan Pengukuran</string>
+      
+  <string name="settings_temperature">Suhu</string>
+      
+  <string name="settings_speed">Kecepatan</string>
+      
+  <string name="settings_about_heading">Tentang</string>
+      
+  <string name="settings_about_this_app">Tentang Cuaca Warbler</string>
+      
+  <string name="settings_privacy_policy_text">Kebijakan Privasi</string>
+      
+  <string name="mps">MPS</string>
+      
+  <string name="meters_per_second">Meter Per Detik</string>
+      
+  <string name="kilometers_per_hour">Kilometer Per Jam</string>
+      
+  <string name="mph">MPH</string>
+      
+  <string name="km_h">KPH</string>
+      
+  <string name="miles_per_hour">Mil Per Jam</string>
+      
+  <string name="celsius">C°</string>
+      
+  <string name="fahrenheit">F°</string>
+      
+  <string name="settings_fahrenheit">derajat fahrenheit</string>
+      
+  <string name="settings_celsius">Celsius</string>
+      
+  <string name="settings_kelvin">Bahasa Indonesia: Kelvin</string>
+      
+  <string name="uv_index_label">Indeks UV: </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">–</string>
+      
+  <string name="forecast">Prakiraan Cuaca 8 Hari</string>
+      
+  <string name="locations">Lokasi</string>
+      
+  <string name="search_location">Pencarian kota</string>
+      
+  <string name="humidity">Kelembaban</string>
+      
+  <string name="humidity_icon">Ikon Kelembaban</string>
+      
+  <string name="uv_index">Indeks UV</string>
+      
+  <string name="uv_index_icon">Ikon Indeks UV</string>
+      
+  <string name="pressure">%1$s hPa</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">Peringatan Cuaca</string>
+      
+  <string name="current_location">Lokasi Saat Ini</string>
+      
+  <string name="sunrise">Matahari terbit</string>
+      
+  <string name="sunset">Matahari terbenam</string>
+      
+  <string name="feels_like">Rasanya Seperti</string>
+      
+  <string name="feels_like_temp">
+    Rasanya seperti
+    <b>%1$s</b>
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">Titik Embun</string>
+      
+  <string name="clouds">Awan</string>
+      
+  <string name="pressure_text">Tekanan</string>
+      
+  <string name="chance_of_rain">Hujan %</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">Angin</string>
+      
+  <string name="details">Rincian</string>
+      
+  <string name="summary">Ringkasan</string>
+      
+  <string name="close">Menutup</string>
+      
+  <string name="no_internet_or_error">Terjadi kesalahan, pastikan Anda memiliki koneksi internet dan coba lagi.</string>
+      
+  <string name="error_text_view_content_description">Tampilan teks kesalahan.</string>
+      
+  <string name="error_icon_warning_content_description">Ikon Kesalahan</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">Ikon cuaca kondisi saat ini.</string>
+      
+  <string name="yellow_rumped_warbler">Burung Pemakan Serangga Berpantat Kuning</string>
+      
+  <string name="currently">Saat ini</string>
+      
+  <string name="hi_low_icon_description">Ikon untuk suhu tinggi dan rendah.</string>
+      
+  <string name="hourly">48 jam ke depan</string>
+      
+  <string name="chart_rain_title">Hujan</string>
+      
+  <string name="chart_temp_title">Suhu</string>
+      
+  <string name="settings_accumulation">Akumulasi</string>
+      
+  <string name="millimeters_per_hour">Milimeter per jam</string>
+      
+  <string name="inches_per_hour">Inci Per Jam</string>
+      
+  <string name="chart_humidity_title">Kelembaban %</string>
+      
+  <string name="chart_uvi_title">Indeks UV</string>
+      
+  <string name="chart_wind_title">Kecepatan Angin</string>
+      
+  <string name="back_arrow_icon_content_description">Ikon tombol kembali</string>
+      
+  <string name="no_rain_in_forecast">Tidak ada ramalan hujan dalam 48 jam ke depan.</string>
+      
+  <string name="precipitation">Pengendapan</string>
+      
+  <string name="loading">Memuat</string>
+      
+  <string name="wind_gust">Hembusan Angin</string>
+      
+  <string name="moonrise">Terbitnya Bulan</string>
+      
+  <string name="moonset">Bulan terbenam</string>
+      
+  <string name="share_icon">Ikon Bagikan</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">Indeks Kualitas Udara</string>
+      
+  <string name="so2">
+    Jadi
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    Tidak
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    sore
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    PM
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">BERSAMA</string>
+      
+  <string name="nh3">
+    Bahasa Inggris
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">TIDAK</string>
+      
+  <string name="add_another_location_description">Tambahkan lokasi lain dengan mengetuk ikon tambah.</string>
+      
+  <string name="add_title">Tambahkan Lokasi</string>
+  
+</resources>

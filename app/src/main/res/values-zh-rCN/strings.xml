@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">莺 天气</string>
+      
+  <string name="current_temp_high_string">75˚</string>
+      
+  <string name="current_temp_low_string">40˚</string>
+      
+  <string name="condition_text_string">多云</string>
+      
+  <string name="city_label_string">俄勒冈州波特兰</string>
+      
+  <string name="refreshed_at_label_string">上午 9:25</string>
+      
+  <string name="current_weather_temp_string">67˚</string>
+      
+  <string name="current_weather_description">当前天气</string>
+      
+  <string name="refresh">刷新</string>
+      
+  <string name="version">v0.0.5</string>
+      
+  <string name="updated_at_string">上午 9:27 刷新</string>
+      
+  <string name="location_icon_description">位置图标</string>
+      
+  <string name="settings_icon_description">设置图标</string>
+      
+  <string name="search_icon_description">搜索图标</string>
+      
+  <string name="text_temperature">36°</string>
+      
+  <string name="settings">设置</string>
+      
+  <string name="settings_units_of_measurement">测量单位</string>
+      
+  <string name="settings_temperature">温度</string>
+      
+  <string name="settings_speed">速度</string>
+      
+  <string name="settings_about_heading">关于</string>
+      
+  <string name="settings_about_this_app">关于 Warbler 天气</string>
+      
+  <string name="settings_privacy_policy_text">隐私政策</string>
+      
+  <string name="mps">国会议员</string>
+      
+  <string name="meters_per_second">米每秒</string>
+      
+  <string name="kilometers_per_hour">公里每小时</string>
+      
+  <string name="mph">英里/小时</string>
+      
+  <string name="km_h">喀拉拉邦</string>
+      
+  <string name="miles_per_hour">英里每小时</string>
+      
+  <string name="celsius">摄氏度</string>
+      
+  <string name="fahrenheit">华氏度</string>
+      
+  <string name="settings_fahrenheit">华氏度</string>
+      
+  <string name="settings_celsius">摄氏度</string>
+      
+  <string name="settings_kelvin">开尔文</string>
+      
+  <string name="uv_index_label">紫外线指数： </string>
+      
+  <string name="percent">%1$s%%</string>
+      
+  <string name="mdash">–</string>
+      
+  <string name="forecast">8 天预报</string>
+      
+  <string name="locations">位置</string>
+      
+  <string name="search_location">搜索城市</string>
+      
+  <string name="humidity">湿度</string>
+      
+  <string name="humidity_icon">湿度图标</string>
+      
+  <string name="uv_index">紫外线指数</string>
+      
+  <string name="uv_index_icon">紫外线指数图标</string>
+      
+  <string name="pressure">%1$s 百帕</string>
+      
+  <string name="cloudy">%1$s%%</string>
+      
+  <string name="weather_alert">天气警报</string>
+      
+  <string name="current_location">当前位置</string>
+      
+  <string name="sunrise">日出</string>
+      
+  <string name="sunset">日落</string>
+      
+  <string name="feels_like">感觉像</string>
+      
+  <string name="feels_like_temp">
+    感觉像
+    <b>%1$s</b>
+  </string>
+      
+  <string name="temperature_formatted">
+    %1$s
+    <small>%2$s</small>
+  </string>
+      
+  <string name="dew_point">露点</string>
+      
+  <string name="clouds">云</string>
+      
+  <string name="pressure_text">压力</string>
+      
+  <string name="chance_of_rain">雨 ％</string>
+      
+  <string name="percentage">%1$s%%</string>
+      
+  <string name="wind">风</string>
+      
+  <string name="details">细节</string>
+      
+  <string name="summary">概括</string>
+      
+  <string name="close">关闭</string>
+      
+  <string name="no_internet_or_error">出现错误，请确保您有互联网连接，然后重试。</string>
+      
+  <string name="error_text_view_content_description">错误文本视图。</string>
+      
+  <string name="error_icon_warning_content_description">错误图标</string>
+      
+  <string name="the_current_conditions_weather_icon_content_description">当前状况的天气图标。</string>
+      
+  <string name="yellow_rumped_warbler">黄腰莺</string>
+      
+  <string name="currently">现在</string>
+      
+  <string name="hi_low_icon_description">高温和低温图标。</string>
+      
+  <string name="hourly">接下来的 48 小时</string>
+      
+  <string name="chart_rain_title">雨</string>
+      
+  <string name="chart_temp_title">温度</string>
+      
+  <string name="settings_accumulation">积累</string>
+      
+  <string name="millimeters_per_hour">毫米/小时</string>
+      
+  <string name="inches_per_hour">英寸/小时</string>
+      
+  <string name="chart_humidity_title">湿度 ％</string>
+      
+  <string name="chart_uvi_title">紫外线指数</string>
+      
+  <string name="chart_wind_title">风速</string>
+      
+  <string name="back_arrow_icon_content_description">返回按钮图标</string>
+      
+  <string name="no_rain_in_forecast">预报未来 48 小时无降水。</string>
+      
+  <string name="precipitation">沉淀</string>
+      
+  <string name="loading">加载中</string>
+      
+  <string name="wind_gust">阵风</string>
+      
+  <string name="moonrise">月出</string>
+      
+  <string name="moonset">月落</string>
+      
+  <string name="share_icon">分享图标</string>
+      
+  <!-- Air Quality Index Data -->
+      
+  <string name="aqi_label">空气质量指数</string>
+      
+  <string name="so2">
+    <sub>2</sub>
+  </string>
+      
+  <string name="no2">
+    <sub>2</sub>
+  </string>
+      
+  <string name="pm10">
+    下午
+    <sub>10</sub>
+  </string>
+      
+  <string name="pm25">
+    PM
+    <sub>2.5</sub>
+  </string>
+      
+  <string name="o3">
+    欧
+    <sub>3</sub>
+  </string>
+      
+  <string name="co">一氧化碳</string>
+      
+  <string name="nh3">
+    氨
+    <sub>3</sub>
+  </string>
+      
+  <string name="no">不</string>
+      
+  <string name="add_another_location_description">点击添加图标来添加另一个位置。</string>
+      
+  <string name="add_title">添加位置</string>
+  
+</resources>
