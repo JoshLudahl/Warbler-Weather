@@ -86,6 +86,10 @@ android {
             excludes += "META-INF/*"
         }
     }
+
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 ktlint {
