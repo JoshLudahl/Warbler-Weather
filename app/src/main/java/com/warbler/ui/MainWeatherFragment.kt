@@ -536,8 +536,6 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         )
                     }
 
-                // (chart?.layers?.get(0) as ColumnCartesianLayer).spacingDp = 40.0f
-
                 setModel(model)
                 visibility = View.VISIBLE
             }
