@@ -56,6 +56,10 @@ android {
                 "WEATHER_API_KEY",
                 "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
             )
+
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            resValue(type = "string", name = "app_name", value = "Weather Warbler debug")
         }
     }
 
