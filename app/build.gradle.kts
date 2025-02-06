@@ -23,7 +23,7 @@ android {
         applicationId = "com.softklass.warbler"
         minSdk = 26
         targetSdk = target
-        versionCode = 80
+        versionCode = 81
         versionName = "0.$versionCode"
         testInstrumentationRunner = "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(mutableMapOf("clearPackageData" to "true"))
