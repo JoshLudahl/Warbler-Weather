@@ -197,12 +197,6 @@ dependencies {
     // For Kotlin users also add the Kotlin extensions library for Play In-App Update:
     implementation(libs.app.update.ktx)
 
-    // Review
-    implementation(libs.review)
-
-    // For Kotlin users also import the Kotlin extensions library for Play In-App Review:
-    implementation(libs.review.ktx)
-
     // Graphs and charts
     // Houses the core logic for charts and other elements. Included in all other modules.
     implementation(libs.vico.core)
