@@ -217,5 +217,11 @@
   <string name="add_another_location_description">أضف موقعًا آخر بالضغط على أيقونة الإضافة.</string>
       
   <string name="add_title">إضافة الموقع</string>
+      
+  <string name="review_app">اترك تعليقا</string>
+      
+  <string name="rain">مطر</string>
+      
+  <string name="snow">الثلج</string>
   
 </resources>

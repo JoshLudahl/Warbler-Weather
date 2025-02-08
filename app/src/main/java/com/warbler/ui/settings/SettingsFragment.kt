@@ -65,6 +65,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     handleShareClick(Constants.WEATHER_WARBLER_URL)
                     true
                 }
+
                 R.id.settings_language_icon -> {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     intent.data = Uri.parse("package:" + context?.packageName)
@@ -135,6 +136,18 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.settingsSubheadingOptionMmphText.setOnClickListener {
             updateAccumulationRadioGroup(R.id.radio_mmph)
         }
+
+        binding.reviewApp.setOnClickListener {
+            reviewApp()
+        }
+
+        binding.reviewAppIcon.setOnClickListener {
+            reviewApp()
+        }
+    }
+
+    private fun reviewApp() {
+        handleOnClickLink(Constants.WEATHER_WARBLER_URL)
     }
 
     private fun updateTemperatureRadioGroup(itemId: Int) {

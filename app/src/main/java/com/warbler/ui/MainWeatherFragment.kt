@@ -402,8 +402,8 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
 
             chart?.legend =
                 getLegendsForRain(
-                    Color.rgb(20, 108, 148) to "Wind",
-                    Color.rgb(182, 187, 196) to "Gust",
+                    Color.rgb(20, 108, 148) to getString(R.string.wind),
+                    Color.rgb(182, 187, 196) to getString(R.string.wind_gust),
                 )
 
             setChartLineSpacingDp(chart?.layers?.get(0) as LineCartesianLayer)
@@ -527,12 +527,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 chart?.legend =
                     if (areNonZeroValuesFound(hourlySnowFall)) {
                         getLegendsForRain(
-                            Color.rgb(56, 161, 232) to "Rain",
-                            Color.rgb(255, 255, 255) to "Snow",
+                            Color.rgb(56, 161, 232) to getString(R.string.rain),
+                            Color.rgb(255, 255, 255) to getString(R.string.snow),
                         )
                     } else {
                         getLegendsForRain(
-                            Color.rgb(56, 161, 232) to "Rain",
+                            Color.rgb(56, 161, 232) to getString(R.string.rain),
                         )
                     }
 
@@ -615,7 +615,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                 val message = buildAlertMessage(alerts)
                 val dialog =
                     MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                        .setTitle("Alert: Weather Alert")
+                        .setTitle(getString(R.string.weather_alert))
                         .setMessage(message)
                         .setNegativeButton(getText(R.string.close)) { dialog, _ ->
                             dialog.cancel()

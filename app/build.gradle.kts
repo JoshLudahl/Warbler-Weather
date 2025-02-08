@@ -23,7 +23,7 @@ android {
         applicationId = "com.softklass.warbler"
         minSdk = 26
         targetSdk = target
-        versionCode = 81
+        versionCode = 82
         versionName = "0.$versionCode"
         testInstrumentationRunner = "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(mutableMapOf("clearPackageData" to "true"))
@@ -196,6 +196,12 @@ dependencies {
     implementation(libs.app.update)
     // For Kotlin users also add the Kotlin extensions library for Play In-App Update:
     implementation(libs.app.update.ktx)
+
+    // Review
+    implementation(libs.review)
+
+    // For Kotlin users also import the Kotlin extensions library for Play In-App Review:
+    implementation(libs.review.ktx)
 
     // Graphs and charts
     // Houses the core logic for charts and other elements. Included in all other modules.

@@ -217,5 +217,11 @@
   <string name="add_another_location_description">追加アイコンをタップして別の場所を追加します。</string>
       
   <string name="add_title">場所を追加</string>
+      
+  <string name="review_app">レビューを残す</string>
+      
+  <string name="rain">雨</string>
+      
+  <string name="snow">雪</string>
   
 </resources>

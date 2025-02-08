@@ -217,5 +217,11 @@
   <string name="add_another_location_description">Fügen Sie einen weiteren Standort hinzu, indem Sie auf das Symbol „Hinzufügen“ tippen.</string>
       
   <string name="add_title">Standort hinzufügen</string>
+      
+  <string name="review_app">Hinterlassen Sie eine Bewertung</string>
+      
+  <string name="rain">Regen</string>
+      
+  <string name="snow">Schnee</string>
   
 </resources>

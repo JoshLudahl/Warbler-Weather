@@ -372,6 +372,25 @@
                         app:layout_constraintTop_toTopOf="@+id/yellow_rumped_warbler_text"
                         app:srcCompat="@drawable/ic_round_open_in_browser" />
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/review_app"
+                        style="@style/settings_subheading_style"
+                        android:text="@string/review_app"
+                        app:layout_constraintEnd_toStartOf="@+id/yellow_rumped_warbler_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/yellow_rumped_warbler_text"
+                        tools:text="Leave a review" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/review_app_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/review_app"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/review_app"
+                        app:srcCompat="@drawable/ic_star" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

@@ -217,5 +217,11 @@
   <string name="add_another_location_description">Ekle simgesine dokunarak başka bir konum ekleyin.</string>
       
   <string name="add_title">Konum Ekle</string>
+      
+  <string name="review_app">Bir yorum bırakın</string>
+      
+  <string name="rain">Yağmur</string>
+      
+  <string name="snow">Kar</string>
   
 </resources>

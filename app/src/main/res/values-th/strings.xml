@@ -217,5 +217,11 @@
   <string name="add_another_location_description">เพิ่มตำแหน่งอื่นโดยแตะไอคอนเพิ่ม</string>
       
   <string name="add_title">เพิ่มตำแหน่งที่ตั้ง</string>
+      
+  <string name="review_app">ฝากความคิดเห็น</string>
+      
+  <string name="rain">ฝน</string>
+      
+  <string name="snow">หิมะ</string>
   
 </resources>

@@ -217,5 +217,11 @@
   <string name="add_another_location_description">जोड़ें आइकन पर टैप करके कोई अन्य स्थान जोड़ें.</string>
       
   <string name="add_title">स्थान जोड़ना</string>
+      
+  <string name="review_app">समीक्षा लिखें</string>
+      
+  <string name="rain">बारिश</string>
+      
+  <string name="snow">बर्फ</string>
   
 </resources>

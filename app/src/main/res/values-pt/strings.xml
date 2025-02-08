@@ -217,5 +217,11 @@
   <string name="add_another_location_description">Adicione outro local tocando no ícone Adicionar.</string>
       
   <string name="add_title">Adicionar localização</string>
+      
+  <string name="review_app">Deixe um comentário</string>
+      
+  <string name="rain">Chuva</string>
+      
+  <string name="snow">Neve</string>
   
 </resources>

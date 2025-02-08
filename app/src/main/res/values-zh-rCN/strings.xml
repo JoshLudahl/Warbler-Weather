@@ -215,5 +215,11 @@
   <string name="add_another_location_description">点击添加图标来添加另一个位置。</string>
       
   <string name="add_title">添加位置</string>
+      
+  <string name="review_app">留下评论</string>
+      
+  <string name="rain">雨</string>
+      
+  <string name="snow">雪</string>
   
 </resources>

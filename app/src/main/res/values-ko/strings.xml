@@ -217,5 +217,11 @@
   <string name="add_another_location_description">추가 아이콘을 탭해서 다른 위치를 추가하세요.</string>
       
   <string name="add_title">위치 추가</string>
+      
+  <string name="review_app">리뷰를 남겨주세요</string>
+      
+  <string name="rain">비</string>
+      
+  <string name="snow">눈</string>
   
 </resources>

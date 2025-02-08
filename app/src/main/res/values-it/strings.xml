@@ -217,5 +217,11 @@
   <string name="add_another_location_description">Aggiungi un\'altra posizione toccando l\'icona Aggiungi.</string>
       
   <string name="add_title">Aggiungi posizione</string>
+      
+  <string name="review_app">Lascia una recensione</string>
+      
+  <string name="rain">Piovere</string>
+      
+  <string name="snow">Nevicare</string>
   
 </resources>

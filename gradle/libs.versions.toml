@@ -6,6 +6,8 @@ appUpdate = "2.1.0"
 browser = "1.8.0"
 constraintlayout = "2.2.0"
 converterMoshi = "2.11.0"
+review = "2.0.2"
+reviewKtx = "2.0.2"
 vicoCore = "2.0.0-alpha.6"
 coreKtx = "1.15.0"
 datastorePreferences = "1.1.2"
@@ -60,6 +62,8 @@ appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "reviewKtx" }
 vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vicoCore" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }

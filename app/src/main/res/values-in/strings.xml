@@ -216,5 +216,11 @@
   <string name="add_another_location_description">Tambahkan lokasi lain dengan mengetuk ikon tambah.</string>
       
   <string name="add_title">Tambahkan Lokasi</string>
+      
+  <string name="review_app">Tinggalkan ulasan</string>
+      
+  <string name="rain">Hujan</string>
+      
+  <string name="snow">Salju</string>
   
 </resources>
