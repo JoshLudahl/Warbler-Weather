@@ -58,7 +58,7 @@ data class Current(
     @SerialName("uvi")
     val uvi: Double,
     @SerialName("visibility")
-    val visibility: Int,
+    val visibility: Int? = null,
     @SerialName("weather")
     val weather: List<Weather>,
     @SerialName("wind_deg")

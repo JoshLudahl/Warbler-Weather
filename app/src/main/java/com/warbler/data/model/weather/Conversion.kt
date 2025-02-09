@@ -74,7 +74,7 @@ object Conversion {
         return Instant.ofEpochSecond(unixUTC)
             .atZone(ZoneId.of("UTC"))
             .dayOfWeek
-            .getDisplayName(TextStyle.FULL, Locale.US)
+            .getDisplayName(TextStyle.FULL, Locale.getDefault())
     }
 
     fun fromKelvinToProvidedUnit(
