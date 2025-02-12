@@ -8,10 +8,10 @@ plugins {
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ktlint)
     alias(libs.plugins.kotlin.serialization)
-    id("kotlin-parcelize")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.firebase.firebase-perf")
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.perf)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
 }
@@ -164,8 +164,8 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
 
     // Firebase
     // Import the BoM for the Firebase platform
@@ -207,7 +207,7 @@ dependencies {
     // For instrumented tests.
     androidTestImplementation(libs.hilt.android.testing)
     // ...with Kotlin.
-    kaptAndroidTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
 
     //  Coroutines
     implementation(libs.kotlinx.coroutines.core)
