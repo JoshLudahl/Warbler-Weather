@@ -32,6 +32,7 @@ lifecycleExtensions = "2.2.0"
 lifecycleLivedataKtx = "2.8.7"
 lifecycleViewmodelCompose = "2.8.7"
 loggingInterceptor = "4.12.0"
+material3 = "1.12.0"
 navigationDynamicFeaturesFragment = "2.8.7"
 navigationFragmentKtx = "2.8.7"
 navigationSafeArgsGradlePlugin = "2.8.7"
@@ -94,7 +95,8 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
-material3 = { module = "androidx.compose.material3:material3" }
+material3View = { module = "com.google.android.material:material", version.ref = "material3" }
+material3Compose = { module = "androidx.compose.material3:material3" }
 navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationDynamicFeaturesFragment" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }

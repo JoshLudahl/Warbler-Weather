@@ -127,7 +127,8 @@ dependencies {
     implementation(libs.lifecycle.extensions)
     implementation(libs.play.services.location)
     implementation(libs.viewpager2)
-    implementation(libs.material3)
+    implementation(libs.material3Compose)
+    implementation(libs.material3View)
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2025.02.00")
