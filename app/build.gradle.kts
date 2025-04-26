@@ -231,7 +231,6 @@ dependencies {
     ksp(libs.room.compiler)
 
     implementation(libs.datastore.preferences)
-    implementation(libs.datastore.preferences.core)
 
     // network
     implementation(libs.retrofit)
