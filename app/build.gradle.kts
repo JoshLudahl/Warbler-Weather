@@ -73,10 +73,6 @@ android {
         animationsDisabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "21"
-    }
-
     buildFeatures {
         dataBinding = true
         viewBinding = true
@@ -94,6 +90,10 @@ android {
     androidResources {
         generateLocaleConfig = true
     }
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 ktlint {
