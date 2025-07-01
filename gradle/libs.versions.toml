@@ -48,7 +48,7 @@ roomKtx = "2.7.2"
 roomRuntime = "2.7.2"
 rules = "1.6.1"
 runner = "1.6.2"
-vicoCore = "2.0.0-alpha.6"
+vicoCore = "2.2.0-alpha.1"
 viewpager2 = "1.1.0"
 
 [libraries]
