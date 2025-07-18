@@ -26,11 +26,12 @@ object DataSourceModule {
     @Provides
     fun providesWeatherDatabase(
         @ApplicationContext context: Context,
-    ) = Room.databaseBuilder(
-        context,
-        WeatherDatabase::class.java,
-        "weather_database",
-    ).build()
+    ) = Room
+        .databaseBuilder(
+            context,
+            WeatherDatabase::class.java,
+            "weather_database",
+        ).build()
 
     @Singleton
     @Provides

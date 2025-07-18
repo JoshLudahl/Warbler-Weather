@@ -12,8 +12,8 @@ import com.warbler.ui.settings.Temperature
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
-    fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherDataEntity {
-        return WeatherDataEntity(
+    fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherDataEntity =
+        WeatherDataEntity(
             city = getCityNameFromLatLon(weatherDataSource.lat, weatherDataSource.lon),
             condition = weatherDataSource.current.weather[0].main,
             description = weatherDataSource.current.weather[0].description,
@@ -25,7 +25,6 @@ object WeatherDataSourceDto {
             temp = weatherDataSource.current.temp,
             wind = weatherDataSource.current.windSpeed,
         )
-    }
 
     private fun getCityNameFromLatLon(
         lat: Double,
@@ -38,21 +37,24 @@ object WeatherDataSourceDto {
     fun buildWeatherForecast(
         weatherDataSource: WeatherDataSource,
         units: Temperature,
-    ): List<WeatherForecast> {
-        return weatherDataSource.daily.mapIndexed { index, daily ->
+    ): List<WeatherForecast> =
+        weatherDataSource.daily.mapIndexed { index, daily ->
             WeatherForecast(
                 dayOfWeek = getDatOfWeekFromUnixUTC(daily.dt.toLong()),
                 hi =
-                    Conversion.fromKelvinToProvidedUnit(daily.temp.max, units).roundToInt()
+                    Conversion
+                        .fromKelvinToProvidedUnit(daily.temp.max, units)
+                        .roundToInt()
                         .toString(),
                 index = index,
                 low =
-                    Conversion.fromKelvinToProvidedUnit(daily.temp.min, units)
-                        .roundToInt().toString(),
+                    Conversion
+                        .fromKelvinToProvidedUnit(daily.temp.min, units)
+                        .roundToInt()
+                        .toString(),
                 icon = daily.weather[0].icon.getIconForCondition,
             )
         }
-    }
 
     fun buildHourlyForecastList(
         weatherDataSource: WeatherDataSource,
@@ -64,7 +66,8 @@ object WeatherDataSourceDto {
 
             val computedHour = hour.dt + weatherDataSource.timezoneOffset
             val temperature =
-                Conversion.fromKelvinToProvidedUnit(hour.temp, units)
+                Conversion
+                    .fromKelvinToProvidedUnit(hour.temp, units)
                     .roundToInt()
                     .toDegrees
 
@@ -139,10 +142,12 @@ object WeatherDataSourceDto {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
                 value =
-                    Conversion.fromKelvinToProvidedUnit(
-                        value = forecast.daily.dewPoint,
-                        unit = forecast.temperature,
-                    ).toInt().toDegrees,
+                    Conversion
+                        .fromKelvinToProvidedUnit(
+                            value = forecast.daily.dewPoint,
+                            unit = forecast.temperature,
+                        ).toInt()
+                        .toDegrees,
                 label = R.string.dew_point,
             ),
         )

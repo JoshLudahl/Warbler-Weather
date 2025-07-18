@@ -32,16 +32,20 @@ class ViewPagerAdapter(
         fun bind(forecastItem: Forecast) {
             itemBinding.forecast = forecastItem
             itemBinding.hiLow.temperatureLowText.text =
-                Conversion.fromKelvinToProvidedUnit(
-                    forecastItem.daily.temp.min,
-                    forecastItem.temperature,
-                ).roundToInt().toDegrees
+                Conversion
+                    .fromKelvinToProvidedUnit(
+                        forecastItem.daily.temp.min,
+                        forecastItem.temperature,
+                    ).roundToInt()
+                    .toDegrees
 
             itemBinding.hiLow.temperatureHiText.text =
-                Conversion.fromKelvinToProvidedUnit(
-                    forecastItem.daily.temp.max,
-                    forecastItem.temperature,
-                ).roundToInt().toDegrees
+                Conversion
+                    .fromKelvinToProvidedUnit(
+                        forecastItem.daily.temp.max,
+                        forecastItem.temperature,
+                    ).roundToInt()
+                    .toDegrees
 
             val weatherDetailList =
                 WeatherDataSourceDto.buildWeatherDetailList(
@@ -102,19 +106,17 @@ class ViewPagerAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewPagerViewHolder {
-        return ForecastViewPagerItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
-        ).let {
-            ViewPagerViewHolder(it)
-        }
-    }
+    ): ViewPagerViewHolder =
+        ForecastViewPagerItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ).let {
+                ViewPagerViewHolder(it)
+            }
 
-    override fun getItemCount(): Int {
-        return days.size
-    }
+    override fun getItemCount(): Int = days.size
 
     override fun onBindViewHolder(
         holder: ViewPagerViewHolder,

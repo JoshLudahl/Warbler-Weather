@@ -6,4 +6,5 @@ import com.warbler.data.model.weather.Forecasts
 
 class ForecastViewPagerViewModel(
     val forecasts: Forecasts,
-) : ViewModel(), LifecycleObserver
+) : ViewModel(),
+    LifecycleObserver

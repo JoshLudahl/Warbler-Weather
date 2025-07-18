@@ -16,8 +16,9 @@ class LocationNetworkAdapter(
     ) {
     private var locationList = emptyList<LocationEntity>()
 
-    class ViewHolder(private val itemBinding: LocationResultListItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    class ViewHolder(
+        private val itemBinding: LocationResultListItemBinding,
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(
             location: LocationEntity,
             clickListener: ClickListener<LocationEntity>,
@@ -31,15 +32,15 @@ class LocationNetworkAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewHolder {
-        return LocationResultListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
-        ).let {
-            ViewHolder(it)
-        }
-    }
+    ): ViewHolder =
+        LocationResultListItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ).let {
+                ViewHolder(it)
+            }
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -59,14 +60,10 @@ object LocationNetworkDiffUtilCallback : DiffUtil.ItemCallback<LocationEntity>()
     override fun areItemsTheSame(
         oldItem: LocationEntity,
         newItem: LocationEntity,
-    ): Boolean {
-        return "${oldItem.lat}${oldItem.lon}" == "${newItem.lat}${newItem.lon}"
-    }
+    ): Boolean = "${oldItem.lat}${oldItem.lon}" == "${newItem.lat}${newItem.lon}"
 
     override fun areContentsTheSame(
         oldItem: LocationEntity,
         newItem: LocationEntity,
-    ): Boolean {
-        return oldItem == newItem
-    }
+    ): Boolean = oldItem == newItem
 }

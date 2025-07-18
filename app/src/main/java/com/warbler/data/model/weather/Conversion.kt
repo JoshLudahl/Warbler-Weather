@@ -32,24 +32,22 @@ object Conversion {
     fun formatSpeedUnitsWithUnitsToString(
         value: Double,
         speed: Speed,
-    ): String {
-        return when (speed) {
+    ): String =
+        when (speed) {
             Speed.MPS -> "$value m/s"
             Speed.KPH -> "${value.metersPerSecondToKilometersPerHour.roundToUpperInt} KMH"
             Speed.MPH -> "${value.metersPerSecondToMilesPerHour.roundToUpperInt} MPH"
         }
-    }
 
     fun formatSpeedUnitsWithUnits(
         value: Double,
         speed: Speed,
-    ): Double {
-        return when (speed) {
+    ): Double =
+        when (speed) {
             Speed.MPS -> value
             Speed.KPH -> value.metersPerSecondToKilometersPerHour
             Speed.MPH -> value.metersPerSecondToMilesPerHour
         }
-    }
 
     val Int.toDegrees
         get() = "$this°"
@@ -64,18 +62,19 @@ object Conversion {
 
     val String.capitalizeEachFirst
         get() =
-            this.split(" ")
+            this
+                .split(" ")
                 .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 
     val currentDate: String
         get() = SimpleDateFormat("EEEE, MMMM dd", Locale.getDefault()).format(Date())
 
-    fun getDatOfWeekFromUnixUTC(unixUTC: Long): String {
-        return Instant.ofEpochSecond(unixUTC)
+    fun getDatOfWeekFromUnixUTC(unixUTC: Long): String =
+        Instant
+            .ofEpochSecond(unixUTC)
             .atZone(ZoneId.of("UTC"))
             .dayOfWeek
             .getDisplayName(TextStyle.FULL, Locale.getDefault())
-    }
 
     fun fromKelvinToProvidedUnit(
         value: Double,
@@ -92,12 +91,14 @@ object Conversion {
     ): String {
         val timeStampWithOffset = timeStamp + offset
         val hour =
-            Instant.ofEpochSecond(timeStampWithOffset)
+            Instant
+                .ofEpochSecond(timeStampWithOffset)
                 .atZone(ZoneId.of("UTC"))
                 .hour
 
         val minute =
-            Instant.ofEpochSecond(timeStampWithOffset)
+            Instant
+                .ofEpochSecond(timeStampWithOffset)
                 .atZone(ZoneId.of("UTC"))
                 .minute
 
@@ -125,7 +126,8 @@ object Conversion {
                 val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
 
                 var hour =
-                    Instant.ofEpochSecond(addHourlyMilli + this.timezoneOffset)
+                    Instant
+                        .ofEpochSecond(addHourlyMilli + this.timezoneOffset)
                         .atZone(ZoneId.of("UTC"))
                         .hour
 
@@ -141,7 +143,8 @@ object Conversion {
 
     val Int.toReadableHour
         get() =
-            Instant.ofEpochSecond(this.toLong())
+            Instant
+                .ofEpochSecond(this.toLong())
                 .atZone(ZoneId.of("UTC"))
                 .hour
 
@@ -162,10 +165,9 @@ object Conversion {
     fun convertOrReturnAccumulationByUnit(
         accumulation: Double,
         unit: Accumulation,
-    ): Double {
-        return when (unit) {
+    ): Double =
+        when (unit) {
             Accumulation.MILLIMETERS_PER_HOUR -> accumulation
             Accumulation.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
         }
-    }
 }

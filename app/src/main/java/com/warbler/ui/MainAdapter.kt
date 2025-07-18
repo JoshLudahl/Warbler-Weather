@@ -14,8 +14,9 @@ class MainAdapter(
 ) : ListAdapter<WeatherForecast, MainAdapter.ViewHolder>(MainDiffViewCallback) {
     private var weatherData = emptyList<WeatherForecast>()
 
-    class ViewHolder(private val itemBinding: WeatherForecastListItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    class ViewHolder(
+        private val itemBinding: WeatherForecastListItemBinding,
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(
             clickListener: ClickListenerInterface<WeatherForecast>,
             weatherForecast: WeatherForecast,
@@ -30,15 +31,15 @@ class MainAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewHolder {
-        return WeatherForecastListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
-        ).let {
-            ViewHolder(it)
-        }
-    }
+    ): ViewHolder =
+        WeatherForecastListItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ).let {
+                ViewHolder(it)
+            }
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -58,14 +59,10 @@ object MainDiffViewCallback : DiffUtil.ItemCallback<WeatherForecast>() {
     override fun areItemsTheSame(
         oldItem: WeatherForecast,
         newItem: WeatherForecast,
-    ): Boolean {
-        return oldItem.dayOfWeek == newItem.dayOfWeek
-    }
+    ): Boolean = oldItem.dayOfWeek == newItem.dayOfWeek
 
     override fun areContentsTheSame(
         oldItem: WeatherForecast,
         newItem: WeatherForecast,
-    ): Boolean {
-        return oldItem == newItem
-    }
+    ): Boolean = oldItem == newItem
 }

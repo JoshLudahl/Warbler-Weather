@@ -35,13 +35,15 @@ class LocationViewModel
 
         init {
             viewModelScope.launch {
-                locationRepository.getAllLocationsFromDatabase().catch {
-                    Log.d("LocationViewModel", "Error: ${it.message}")
-                    _locationList.value = Resource.Error(message = it.message)
-                }.collect {
-                    Log.d("LocationViewModel", "Success: $it")
-                    _locationList.value = Resource.Success(it)
-                }
+                locationRepository
+                    .getAllLocationsFromDatabase()
+                    .catch {
+                        Log.d("LocationViewModel", "Error: ${it.message}")
+                        _locationList.value = Resource.Error(message = it.message)
+                    }.collect {
+                        Log.d("LocationViewModel", "Success: $it")
+                        _locationList.value = Resource.Success(it)
+                    }
             }
         }
 
@@ -68,12 +70,14 @@ class LocationViewModel
             Log.d("LocationViewModel", "searchForLocation launching coroutine...")
             viewModelScope.launch {
                 Log.d("LocationViewModel", "searchForLocation Attempting to search for: $query")
-                locationNetworkRepository.getLocationsFromGeoService(query).catch { error ->
-                    Log.d("LocationViewModel", "searchForLocation error: ${error.message}")
-                }.collect {
-                    Log.i("LocationViewModel", "searchForLocation success: ${it.size}")
-                    _locationSearchList.value = Resource.Success(it)
-                }
+                locationNetworkRepository
+                    .getLocationsFromGeoService(query)
+                    .catch { error ->
+                        Log.d("LocationViewModel", "searchForLocation error: ${error.message}")
+                    }.collect {
+                        Log.i("LocationViewModel", "searchForLocation success: ${it.size}")
+                        _locationSearchList.value = Resource.Success(it)
+                    }
             }
         }
     }

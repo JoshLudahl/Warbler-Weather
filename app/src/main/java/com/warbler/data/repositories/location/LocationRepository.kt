@@ -39,8 +39,8 @@ class LocationRepository
             locationDao.deleteLocation(location)
         }
 
-        fun getDefaultLocation(): LocationEntity {
-            return LocationEntity(
+        fun getDefaultLocation(): LocationEntity =
+            LocationEntity(
                 country = "US",
                 lat = 45.5152,
                 lon = -122.6793,
@@ -48,5 +48,4 @@ class LocationRepository
                 state = "Oregon",
                 current = true,
             )
-        }
     }

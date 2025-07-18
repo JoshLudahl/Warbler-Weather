@@ -14,8 +14,9 @@ class MainWeatherHourlyForecastAdapter :
     ) {
     private var list = emptyList<HourlyForecastItem>()
 
-    class ViewHolder(private val itemBinding: HourlyForecastListItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    class ViewHolder(
+        private val itemBinding: HourlyForecastListItemBinding,
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(hourlyListItem: HourlyForecastItem) {
             itemBinding.weather = hourlyListItem
             itemBinding.weatherIcon.setImageResource(hourlyListItem.icon as Int)
@@ -25,15 +26,15 @@ class MainWeatherHourlyForecastAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewHolder {
-        return HourlyForecastListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
-        ).let {
-            ViewHolder(it)
-        }
-    }
+    ): ViewHolder =
+        HourlyForecastListItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ).let {
+                ViewHolder(it)
+            }
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -53,14 +54,10 @@ object HourlyWeatherDiffUtil : DiffUtil.ItemCallback<HourlyForecastItem>() {
     override fun areItemsTheSame(
         oldItem: HourlyForecastItem,
         newItem: HourlyForecastItem,
-    ): Boolean {
-        return oldItem.hour == newItem.hour
-    }
+    ): Boolean = oldItem.hour == newItem.hour
 
     override fun areContentsTheSame(
         oldItem: HourlyForecastItem,
         newItem: HourlyForecastItem,
-    ): Boolean {
-        return oldItem == newItem
-    }
+    ): Boolean = oldItem == newItem
 }

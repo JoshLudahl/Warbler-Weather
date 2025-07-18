@@ -29,7 +29,8 @@ object NetworkSourceModule {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        return OkHttpClient.Builder()
+        return OkHttpClient
+            .Builder()
             .addInterceptor(NetworkInterceptor(context))
             .addInterceptor(interceptor)
             .build()
@@ -41,7 +42,8 @@ object NetworkSourceModule {
         val contentType = "application/json".toMediaType()
         val json = Json { ignoreUnknownKeys = true }
 
-        return Retrofit.Builder()
+        return Retrofit
+            .Builder()
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory(contentType = contentType))
             .baseUrl(NetworkConstants.WEATHER_BASE_URL)
@@ -50,13 +52,9 @@ object NetworkSourceModule {
 
     @Singleton
     @Provides
-    fun providesWeatherAPIService(retrofit: Retrofit): WeatherApiService {
-        return retrofit.create(WeatherApiService::class.java)
-    }
+    fun providesWeatherAPIService(retrofit: Retrofit): WeatherApiService = retrofit.create(WeatherApiService::class.java)
 
     @Singleton
     @Provides
-    fun providesLocationAPIService(retrofit: Retrofit): LocationApiService {
-        return retrofit.create(LocationApiService::class.java)
-    }
+    fun providesLocationAPIService(retrofit: Retrofit): LocationApiService = retrofit.create(LocationApiService::class.java)
 }

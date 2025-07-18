@@ -5,11 +5,12 @@ import android.widget.Toast
 import kotlinx.serialization.json.Json
 
 fun Context.showToast(message: String) {
-    Toast.makeText(
-        this,
-        message,
-        Toast.LENGTH_SHORT,
-    ).show()
+    Toast
+        .makeText(
+            this,
+            message,
+            Toast.LENGTH_SHORT,
+        ).show()
 }
 
 inline fun <reified R : Any> String.convertToDataClass(): R {

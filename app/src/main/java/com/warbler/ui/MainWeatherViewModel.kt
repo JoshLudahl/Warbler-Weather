@@ -32,7 +32,8 @@ class MainWeatherViewModel
         private val dataStore: DataStore<Preferences>,
         private val locationRepository: LocationRepository,
         private val weatherNetworkRepository: WeatherNetworkRepository,
-    ) : ViewModel(), LifecycleObserver {
+    ) : ViewModel(),
+        LifecycleObserver {
         private val _currentLocation = MutableStateFlow(locationRepository.getDefaultLocation())
         val currentLocation: StateFlow<LocationEntity>
             get() = _currentLocation
@@ -86,18 +87,20 @@ class MainWeatherViewModel
 
         init {
             viewModelScope.launch {
-                locationRepository.getCurrentLocationFromDatabase().catch { e ->
-                    Log.d("MainWeatherViewModel", "Caught error getting location: ${e.message}")
-                    _locationState.value =
-                        Resource.Error(
-                            message = e.message ?: "An error occurred",
-                        )
-                }.collect {
-                    Log.d("MainWeatherViewModel", "Setting location to $it")
-                    _locationState.value = Resource.Success(it)
-                    _currentLocation.value = it
-                    getAqi()
-                }
+                locationRepository
+                    .getCurrentLocationFromDatabase()
+                    .catch { e ->
+                        Log.d("MainWeatherViewModel", "Caught error getting location: ${e.message}")
+                        _locationState.value =
+                            Resource.Error(
+                                message = e.message ?: "An error occurred",
+                            )
+                    }.collect {
+                        Log.d("MainWeatherViewModel", "Setting location to $it")
+                        _locationState.value = Resource.Success(it)
+                        _currentLocation.value = it
+                        getAqi()
+                    }
             }
 
             viewModelScope.launch {
@@ -156,7 +159,10 @@ class MainWeatherViewModel
                                     "Updating ViewModel with AQI: ${it.list[0].main.aqi}",
                                 )
                                 aqi.value = Resource.Success(it)
-                                _aqiValue.value = it.list[0].main.aqi.toString()
+                                _aqiValue.value =
+                                    it.list[0]
+                                        .main.aqi
+                                        .toString()
                                 _hasAqi.value = true
                             }
                         }
@@ -196,7 +202,8 @@ class MainWeatherViewModel
             _isDisabled.value = true
             Log.i("Log", "isDisabled After: ${isDisabled.value}")
             val currentLocation: LocationEntity = locationEntity
-            weatherNetworkRepository.getCurrentWeather(currentLocation)
+            weatherNetworkRepository
+                .getCurrentWeather(currentLocation)
                 .catch { e ->
                     _weatherState.value =
                         Resource.Error(
@@ -204,8 +211,7 @@ class MainWeatherViewModel
                         )
                     _errorView.value = true
                     Log.d("MainWeatherViewModel", "error view: ${_errorView.value} Caught error3e: $e")
-                }
-                .collect {
+                }.collect {
                     Log.d(
                         "MainWeatherViewModel",
                         "Updating ViewModel with data: $it",

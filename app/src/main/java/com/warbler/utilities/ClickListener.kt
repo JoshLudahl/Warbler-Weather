@@ -1,6 +1,8 @@
 package com.warbler.utilities
 
-class ClickListener<T>(val clickListener: (item: T) -> Unit) {
+class ClickListener<T>(
+    val clickListener: (item: T) -> Unit,
+) {
     fun onClick(item: T) = clickListener(item)
 }
 

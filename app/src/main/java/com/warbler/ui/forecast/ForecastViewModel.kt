@@ -13,21 +13,30 @@ import kotlin.math.roundToInt
 
 class ForecastViewModel(
     val forecast: Forecast,
-) : ViewModel(), LifecycleObserver {
+) : ViewModel(),
+    LifecycleObserver {
     val maxTemperature =
-        Conversion.fromKelvinToProvidedUnit(
-            forecast.daily.temp.max,
-            forecast.temperature,
-        ).roundToInt().toDegrees
+        Conversion
+            .fromKelvinToProvidedUnit(
+                forecast.daily.temp.max,
+                forecast.temperature,
+            ).roundToInt()
+            .toDegrees
 
     val minTemperature =
-        Conversion.fromKelvinToProvidedUnit(
-            forecast.daily.temp.min,
-            forecast.temperature,
-        ).roundToInt().toDegrees
+        Conversion
+            .fromKelvinToProvidedUnit(
+                forecast.daily.temp.min,
+                forecast.temperature,
+            ).roundToInt()
+            .toDegrees
 
-    val icon = forecast.daily.weather[0].icon.getIconForCondition
-    val description = forecast.daily.weather[0].description.capitalizeEachFirst
+    val icon =
+        forecast.daily.weather[0]
+            .icon.getIconForCondition
+    val description =
+        forecast.daily.weather[0]
+            .description.capitalizeEachFirst
     val dateTitle = getDatOfWeekFromUnixUTC(forecast.daily.dt.toLong())
 
     init {

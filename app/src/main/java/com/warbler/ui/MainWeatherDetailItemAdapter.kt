@@ -14,8 +14,9 @@ class MainWeatherDetailItemAdapter :
     ) {
     private var weatherDetailList = emptyList<WeatherDetailItem>()
 
-    class ViewHolder(private val itemBinding: GridLayoutItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    class ViewHolder(
+        private val itemBinding: GridLayoutItemBinding,
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(weatherDetailItem: WeatherDetailItem) {
             itemBinding.detail = weatherDetailItem
             itemBinding.detailIcon.setImageResource(weatherDetailItem.icon)
@@ -25,15 +26,15 @@ class MainWeatherDetailItemAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewHolder {
-        return GridLayoutItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
-        ).let {
-            ViewHolder(it)
-        }
-    }
+    ): ViewHolder =
+        GridLayoutItemBinding
+            .inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ).let {
+                ViewHolder(it)
+            }
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -53,14 +54,10 @@ object MainWeatherDetailItemDiffUtil : DiffUtil.ItemCallback<WeatherDetailItem>(
     override fun areItemsTheSame(
         oldItem: WeatherDetailItem,
         newItem: WeatherDetailItem,
-    ): Boolean {
-        return oldItem.value == newItem.value
-    }
+    ): Boolean = oldItem.value == newItem.value
 
     override fun areContentsTheSame(
         oldItem: WeatherDetailItem,
         newItem: WeatherDetailItem,
-    ): Boolean {
-        return oldItem == newItem
-    }
+    ): Boolean = oldItem == newItem
 }
