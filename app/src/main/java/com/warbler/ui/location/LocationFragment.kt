@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.fragment_location) {
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LocationViewModel by viewModels()

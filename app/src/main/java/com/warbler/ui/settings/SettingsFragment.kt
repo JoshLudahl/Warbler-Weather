@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 

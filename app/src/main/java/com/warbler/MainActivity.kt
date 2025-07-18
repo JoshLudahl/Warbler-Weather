@@ -37,11 +37,12 @@ class MainActivity : AppCompatActivity() {
             if (state.installStatus() == InstallStatus.DOWNLOADED) {
 
                 Log.i("MainActivity", "Update has been downloaded.")
-                Toast.makeText(
-                    this,
-                    "Update Completed. Restarting application.",
-                    Toast.LENGTH_SHORT,
-                ).show()
+                Toast
+                    .makeText(
+                        this,
+                        "Update Completed. Restarting application.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 lifecycleScope.launch {
                     appUpdateManager.completeUpdate()
                 }

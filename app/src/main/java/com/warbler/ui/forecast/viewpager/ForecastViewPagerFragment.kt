@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ForecastViewPagerFragment : Fragment(R.layout.fragment_forecast_viewpager) {
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentForecastViewpagerBinding? = null
     private val binding get() = _binding!!
     private val args: ForecastViewPagerFragmentArgs by navArgs()

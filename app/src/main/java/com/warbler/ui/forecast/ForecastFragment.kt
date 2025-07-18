@@ -24,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
     private val args: ForecastFragmentArgs by navArgs()
@@ -66,7 +67,9 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                 icon = R.drawable.ic_wi_sunrise,
                 value =
                     Conversion.getTimeFromTimeStamp(
-                        timeStamp = viewModel.forecast.daily.sunrise.toLong(),
+                        timeStamp =
+                            viewModel.forecast.daily.sunrise
+                                .toLong(),
                         offset = viewModel.forecast.timeZoneOffset.toLong(),
                     ) + " AM",
                 label = R.string.sunrise,
@@ -78,7 +81,9 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                 icon = R.drawable.ic_wi_sunset,
                 value =
                     Conversion.getTimeFromTimeStamp(
-                        timeStamp = viewModel.forecast.daily.sunset.toLong(),
+                        timeStamp =
+                            viewModel.forecast.daily.sunset
+                                .toLong(),
                         offset = viewModel.forecast.timeZoneOffset.toLong(),
                     ) + " PM",
                 label = R.string.sunset,
@@ -89,10 +94,12 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
                 value =
-                    Conversion.fromKelvinToProvidedUnit(
-                        value = daily.dewPoint,
-                        unit = viewModel.forecast.temperature,
-                    ).toInt().toDegrees,
+                    Conversion
+                        .fromKelvinToProvidedUnit(
+                            value = daily.dewPoint,
+                            unit = viewModel.forecast.temperature,
+                        ).toInt()
+                        .toDegrees,
                 label = R.string.dew_point,
             ),
         )

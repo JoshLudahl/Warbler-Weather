@@ -56,6 +56,7 @@ import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentMainWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainWeatherViewModel by viewModels()
@@ -83,10 +84,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         } ?: toast("Error getting forecast.")
     }
 
-    private fun getFormattedLocation(locationEntity: LocationEntity): String {
-        return locationEntity.state?.let { "${locationEntity.name}, ${locationEntity.state}" }
+    private fun getFormattedLocation(locationEntity: LocationEntity): String =
+        locationEntity.state?.let { "${locationEntity.name}, ${locationEntity.state}" }
             ?: locationEntity.name
-    }
 
     private fun buildWeatherForecastForViewPager(): Forecasts {
         val list = mutableListOf<Forecast>()
@@ -174,10 +174,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_thermometer,
                 value =
-                    Conversion.fromKelvinToProvidedUnit(
-                        result.current.feelsLike,
-                        viewModel.temperatureUnit.value,
-                    ).roundToInt().toDegrees,
+                    Conversion
+                        .fromKelvinToProvidedUnit(
+                            result.current.feelsLike,
+                            viewModel.temperatureUnit.value,
+                        ).roundToInt()
+                        .toDegrees,
                 label = R.string.feels_like,
             ),
         )
@@ -186,10 +188,12 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_raindrops,
                 value =
-                    Conversion.fromKelvinToProvidedUnit(
-                        value = result.current.dewPoint,
-                        unit = viewModel.temperatureUnit.value,
-                    ).toInt().toDegrees,
+                    Conversion
+                        .fromKelvinToProvidedUnit(
+                            value = result.current.dewPoint,
+                            unit = viewModel.temperatureUnit.value,
+                        ).toInt()
+                        .toDegrees,
                 label = R.string.dew_point,
             ),
         )
@@ -314,23 +318,30 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     ) {
         with(binding) {
             currentTemperature.text =
-                Conversion.fromKelvinToProvidedUnit(
-                    result.current.temp,
-                    value,
-                ).roundToInt().toDegrees
+                Conversion
+                    .fromKelvinToProvidedUnit(
+                        result.current.temp,
+                        value,
+                    ).roundToInt()
+                    .toDegrees
 
             val feelsLikeTemp =
-                Conversion.fromKelvinToProvidedUnit(
-                    result.current.feelsLike,
-                    value,
-                ).roundToInt().toDegrees
+                Conversion
+                    .fromKelvinToProvidedUnit(
+                        result.current.feelsLike,
+                        value,
+                    ).roundToInt()
+                    .toDegrees
 
             feelsLike.text = getString(R.string.feels_like_temp, feelsLikeTemp)
 
-            weatherDescription.text = result.current.weather[0].description.capitalizeEachFirst
+            weatherDescription.text =
+                result.current.weather[0]
+                    .description.capitalizeEachFirst
 
             currentWeatherIcon.setImageResource(
-                result.current.weather[0].icon.getIconForCondition,
+                result.current.weather[0]
+                    .icon.getIconForCondition,
             )
 
             binding.noDataInclude.title.text = getString(R.string.precipitation)
@@ -443,10 +454,11 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
     ) {
         val data =
             result.hourly.map {
-                Conversion.fromKelvinToProvidedUnit(
-                    it.temp,
-                    temperatureUnit,
-                ).roundToInt()
+                Conversion
+                    .fromKelvinToProvidedUnit(
+                        it.temp,
+                        temperatureUnit,
+                    ).roundToInt()
             }
 
         val model =
@@ -603,8 +615,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         .setMessage(it.description)
                         .setNegativeButton(getText(R.string.close)) { dialog, _ ->
                             dialog.cancel()
-                        }
-                        .create()
+                        }.create()
 
                 dialog.show()
             }
@@ -619,8 +630,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
                         .setMessage(message)
                         .setNegativeButton(getText(R.string.close)) { dialog, _ ->
                             dialog.cancel()
-                        }
-                        .create()
+                        }.create()
                 dialog.show()
             }
         }
