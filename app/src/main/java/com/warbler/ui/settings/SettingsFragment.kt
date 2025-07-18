@@ -34,15 +34,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupListeners()
-
-//        binding.composeView.apply {
-//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-//            setContent {
-//                MaterialTheme {
-//                    SegmentedButtonSingleSelect()
-//                }
-//            }
-//        }
     }
 
     private fun handleShareClick(info: String) {
