@@ -174,17 +174,17 @@ dependencies {
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.crashlytics)
 
     // Add the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.database)
 
     // Add the dependency for the Firebase SDK for Google Analytics
-    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.analytics)
 
     // Add Performance lib
-    implementation(libs.firebase.perf.ktx)
+    implementation(libs.firebase.perf)
 
     // This dependency is downloaded from the Google’s Maven repository.
     // Make sure you also include that repository in your project's build.gradle file.
