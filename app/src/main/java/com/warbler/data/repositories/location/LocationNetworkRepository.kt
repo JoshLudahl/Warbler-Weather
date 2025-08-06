@@ -35,4 +35,27 @@ class LocationNetworkRepository
                     emit(arrayListOf<LocationEntity>())
                 }
             }.flowOn(Dispatchers.IO)
+
+        fun reverseGeocodeLocation(
+            latitude: Double,
+            longitude: Double,
+        ): Flow<LocationEntity?> =
+            flow {
+                Log.d("LocationNetworkRepository", "Performing reverse geocode for $latitude, $longitude")
+                try {
+                    val locations = locationApiService.reverseGeocode(latitude, longitude)
+                    if (locations.isEmpty()) {
+                        Log.d("LocationNetworkRepository", "No reverse geocode results, returning null.")
+                        emit(null)
+                    } else {
+                        val location = locations.first()
+                        val locationEntity = LocationDto.locationDataSourceToLocationEntity(location)
+                        Log.d("LocationNetworkRepository", "Reverse geocode result: $locationEntity")
+                        emit(locationEntity)
+                    }
+                } catch (e: Exception) {
+                    Log.e("LocationNetworkRepository", "Error reverse geocoding: ${e.message}")
+                    emit(null)
+                }
+            }.flowOn(Dispatchers.IO)
     }

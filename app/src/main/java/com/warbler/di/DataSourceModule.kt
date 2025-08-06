@@ -54,4 +54,10 @@ object DataSourceModule {
     fun providesDataStore(
         @ApplicationContext context: Context,
     ): DataStore<Preferences> = context.dataStore
+
+    @Singleton
+    @Provides
+    fun providesContext(
+        @ApplicationContext context: Context,
+    ) = context
 }

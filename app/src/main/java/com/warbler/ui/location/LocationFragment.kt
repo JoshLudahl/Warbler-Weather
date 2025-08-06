@@ -1,11 +1,15 @@
 package com.warbler.ui.location
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -52,6 +56,23 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         LocationNetworkAdapter(
             ClickListener { location -> saveLocationSearchResultToDatabase(location) },
         )
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions(),
+        ) { permissions ->
+            val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+            val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+
+            if (fineLocationGranted || coarseLocationGranted) {
+                // Permission granted, proceed with location request
+                lifecycleScope.launch {
+                    viewModel.getCurrentLocationAndSave()
+                }
+            } else {
+                Log.d("LocationFragment", "Location permission denied")
+            }
+        }
 
     override fun onViewCreated(
         view: View,
@@ -115,6 +136,28 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.currentLocationSaved.collect { saved ->
+                    if (saved) {
+                        Log.d("LocationFragment", "Current location saved, navigating back")
+                        findNavController().navigate(R.id.action_locationFragment_to_mainWeatherFragment)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isLoadingCurrentLocation.collect { isLoading ->
+                    view?.findViewById<android.widget.ProgressBar>(R.id.current_location_progress)?.let { progressBar ->
+                        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                        Log.d("LocationFragment", "Current location loading state: $isLoading")
+                    }
+                }
+            }
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -136,6 +179,10 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.current_location_icon -> {
+                    getCurrentLocationAndSave()
+                    true
+                }
                 R.id.add_location_icon -> {
                     listOf(binding.searchBarLayoutContainer, binding.searchBarEditText)
                         .forEach { it.visibility = View.VISIBLE }
@@ -234,6 +281,36 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
     }
 
     private fun clearLocationSearchList() = locationNetworkAdapter.setItems(arrayListOf())
+
+    private fun getCurrentLocationAndSave() {
+        // Check if permissions are already granted
+        val fineLocationGranted =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) == PackageManager.PERMISSION_GRANTED
+
+        val coarseLocationGranted =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            ) == PackageManager.PERMISSION_GRANTED
+
+        if (fineLocationGranted || coarseLocationGranted) {
+            // Permission already granted, proceed with location request
+            lifecycleScope.launch {
+                viewModel.getCurrentLocationAndSave()
+            }
+        } else {
+            // Request permissions
+            locationPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                ),
+            )
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

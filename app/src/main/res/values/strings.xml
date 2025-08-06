@@ -101,6 +101,8 @@
     <string name="no">NO</string>
     <string name="add_another_location_description">Add another location by tapping the add icon.</string>
     <string name="add_title">Add Location</string>
+    <string name="get_current_location_description" translatable="false">Get your current location</string>
+    <string name="current_location_title" translatable="false">Current Location</string>
     <string name="review_app">Leave a review</string>
     <string name="rain">Rain</string>
     <string name="snow">Snow</string>

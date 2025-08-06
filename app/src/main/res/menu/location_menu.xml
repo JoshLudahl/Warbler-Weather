@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/current_location_icon"
+        android:contentDescription="@string/get_current_location_description"
+        android:icon="@drawable/ic_my_location"
+        android:title="@string/current_location_title"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/add_location_icon"
         android:contentDescription="@string/add_another_location_description"
         android:icon="@drawable/ic_add_40"

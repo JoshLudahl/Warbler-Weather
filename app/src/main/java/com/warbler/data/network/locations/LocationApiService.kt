@@ -12,4 +12,12 @@ interface LocationApiService {
         @Query("limit") limit: Int = NetworkConstants.CITY_SEARCH_LIMIT,
         @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY,
     ): List<LocationDataSource>
+
+    @GET("geo/1.0/reverse")
+    suspend fun reverseGeocode(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("limit") limit: Int = 1,
+        @Query("appid") apiKey: String = NetworkConstants.WEATHER_API_KEY,
+    ): List<LocationDataSource>
 }
