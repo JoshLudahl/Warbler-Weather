@@ -17,7 +17,7 @@ plugins {
 }
 
 android {
-    val target = 35
+    val target = 36
     compileSdk = target
     defaultConfig {
         applicationId = "com.softklass.warbler"
