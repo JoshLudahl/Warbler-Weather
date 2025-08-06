@@ -10,7 +10,9 @@ import com.warbler.data.model.location.LocationEntity
 import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.WeatherDataSource
+import com.warbler.data.model.weather.WeatherDataSourceDto
 import com.warbler.data.repositories.location.LocationRepository
+import com.warbler.data.repositories.weather.WeatherDatabaseRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import com.warbler.ui.settings.Accumulation
 import com.warbler.ui.settings.Speed
@@ -32,6 +34,7 @@ class MainWeatherViewModel
         private val dataStore: DataStore<Preferences>,
         private val locationRepository: LocationRepository,
         private val weatherNetworkRepository: WeatherNetworkRepository,
+        private val weatherDatabaseRepository: WeatherDatabaseRepository,
     ) : ViewModel(),
         LifecycleObserver {
         private val _currentLocation = MutableStateFlow(locationRepository.getDefaultLocation())
@@ -202,6 +205,7 @@ class MainWeatherViewModel
             _isDisabled.value = true
             Log.i("Log", "isDisabled After: ${isDisabled.value}")
             val currentLocation: LocationEntity = locationEntity
+
             weatherNetworkRepository
                 .getCurrentWeather(currentLocation)
                 .catch { e ->
@@ -210,7 +214,10 @@ class MainWeatherViewModel
                             message = e.message ?: "An error occurred.",
                         )
                     _errorView.value = true
-                    Log.d("MainWeatherViewModel", "error view: ${_errorView.value} Caught error3e: $e")
+                    Log.d(
+                        "MainWeatherViewModel",
+                        "error view: ${_errorView.value} Caught error3e: $e",
+                    )
                 }.collect {
                     Log.d(
                         "MainWeatherViewModel",
@@ -220,7 +227,19 @@ class MainWeatherViewModel
                     _errorView.value = false
                     _weatherState.value = Resource.Success(it)
                     _weatherObject.value = it
+
+                    // Save weather data to database for caching
+                    val locationName = "${currentLocation.name}, ${currentLocation.state}"
+                    val weatherEntity = WeatherDataSourceDto.buildWeatherData(it, locationName)
+
+                    weatherDatabaseRepository.insertWeather(weatherEntity)
+
+                    Log.d(
+                        "MainWeatherViewModel",
+                        "Saved weather data to database for location: $locationName",
+                    )
                 }
+
             _isDisabled.value = false
         }
     }

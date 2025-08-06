@@ -5,6 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.warbler.data.database.location.LocationDao
 import com.warbler.data.database.weather.WeatherDatabase
 import com.warbler.data.database.weather.WeatherDatabaseDao
@@ -22,6 +24,13 @@ import javax.inject.Singleton
 object DataSourceModule {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+    private val MIGRATION_1_2 =
+        object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE weather_table ADD COLUMN iconCode TEXT NOT NULL DEFAULT '02d'")
+            }
+        }
+
     @Singleton
     @Provides
     fun providesWeatherDatabase(
@@ -31,7 +40,8 @@ object DataSourceModule {
             context,
             WeatherDatabase::class.java,
             "weather_database",
-        ).build()
+        ).addMigrations(MIGRATION_1_2)
+        .build()
 
     @Singleton
     @Provides

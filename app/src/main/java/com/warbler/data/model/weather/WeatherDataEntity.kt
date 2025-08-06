@@ -19,4 +19,5 @@ data class WeatherDataEntity(
     val temp: Double,
     val updated: String = DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
     val wind: Double,
+    val iconCode: String = "02d",
 )

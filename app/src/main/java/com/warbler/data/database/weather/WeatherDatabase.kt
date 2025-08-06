@@ -11,7 +11,7 @@ import com.warbler.data.model.weather.WeatherDataEntity
         LocationEntity::class,
         WeatherDataEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 abstract class WeatherDatabase : RoomDatabase() {

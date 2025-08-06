@@ -106,4 +106,8 @@
     <string name="review_app">Leave a review</string>
     <string name="rain">Rain</string>
     <string name="snow">Snow</string>
+    
+    <!-- Widget strings -->
+    <string name="refresh_weather" translatable="false">Refresh weather</string>
+    <string name="weather_icon" translatable="false">Weather icon</string>
 </resources>

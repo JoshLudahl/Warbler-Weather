@@ -12,9 +12,12 @@ import com.warbler.ui.settings.Temperature
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
-    fun buildWeatherData(weatherDataSource: WeatherDataSource): WeatherDataEntity =
+    fun buildWeatherData(
+        weatherDataSource: WeatherDataSource,
+        cityName: String = "",
+    ): WeatherDataEntity =
         WeatherDataEntity(
-            city = getCityNameFromLatLon(weatherDataSource.lat, weatherDataSource.lon),
+            city = cityName.ifEmpty { getCityNameFromLatLon(weatherDataSource.lat, weatherDataSource.lon) },
             condition = weatherDataSource.current.weather[0].main,
             description = weatherDataSource.current.weather[0].description,
             hi = weatherDataSource.daily[0].temp.max,
@@ -24,6 +27,7 @@ object WeatherDataSourceDto {
             pressure = weatherDataSource.current.pressure,
             temp = weatherDataSource.current.temp,
             wind = weatherDataSource.current.windSpeed,
+            iconCode = weatherDataSource.current.weather[0].icon,
         )
 
     private fun getCityNameFromLatLon(

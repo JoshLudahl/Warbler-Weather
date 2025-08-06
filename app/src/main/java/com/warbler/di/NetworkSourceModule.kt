@@ -6,6 +6,8 @@ import com.warbler.data.network.NetworkConstants
 import com.warbler.data.network.NetworkInterceptor
 import com.warbler.data.network.locations.LocationApiService
 import com.warbler.data.network.weather.WeatherApiService
+import com.warbler.data.repositories.location.LocationNetworkRepository
+import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,4 +59,12 @@ object NetworkSourceModule {
     @Singleton
     @Provides
     fun providesLocationAPIService(retrofit: Retrofit): LocationApiService = retrofit.create(LocationApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesWeatherNetworkRepository(weatherApiService: WeatherApiService) = WeatherNetworkRepository(weatherApiService)
+
+    @Singleton
+    @Provides
+    fun providesLocationNetworkRepository(locationApiService: LocationApiService) = LocationNetworkRepository(locationApiService)
 }
