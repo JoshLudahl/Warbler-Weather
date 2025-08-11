@@ -43,6 +43,8 @@
     <string name="locations">Locations</string>
     <string name="search_location">Search for city</string>
     <string name="humidity">Humidity</string>
+
+    <string name="humidity_format" translatable="false">%s%%</string>
     <string name="humidity_icon">Humidity Icon</string>
     <string name="uv_index">UV Index</string>
     <string name="uv_index_icon">UV Index Icon</string>
@@ -106,7 +108,16 @@
     <string name="review_app">Leave a review</string>
     <string name="rain">Rain</string>
     <string name="snow">Snow</string>
-    
+
+    <!-- AQI info dialog -->
+    <string name="aqi_info_title" translatable="false">Air Quality Index (OpenWeatherMap)</string>
+    <string name="aqi_info_source_note" translatable="false">Scale from 1 (Good) to 5 (Very Poor) per OpenWeatherMap Air Pollution API.</string>
+    <string name="aqi_1_good" translatable="false">1 — Good: Air quality is considered satisfactory; little or no risk.</string>
+    <string name="aqi_2_fair" translatable="false">2 — Fair: Acceptable air quality; some pollutants may mildly affect sensitive individuals.</string>
+    <string name="aqi_3_moderate" translatable="false">3 — Moderate: Sensitive groups may experience irritation or breathing discomfort.</string>
+    <string name="aqi_4_poor" translatable="false">4 — Poor: Unhealthy for sensitive groups; increased likelihood of adverse effects.</string>
+    <string name="aqi_5_very_poor" translatable="false">5 — Very Poor: Unhealthy for everyone; significant risk of adverse effects.</string>
+
     <!-- Widget strings -->
     <string name="refresh_weather" translatable="false">Refresh weather</string>
     <string name="weather_icon" translatable="false">Weather icon</string>

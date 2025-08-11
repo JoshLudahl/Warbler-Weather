@@ -221,7 +221,7 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
         list.add(
             WeatherDetailItem(
                 icon = R.drawable.ic_wi_humidity,
-                value = getString(R.string.percent, result.current.humidity.toString()),
+                value = getString(R.string.humidity_format, result.current.humidity.toString()),
                 label = R.string.humidity,
             ),
         )
@@ -607,6 +607,9 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             }
         }
 
+        binding.uvIndexValue.setOnClickListener { showAqiInfoDialog() }
+        binding.uvIndexLabel.setOnClickListener { showAqiInfoDialog() }
+
         binding.weatherAlertIcon.setOnClickListener {
             viewModel.weatherObject.value?.alerts?.get(0)?.let {
                 val dialog =
@@ -651,6 +654,17 @@ class MainWeatherFragment : Fragment(R.layout.fragment_main_weather) {
             message.append("\n\n")
         }
         return message.toString()
+    }
+
+    private fun showAqiInfoDialog() {
+        val view = layoutInflater.inflate(R.layout.dialog_aqi_info, null)
+        val dialog =
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setTitle(getString(R.string.aqi_info_title))
+                .setView(view)
+                .setNegativeButton(getText(R.string.close)) { d, _ -> d.dismiss() }
+                .create()
+        dialog.show()
     }
 
     override fun onDestroyView() {
