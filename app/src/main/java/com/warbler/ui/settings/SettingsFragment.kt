@@ -1,7 +1,9 @@
 package com.warbler.ui.settings
 
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -12,8 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.Event.Log
+import com.warbler.MainActivity
 import com.warbler.R
 import com.warbler.databinding.FragmentSettingsBinding
+import com.warbler.ui.widget.WeatherWidgetProvider
 import com.warbler.utilities.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,6 +57,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun setupListeners() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.settings_widget_icon -> {
+                    handleOnClickWidgetOption()
+                    true
+                }
+
                 R.id.settings_share_icon -> {
                     handleShareClick(Constants.WEATHER_WARBLER_URL)
                     true
@@ -60,7 +69,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
                 R.id.settings_language_icon -> {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    intent.data = Uri.parse("package:" + context?.packageName)
+                    intent.data = ("package:" + context?.packageName).toUri()
                     startActivity(intent)
                     true
                 }
@@ -188,6 +197,32 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 .show()
 
             Log.builder().setContent("Error opening link: ${exception.message}").build()
+        }
+    }
+
+    private fun handleOnClickWidgetOption() {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val myProvider = ComponentName(requireContext(), WeatherWidgetProvider::class.java)
+        val intent = Intent(context, MainActivity::class.java)
+
+        if (appWidgetManager.isRequestPinAppWidgetSupported) {
+            // Create the PendingIntent object only if your app needs to be notified
+            // when the user chooses to pin the widget. Note that if the pinning
+            // operation fails, your app isn't notified. This callback receives the ID
+            // of the newly pinned widget (EXTRA_APPWIDGET_ID).
+            val successCallback =
+                PendingIntent.getBroadcast(
+                    // context =
+                    context,
+                    // requestCode =
+                    0,
+                    // intent =
+                    intent,
+                    // flags =
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                )
+
+            appWidgetManager.requestPinAppWidget(myProvider, null, successCallback)
         }
     }
 

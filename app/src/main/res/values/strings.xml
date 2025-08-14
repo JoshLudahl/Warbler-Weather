@@ -121,4 +121,5 @@
     <!-- Widget strings -->
     <string name="refresh_weather" translatable="false">Refresh weather</string>
     <string name="weather_icon" translatable="false">Weather icon</string>
+    <string name="widget_icon" translatable="false">Widget Icon</string>
 </resources>
