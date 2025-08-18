@@ -316,50 +316,12 @@
                         tools:text="About" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/settings_subheading_about_this_app_text"
-                        style="@style/settings_subheading_style"
-                        android:text="@string/settings_about_this_app"
-                        app:layout_constraintEnd_toStartOf="@+id/about_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/settings_about_heading_text"
-                        tools:text="About Weatheruous" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/settings_subheading_privacy_policy_text"
-                        style="@style/settings_subheading_style"
-                        android:text="@string/settings_privacy_policy_text"
-                        app:layout_constraintEnd_toStartOf="@+id/privacy_policy_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_about_this_app_text"
-                        tools:text="Privacy Policy" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/about_icon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_about_this_app_text"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_about_this_app_text"
-                        app:srcCompat="@drawable/ic_round_open_in_browser" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/privacy_policy_icon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/settings_subheading_privacy_policy_text"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/settings_subheading_privacy_policy_text"
-                        app:srcCompat="@drawable/ic_round_open_in_browser" />
-
-                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/yellow_rumped_warbler_text"
                         style="@style/settings_subheading_style"
                         android:text="@string/yellow_rumped_warbler"
                         app:layout_constraintEnd_toStartOf="@+id/yellow_rumped_warbler_icon"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/settings_subheading_privacy_policy_text"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_about_heading_text"
                         tools:text="Yellow-rumped Warbler" />
 
                     <androidx.appcompat.widget.AppCompatImageView
