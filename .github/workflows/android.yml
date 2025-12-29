@@ -26,43 +26,6 @@ jobs:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
           WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
 
-#  This doesn't currently work as a result of internet not available. Running locally works fine.
-#  ui-test:
-#    runs-on: macOS-latest
-#    strategy:
-#      matrix:
-#        api-level: [33]
-#        target: [default]
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v5
-#
-#      - name: set up JDK 17
-#        uses: actions/setup-java@v5
-#        with:
-#          java-version: '17'
-#          distribution: 'adopt'
-#          cache: gradle
-#
-#      - name: Run Tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: ${{ matrix.api-level }}
-#          target: ${{ matrix.target }}
-#          arch: x86_64
-#          profile: pixel_6
-#          script: avdmanager list device && ./gradlew connectedAndroidTest --stacktrace
-#        env:
-#          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-#          WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
-#
-#      - name: Upload Reports
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: Test-Reports
-#          path: app/build/reports
-#        if: always()
-
   unit-test:
     runs-on: ubuntu-latest
     steps:
@@ -102,7 +65,9 @@ jobs:
 
       # Build APKs required by Firebase Test Lab
       - name: Build app and test APKs
-        run: ./gradlew assembleDebug assembleDebugAndroidTest
+        run: |
+          ./gradlew assembleDebug assembleDebugAndroidTest \
+            -Pandroid.testInstrumentationRunnerArguments.class=com.warbler.tests.usecases.DemoTest
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
           WEATHER_BASE_URL: ${{ secrets.WEATHER_BASE_URL }}
@@ -117,6 +82,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: List available Firebase Test Lab models
+        run: gcloud firebase test android models list
 
       # Run tests on real devices
       - name: Run UI tests on Firebase Test Lab
