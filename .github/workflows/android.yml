@@ -92,4 +92,3 @@ jobs:
             --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
             --device model=cheetah,version=33,locale=en,orientation=portrait \
             --timeout 15m
-
