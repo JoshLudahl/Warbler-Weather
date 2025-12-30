@@ -91,6 +91,5 @@ jobs:
             --app app/build/outputs/apk/debug/app-debug.apk \
             --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
             --device model=cheetah,version=33,locale=en,orientation=portrait \
-            --timeout 15m \
-            --project=${{ secrets.GCP_PROJECT_ID }}
+            --timeout 15m
 
