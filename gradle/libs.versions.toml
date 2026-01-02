@@ -48,7 +48,7 @@ roomKtx = "2.8.4"
 roomRuntime = "2.8.4"
 rules = "1.7.0"
 runner = "1.7.0"
-vicoCore = "2.0.0-alpha.6" # Leave for now, resource linking issue with updated version, requires investigation.
+vicoCore = "2.4.0-beta.3" # Leave for now, resource linking issue with updated version, requires investigation.
 viewpager2 = "1.1.0"
 
 [libraries]
