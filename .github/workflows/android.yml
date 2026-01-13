@@ -85,6 +85,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       # Run tests on real devices
+      # Parallel - add sharding with the flag: --num-test-shards=3
       - name: Run UI tests on Firebase Test Lab
         run: |
           gcloud firebase test android run \
