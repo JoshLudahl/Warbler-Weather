@@ -17,7 +17,7 @@ class DemoTest : BaseTest() {
     @Before
     fun waitForLoading() {
         screen<Main> {
-            waitForView(addLocationIcon)
+            waitForView(dateTitle)
         }
     }
 
@@ -39,7 +39,7 @@ class DemoTest : BaseTest() {
     }
 
     @Test
-    fun verifySettingsScreenIsDisplayed() {
+    fun verifySettingsTapTakesUserToSettingsScreen() {
         screen<Main> { click on settingsIcon }
 
         screen<Settings> {
