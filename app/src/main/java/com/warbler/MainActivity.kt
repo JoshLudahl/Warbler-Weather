@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("ConfigCheck", "WEATHER_API_KEY length=${BuildConfig.WEATHER_API_KEY.length}")
+
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         aut = appUpdateManager.appUpdateInfo
         checkIsUpdateAvailable()

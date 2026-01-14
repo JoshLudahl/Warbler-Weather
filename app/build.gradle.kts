@@ -51,10 +51,18 @@ android {
         }
         debug {
             isMinifyEnabled = false
+
+            val weatherApiKey =
+                System
+                    .getenv("WEATHER_API_KEY")
+                    ?.takeIf { it.isNotBlank() }
+                    ?: project.findProperty("WEATHER_API_KEY")?.toString()
+                    ?: ""
+
             buildConfigField(
                 "String",
                 "WEATHER_API_KEY",
-                "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
+                "\"$weatherApiKey\"",
             )
 
             applicationIdSuffix = ".debug"
