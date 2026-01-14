@@ -12,4 +12,5 @@ class Main {
     val errorView: Matcher<View> = view(R.id.error_view)
     val locationText: Matcher<View> = view(R.id.location_text)
     val settingsIcon: Matcher<View> = view(R.id.settings_icon)
+    val airQualityText: Matcher<View> = view("Air Quality Index")
 }
