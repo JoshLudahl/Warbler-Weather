@@ -10,6 +10,7 @@ import com.softklass.elk.rules.EspressoSetupRule
 import com.warbler.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.junit.Before
 import org.junit.Rule
@@ -31,8 +32,14 @@ abstract class BaseTest {
     @Before
     fun init() = hiltAndroidRule.inject()
 
+    enum class ViewStatus {
+        DISPLAYED,
+        GONE,
+    }
+
     fun waitForView(
         matcher: Matcher<View>,
+        status: ViewStatus = ViewStatus.DISPLAYED,
         timeout: Long = 15000,
         interval: Long = 500,
     ) {
@@ -41,12 +48,21 @@ abstract class BaseTest {
 
         while (System.currentTimeMillis() < endTime) {
             try {
-                onView(matcher).check(matches(isDisplayed()))
-                return // View is displayed, exit function
+                when (status) {
+                    ViewStatus.DISPLAYED -> onView(matcher).check(matches(isDisplayed()))
+                    ViewStatus.GONE -> {
+                        try {
+                            onView(matcher).check(matches(not(isDisplayed())))
+                        } catch (e: NoMatchingViewException) {
+                            // View does not exist, which is also fine for GONE
+                        }
+                    }
+                }
+                return // Condition met, exit function
             } catch (e: Exception) {
                 when (e) {
                     is NoMatchingViewException -> {
-                        // View not found or not displayed yet, continue waiting
+                        // View condition not met, continue waiting
                         Thread.sleep(interval)
                     }
                     else -> throw e
@@ -55,6 +71,15 @@ abstract class BaseTest {
         }
 
         // Final attempt to throw the actual error if timeout is reached
-        onView(matcher).check(matches(isDisplayed()))
+        when (status) {
+            ViewStatus.DISPLAYED -> onView(matcher).check(matches(isDisplayed()))
+            ViewStatus.GONE -> {
+                try {
+                    onView(matcher).check(matches(not(isDisplayed())))
+                } catch (e: NoMatchingViewException) {
+                    // View does not exist, which is also fine for GONE
+                }
+            }
+        }
     }
 }
