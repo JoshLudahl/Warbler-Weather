@@ -17,7 +17,7 @@ class DemoTest : BaseTest() {
     @Before
     fun waitForLoading() {
         screen<Main> {
-            waitForView(airQualityText)
+            waitForView(loading, BaseTest.ViewStatus.GONE)
         }
     }
 
