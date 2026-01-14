@@ -17,7 +17,7 @@ class DemoTest : BaseTest() {
     @Before
     fun waitForLoading() {
         screen<Main> {
-            waitForView(loading, BaseTest.ViewStatus.GONE)
+            waitForView(loading, ViewStatus.GONE)
         }
     }
 

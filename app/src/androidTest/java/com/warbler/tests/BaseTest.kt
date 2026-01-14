@@ -47,6 +47,7 @@ abstract class BaseTest {
         val endTime = startTime + timeout
 
         while (System.currentTimeMillis() < endTime) {
+            Thread.sleep(1_000)
             try {
                 when (status) {
                     ViewStatus.DISPLAYED -> onView(matcher).check(matches(isDisplayed()))
