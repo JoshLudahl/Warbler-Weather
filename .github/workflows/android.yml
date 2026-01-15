@@ -85,7 +85,7 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       # Run tests on real devices
-      # Parallel - add sharding with the flag: --num-test-shards=3
+      # Parallel - add sharding with the flag: --num-uniform-shards 2
       - name: Run UI tests on Firebase Test Lab
         run: |
           gcloud firebase test android run \
@@ -96,5 +96,4 @@ jobs:
             --use-orchestrator \
             --timeout 15m \
             --results-bucket=gs://warbler-weather-test-results \
-            --test-targets "class com.warbler.tests.usecases.DemoTest" \
-            --num-uniform-shards 2
+            --test-targets "class com.warbler.tests.usecases.DemoTest"
