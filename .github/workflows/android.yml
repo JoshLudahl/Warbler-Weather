@@ -97,4 +97,4 @@ jobs:
             --timeout 15m \
             --results-bucket=gs://warbler-weather-test-results \
             --test-targets "class com.warbler.tests.usecases.DemoTest" \
-            --num-test-shards=2
+            --num-uniform-shards 2
