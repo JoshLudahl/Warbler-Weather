@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.ApplicationExtension
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
@@ -16,7 +17,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-android {
+configure<ApplicationExtension> {
     val target = 36
     compileSdk = target
     defaultConfig {
@@ -87,8 +88,8 @@ android {
     }
 
     testOptions {
-        execution = "ANDROIDX_TEST_ORCHESTRATOR"
         animationsDisabled = true
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 
     buildFeatures {
@@ -96,7 +97,9 @@ android {
         viewBinding = true
         compose = true
         buildConfig = false
+        resValues = true
     }
+
     namespace = "com.warbler"
 
     packaging {
