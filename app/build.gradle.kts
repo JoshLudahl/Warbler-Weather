@@ -28,8 +28,18 @@ android {
         testInstrumentationRunner = "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(mutableMapOf("clearPackageData" to "true"))
         vectorDrawables.useSupportLibrary = true
-        buildConfigField(
-            "String",
+        resValue(
+            "string",
+            "VERSION_NAME",
+            "\"0.$versionCode\"",
+        )
+        resValue(
+            "string",
+            "VERSION_CODE",
+            "\"$versionCode\"",
+        )
+        resValue(
+            "string",
             "WEATHER_BASE_URL",
             "\"${System.getenv("WEATHER_BASE_URL") ?: project.property("WEATHER_BASE_URL")}\"",
         )
@@ -42,8 +52,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            buildConfigField(
-                "String",
+            resValue(
+                "string",
                 "WEATHER_API_KEY",
                 "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
             )
@@ -59,8 +69,8 @@ android {
                     ?: project.findProperty("WEATHER_API_KEY")?.toString()
                     ?: ""
 
-            buildConfigField(
-                "String",
+            resValue(
+                "string",
                 "WEATHER_API_KEY",
                 "\"$weatherApiKey\"",
             )
@@ -85,7 +95,7 @@ android {
         dataBinding = true
         viewBinding = true
         compose = true
-        buildConfig = true
+        buildConfig = false
     }
     namespace = "com.warbler"
 

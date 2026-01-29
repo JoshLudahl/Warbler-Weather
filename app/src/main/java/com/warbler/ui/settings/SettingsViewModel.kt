@@ -1,14 +1,15 @@
 package com.warbler.ui.settings
 
+import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.warbler.BuildConfig
 import com.warbler.R
 import com.warbler.utilities.DataPref
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ class SettingsViewModel
     @Inject
     constructor(
         private val dataStore: DataStore<Preferences>,
+        @ApplicationContext private val context: Context,
     ) : ViewModel() {
         private val _temperatureUnit = MutableStateFlow(R.id.radio_celsius)
         val temperatureUnit: StateFlow<Int>
@@ -32,7 +34,7 @@ class SettingsViewModel
         val accumulationUnit: StateFlow<Int>
             get() = _accumulationUnit
 
-        private val _appVersion = MutableStateFlow("Beta Version ${BuildConfig.VERSION_NAME}")
+        private val _appVersion = MutableStateFlow("Beta Version ${context.getString(R.string.VERSION_NAME)}")
         val appVersion get() = _appVersion
 
         init {
