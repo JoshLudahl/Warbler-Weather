@@ -23,4 +23,8 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":feature-weather")
+include(":feature-location")
+include(":feature-settings")
+include(":core")
 rootProject.name="Weatheruous"
