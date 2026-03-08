@@ -1,73 +1,16 @@
 import com.android.build.api.dsl.LibraryExtension
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    id("warbler.android.library")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    alias(libs.plugins.ktlint)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
 }
 
 configure<LibraryExtension> {
-    val target = 36
-    compileSdk = target
-
-    defaultConfig {
-        minSdk = 26
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-        compose = true
-        buildConfig = false
-    }
-
     namespace = "com.warbler.feature.weather"
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-ktlint {
-    android = true
-    ignoreFailures = false
-    reporters {
-        reporter(ReporterType.CHECKSTYLE)
-        reporter(ReporterType.JSON)
-        reporter(ReporterType.HTML)
-    }
-    additionalEditorconfig.set(
-        mapOf(
-            "max_line_length" to "off",
-            "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
-        ),
-    )
-}
-
-tasks.named("preBuild") {
-    dependsOn("ktlintFormat")
 }
 
 dependencies {

@@ -22,6 +22,8 @@ dependencyResolutionManagement {
     }
 }
 
+// Include the convention plugins build
+includeBuild("core-build")
 include(":app")
 include(":feature-weather")
 include(":feature-location")

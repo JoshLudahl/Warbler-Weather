@@ -1,2 +1,13 @@
 [
+    {
+        "file": "/Users/joshy/Development/Android/Warbler-Weather/feature-weather/build.gradle.kts",
+        "errors": [
+            {
+                "line": 16,
+                "column": 1,
+                "message": "Needless blank line(s)",
+                "rule": "standard:no-consecutive-blank-lines"
+            }
+        ]
+    }
 ]
