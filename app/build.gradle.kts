@@ -139,6 +139,10 @@ tasks.named("preBuild") {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(project(":feature-weather"))
+    implementation(project(":feature-location"))
+    implementation(project(":feature-settings"))
+    implementation(project(":core"))
 
     //  Android specific
     implementation(libs.appcompat)
@@ -150,6 +154,8 @@ dependencies {
     implementation(libs.viewpager2)
     implementation(libs.material3Compose)
     implementation(libs.material3View)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2025.09.01")
