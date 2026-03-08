@@ -1,3 +1,0 @@
-R_DEF: Internal format may change without notice
-local
-string module_name_feature_settings
