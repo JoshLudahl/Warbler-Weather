@@ -17,3 +17,8 @@
 .idea
 /.idea/
 /.kotlin/
+/core/build/
+/core-build/build/
+/feature-location/build/
+/feature-settings/build/
+/feature-weather/build/
