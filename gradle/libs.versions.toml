@@ -53,6 +53,7 @@ vicoCore = "2.0.0-alpha.6" # Leave for now, resource linking issue with updated 
 viewpager2 = "1.1.0"
 navigation3Runtime = "1.0.1"
 navigation3Ui = "1.0.1"
+uiTextGoogleFonts = "1.10.4"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
@@ -130,6 +131,7 @@ vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vicoCore
 vico-views = { module = "com.patrykandpatrick.vico:views", version.ref = "vicoCore" }
 navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
 navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }
+ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

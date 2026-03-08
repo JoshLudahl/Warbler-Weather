@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.lifecycle.extensions)
     implementation(libs.material3Compose)
     implementation(libs.material3View)
+    implementation(libs.ui.text.google.fonts)
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2025.09.01")
