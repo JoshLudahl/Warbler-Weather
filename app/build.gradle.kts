@@ -237,6 +237,10 @@ dependencies {
     // ...with Kotlin.
     kspAndroidTest(libs.hilt.android.compiler)
 
+    // Resolve conflict between Compose BOM (1.1.0) and hilt-android-testing (1.2.0)
+    implementation(libs.concurrent.futures)
+    androidTestImplementation(libs.concurrent.futures)
+
     //  Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
