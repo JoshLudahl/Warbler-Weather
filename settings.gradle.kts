@@ -4,7 +4,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        maven { url= uri("https://jitpack.io") }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 plugins {
@@ -29,4 +29,4 @@ include(":feature-weather")
 include(":feature-location")
 include(":feature-settings")
 include(":core")
-rootProject.name="Weatheruous"
+rootProject.name = "Weatheruous"

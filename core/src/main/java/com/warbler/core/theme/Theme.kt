@@ -267,8 +267,7 @@ fun AppTheme(
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content:
-        @Composable()
-        () -> Unit,
+        @Composable () -> Unit,
 ) {
     val colorScheme =
         when {
@@ -276,7 +275,6 @@ fun AppTheme(
                 val context = LocalContext.current
                 if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
             }
-
             darkTheme -> darkScheme
             else -> lightScheme
         }
