@@ -1,11 +1,11 @@
-package com.warbler.screens
+package com.warbler.robot
 
 import android.view.View
 import com.softklass.elk.espresso.view
 import com.warbler.R
 import org.hamcrest.Matcher
 
-class Main {
+class MainRobot {
     val addLocationIcon: Matcher<View> = view(R.id.search_icon)
     val currentLocationIcon: Matcher<View> = view(R.id.current_location_icon)
     val currentTemperature: Matcher<View> = view(R.id.current_temperature)

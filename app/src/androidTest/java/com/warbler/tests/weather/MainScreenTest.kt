@@ -1,11 +1,11 @@
-package com.warbler.tests.usecases
+package com.warbler.tests.weather
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.softklass.elk.espresso.isDisplayed
 import com.softklass.elk.screen
-import com.warbler.screens.Main
+import com.warbler.robot.MainRobot
 import com.warbler.tests.BaseTest
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.CoreMatchers.containsString
@@ -16,14 +16,14 @@ import org.junit.Test
 class MainScreenTest : BaseTest() {
     @Before
     fun waitForLoading() {
-        screen<Main> {
+        screen<MainRobot> {
             waitForView(loading, ViewStatus.GONE)
         }
     }
 
     @Test
     fun verifyCurrentTemperatureShowsFakeValue() {
-        screen<Main> {
+        screen<MainRobot> {
             currentTemperature.isDisplayed()
             onView(currentTemperature).check(matches(withText("23°")))
         }
@@ -31,7 +31,7 @@ class MainScreenTest : BaseTest() {
 
     @Test
     fun verifyFeelsLikeShowsFakeValue() {
-        screen<Main> {
+        screen<MainRobot> {
             feelsLike.isDisplayed()
             onView(feelsLike).check(matches(withText(containsString("22°"))))
         }
@@ -39,7 +39,7 @@ class MainScreenTest : BaseTest() {
 
     @Test
     fun verifyWeatherDescriptionShowsFakeValue() {
-        screen<Main> {
+        screen<MainRobot> {
             weatherDescription.isDisplayed()
             onView(weatherDescription).check(matches(withText("Clear Sky")))
         }
@@ -47,21 +47,21 @@ class MainScreenTest : BaseTest() {
 
     @Test
     fun verifyDateTitleIsDisplayed() {
-        screen<Main> {
+        screen<MainRobot> {
             dateTitle.isDisplayed()
         }
     }
 
     @Test
     fun verifyAirQualityLayoutIsDisplayed() {
-        screen<Main> {
+        screen<MainRobot> {
             airQualityLayout.isDisplayed()
         }
     }
 
     @Test
     fun verifyAirQualityTextIsDisplayed() {
-        screen<Main> {
+        screen<MainRobot> {
             airQualityText.isDisplayed()
         }
     }

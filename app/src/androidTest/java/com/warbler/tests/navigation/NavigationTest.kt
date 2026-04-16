@@ -1,38 +1,38 @@
-package com.warbler.tests.usecases
+package com.warbler.tests.navigation
 
 import com.softklass.elk.espresso.click
 import com.softklass.elk.espresso.isDisplayed
 import com.softklass.elk.espresso.on
 import com.softklass.elk.screen
-import com.warbler.screens.Location
-import com.warbler.screens.Main
-import com.warbler.screens.Settings
+import com.warbler.robot.LocationRobot
+import com.warbler.robot.MainRobot
+import com.warbler.robot.SettingsRobot
 import com.warbler.tests.BaseTest
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
 import org.junit.Test
 
 @HiltAndroidTest
-class DemoTest : BaseTest() {
+class NavigationTest : BaseTest() {
     @Before
     fun waitForLoading() {
-        screen<Main> {
+        screen<MainRobot> {
             waitForView(loading, ViewStatus.GONE)
         }
     }
 
     @Test
     fun verifyLocationIconIsDisplayed() {
-        screen<Main> {
+        screen<MainRobot> {
             addLocationIcon.isDisplayed()
         }
     }
 
     @Test
     fun verifyLocationTapTakesUserToLocationScreen() {
-        screen<Main> { click on addLocationIcon }
+        screen<MainRobot> { click on addLocationIcon }
 
-        screen<Location> {
+        screen<LocationRobot> {
             waitForView(appBarSection)
             appBarSection.isDisplayed()
         }
@@ -40,9 +40,9 @@ class DemoTest : BaseTest() {
 
     @Test
     fun verifySettingsTapTakesUserToSettingsScreen() {
-        screen<Main> { click on settingsIcon }
+        screen<MainRobot> { click on settingsIcon }
 
-        screen<Settings> {
+        screen<SettingsRobot> {
             waitForView(settingsTitle)
             settingsTitle.isDisplayed()
         }

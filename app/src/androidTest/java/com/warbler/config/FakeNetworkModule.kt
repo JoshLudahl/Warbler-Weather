@@ -95,8 +95,8 @@ object FakeNetworkModule {
     private val dummyWeatherDataSource =
         WeatherDataSource(
             current = dummyCurrent,
-            daily = List(3) { dummyDaily },
-            hourly = listOf(dummyHourly),
+            daily = List(7) { dummyDaily },
+            hourly = List(48) { dummyHourly },
             lat = 40.7128,
             lon = -74.0060,
             timezone = "America/New_York",
