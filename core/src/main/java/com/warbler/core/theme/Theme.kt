@@ -2,6 +2,7 @@ package com.warbler.core.theme
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 
 private val lightScheme =
     lightColorScheme(
@@ -284,4 +286,20 @@ fun AppTheme(
         typography = AppTypography,
         content = content,
     )
+}
+
+@Preview(showBackground = true, name = "Light Theme")
+@Composable
+private fun AppThemeLightPreview() {
+    AppTheme(dynamicColor = false) {
+        Text("Light Theme Preview")
+    }
+}
+
+@Preview(showBackground = true, name = "Dark Theme")
+@Composable
+private fun AppThemeDarkPreview() {
+    AppTheme(darkTheme = true, dynamicColor = false) {
+        Text("Dark Theme Preview")
+    }
 }

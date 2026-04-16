@@ -34,6 +34,7 @@ lifecycleLivedataKtx = "2.10.0"
 lifecycleViewmodelCompose = "2.10.0"
 loggingInterceptor = "5.3.2"
 material3 = "1.13.0"
+material3Compose = "1.5.0-alpha17"
 navigationDynamicFeaturesFragment = "2.9.7"
 navigationFragmentKtx = "2.9.7"
 navigationSafeArgsGradlePlugin = "2.9.7"
@@ -102,7 +103,7 @@ logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", ver
 material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 material3View = { module = "com.google.android.material:material", version.ref = "material3" }
-material3Compose = { module = "androidx.compose.material3:material3" }
+material3Compose = { module = "androidx.compose.material3:material3", version.ref = "material3Compose" }
 
 
 

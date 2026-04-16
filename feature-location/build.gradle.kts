@@ -18,6 +18,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.constraintlayout)
+
+    // Project modules
+    implementation(project(":core"))
     implementation(libs.lifecycle.extensions)
     implementation(libs.material3Compose)
     implementation(libs.material3View)
