@@ -15,7 +15,7 @@ class WarblerAndroidLibraryConventionPlugin : Plugin<Project> {
         pluginManager.apply("org.jlleitschuh.gradle.ktlint")
 
         extensions.configure<LibraryExtension> {
-            val targetSdk = 36
+            val targetSdk = 37
             compileSdk = targetSdk
 
             defaultConfig {

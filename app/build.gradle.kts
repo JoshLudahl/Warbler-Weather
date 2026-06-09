@@ -18,7 +18,7 @@ plugins {
 }
 
 configure<ApplicationExtension> {
-    val target = 36
+    val target = 37
     compileSdk = target
     defaultConfig {
         applicationId = "com.softklass.warbler"
@@ -49,6 +49,7 @@ configure<ApplicationExtension> {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
