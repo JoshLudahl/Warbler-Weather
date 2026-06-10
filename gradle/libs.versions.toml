@@ -5,6 +5,7 @@ appcompat = "1.7.1"
 appUpdate = "2.1.0"
 browser = "1.10.0"
 concurrentFutures = "1.3.0"
+composeBom = "2026.05.01"
 constraintlayout = "2.2.1"
 converterMoshi = "3.0.0"
 coreKtx = "1.19.0"
@@ -64,6 +65,7 @@ adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
 app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }

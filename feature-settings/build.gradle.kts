@@ -29,7 +29,7 @@ dependencies {
     implementation(libs.material3View)
 
     // Compose
-    val composeBom = platform("androidx.compose:compose-bom:2025.09.01")
+    val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
