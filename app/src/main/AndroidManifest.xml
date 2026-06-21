@@ -36,6 +36,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <property
+            android:name="android.app.appfunctions.app_metadata"
+            android:resource="@xml/app_metadata" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.warbler.fileprovider"

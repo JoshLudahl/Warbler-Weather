@@ -1,4 +1,4 @@
-package com.warbler.feature.weather.ui
+package com.warbler.feature.weather.ui.forecast
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

@@ -138,12 +138,21 @@ tasks.named("preBuild") {
     dependsOn("ktlintFormat")
 }
 
+ksp {
+    arg("appfunctions:aggregateAppFunctions", "true")
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":feature-weather"))
     implementation(project(":feature-location"))
     implementation(project(":feature-settings"))
     implementation(project(":core"))
+
+    // AppFunctions
+    implementation(libs.appfunctions)
+    implementation(libs.appfunctions.service)
+    ksp(libs.appfunctions.compiler)
 
     //  Android specific
     implementation(libs.appcompat)

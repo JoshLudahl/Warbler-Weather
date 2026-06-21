@@ -11,8 +11,8 @@ import androidx.navigation3.ui.NavDisplay
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.location.ui.LocationScreen
 import com.warbler.feature.settings.ui.SettingsScreen
-import com.warbler.feature.weather.ui.ForecastScreen
-import com.warbler.feature.weather.ui.WeatherScreen
+import com.warbler.feature.weather.ui.current.WeatherScreen
+import com.warbler.feature.weather.ui.forecast.ForecastScreen
 
 @Composable
 fun ApplicationNavigation(
