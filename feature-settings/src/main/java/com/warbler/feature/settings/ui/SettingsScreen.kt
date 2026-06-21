@@ -42,7 +42,13 @@ import com.warbler.feature.settings.model.TemperatureUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel = viewModel(),
+    onNavigateUp: () -> Unit = {},
+    onReviewAppClick: () -> Unit = {},
+    onAboutClick: () -> Unit = {},
+    onShareClick: () -> Unit = {},
+) {
     val uiState by viewModel.uiState.collectAsState()
 
     SettingsContent(
@@ -50,6 +56,10 @@ fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
         onTemperatureUnitSelected = viewModel::onTemperatureUnitSelected,
         onSpeedUnitSelected = viewModel::onSpeedUnitSelected,
         onAccumulationUnitSelected = viewModel::onAccumulationUnitSelected,
+        onNavigateUp = onNavigateUp,
+        onReviewAppClick = onReviewAppClick,
+        onAboutClick = onAboutClick,
+        onShareClick = onShareClick,
     )
 }
 
@@ -60,6 +70,10 @@ private fun SettingsContent(
     onTemperatureUnitSelected: (TemperatureUnit) -> Unit = {},
     onSpeedUnitSelected: (SpeedUnit) -> Unit = {},
     onAccumulationUnitSelected: (AccumulationUnit) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
+    onReviewAppClick: () -> Unit = {},
+    onAboutClick: () -> Unit = {},
+    onShareClick: () -> Unit = {},
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
