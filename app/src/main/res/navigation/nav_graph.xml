@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.warbler.ui.settings.SettingsFragment"
+        android:name="com.warbler.feature.settings.ui.SettingsFragment"
         android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_mainWeatherFragment"
