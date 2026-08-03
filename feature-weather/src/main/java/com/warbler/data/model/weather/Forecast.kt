@@ -2,16 +2,16 @@ package com.warbler.data.model.weather
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import com.warbler.ui.settings.Speed
-import com.warbler.ui.settings.Temperature
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
 data class Forecast(
     val daily: Daily,
-    val speed: Speed,
-    val temperature: Temperature,
+    val speed: SpeedUnit,
+    val temperature: TemperatureUnit,
     val timeZoneOffset: Int,
 ) : Parcelable
 

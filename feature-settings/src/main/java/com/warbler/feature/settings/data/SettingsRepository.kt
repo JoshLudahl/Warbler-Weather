@@ -5,9 +5,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.warbler.feature.settings.model.AccumulationUnit
-import com.warbler.feature.settings.model.SpeedUnit
-import com.warbler.feature.settings.model.TemperatureUnit
+import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

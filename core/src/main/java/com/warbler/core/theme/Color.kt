@@ -1,6 +1,12 @@
 package com.warbler.core.theme
 import androidx.compose.ui.graphics.Color
 
+val aqi1Good = Color(0xFFA1DD70)
+val aqi2Fair = Color(0xFFFFDA78)
+val aqi3Moderate = Color(0xFFFF7F3E)
+val aqi4Poor = Color(0xFFEE4E4E)
+val aqi5VeryPoor = Color(0xFFA91D3A)
+
 val primaryLight = Color(0xFF0D131C)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFF222831)

@@ -1,6 +1,6 @@
 package com.warbler.data.model.weather
 
-import com.warbler.R
+import com.warbler.feature.weather.R
 
 object WeatherIconSelection {
     val String.getIconForCondition

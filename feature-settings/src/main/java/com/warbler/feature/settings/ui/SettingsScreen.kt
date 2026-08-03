@@ -39,10 +39,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.core.theme.AppTheme
-import com.warbler.feature.settings.model.AccumulationUnit
-import com.warbler.feature.settings.model.SpeedUnit
-import com.warbler.feature.settings.model.TemperatureUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

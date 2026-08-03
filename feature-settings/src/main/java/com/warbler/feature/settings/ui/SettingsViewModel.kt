@@ -5,10 +5,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.feature.settings.data.SettingsRepository
-import com.warbler.feature.settings.model.AccumulationUnit
-import com.warbler.feature.settings.model.SpeedUnit
-import com.warbler.feature.settings.model.TemperatureUnit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow

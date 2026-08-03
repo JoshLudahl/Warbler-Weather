@@ -1,4 +1,4 @@
-package com.warbler.feature.settings.model
+package com.warbler.core.model.units
 
 enum class AccumulationUnit(
     val label: String,

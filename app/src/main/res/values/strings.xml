@@ -42,27 +42,14 @@
     <string name="forecast">8 day Forecast</string>
     <string name="locations">Locations</string>
     <string name="search_location">Search for city</string>
-    <string name="humidity">Humidity</string>
-
     <string name="humidity_format" translatable="false">%s%%</string>
     <string name="humidity_icon">Humidity Icon</string>
-    <string name="uv_index">UV Index</string>
     <string name="uv_index_icon">UV Index Icon</string>
-    <string name="pressure">%1$s hPa</string>
-    <string name="cloudy">%1$s%%</string>
     <string name="weather_alert">Weather Alert</string>
     <string name="current_location">Current Location</string>
-    <string name="sunrise">Sunrise</string>
-    <string name="sunset">Sunset</string>
     <string name="feels_like">Feels Like</string>
     <string name="feels_like_temp">Feels like <b>%1$s</b></string>
     <string name="temperature_formatted">%1$s<small>%2$s</small></string>
-    <string name="dew_point">Dew Point</string>
-    <string name="clouds">Clouds</string>
-    <string name="pressure_text">Pressure</string>
-    <string name="chance_of_rain">Rain %</string>
-    <string name="percentage">%1$s%%</string>
-    <string name="wind">Wind</string>
     <string name="details">Details</string>
     <string name="summary">Summary</string>
     <string name="close">Close</string>
@@ -86,9 +73,6 @@
     <string name="no_rain_in_forecast">No precipitation in the forecast for the next 48 hours.</string>
     <string name="precipitation">Precipitation</string>
     <string name="loading">Loading</string>
-    <string name="wind_gust">Wind Gust</string>
-    <string name="moonrise">Moonrise</string>
-    <string name="moonset">Moonset</string>
     <string name="share_icon">Share Icon</string>
 
     <!-- Air Quality Index Data -->

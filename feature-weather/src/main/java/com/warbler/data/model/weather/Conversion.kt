@@ -2,10 +2,10 @@ package com.warbler.data.model.weather
 
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.core.utilities.Constants
-import com.warbler.ui.settings.Accumulation
-import com.warbler.ui.settings.Speed
-import com.warbler.ui.settings.Temperature
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -31,33 +31,33 @@ object Conversion {
 
     fun formatSpeedUnitsWithUnitsToString(
         value: Double,
-        speed: Speed,
+        speed: SpeedUnit,
     ): String =
         when (speed) {
-            Speed.MPS -> "$value m/s"
-            Speed.KPH -> "${value.metersPerSecondToKilometersPerHour.roundToUpperInt} KMH"
-            Speed.MPH -> "${value.metersPerSecondToMilesPerHour.roundToUpperInt} MPH"
+            SpeedUnit.MPS -> "$value m/s"
+            SpeedUnit.KPH -> "${value.metersPerSecondToKilometersPerHour.roundToUpperInt} KMH"
+            SpeedUnit.MPH -> "${value.metersPerSecondToMilesPerHour.roundToUpperInt} MPH"
         }
 
     fun formatSpeedUnitsWithUnits(
         value: Double,
-        speed: Speed,
+        speed: SpeedUnit,
     ): Double =
         when (speed) {
-            Speed.MPS -> value
-            Speed.KPH -> value.metersPerSecondToKilometersPerHour
-            Speed.MPH -> value.metersPerSecondToMilesPerHour
+            SpeedUnit.MPS -> value
+            SpeedUnit.KPH -> value.metersPerSecondToKilometersPerHour
+            SpeedUnit.MPH -> value.metersPerSecondToMilesPerHour
         }
 
     val Int.toDegrees
         get() = "$this°"
 
-    val Temperature.temperatureSymbol
+    val TemperatureUnit.temperatureSymbol
         get() =
             when (this) {
-                Temperature.CELSIUS -> "c"
-                Temperature.FAHRENHEIT -> "f"
-                Temperature.KELVIN -> "k"
+                TemperatureUnit.CELSIUS -> "c"
+                TemperatureUnit.FAHRENHEIT -> "f"
+                TemperatureUnit.KELVIN -> "k"
             }
 
     val String.capitalizeEachFirst
@@ -78,11 +78,11 @@ object Conversion {
 
     fun fromKelvinToProvidedUnit(
         value: Double,
-        unit: Temperature,
+        unit: TemperatureUnit,
     ) = when (unit) {
-        Temperature.CELSIUS -> value.toCelsiusFromKelvin
-        Temperature.FAHRENHEIT -> value.toFahrenheitFromKelvin
-        Temperature.KELVIN -> value
+        TemperatureUnit.CELSIUS -> value.toCelsiusFromKelvin
+        TemperatureUnit.FAHRENHEIT -> value.toFahrenheitFromKelvin
+        TemperatureUnit.KELVIN -> value
     }
 
     fun getTimeFromTimeStamp(
@@ -164,10 +164,10 @@ object Conversion {
 
     fun convertOrReturnAccumulationByUnit(
         accumulation: Double,
-        unit: Accumulation,
+        unit: AccumulationUnit,
     ): Double =
         when (unit) {
-            Accumulation.MILLIMETERS_PER_HOUR -> accumulation
-            Accumulation.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
+            AccumulationUnit.MILLIMETERS_PER_HOUR -> accumulation
+            AccumulationUnit.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
         }
 }

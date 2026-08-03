@@ -1,8 +1,8 @@
 package com.warbler.feature.settings.ui
 
-import com.warbler.feature.settings.model.AccumulationUnit
-import com.warbler.feature.settings.model.SpeedUnit
-import com.warbler.feature.settings.model.TemperatureUnit
+import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.model.units.TemperatureUnit
 
 data class SettingsUiState(
     val temperatureUnit: TemperatureUnit = TemperatureUnit.FAHRENHEIT,

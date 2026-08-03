@@ -1,14 +1,14 @@
 package com.warbler.data.model.weather
 
 import android.content.Context
-import com.warbler.R
+import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.data.model.weather.Conversion.fromDoubleToPercentage
 import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
 import com.warbler.data.model.weather.Conversion.getDatOfWeekFromUnixUTC
 import com.warbler.data.model.weather.Conversion.toDegrees
 import com.warbler.data.model.weather.Conversion.toReadableHour
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
-import com.warbler.ui.settings.Temperature
+import com.warbler.feature.weather.R
 import kotlin.math.roundToInt
 
 object WeatherDataSourceDto {
@@ -40,7 +40,7 @@ object WeatherDataSourceDto {
 
     fun buildWeatherForecast(
         weatherDataSource: WeatherDataSource,
-        units: Temperature,
+        units: TemperatureUnit,
     ): List<WeatherForecast> =
         weatherDataSource.daily.mapIndexed { index, daily ->
             WeatherForecast(
@@ -62,7 +62,7 @@ object WeatherDataSourceDto {
 
     fun buildHourlyForecastList(
         weatherDataSource: WeatherDataSource,
-        units: Temperature,
+        units: TemperatureUnit,
     ): List<HourlyForecastItem> {
         val list = mutableListOf<HourlyForecastItem>()
 

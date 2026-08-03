@@ -8,6 +8,9 @@ data class WeatherUiState(
     val feelsLike: String,
     val hasAqi: Boolean,
     val aqiValue: String,
+    val aqiLevel: Int = 0,
     val hasAlerts: Boolean,
+    val alertTitle: String = "",
+    val alertDescription: String = "",
     val iconRes: Int,
 )
