@@ -2,11 +2,9 @@ import com.android.build.api.dsl.ApplicationExtension
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
@@ -200,6 +198,7 @@ dependencies {
 
     // DI
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     ksp(libs.hilt.android.compiler)
@@ -258,6 +257,8 @@ dependencies {
     // Kotlin
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
     implementation(libs.kotlinx.serialization.json)
 
     // Feature module Support

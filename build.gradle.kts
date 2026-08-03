@@ -12,6 +12,7 @@ buildscript {
 }
 
 plugins {
+    alias(libs.plugins.android.application) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.serialization) apply false
@@ -20,5 +21,6 @@ plugins {
 }
 
 tasks.register("clean", Delete::class) {
+    description = "Clean project."
     delete(rootProject.layout.buildDirectory.get())
 }

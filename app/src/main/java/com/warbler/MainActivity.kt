@@ -3,12 +3,10 @@ package com.warbler
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -18,15 +16,13 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.warbler.databinding.ActivityMainBinding
+import com.warbler.core.theme.AppTheme
+import com.warbler.navigation.ApplicationNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navHostFragment: NavHostFragment
-    private lateinit var navController: NavController
     private lateinit var appUpdateManager: AppUpdateManager
 
     private lateinit var aut: Task<AppUpdateInfo>
@@ -52,25 +48,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("ConfigCheck", "WEATHER_API_KEY length=${getString(R.string.WEATHER_API_KEY).length}")
-
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         aut = appUpdateManager.appUpdateInfo
         checkIsUpdateAvailable()
-        setTheme(R.style.Theme_Main)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        navHostFragment =
-            supportFragmentManager
-                .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-
-        navController = navHostFragment.navController
-
-//        setContent {
-//            AppTheme {
-//                ApplicationNavigation()
-//            }
-//        }
+        setContent {
+            AppTheme {
+                ApplicationNavigation()
+            }
+        }
     }
 
     private fun checkIsUpdateAvailable() {

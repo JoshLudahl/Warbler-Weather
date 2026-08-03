@@ -16,4 +16,7 @@ sealed interface Destinations : NavKey {
 
     @Serializable
     data object Settings : Destinations
+
+    @Serializable
+    data object ForecastViewPager : Destinations
 }

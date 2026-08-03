@@ -94,6 +94,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
 hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
@@ -143,8 +144,10 @@ navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", vers
 ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "gradle" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = {id = "com.google.firebase.crashlytics"}
+hilt-android = { id = "dagger.hilt.android.plugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf" }
 google-services = { id = "com.google.gms.google-services" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
