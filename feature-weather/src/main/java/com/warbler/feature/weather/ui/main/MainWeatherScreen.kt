@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,7 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun MainWeatherScreen(
     weatherUiState: WeatherUiState?,
@@ -36,7 +37,8 @@ fun MainWeatherScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Warbler Weather") },
+                title = { Text(weatherUiState?.locationName ?: "Warbler Weather") },
+                subtitle = { Text(weatherUiState?.dateTitle ?: "") },
                 actions = {
                     IconButton(onClick = onLocationClick) {
                         Icon(Icons.Default.LocationOn, contentDescription = "Location")
@@ -57,9 +59,6 @@ fun MainWeatherScreen(
                         .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(text = weatherUiState.locationName, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text(text = weatherUiState.dateTitle, fontSize = 16.sp)
-
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Card(
