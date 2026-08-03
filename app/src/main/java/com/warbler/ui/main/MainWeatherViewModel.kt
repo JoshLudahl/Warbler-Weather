@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.core.model.location.LocationEntity
 import com.warbler.data.model.weather.WeatherDataSource
+import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import com.warbler.feature.weather.ui.main.WeatherUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -65,5 +65,11 @@ class MainWeatherViewModel
                 hasAqi = false,
                 aqiValue = "0",
                 hasAlerts = !alerts.isNullOrEmpty(),
+                iconRes =
+                    current.weather
+                        .firstOrNull()
+                        ?.icon
+                        .orEmpty()
+                        .getIconForCondition,
             )
     }
