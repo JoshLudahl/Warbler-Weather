@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -43,7 +47,16 @@ fun LocationScreen(
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Locations") }) },
+        topBar = {
+            TopAppBar(
+                title = { Text("Locations") },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+            )
+        },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             // Search UI

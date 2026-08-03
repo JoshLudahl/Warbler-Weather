@@ -11,7 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -98,7 +98,7 @@ fun MainWeatherScreen(
             }
         } else {
             Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+                CircularWavyProgressIndicator()
             }
         }
     }
