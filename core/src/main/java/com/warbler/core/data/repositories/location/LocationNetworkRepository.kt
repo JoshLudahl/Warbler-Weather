@@ -1,9 +1,9 @@
-package com.warbler.data.repositories.location
+package com.warbler.core.data.repositories.location
 
 import android.util.Log
-import com.warbler.data.model.location.LocationDto
-import com.warbler.data.model.location.LocationEntity
-import com.warbler.data.network.locations.LocationApiService
+import com.warbler.core.model.location.LocationDto
+import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.network.locations.LocationApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

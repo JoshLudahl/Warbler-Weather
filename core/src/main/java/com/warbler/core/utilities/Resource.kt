@@ -1,4 +1,4 @@
-package com.warbler.utilities
+package com.warbler.core.utilities
 
 sealed class Resource<out T> {
     data class Error(

@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.warbler.core.utilities.ClickListenerInterface
 import com.warbler.data.model.weather.WeatherForecast
 import com.warbler.databinding.WeatherForecastListItemBinding
-import com.warbler.utilities.ClickListenerInterface
 
 class MainAdapter(
     private val clickListener: ClickListenerInterface<WeatherForecast>,

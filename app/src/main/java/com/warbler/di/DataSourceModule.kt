@@ -7,10 +7,10 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.warbler.data.database.location.LocationDao
+import com.warbler.core.data.database.location.LocationDao
+import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.data.database.weather.WeatherDatabase
 import com.warbler.data.database.weather.WeatherDatabaseDao
-import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.data.repositories.weather.WeatherDatabaseRepository
 import dagger.Module
 import dagger.Provides
@@ -39,7 +39,7 @@ object DataSourceModule {
         .databaseBuilder(
             context,
             WeatherDatabase::class.java,
-            "weather_database",
+            "weather_database_v2",
         ).addMigrations(MIGRATION_1_2)
         .build()
 

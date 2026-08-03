@@ -11,11 +11,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.warbler.MainActivity
 import com.warbler.R
+import com.warbler.core.data.repositories.location.LocationRepository
+import com.warbler.core.utilities.DataPref
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
-import com.warbler.data.repositories.location.LocationRepository
 import com.warbler.data.repositories.weather.WeatherDatabaseRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
-import com.warbler.utilities.DataPref
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

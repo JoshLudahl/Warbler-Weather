@@ -1,4 +1,4 @@
-package com.warbler.utilities
+package com.warbler.core.utilities
 
 import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
 

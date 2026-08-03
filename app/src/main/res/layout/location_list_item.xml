@@ -8,7 +8,7 @@
 
         <variable
             name="clickListener"
-            type="com.warbler.utilities.ClickListenerInterface" />
+            type="com.warbler.core.utilities.ClickListenerInterface" />
 
         <variable
             name="adapter"
@@ -16,11 +16,11 @@
 
         <variable
             name="viewModel"
-            type="com.warbler.ui.location.LocationViewModel" />
+            type="com.warbler.feature.location.ui.LocationViewModel" />
 
         <variable
             name="location"
-            type="com.warbler.data.model.location.LocationEntity" />
+            type="com.warbler.core.model.location.LocationEntity" />
 
     </data>
 

@@ -1,4 +1,4 @@
-package com.warbler.utilities
+package com.warbler.core.utilities
 
 class ClickListener<T>(
     val clickListener: (item: T) -> Unit,

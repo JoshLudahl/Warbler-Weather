@@ -1,4 +1,4 @@
-package com.warbler.utilities
+package com.warbler.core.utilities
 
 import android.content.Context
 import android.widget.Toast

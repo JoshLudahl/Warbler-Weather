@@ -1,4 +1,4 @@
-package com.warbler.utilities
+package com.warbler.core.utilities
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

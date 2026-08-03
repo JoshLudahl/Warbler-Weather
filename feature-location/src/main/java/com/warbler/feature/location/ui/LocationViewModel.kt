@@ -1,13 +1,13 @@
-package com.warbler.ui.location
+package com.warbler.feature.location.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.warbler.data.model.location.LocationEntity
-import com.warbler.data.repositories.location.LocationNetworkRepository
-import com.warbler.data.repositories.location.LocationRepository
-import com.warbler.utilities.LocationService
-import com.warbler.utilities.Resource
+import com.warbler.core.data.repositories.location.LocationNetworkRepository
+import com.warbler.core.data.repositories.location.LocationRepository
+import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.utilities.LocationService
+import com.warbler.core.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +30,7 @@ class LocationViewModel
 
         private val _locationSearchList =
             MutableStateFlow<Resource<List<LocationEntity>>>(
-                Resource.Loading,
+                Resource.Success(emptyList()),
             )
         val locationSearchList: StateFlow<Resource<List<LocationEntity>>>
             get() = _locationSearchList
@@ -58,8 +58,10 @@ class LocationViewModel
         }
 
         fun saveToDatabase(location: LocationEntity) {
+            Log.d("LocationViewModel", "saveToDatabase: ${location.name}")
             viewModelScope.launch {
                 locationRepository.saveLocationToDatabaseAndSetAsCurrent(location)
+                Log.d("LocationViewModel", "saveToDatabase: finished")
             }
         }
 
@@ -78,12 +80,14 @@ class LocationViewModel
 
         fun searchForLocation(query: String) {
             Log.d("LocationViewModel", "searchForLocation launching coroutine...")
+            _locationSearchList.value = Resource.Loading
             viewModelScope.launch {
                 Log.d("LocationViewModel", "searchForLocation Attempting to search for: $query")
                 locationNetworkRepository
                     .getLocationsFromGeoService(query)
                     .catch { error ->
                         Log.d("LocationViewModel", "searchForLocation error: ${error.message}")
+                        _locationSearchList.value = Resource.Error(message = error.message)
                     }.collect {
                         Log.i("LocationViewModel", "searchForLocation success: ${it.size}")
                         _locationSearchList.value = Resource.Success(it)

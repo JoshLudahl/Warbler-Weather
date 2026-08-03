@@ -1,12 +1,12 @@
-package com.warbler.data.repositories.location
+package com.warbler.core.data.repositories.location
 
 import android.util.Log
-import com.warbler.data.database.location.LocationDao
-import com.warbler.data.model.location.LocationEntity
+import com.warbler.core.data.database.location.LocationDao
+import com.warbler.core.model.location.LocationEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocationRepository
@@ -14,15 +14,17 @@ class LocationRepository
     constructor(
         private val locationDao: LocationDao,
     ) {
-        suspend fun getCurrentLocationFromDatabase(): Flow<LocationEntity> =
-            flow {
-                val currentLocation = locationDao.getCurrentLocation()
-                currentLocation?.let {
-                    emit(it)
-                } ?: emit(getDefaultLocation())
-            }.flowOn(Dispatchers.Main)
+        fun getCurrentLocationFromDatabase(): Flow<LocationEntity> =
+            locationDao
+                .getCurrentLocation()
+                .map { currentLocation ->
+                    currentLocation ?: getDefaultLocation()
+                }.flowOn(Dispatchers.IO)
 
-        fun getAllLocationsFromDatabase(): Flow<List<LocationEntity>> = locationDao.getAllLocations()
+        fun getAllLocationsFromDatabase(): Flow<List<LocationEntity>> {
+            Log.d("LocationRepository", "Fetching all locations from database")
+            return locationDao.getAllLocations()
+        }
 
         suspend fun saveLocationToDatabaseAndSetAsCurrent(location: LocationEntity) {
             updateToCurrentLocation(location)

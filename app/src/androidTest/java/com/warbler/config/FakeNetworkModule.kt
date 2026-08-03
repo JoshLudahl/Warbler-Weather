@@ -1,6 +1,8 @@
 package com.warbler.config
 
-import com.warbler.data.model.location.LocationDataSource
+import com.warbler.core.data.repositories.location.LocationNetworkRepository
+import com.warbler.core.model.location.LocationDataSource
+import com.warbler.core.network.locations.LocationApiService
 import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.Aqi
 import com.warbler.data.model.weather.Components
@@ -13,9 +15,7 @@ import com.warbler.data.model.weather.Main
 import com.warbler.data.model.weather.Temp
 import com.warbler.data.model.weather.Weather
 import com.warbler.data.model.weather.WeatherDataSource
-import com.warbler.data.network.locations.LocationApiService
 import com.warbler.data.network.weather.WeatherApiService
-import com.warbler.data.repositories.location.LocationNetworkRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import com.warbler.di.NetworkSourceModule
 import dagger.Module

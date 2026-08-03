@@ -1,8 +1,8 @@
 package com.warbler.data.network.weather
 
+import com.warbler.core.network.NetworkConstants
 import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.WeatherDataSource
-import com.warbler.data.network.NetworkConstants
 import retrofit2.http.GET
 import retrofit2.http.Query
 

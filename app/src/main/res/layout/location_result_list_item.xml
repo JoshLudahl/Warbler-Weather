@@ -8,11 +8,11 @@
 
         <variable
             name="clickListener"
-            type="com.warbler.utilities.ClickListener" />
+            type="com.warbler.core.utilities.ClickListener" />
 
         <variable
             name="location"
-            type="com.warbler.data.model.location.LocationEntity" />
+            type="com.warbler.core.model.location.LocationEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

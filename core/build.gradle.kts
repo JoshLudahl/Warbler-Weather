@@ -54,6 +54,15 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    //  data
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(libs.play.services.location)
+    implementation(libs.datastore.preferences)
+    implementation(libs.vico.core)
+    implementation(libs.vico.views)
+
     // Kotlin
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)

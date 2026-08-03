@@ -26,7 +26,7 @@ fun ApplicationNavigation(
             entryProvider {
                 entry<Destinations.Home> { WeatherScreen() }
                 entry<Destinations.Forecast> { ForecastScreen() }
-                entry<Destinations.Location> { LocationScreen() }
+                entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Settings> { SettingsScreen() }
             },
     )

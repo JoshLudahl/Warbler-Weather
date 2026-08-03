@@ -9,7 +9,7 @@
 
         <variable
             name="location"
-            type="com.warbler.data.model.location.LocationEntity" />
+            type="com.warbler.core.model.location.LocationEntity" />
 
         <variable
             name="r"

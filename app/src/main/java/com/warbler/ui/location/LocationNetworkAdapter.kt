@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.warbler.data.model.location.LocationEntity
+import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.utilities.ClickListener
 import com.warbler.databinding.LocationResultListItemBinding
-import com.warbler.utilities.ClickListener
 
 class LocationNetworkAdapter(
     private val clickListener: ClickListener<LocationEntity>,

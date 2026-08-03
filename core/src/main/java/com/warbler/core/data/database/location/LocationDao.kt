@@ -1,4 +1,4 @@
-package com.warbler.data.database.location
+package com.warbler.core.data.database.location
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.warbler.data.model.location.LocationEntity
+import com.warbler.core.model.location.LocationEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,7 +15,7 @@ interface LocationDao {
     suspend fun insertLocation(location: LocationEntity)
 
     @Query("SELECT * FROM location_table ORDER by updated DESC LIMIT 1")
-    suspend fun getCurrentLocation(): LocationEntity?
+    fun getCurrentLocation(): Flow<LocationEntity?>
 
     @Update
     suspend fun updateCurrentLocation(location: LocationEntity)

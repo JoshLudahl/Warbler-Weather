@@ -2,10 +2,10 @@ package com.warbler.data.model.weather
 
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.warbler.core.utilities.Constants
 import com.warbler.ui.settings.Accumulation
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
-import com.warbler.utilities.Constants
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId

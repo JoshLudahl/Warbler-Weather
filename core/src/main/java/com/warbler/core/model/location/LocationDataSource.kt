@@ -1,4 +1,4 @@
-package com.warbler.data.model.location
+package com.warbler.core.model.location
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

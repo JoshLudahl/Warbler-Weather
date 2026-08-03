@@ -1,4 +1,4 @@
-package com.warbler.data.model.location
+package com.warbler.core.model.location
 
 import androidx.annotation.Keep
 import androidx.room.Entity

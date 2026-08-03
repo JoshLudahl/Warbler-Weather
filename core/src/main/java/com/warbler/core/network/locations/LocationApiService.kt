@@ -1,7 +1,7 @@
-package com.warbler.data.network.locations
+package com.warbler.core.network.locations
 
-import com.warbler.data.model.location.LocationDataSource
-import com.warbler.data.network.NetworkConstants
+import com.warbler.core.model.location.LocationDataSource
+import com.warbler.core.network.NetworkConstants
 import retrofit2.http.GET
 import retrofit2.http.Query
 

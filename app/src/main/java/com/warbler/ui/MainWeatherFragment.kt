@@ -25,7 +25,13 @@ import com.patrykandpatrick.vico.core.model.CartesianChartModel
 import com.patrykandpatrick.vico.core.model.ColumnCartesianLayerModel
 import com.patrykandpatrick.vico.core.model.LineCartesianLayerModel
 import com.warbler.R
-import com.warbler.data.model.location.LocationEntity
+import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.utilities.ClickListenerInterface
+import com.warbler.core.utilities.Constants
+import com.warbler.core.utilities.Resource
+import com.warbler.core.utilities.areNonZeroValuesFound
+import com.warbler.core.utilities.doesAnyListContainValues
+import com.warbler.core.utilities.showToast
 import com.warbler.data.model.weather.Alert
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.bottomAxisValueFormatter
@@ -43,12 +49,6 @@ import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.databinding.FragmentMainWeatherBinding
 import com.warbler.ui.settings.Speed
 import com.warbler.ui.settings.Temperature
-import com.warbler.utilities.ClickListenerInterface
-import com.warbler.utilities.Constants
-import com.warbler.utilities.Resource
-import com.warbler.utilities.areNonZeroValuesFound
-import com.warbler.utilities.doesAnyListContainValues
-import com.warbler.utilities.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

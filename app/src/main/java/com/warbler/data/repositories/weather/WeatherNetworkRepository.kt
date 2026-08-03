@@ -1,11 +1,11 @@
 package com.warbler.data.repositories.weather
 
 import android.util.Log
-import com.warbler.data.model.location.LocationEntity
+import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.utilities.Resource
 import com.warbler.data.model.weather.AirQualitySource
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.network.weather.WeatherApiService
-import com.warbler.utilities.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

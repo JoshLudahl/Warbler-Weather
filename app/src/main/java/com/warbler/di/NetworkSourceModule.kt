@@ -2,11 +2,11 @@ package com.warbler.di
 
 import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.warbler.data.network.NetworkConstants
-import com.warbler.data.network.NetworkInterceptor
-import com.warbler.data.network.locations.LocationApiService
+import com.warbler.core.data.repositories.location.LocationNetworkRepository
+import com.warbler.core.network.NetworkConstants
+import com.warbler.core.network.NetworkInterceptor
+import com.warbler.core.network.locations.LocationApiService
 import com.warbler.data.network.weather.WeatherApiService
-import com.warbler.data.repositories.location.LocationNetworkRepository
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
 import dagger.Module
 import dagger.Provides
