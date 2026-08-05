@@ -149,7 +149,6 @@ dependencies {
 
     // AppFunctions
     implementation(libs.appfunctions)
-    implementation(libs.appfunctions.service)
     ksp(libs.appfunctions.compiler)
 
     //  Android specific
