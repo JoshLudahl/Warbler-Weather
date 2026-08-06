@@ -50,6 +50,8 @@ import com.warbler.core.theme.aqi3Moderate
 import com.warbler.core.theme.aqi4Poor
 import com.warbler.core.theme.aqi5VeryPoor
 import com.warbler.feature.weather.R
+import com.warbler.feature.weather.ui.composables.MainWeatherCard
+import com.warbler.feature.weather.ui.composables.MenuSample
 
 private fun aqiColorForLevel(level: Int): Color =
     when (level) {
@@ -95,9 +97,14 @@ fun MainWeatherScreen(
 //                    IconButton(onClick = onSettingsClick) {
 //                        Icon(Icons.Default.Settings, contentDescription = "Settings")
 //                    }
-                    IconButton(onClick = onSettingsClick) {
-                        Icon(painterResource(R.drawable.menu_03), contentDescription = "Settings")
-                    }
+//                    IconButton(onClick = onSettingsClick) {
+//                        Icon(painterResource(R.drawable.menu_03), contentDescription = "Settings")
+//                    }
+
+                    MenuSample(
+                        onLocationClick = onLocationClick,
+                        onSettingsClick = onSettingsClick,
+                    )
                 },
             )
         },
@@ -112,6 +119,14 @@ fun MainWeatherScreen(
                         .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Spacer(modifier = Modifier.height(16.dp))
+
+                MainWeatherCard(
+                    weatherUiState = weatherUiState,
+                    icon = weatherUiState.iconRes,
+                    modifier =
+                    Modifier,
+                )
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Card(
