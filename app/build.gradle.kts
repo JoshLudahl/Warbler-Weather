@@ -114,6 +114,9 @@ configure<ApplicationExtension> {
 
 kotlin {
     jvmToolchain(21)
+    compilerOptions {
+        moduleName.set("warbler_app")
+    }
 }
 
 ktlint {
@@ -137,7 +140,7 @@ tasks.named("preBuild") {
 }
 
 ksp {
-    arg("appfunctions:aggregateAppFunctions", "true")
+    arg("appfunctions:moduleName", "warbler_app")
 }
 
 dependencies {
