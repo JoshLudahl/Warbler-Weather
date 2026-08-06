@@ -30,6 +30,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -170,12 +171,21 @@ fun MainWeatherScreen(
                                 AlertDialog(
                                     onDismissRequest = { showAlertDialog = false },
                                     confirmButton = {
-                                        IconButton(onClick = { showAlertDialog = false }) {
+                                        TextButton(onClick = { showAlertDialog = false }) {
                                             Text(text = "OK")
                                         }
                                     },
                                     title = { Text(text = weatherUiState.alertTitle.ifEmpty { "Weather Alert" }) },
-                                    text = { Text(text = weatherUiState.alertDescription) },
+                                    text = {
+                                        Column(
+                                            modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+                                        ) {
+                                            Text(
+                                                text = weatherUiState.alertDescription,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                            )
+                                        }
+                                    },
                                 )
                             }
                         }
@@ -220,7 +230,9 @@ fun MainWeatherScreen(
                             },
                             title = { Text(text = "Air Quality Index") },
                             text = {
-                                Column {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+                                ) {
                                     aqiLevelInfoList.forEach { info ->
                                         Row(
                                             modifier = Modifier.padding(vertical = 8.dp),

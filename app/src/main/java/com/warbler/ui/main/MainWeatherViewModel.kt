@@ -116,7 +116,7 @@ class MainWeatherViewModel
                 aqiLevel = _weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0,
                 hasAlerts = !alerts.isNullOrEmpty(),
                 alertTitle = alerts?.firstOrNull()?.event.orEmpty(),
-                alertDescription = alerts?.firstOrNull()?.description.orEmpty(),
+                alertDescription = alerts?.joinToString("\n\n") { it.description }.orEmpty(),
                 iconRes =
                     current.weather
                         .firstOrNull()

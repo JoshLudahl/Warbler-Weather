@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -30,7 +30,7 @@ fun ApplicationNavigation(
         entryProvider =
             entryProvider {
                 entry<Destinations.Home> {
-                    val viewModel: MainWeatherViewModel = hiltViewModel()
+                    val viewModel: MainWeatherViewModel = hiltViewModel<MainWeatherViewModel>()
                     val weatherUiState by viewModel.weatherUiState.collectAsState()
                     MainWeatherScreen(
                         weatherUiState = weatherUiState,
