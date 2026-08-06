@@ -17,8 +17,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -45,6 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.warbler.core.theme.AppTypography
 import com.warbler.core.theme.aqi1Good
 import com.warbler.core.theme.aqi2Fair
 import com.warbler.core.theme.aqi3Moderate
@@ -87,14 +86,17 @@ fun MainWeatherScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(weatherUiState?.locationName ?: "Warbler Weather") },
+                title = { Text(weatherUiState?.locationName ?: "Warbler Weather", fontFamily = AppTypography.titleMedium.fontFamily, fontWeight = FontWeight.Bold) },
                 subtitle = { Text(weatherUiState?.dateTitle ?: "") },
                 actions = {
-                    IconButton(onClick = onLocationClick) {
-                        Icon(Icons.Default.LocationOn, contentDescription = "Location")
-                    }
+//                    IconButton(onClick = onLocationClick) {
+//                        Icon(Icons.Default.LocationOn, contentDescription = "Location")
+//                    }
+//                    IconButton(onClick = onSettingsClick) {
+//                        Icon(Icons.Default.Settings, contentDescription = "Settings")
+//                    }
                     IconButton(onClick = onSettingsClick) {
-                        Icon(Icons.Default.Settings, contentDescription = "Settings")
+                        Icon(painterResource(R.drawable.menu_03), contentDescription = "Settings")
                     }
                 },
             )
