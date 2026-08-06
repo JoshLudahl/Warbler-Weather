@@ -31,7 +31,3 @@ fun doesAnyListContainValues(list: List<List<Double>>): Boolean {
     }
     return false
 }
-
-fun String.toTitleCase(): String =
-    split(" ")
-        .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }

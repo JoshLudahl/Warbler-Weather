@@ -8,7 +8,7 @@ import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.core.model.location.LocationEntity
 import com.warbler.core.utilities.DataPref
 import com.warbler.core.utilities.Resource
-import com.warbler.core.utilities.toTitleCase
+import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
@@ -109,7 +109,7 @@ class MainWeatherViewModel
                     current.weather
                         .firstOrNull()
                         ?.description
-                        ?.toTitleCase()
+                        ?.capitalizeEachFirst
                         .orEmpty(),
                 dateTitle = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(Date()),
                 feelsLike = "Feels like ${convertTemperature(current.feelsLike, temperatureUnit)}",
