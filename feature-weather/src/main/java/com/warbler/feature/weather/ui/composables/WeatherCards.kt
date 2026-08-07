@@ -50,7 +50,6 @@ import com.warbler.data.model.weather.aqiColorForLevel
 import com.warbler.data.model.weather.aqiLevelInfoList
 import com.warbler.feature.weather.R
 import com.warbler.feature.weather.ui.main.WeatherUiState
-import kotlin.text.ifEmpty
 
 @Composable
 fun MainWeatherCard(
@@ -133,7 +132,9 @@ fun WeatherAlert(
             title = { Text(text = weatherUiState.alertTitle.ifEmpty { "Weather Alert" }) },
             text = {
                 Column(
-                    modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState()),
                 ) {
                     Text(
                         text = weatherUiState.alertDescription,
@@ -176,7 +177,9 @@ fun AqiInformation(
             title = { Text(text = "Air Quality Index - ${weatherUiState.aqiLevel}") },
             text = {
                 Column(
-                    modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState()),
                 ) {
                     aqiLevelInfoList.forEach { info ->
                         Row(
@@ -306,6 +309,7 @@ fun HourlyForecastCard(
                 text = time,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary,
             )
 
             Icon(
@@ -341,6 +345,7 @@ fun DailyForecastCard(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Column(
             modifier =
@@ -354,6 +359,7 @@ fun DailyForecastCard(
                 text = day,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
             )
 
             Icon(

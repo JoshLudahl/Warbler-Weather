@@ -239,7 +239,9 @@ private fun <T> SingleSelectButtonGroup(
     onSelected: (T) -> Unit,
 ) {
     FlowRow(
-        Modifier.padding(horizontal = 8.dp).fillMaxWidth(),
+        Modifier
+            .padding(horizontal = 8.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
