@@ -32,7 +32,7 @@ import com.warbler.feature.weather.R
 )
 @Preview
 @Composable
-fun MenuSample(
+fun NavigationMenuOptions(
     onLocationClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
@@ -55,7 +55,7 @@ fun MenuSample(
     }
     DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
         DropdownMenuItem(
-            text = { Text("Edit") },
+            text = { Text("Location") },
             onClick = onLocationClick,
             leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = "Location") },
         )

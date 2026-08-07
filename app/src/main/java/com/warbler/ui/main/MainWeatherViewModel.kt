@@ -32,9 +32,8 @@ class MainWeatherViewModel
         private val weatherNetworkRepository: WeatherNetworkRepository,
         private val dataStore: DataStore<Preferences>,
     ) : ViewModel() {
-        private val _weatherUiState = MutableStateFlow<WeatherUiState?>(null)
         val weatherUiState: StateFlow<WeatherUiState?>
-            get() = _weatherUiState
+            field = MutableStateFlow<WeatherUiState?>(null)
 
         private var pendingAqiLevel: Int? = null
 
@@ -57,7 +56,7 @@ class MainWeatherViewModel
                     .combine(temperatureUnitFlow) { weather, temperatureUnit ->
                         weather.toUiState(location, temperatureUnit)
                     }.collect { uiState ->
-                        _weatherUiState.value = uiState
+                        weatherUiState.value = uiState
                     }
             }
             loadAqi(location)
@@ -87,8 +86,8 @@ class MainWeatherViewModel
                                     ?.main
                                     ?.aqi ?: 0
                             pendingAqiLevel = aqiLevel
-                            _weatherUiState.value =
-                                _weatherUiState.value?.copy(
+                            weatherUiState.value =
+                                weatherUiState.value?.copy(
                                     hasAqi = aqiLevel in 1..5,
                                     aqiValue = aqiLevel.toString(),
                                     aqiLevel = aqiLevel,
@@ -113,9 +112,9 @@ class MainWeatherViewModel
                         .orEmpty(),
                 dateTitle = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(Date()),
                 feelsLike = "Feels like ${convertTemperature(current.feelsLike, temperatureUnit)}",
-                hasAqi = (_weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0) in 1..5,
-                aqiValue = (_weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0).toString(),
-                aqiLevel = _weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0,
+                hasAqi = (weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0) in 1..5,
+                aqiValue = (weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0).toString(),
+                aqiLevel = weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0,
                 hasAlerts = !alerts.isNullOrEmpty(),
                 alertTitle = alerts?.firstOrNull()?.event.orEmpty(),
                 alertDescription = alerts?.joinToString("\n\n") { it.description }.orEmpty(),
