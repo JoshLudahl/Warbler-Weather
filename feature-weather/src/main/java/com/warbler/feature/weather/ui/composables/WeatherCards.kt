@@ -1,5 +1,6 @@
 package com.warbler.feature.weather.ui.composables
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,11 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,6 +45,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -496,16 +496,50 @@ fun WeatherForecastList(
     forecasts: List<DailyForecast>,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
-        modifier =
-            modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(0.dp),
-    ) {
-        items(forecasts) { forecast ->
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-            ForecastRow(forecast = forecast, modifier = Modifier.fillMaxWidth())
+    if (isLandscape) {
+        Column(
+            modifier = modifier.fillMaxSize(),
+        ) {
+            // Group items into rows of 2 for landscape
+            val rows = forecasts.chunked(2)
+            rows.forEach { rowItems ->
+                Row(
+                    modifier = Modifier.weight(1f).fillMaxWidth(),
+                ) {
+                    rowItems.forEach { forecast ->
+                        ForecastRow(
+                            forecast = forecast,
+                            modifier =
+                                Modifier
+                                    .weight(1f)
+                                    .padding(8.dp)
+                                    .fillMaxHeight(),
+                        )
+                    }
+                    // Fill empty space if the last row isn't full
+                    if (rowItems.size < 2) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                }
+            }
+        }
+    } else {
+        Column(
+            modifier = modifier.fillMaxSize(),
+        ) {
+            forecasts.forEach { forecast ->
+                ForecastRow(
+                    forecast = forecast,
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                )
+            }
         }
     }
 }
@@ -517,20 +551,20 @@ fun ForecastRow(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier =
-            modifier
-                .fillMaxHeight(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        modifier = modifier,
+        shape = RoundedCornerShape(30.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
     ) {
         Row(
             modifier =
                 Modifier
-                    .fillMaxHeight()
-                    .padding(vertical = 12.dp, horizontal = 16.dp),
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             // Day of week
