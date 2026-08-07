@@ -64,14 +64,14 @@ fun MainWeatherScreen(
                         .fillMaxSize()
                         .padding(innerPadding)
                         .verticalScroll(rememberScrollState())
-                        .padding(16.dp),
+                        .padding(start = 16.dp, end = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 if (weatherUiState.hasAlerts) {
                     WeatherAlert(weatherUiState = weatherUiState)
                 }
 
-                SectionTitle(title = "Current Conditions", hasMore = false)
+                SectionTitle(title = "Current Conditions", onClickMore = { onStatsNextClick() })
                 MainWeatherCard(
                     weatherUiState = weatherUiState,
                     icon = weatherUiState.iconRes,
@@ -83,10 +83,7 @@ fun MainWeatherScreen(
                     AqiInformation(weatherUiState = weatherUiState)
                 }
 
-                WeatherStats(
-                    weatherUiState = weatherUiState,
-                    onStatsNextClick = { onStatsNextClick() },
-                )
+                WeatherStats(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Next 48 Hours", onClickMore = { onHourlyClick() })
                 HourlyForecastSection()

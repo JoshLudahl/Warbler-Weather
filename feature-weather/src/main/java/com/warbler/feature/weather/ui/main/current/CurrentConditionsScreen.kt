@@ -1,4 +1,4 @@
-package com.warbler.feature.weather.ui.forecast.daily
+package com.warbler.feature.weather.ui.main.current
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,19 +16,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.warbler.core.theme.AppTheme
 
 @Composable
-fun ForecastScreen(
+fun CurrentConditionsScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text("8 Day Forecast") },
+                title = { Text("Current Weather Conditions") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -51,15 +49,5 @@ fun ForecastScreen(
                     .padding(horizontal = 16.dp),
         ) {
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ForecastScreenPreview() {
-    AppTheme {
-        ForecastScreen(
-            onNavigateUp = {},
-        )
     }
 }

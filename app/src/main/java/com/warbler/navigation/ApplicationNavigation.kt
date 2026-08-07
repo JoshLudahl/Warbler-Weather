@@ -18,7 +18,7 @@ import com.warbler.feature.weather.ui.forecast.daily.ForecastScreen
 import com.warbler.feature.weather.ui.forecast.daily.ForecastViewPagerScreen
 import com.warbler.feature.weather.ui.forecast.hourly.HourlyScreen
 import com.warbler.feature.weather.ui.main.MainWeatherScreen
-import com.warbler.feature.weather.ui.main.current.StatsScreen
+import com.warbler.feature.weather.ui.main.current.CurrentConditionsScreen
 import com.warbler.ui.main.MainWeatherViewModel
 
 @Composable
@@ -43,12 +43,12 @@ fun ApplicationNavigation(
                         onStatsNextClick = { backStack.add(Destinations.Stats) },
                     )
                 }
-                entry<Destinations.Forecast> { ForecastScreen() }
+                entry<Destinations.Forecast> { ForecastScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
                 entry<Destinations.ForecastViewPager> { ForecastViewPagerScreen() }
-                entry<Destinations.Hourly> { HourlyScreen() }
+                entry<Destinations.Hourly> { HourlyScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Settings> { SettingsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
-                entry<Destinations.Stats> { StatsScreen() }
+                entry<Destinations.Stats> { CurrentConditionsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
             },
     )
 }

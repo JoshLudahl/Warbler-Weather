@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,21 +13,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Air
-import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.SwapVert
-import androidx.compose.material.icons.filled.Thunderstorm
 import androidx.compose.material.icons.filled.Umbrella
 import androidx.compose.material.icons.filled.WaterDrop
-import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -243,7 +236,6 @@ fun WeatherStat(
 @Composable
 fun WeatherStats(
     weatherUiState: WeatherUiState,
-    onStatsNextClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -258,7 +250,7 @@ fun WeatherStats(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 0.dp, top = 24.dp, bottom = 24.dp),
+                    .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 24.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -279,16 +271,6 @@ fun WeatherStats(
                 value = "100%",
                 label = "Rain",
             )
-
-            IconButton(
-                onClick = { onStatsNextClick() },
-                modifier = Modifier.size(48.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowRight,
-                    contentDescription = "More",
-                )
-            }
         }
     }
 }
@@ -336,40 +318,6 @@ fun HourlyForecastCard(
                 text = temperature,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-            )
-        }
-    }
-}
-
-@Composable
-fun HourlyForecastSection() {
-    // MOCK DATA::::
-    data class HourlyForecast(
-        val time: String,
-        val temp: Int,
-        val icon: ImageVector,
-    )
-
-    val hourlyForecasts =
-        listOf(
-            HourlyForecast("10 am", 16, Icons.Default.Cloud),
-            HourlyForecast("11 am", 17, Icons.Default.Cloud),
-            HourlyForecast("12 pm", 18, Icons.Default.Thunderstorm),
-            HourlyForecast("01 pm", 19, Icons.Default.Thunderstorm),
-        )
-
-    // END MOCK DATA
-
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
-    ) {
-        items(hourlyForecasts) { forecast ->
-
-            HourlyForecastCard(
-                time = forecast.time,
-                temperature = "${forecast.temp}°",
-                icon = forecast.icon,
             )
         }
     }
@@ -438,41 +386,6 @@ fun DailyForecastCard(
                     color = temp_low,
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun ForecastSection() {
-    // MOCK DATA
-    data class DailyForecast(
-        val day: String,
-        val high: Int,
-        val low: Int,
-        val icon: ImageVector,
-    )
-
-    val forecast =
-        listOf(
-            DailyForecast("Monday", 22, 14, Icons.Default.WbSunny),
-            DailyForecast("Tuesday", 20, 12, Icons.Default.Cloud),
-            DailyForecast("Wednesday", 18, 10, Icons.Default.Thunderstorm),
-        )
-
-    // END MOCK DATA
-
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        forecast.forEach { day ->
-            DailyForecastCard(
-                day = day.day,
-                high = day.high,
-                low = day.low,
-                icon = day.icon,
-                modifier = Modifier.weight(1f),
-            )
         }
     }
 }
