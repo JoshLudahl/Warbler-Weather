@@ -16,6 +16,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ButtonGroupDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -109,9 +111,13 @@ private fun SettingsContent(
             SectionHeading("Units of Measurement")
             // Temperature
             SubHeading("Temperature")
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.surfaceContainer,
+            Card(
+                shape = RoundedCornerShape(30.dp),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -128,9 +134,13 @@ private fun SettingsContent(
 
             // Speed
             SubHeading("Speed")
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.surfaceContainer,
+            Card(
+                shape = RoundedCornerShape(30.dp),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -147,9 +157,13 @@ private fun SettingsContent(
 
             // Accumulation
             SubHeading("Accumulation")
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.surfaceContainer,
+            Card(
+                shape = RoundedCornerShape(30.dp),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -167,7 +181,7 @@ private fun SettingsContent(
             // About
             SectionHeading("About")
             Surface(
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(30.dp),
                 color = MaterialTheme.colorScheme.surfaceContainer,
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -203,7 +217,6 @@ private fun SectionHeading(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(vertical = 8.dp),
     )
 }
@@ -213,7 +226,6 @@ private fun SubHeading(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(vertical = 4.dp),
     )
 }
@@ -238,10 +250,10 @@ private fun <T> SingleSelectButtonGroup(
                 onCheckedChange = { onSelected(option) },
                 colors =
                     ToggleButtonDefaults.toggleButtonColors(
-                        checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                        checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                        contentColor = MaterialTheme.colorScheme.onSurface,
+                        checkedContainerColor = MaterialTheme.colorScheme.onSurface,
+                        checkedContentColor = MaterialTheme.colorScheme.surface,
+                        containerColor = MaterialTheme.colorScheme.background,
+                        contentColor = MaterialTheme.colorScheme.onBackground,
                     ),
                 shapes =
                     when (index) {
