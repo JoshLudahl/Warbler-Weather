@@ -76,7 +76,7 @@ fun MainWeatherScreen(
                     weatherUiState = weatherUiState,
                     icon = weatherUiState.iconRes,
                     modifier =
-                        Modifier,
+                    Modifier,
                 )
 
                 if (weatherUiState.hasAqi) {

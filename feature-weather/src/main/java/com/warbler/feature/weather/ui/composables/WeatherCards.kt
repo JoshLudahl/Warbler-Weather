@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +29,7 @@ import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -132,9 +136,10 @@ fun WeatherAlert(
             title = { Text(text = weatherUiState.alertTitle.ifEmpty { "Weather Alert" }) },
             text = {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .verticalScroll(rememberScrollState()),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState()),
                 ) {
                     Text(
                         text = weatherUiState.alertDescription,
@@ -177,9 +182,10 @@ fun AqiInformation(
             title = { Text(text = "Air Quality Index - ${weatherUiState.aqiLevel}") },
             text = {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .verticalScroll(rememberScrollState()),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState()),
                 ) {
                     aqiLevelInfoList.forEach { info ->
                         Row(
@@ -392,6 +398,83 @@ fun DailyForecastCard(
                     color = temp_low,
                 )
             }
+        }
+    }
+}
+
+// Data model for weather stats
+data class WeatherStat(
+    val title: String,
+    val value: String,
+    val description: String,
+    val icon: @Composable () -> Unit,
+)
+
+@Composable
+fun WeatherStatsGrid(
+    stats: List<WeatherStat>,
+    modifier: Modifier = Modifier,
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 150.dp),
+        modifier =
+            modifier
+                .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items(stats) { stat ->
+            WeatherStatCard(stat = stat)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun WeatherStatCard(stat: WeatherStat) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(30.dp),
+    ) {
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            // Icon
+            Box(
+                modifier =
+                    Modifier
+                        .size(48.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                stat.icon()
+            }
+
+            // Title
+            Text(
+                text = stat.title,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium,
+            )
+
+            // Value
+            Text(
+                text = stat.value,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+            )
+
+            // Description
+            Text(
+                text = stat.description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }
