@@ -14,9 +14,11 @@ import androidx.navigation3.ui.NavDisplay
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.location.ui.LocationScreen
 import com.warbler.feature.settings.ui.SettingsScreen
-import com.warbler.feature.weather.ui.forecast.ForecastScreen
-import com.warbler.feature.weather.ui.forecast.ForecastViewPagerScreen
+import com.warbler.feature.weather.ui.forecast.daily.ForecastScreen
+import com.warbler.feature.weather.ui.forecast.daily.ForecastViewPagerScreen
+import com.warbler.feature.weather.ui.forecast.hourly.HourlyScreen
 import com.warbler.feature.weather.ui.main.MainWeatherScreen
+import com.warbler.feature.weather.ui.main.current.StatsScreen
 import com.warbler.ui.main.MainWeatherViewModel
 
 @Composable
@@ -36,12 +38,17 @@ fun ApplicationNavigation(
                         weatherUiState = weatherUiState,
                         onLocationClick = { backStack.add(Destinations.Location) },
                         onSettingsClick = { backStack.add(Destinations.Settings) },
+                        onForecastClick = { backStack.add(Destinations.Forecast) },
+                        onHourlyClick = { backStack.add(Destinations.Hourly) },
+                        onStatsNextClick = { backStack.add(Destinations.Stats) },
                     )
                 }
                 entry<Destinations.Forecast> { ForecastScreen() }
                 entry<Destinations.ForecastViewPager> { ForecastViewPagerScreen() }
+                entry<Destinations.Hourly> { HourlyScreen() }
                 entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Settings> { SettingsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
+                entry<Destinations.Stats> { StatsScreen() }
             },
     )
 }

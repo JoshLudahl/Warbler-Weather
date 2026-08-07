@@ -12,10 +12,16 @@ sealed interface Destinations : NavKey {
     data object Home : Destinations
 
     @Serializable
+    data object Hourly : Destinations
+
+    @Serializable
     data object Location : Destinations
 
     @Serializable
     data object Settings : Destinations
+
+    @Serializable
+    data object Stats : Destinations
 
     @Serializable
     data object ForecastViewPager : Destinations

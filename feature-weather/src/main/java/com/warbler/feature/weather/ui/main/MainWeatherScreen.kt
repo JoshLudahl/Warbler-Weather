@@ -33,6 +33,9 @@ fun MainWeatherScreen(
     weatherUiState: WeatherUiState?,
     onLocationClick: () -> Unit,
     onSettingsClick: () -> Unit,
+    onForecastClick: () -> Boolean,
+    onHourlyClick: () -> Boolean,
+    onStatsNextClick: () -> Boolean,
 ) {
     Scaffold(
         topBar = {
@@ -82,12 +85,13 @@ fun MainWeatherScreen(
 
                 WeatherStats(
                     weatherUiState = weatherUiState,
+                    onStatsNextClick = { onStatsNextClick() },
                 )
 
-                SectionTitle(title = "Next 48 Hours")
+                SectionTitle(title = "Next 48 Hours", onClickMore = { onHourlyClick() })
                 HourlyForecastSection()
 
-                SectionTitle(title = "8 Day Forecast")
+                SectionTitle(title = "8 Day Forecast", onClickMore = { onForecastClick() })
                 ForecastSection()
             }
         } else {

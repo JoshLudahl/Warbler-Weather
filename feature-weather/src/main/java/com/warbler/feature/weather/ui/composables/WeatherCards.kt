@@ -23,7 +23,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Air
-import androidx.compose.material.icons.filled.ArrowRight
 import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.SwapVert
 import androidx.compose.material.icons.filled.Thunderstorm
@@ -244,6 +243,7 @@ fun WeatherStat(
 @Composable
 fun WeatherStats(
     weatherUiState: WeatherUiState,
+    onStatsNextClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -281,7 +281,7 @@ fun WeatherStats(
             )
 
             IconButton(
-                onClick = { },
+                onClick = { onStatsNextClick() },
                 modifier = Modifier.size(48.dp),
             ) {
                 Icon(
