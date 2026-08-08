@@ -23,10 +23,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Air
 import androidx.compose.material.icons.filled.SwapVert
-import androidx.compose.material.icons.filled.Umbrella
-import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -213,8 +210,8 @@ fun AqiInformation(
 }
 
 @Composable
-fun WeatherStat(
-    imageVector: ImageVector,
+fun WeatherStatItem(
+    icon: Any,
     value: String,
     label: String,
     modifier: Modifier = Modifier,
@@ -223,11 +220,22 @@ fun WeatherStat(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = label,
-            modifier = Modifier.size(24.dp),
-        )
+        when (icon) {
+            is ImageVector -> {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = label,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+            is Int -> {
+                Image(
+                    painter = painterResource(id = icon),
+                    contentDescription = label,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -267,20 +275,20 @@ fun WeatherStats(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            WeatherStat(
-                imageVector = Icons.Default.Air,
+            WeatherStatItem(
+                icon = R.drawable.ic_wind,
                 value = weatherUiState.wind,
                 label = "Wind",
             )
 
-            WeatherStat(
-                imageVector = Icons.Default.WaterDrop,
+            WeatherStatItem(
+                icon = R.drawable.ic_wi_humidity,
                 value = weatherUiState.humidity,
                 label = "Humidity",
             )
 
-            WeatherStat(
-                imageVector = Icons.Default.Umbrella,
+            WeatherStatItem(
+                icon = R.drawable.ic_wi_umbrella,
                 value = weatherUiState.rain,
                 label = "Rain",
             )

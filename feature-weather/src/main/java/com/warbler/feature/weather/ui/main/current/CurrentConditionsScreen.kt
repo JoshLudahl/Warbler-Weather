@@ -1,24 +1,18 @@
 package com.warbler.feature.weather.ui.main.current
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Air
-import androidx.compose.material.icons.filled.Cloud
-import androidx.compose.material.icons.filled.Compress
-import androidx.compose.material.icons.filled.DeviceThermostat
-import androidx.compose.material.icons.filled.Umbrella
 import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.WaterDrop
-import androidx.compose.material.icons.filled.WbSunny
-import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -31,7 +25,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.warbler.feature.weather.R
 import com.warbler.feature.weather.ui.composables.MainWeatherCard
 import com.warbler.feature.weather.ui.composables.WeatherStat
 import com.warbler.feature.weather.ui.composables.WeatherStatsGrid
@@ -103,61 +99,122 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 title = "Wind Speed",
                 value = weatherUiState.wind,
                 description = "Current wind speed",
-                icon = { Icon(Icons.Default.Air, contentDescription = "Wind Speed") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wind),
+                        contentDescription = "Wind Speed",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Humidity",
                 value = weatherUiState.humidity,
                 description = "Current humidity",
-                icon = { Icon(Icons.Default.WaterDrop, contentDescription = "Humidity") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_humidity),
+                        contentDescription = "Humidity",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Rain",
                 value = weatherUiState.rain,
                 description = "Precipitation probability",
-                icon = { Icon(Icons.Default.Umbrella, contentDescription = "Rain") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_umbrella),
+                        contentDescription = "Rain",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "UV Index",
                 value = weatherUiState.uvIndex,
                 description = "Solar radiation level",
-                icon = { Icon(Icons.Default.WbSunny, contentDescription = "UV Index") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_day_sunny),
+                        contentDescription = "UV Index",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Pressure",
                 value = weatherUiState.pressure,
                 description = "Atmospheric pressure",
-                icon = { Icon(Icons.Default.Compress, contentDescription = "Pressure") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_barometer),
+                        contentDescription = "Pressure",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Visibility",
                 value = weatherUiState.visibility,
                 description = "Maximum visual range",
-                icon = { Icon(Icons.Default.Visibility, contentDescription = "Visibility") },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Visibility,
+                        contentDescription = "Visibility",
+                        modifier = Modifier.size(32.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                },
             ),
             WeatherStat(
                 title = "Clouds",
                 value = weatherUiState.clouds,
                 description = "Cloud cover percentage",
-                icon = { Icon(Icons.Default.Cloud, contentDescription = "Clouds") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_cloud),
+                        contentDescription = "Clouds",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Dew Point",
                 value = weatherUiState.dewPoint,
                 description = "Atmospheric moisture",
-                icon = { Icon(Icons.Default.DeviceThermostat, contentDescription = "Dew Point") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_raindrops),
+                        contentDescription = "Dew Point",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Sunrise",
                 value = weatherUiState.sunrise,
                 description = "Time of sunrise",
-                icon = { Icon(Icons.Default.WbTwilight, contentDescription = "Sunrise") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_sunrise),
+                        contentDescription = "Sunrise",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
             WeatherStat(
                 title = "Sunset",
                 value = weatherUiState.sunset,
                 description = "Time of sunset",
-                icon = { Icon(Icons.Default.WbTwilight, contentDescription = "Sunset") },
+                icon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_wi_sunset),
+                        contentDescription = "Sunset",
+                        modifier = Modifier.size(32.dp),
+                    )
+                },
             ),
         )
 
