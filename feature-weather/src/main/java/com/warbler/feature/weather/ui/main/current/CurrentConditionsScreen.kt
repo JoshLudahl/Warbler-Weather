@@ -46,13 +46,15 @@ fun CurrentConditionsScreen(
         topBar = {
             TopAppBar(
                 title = {
+                    Text("Current Conditions")
+                },
+                subtitle = {
                     Text(
                         weatherUiState?.locationName ?: "Warbler Weather",
                         fontFamily = AppTypography.titleMedium.fontFamily,
                         fontWeight = FontWeight.Bold,
                     )
                 },
-                subtitle = { Text("Current Conditions") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
