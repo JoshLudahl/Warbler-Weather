@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.warbler.feature.weather.R
+import com.warbler.feature.weather.ui.composables.AqiInformation
 import com.warbler.feature.weather.ui.composables.MainWeatherCard
 import com.warbler.feature.weather.ui.composables.WeatherStat
 import com.warbler.feature.weather.ui.composables.WeatherStatsGrid
@@ -71,6 +72,11 @@ fun CurrentConditionsScreen(
                     weatherUiState = weatherUiState,
                     icon = weatherUiState.iconRes,
                 )
+
+                if (weatherUiState.hasAqi) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    AqiInformation(weatherUiState = weatherUiState)
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 

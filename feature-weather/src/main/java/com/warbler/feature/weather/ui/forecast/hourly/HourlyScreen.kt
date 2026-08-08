@@ -1,5 +1,6 @@
 package com.warbler.feature.weather.ui.forecast.hourly
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -83,6 +84,7 @@ fun HourlyScreen(
                     .padding(paddingValues)
                     .verticalScroll(rememberScrollState()),
         ) {
+            Log.d("HourlyScreen", "weatherUiState: $weatherUiState")
             if (weatherUiState != null) {
                 Spacer(modifier = Modifier.height(16.dp))
                 HourlyForecastSection(weatherUiState = weatherUiState)

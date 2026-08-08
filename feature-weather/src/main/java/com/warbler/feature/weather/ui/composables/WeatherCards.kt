@@ -469,16 +469,6 @@ private fun WeatherStatCard(stat: WeatherStat) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            // Icon
-            Box(
-                modifier =
-                    Modifier
-                        .size(64.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                stat.icon()
-            }
-
             // Title
             Text(
                 text = stat.title,
@@ -486,10 +476,20 @@ private fun WeatherStatCard(stat: WeatherStat) {
                 fontWeight = FontWeight.Medium,
             )
 
+            // Icon
+            Box(
+                modifier =
+                    Modifier
+                        .size(56.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                stat.icon()
+            }
+
             // Value
             Text(
                 text = stat.value,
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.bodyLargeEmphasized,
                 fontWeight = FontWeight.Bold,
             )
 
