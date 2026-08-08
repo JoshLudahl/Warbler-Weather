@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -47,6 +48,7 @@ class LocationService
                 continuation.invokeOnCancellation {
                     cancellationTokenSource.cancel()
                 }
+                Log.d("LocationService", "getCurrentLocation: starting")
 
                 try {
                     fusedLocationClient
@@ -54,8 +56,10 @@ class LocationService
                             Priority.PRIORITY_HIGH_ACCURACY,
                             cancellationTokenSource.token,
                         ).addOnSuccessListener { location ->
+                            Log.d("LocationService", "getCurrentLocation: success")
                             continuation.resume(location)
                         }.addOnFailureListener { exception ->
+                            Log.d("LocationService", "getCurrentLocation: failure")
                             continuation.resumeWithException(exception)
                         }
                 } catch (e: SecurityException) {

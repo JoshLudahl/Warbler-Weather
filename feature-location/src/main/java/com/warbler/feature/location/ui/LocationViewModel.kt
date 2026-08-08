@@ -19,7 +19,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class LocationViewModel
     @OptIn(FlowPreview::class)
@@ -71,7 +73,7 @@ class LocationViewModel
 
             viewModelScope.launch {
                 _searchQuery
-                    .debounce(500)
+                    .debounce(500.milliseconds)
                     .distinctUntilChanged()
                     .filter { it.length >= 3 }
                     .collect { query ->
@@ -144,6 +146,7 @@ class LocationViewModel
 
                     // Get current location
                     val location = locationService.getCurrentLocation()
+                    Log.d("LocationViewModel", "Got location: $location")
                     if (location == null) {
                         Log.e("LocationViewModel", "Failed to get current location")
                         _isLoadingCurrentLocation.value = false
