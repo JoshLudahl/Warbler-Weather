@@ -35,8 +35,12 @@ data class HourlyForecastItem(
     val iconRes: Int,
     val pop: Float = 0f,
     val accumulation: Float = 0f,
+    val rainAccumulation: Float = 0f,
+    val snowAccumulation: Float = 0f,
     val humidity: Int = 0,
     val windSpeed: Float = 0f,
+    val windGust: Float = 0f,
+    val uvi: Float = 0f,
 )
 
 data class DailyForecastItem(

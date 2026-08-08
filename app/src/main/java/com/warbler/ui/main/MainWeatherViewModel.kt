@@ -205,6 +205,16 @@ class MainWeatherViewModel
                                     hourlyAccumulation,
                                     AccumulationUnit.entries[accumulationUnit],
                                 ).toFloat(),
+                            rainAccumulation =
+                                convertOrReturnAccumulationByUnit(
+                                    it.rain?.h ?: 0.0,
+                                    AccumulationUnit.entries[accumulationUnit],
+                                ).toFloat(),
+                            snowAccumulation =
+                                convertOrReturnAccumulationByUnit(
+                                    it.snow?.h ?: 0.0,
+                                    AccumulationUnit.entries[accumulationUnit],
+                                ).toFloat(),
                             humidity = it.humidity,
                             windSpeed =
                                 Conversion
@@ -212,6 +222,13 @@ class MainWeatherViewModel
                                         it.windSpeed,
                                         SpeedUnit.entries[speedUnit],
                                     ).toFloat(),
+                            windGust =
+                                Conversion
+                                    .formatSpeedUnitsWithUnits(
+                                        it.windGust,
+                                        SpeedUnit.entries[speedUnit],
+                                    ).toFloat(),
+                            uvi = it.uvi.toFloat(),
                         )
                     },
                 dailyForecasts =
