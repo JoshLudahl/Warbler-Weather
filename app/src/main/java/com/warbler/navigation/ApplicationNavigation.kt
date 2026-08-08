@@ -47,7 +47,14 @@ fun ApplicationNavigation(
                         onStatsNextClick = { backStack.add(Destinations.Stats) },
                     )
                 }
-                entry<Destinations.Forecast> { ForecastScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
+                entry<Destinations.Forecast> {
+                    val viewModel: MainWeatherViewModel = hiltViewModel<MainWeatherViewModel>()
+                    val weatherUiState by viewModel.weatherUiState.collectAsState()
+                    ForecastScreen(
+                        weatherUiState = weatherUiState,
+                        onNavigateUp = { backStack.removeLastOrNull() },
+                    )
+                }
                 entry<Destinations.ForecastViewPager> { ForecastViewPagerScreen() }
                 entry<Destinations.Hourly> { HourlyScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }

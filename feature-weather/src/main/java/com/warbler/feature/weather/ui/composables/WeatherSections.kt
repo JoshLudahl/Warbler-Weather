@@ -10,9 +10,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
-import androidx.compose.material.icons.filled.Cloud
-import androidx.compose.material.icons.filled.Thunderstorm
-import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -20,9 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.warbler.feature.weather.ui.main.WeatherUiState
 
 @Composable
 fun SectionTitle(
@@ -60,68 +57,37 @@ fun SectionTitle(
 }
 
 @Composable
-fun HourlyForecastSection() {
-    // MOCK DATA::::
-    data class HourlyForecast(
-        val time: String,
-        val temp: Int,
-        val icon: ImageVector,
-    )
-
-    val hourlyForecasts =
-        listOf(
-            HourlyForecast("10 am", 16, Icons.Default.Cloud),
-            HourlyForecast("11 am", 17, Icons.Default.Cloud),
-            HourlyForecast("12 pm", 18, Icons.Default.Thunderstorm),
-            HourlyForecast("01 pm", 19, Icons.Default.Thunderstorm),
-        )
-
-    // END MOCK DATA
-
+fun HourlyForecastSection(
+    weatherUiState: WeatherUiState,
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
-        items(hourlyForecasts) { forecast ->
-
+        items(weatherUiState.hourlyForecasts) { forecast ->
             HourlyForecastCard(
                 time = forecast.time,
-                temperature = "${forecast.temp}°",
-                icon = forecast.icon,
+                temperature = forecast.temperature,
+                icon = forecast.iconRes,
             )
         }
     }
 }
 
 @Composable
-fun ForecastSection() {
-    // MOCK DATA
-    data class DailyForecast(
-        val day: String,
-        val high: Int,
-        val low: Int,
-        val icon: ImageVector,
-    )
-
-    val forecast =
-        listOf(
-            DailyForecast("Monday", 22, 14, Icons.Default.WbSunny),
-            DailyForecast("Tuesday", 20, 12, Icons.Default.Cloud),
-            DailyForecast("Wednesday", 18, 10, Icons.Default.Thunderstorm),
-        )
-
-    // END MOCK DATA
-
+fun ForecastSection(
+    weatherUiState: WeatherUiState,
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        forecast.forEach { day ->
+        weatherUiState.dailyForecasts.take(3).forEach { day ->
             DailyForecastCard(
                 day = day.day,
-                high = day.high,
-                low = day.low,
-                icon = day.icon,
+                high = day.highTemp,
+                low = day.lowTemp,
+                icon = day.iconRes,
                 modifier = Modifier.weight(1f),
             )
         }

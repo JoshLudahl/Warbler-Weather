@@ -86,10 +86,10 @@ fun MainWeatherScreen(
                 WeatherStats(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Next 48 Hours", onClickMore = { onHourlyClick() })
-                HourlyForecastSection()
+                HourlyForecastSection(weatherUiState = weatherUiState)
 
-                SectionTitle(title = "8 Day Forecast", onClickMore = { onForecastClick() })
-                ForecastSection()
+                SectionTitle(title = "Forecast", onClickMore = { onForecastClick() })
+                ForecastSection(weatherUiState = weatherUiState)
             }
         } else {
             Box(

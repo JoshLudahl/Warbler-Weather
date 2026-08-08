@@ -11,9 +11,12 @@ import com.warbler.core.utilities.DataPref
 import com.warbler.core.utilities.Resource
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
+import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
 import com.warbler.data.repositories.weather.WeatherNetworkRepository
+import com.warbler.feature.weather.ui.main.DailyForecastItem
+import com.warbler.feature.weather.ui.main.HourlyForecastItem
 import com.warbler.feature.weather.ui.main.WeatherUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +25,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
@@ -77,6 +82,17 @@ class MainWeatherViewModel
                 1 -> "${((tempKelvin - 273.15) * 9 / 5 + 32).toInt()}°F" // Fahrenheit
                 2 -> "${tempKelvin.toInt()}K" // Kelvin
                 else -> "${((tempKelvin - 273.15) * 9 / 5 + 32).toInt()}°F" // Default to Fahrenheit
+            }
+
+        private fun convertTemperatureToInt(
+            tempKelvin: Double,
+            temperatureUnit: Int,
+        ): Int =
+            when (temperatureUnit) {
+                0 -> (tempKelvin - 273.15).toInt() // Celsius
+                1 -> ((tempKelvin - 273.15) * 9 / 5 + 32).toInt() // Fahrenheit
+                2 -> tempKelvin.toInt() // Kelvin
+                else -> ((tempKelvin - 273.15) * 9 / 5 + 32).toInt() // Default to Fahrenheit
             }
 
         private fun loadAqi(location: LocationEntity) {
@@ -138,5 +154,50 @@ class MainWeatherViewModel
                     ),
                 humidity = "${current.humidity}%",
                 rain = "${(hourly.firstOrNull()?.pop?.times(100))?.toInt() ?: 0}%",
+                hourlyForecasts =
+                    hourly.take(48).map {
+                        val hour =
+                            Instant
+                                .ofEpochSecond(it.dt.toLong() + timezoneOffset)
+                                .atZone(ZoneId.of("UTC"))
+                                .hour
+
+                        HourlyForecastItem(
+                            time = hour.fromHourWithSuffix,
+                            temperature = convertTemperature(it.temp, temperatureUnit),
+                            iconRes =
+                                it.weather
+                                    .firstOrNull()
+                                    ?.icon
+                                    .orEmpty()
+                                    .getIconForCondition,
+                        )
+                    },
+                dailyForecasts =
+                    daily.mapIndexed { index, dailyWeather ->
+                        val day =
+                            when (index) {
+                                0 -> "Today"
+                                1 -> "Tomorrow"
+                                else -> Conversion.getDatOfWeekFromUnixUTC(dailyWeather.dt.toLong())
+                            }
+                        DailyForecastItem(
+                            day = day,
+                            highTemp = convertTemperatureToInt(dailyWeather.temp.max, temperatureUnit),
+                            lowTemp = convertTemperatureToInt(dailyWeather.temp.min, temperatureUnit),
+                            iconRes =
+                                dailyWeather.weather
+                                    .firstOrNull()
+                                    ?.icon
+                                    .orEmpty()
+                                    .getIconForCondition,
+                            description =
+                                dailyWeather.weather
+                                    .firstOrNull()
+                                    ?.description
+                                    ?.capitalizeEachFirst
+                                    .orEmpty(),
+                        )
+                    },
             )
     }

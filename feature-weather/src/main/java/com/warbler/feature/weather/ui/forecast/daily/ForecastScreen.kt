@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CloudQueue
-import androidx.compose.material.icons.filled.Thunderstorm
-import androidx.compose.material.icons.filled.WbCloudy
-import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,12 +21,11 @@ import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.weather.ui.composables.DailyForecast
 import com.warbler.feature.weather.ui.composables.WeatherForecastList
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.Locale
+import com.warbler.feature.weather.ui.main.WeatherUiState
 
 @Composable
 fun ForecastScreen(
+    weatherUiState: WeatherUiState?,
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
@@ -58,7 +53,7 @@ fun ForecastScreen(
                     .padding(paddingValues)
                     .padding(start = 16.dp, end = 16.dp),
         ) {
-            ForecastScreenContent()
+            ForecastScreenContent(weatherUiState)
         }
     }
 }
@@ -68,6 +63,7 @@ fun ForecastScreen(
 private fun ForecastScreenPreview() {
     AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         ForecastScreen(
+            weatherUiState = null,
             onNavigateUp = {},
         )
     }
@@ -75,76 +71,17 @@ private fun ForecastScreenPreview() {
 
 // Usage example
 @Composable
-fun ForecastScreenContent() {
-    // Helper to generate day names
-    fun generateDays(startIndex: Int): List<String> =
-        (0 until startIndex).map { offset ->
-            LocalDate
-                .now()
-                .plusDays(offset.toLong())
-                .dayOfWeek
-                .getDisplayName(TextStyle.SHORT, Locale.getDefault())
-        }
-
+fun ForecastScreenContent(weatherUiState: WeatherUiState?) {
     val forecasts =
-        listOf(
+        weatherUiState?.dailyForecasts?.map {
             DailyForecast(
-                day = "Mon",
-                icon = Icons.Filled.WbSunny,
-                highTemp = 22,
-                lowTemp = 15,
-                description = "Clear skies",
-            ),
-            DailyForecast(
-                day = "Tue",
-                icon = Icons.Filled.CloudQueue,
-                highTemp = 24,
-                lowTemp = 16,
-                description = "Partly cloudy",
-            ),
-            DailyForecast(
-                day = "Wed",
-                icon = Icons.Filled.CloudQueue,
-                highTemp = 20,
-                lowTemp = 14,
-                description = "Overcast clouds",
-            ),
-            DailyForecast(
-                day = "Thu",
-                icon = Icons.Filled.CloudQueue,
-                highTemp = 18,
-                lowTemp = 12,
-                description = "Light rain",
-            ),
-            DailyForecast(
-                day = "Fri",
-                icon = Icons.Filled.Thunderstorm,
-                highTemp = 19,
-                lowTemp = 13,
-                description = "Thunderstorms",
-            ),
-            DailyForecast(
-                day = "Sat",
-                icon = Icons.Filled.WbCloudy,
-                highTemp = 21,
-                lowTemp = 14,
-                description = "Cloudy intervals",
-            ),
-            DailyForecast(
-                day = "Sun",
-                icon = Icons.Filled.WbSunny,
-                highTemp = 23,
-                lowTemp = 15,
-                description = "Mostly sunny",
-            ),
-            DailyForecast(
-                day = "Mon",
-                icon = Icons.Filled.WbCloudy,
-                highTemp = 25,
-                lowTemp = 17,
-                description = "Warm & partly cloudy",
-            ),
-        )
+                day = it.day,
+                icon = it.iconRes,
+                highTemp = it.highTemp,
+                lowTemp = it.lowTemp,
+                description = it.description,
+            )
+        } ?: emptyList()
 
     WeatherForecastList(
         forecasts = forecasts,

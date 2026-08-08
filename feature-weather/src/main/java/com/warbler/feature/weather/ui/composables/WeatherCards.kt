@@ -292,7 +292,7 @@ fun WeatherStats(
 fun HourlyForecastCard(
     time: String,
     temperature: String,
-    icon: ImageVector,
+    icon: Int,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -322,16 +322,16 @@ fun HourlyForecastCard(
                 color = MaterialTheme.colorScheme.primary,
             )
 
-            Icon(
-                imageVector = icon,
+            Image(
+                painter = painterResource(id = icon),
                 contentDescription = null,
-                modifier = Modifier.size(28.dp),
+                modifier = Modifier.size(56.dp),
             )
 
             Text(
                 text = temperature,
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold,
             )
         }
     }
@@ -342,7 +342,7 @@ fun DailyForecastCard(
     day: String,
     high: Int,
     low: Int,
-    icon: ImageVector,
+    icon: Int,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -372,8 +372,8 @@ fun DailyForecastCard(
                 color = MaterialTheme.colorScheme.primary,
             )
 
-            Icon(
-                imageVector = icon,
+            Image(
+                painter = painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier.size(56.dp),
             )
@@ -486,7 +486,7 @@ private fun WeatherStatCard(stat: WeatherStat) {
 // Data model for daily forecast
 data class DailyForecast(
     val day: String,
-    val icon: ImageVector,
+    val icon: Int,
     val highTemp: Int,
     val lowTemp: Int,
     val description: String,
@@ -593,11 +593,10 @@ fun ForecastRow(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(
-                    imageVector = forecast.icon,
+                Image(
+                    painter = painterResource(id = forecast.icon),
                     contentDescription = forecast.description,
                     modifier = Modifier.size(32.dp),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
 
