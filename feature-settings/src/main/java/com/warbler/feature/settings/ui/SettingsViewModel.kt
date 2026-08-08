@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.feature.settings.data.SettingsRepository
@@ -44,6 +45,11 @@ class SettingsViewModel
                     _uiState.update { it.copy(accumulationUnit = unit) }
                 }
             }
+            viewModelScope.launch {
+                repository.clockUnit.collect { unit ->
+                    _uiState.update { it.copy(clockUnit = unit) }
+                }
+            }
             _uiState.update {
                 it.copy(appVersion = "Beta Version ${getVersionName()}")
             }
@@ -78,6 +84,12 @@ class SettingsViewModel
         fun onAccumulationUnitSelected(unit: AccumulationUnit) {
             viewModelScope.launch {
                 repository.saveAccumulationUnit(unit)
+            }
+        }
+
+        fun onClockUnitSelected(unit: ClockUnit) {
+            viewModelScope.launch {
+                repository.saveClockUnit(unit)
             }
         }
     }

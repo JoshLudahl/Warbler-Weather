@@ -42,6 +42,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.core.theme.AppTheme
@@ -62,6 +63,7 @@ fun SettingsScreen(
         onTemperatureUnitSelected = viewModel::onTemperatureUnitSelected,
         onSpeedUnitSelected = viewModel::onSpeedUnitSelected,
         onAccumulationUnitSelected = viewModel::onAccumulationUnitSelected,
+        onClockUnitSelected = viewModel::onClockUnitSelected,
         onNavigateUp = onNavigateUp,
         onReviewAppClick = onReviewAppClick,
         onAboutClick = onAboutClick,
@@ -76,6 +78,7 @@ private fun SettingsContent(
     onTemperatureUnitSelected: (TemperatureUnit) -> Unit = {},
     onSpeedUnitSelected: (SpeedUnit) -> Unit = {},
     onAccumulationUnitSelected: (AccumulationUnit) -> Unit = {},
+    onClockUnitSelected: (ClockUnit) -> Unit = {},
     onNavigateUp: () -> Unit = {},
     onReviewAppClick: () -> Unit = {},
     onAboutClick: () -> Unit = {},
@@ -172,6 +175,29 @@ private fun SettingsContent(
                         selected = uiState.accumulationUnit,
                         label = { it.label },
                         onSelected = onAccumulationUnitSelected,
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Clock
+            SectionHeading("Clock")
+            Card(
+                shape = RoundedCornerShape(30.dp),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    SingleSelectButtonGroup(
+                        options = ClockUnit.entries,
+                        selected = uiState.clockUnit,
+                        label = { it.label },
+                        onSelected = onClockUnitSelected,
                     )
                 }
             }

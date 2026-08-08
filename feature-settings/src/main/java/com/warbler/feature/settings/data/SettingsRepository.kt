@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.warbler.core.model.units.AccumulationUnit
+import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +24,7 @@ class SettingsRepository
         private val temperatureKey = intPreferencesKey("temperature_unit")
         private val speedKey = intPreferencesKey("speed_unit")
         private val accumulationKey = intPreferencesKey("accumulation_unit")
+        private val clockKey = intPreferencesKey("clock_unit")
 
         val temperatureUnit: Flow<TemperatureUnit> =
             dataStore.data
@@ -59,6 +61,17 @@ class SettingsRepository
                     }
                 }
 
+        val clockUnit: Flow<ClockUnit> =
+            dataStore.data
+                .catch { emit(emptyPreferences()) }
+                .map { prefs ->
+                    when (prefs[clockKey] ?: 0) {
+                        0 -> ClockUnit.H12
+                        1 -> ClockUnit.H24
+                        else -> ClockUnit.H12
+                    }
+                }
+
         suspend fun saveTemperatureUnit(unit: TemperatureUnit) {
             val value =
                 when (unit) {
@@ -86,5 +99,14 @@ class SettingsRepository
                     AccumulationUnit.MILLIMETERS_PER_HOUR -> 1
                 }
             dataStore.edit { it[accumulationKey] = value }
+        }
+
+        suspend fun saveClockUnit(unit: ClockUnit) {
+            val value =
+                when (unit) {
+                    ClockUnit.H12 -> 0
+                    ClockUnit.H24 -> 1
+                }
+            dataStore.edit { it[clockKey] = value }
         }
     }
