@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.utilities.DataPref
 import com.warbler.core.utilities.Resource
+import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
@@ -51,13 +53,17 @@ class MainWeatherViewModel
         private fun loadWeather(location: LocationEntity) {
             viewModelScope.launch {
                 val temperatureUnitFlow = DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore)
+                val speedUnitFlow = DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore)
                 val weatherFlow = weatherNetworkRepository.getCurrentWeather(location).catch { }
-                weatherFlow
-                    .combine(temperatureUnitFlow) { weather, temperatureUnit ->
-                        weather.toUiState(location, temperatureUnit)
-                    }.collect { uiState ->
-                        weatherUiState.value = uiState
-                    }
+                combine(
+                    weatherFlow,
+                    temperatureUnitFlow,
+                    speedUnitFlow,
+                ) { weather, temperatureUnit, speedUnit ->
+                    weather.toUiState(location, temperatureUnit, speedUnit)
+                }.collect { uiState ->
+                    weatherUiState.value = uiState
+                }
             }
             loadAqi(location)
         }
@@ -100,6 +106,7 @@ class MainWeatherViewModel
         private fun WeatherDataSource.toUiState(
             location: LocationEntity,
             temperatureUnit: Int,
+            speedUnit: Int,
         ): WeatherUiState =
             WeatherUiState(
                 locationName = location.toDisplayString,
@@ -124,5 +131,12 @@ class MainWeatherViewModel
                         ?.icon
                         .orEmpty()
                         .getIconForCondition,
+                wind =
+                    Conversion.formatSpeedUnitsWithUnitsToString(
+                        current.windSpeed,
+                        SpeedUnit.entries[speedUnit],
+                    ),
+                humidity = "${current.humidity}%",
+                rain = "${(hourly.firstOrNull()?.pop?.times(100))?.toInt() ?: 0}%",
             )
     }

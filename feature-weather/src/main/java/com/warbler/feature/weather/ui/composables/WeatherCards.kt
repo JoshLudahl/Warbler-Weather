@@ -269,19 +269,19 @@ fun WeatherStats(
         ) {
             WeatherStat(
                 imageVector = Icons.Default.Air,
-                value = "10 m/s",
+                value = weatherUiState.wind,
                 label = "Wind",
             )
 
             WeatherStat(
                 imageVector = Icons.Default.WaterDrop,
-                value = "98%",
+                value = weatherUiState.humidity,
                 label = "Humidity",
             )
 
             WeatherStat(
                 imageVector = Icons.Default.Umbrella,
-                value = "100%",
+                value = weatherUiState.rain,
                 label = "Rain",
             )
         }

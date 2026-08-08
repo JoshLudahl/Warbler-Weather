@@ -13,4 +13,7 @@ data class WeatherUiState(
     val alertTitle: String = "",
     val alertDescription: String = "",
     val iconRes: Int,
+    val wind: String = "",
+    val humidity: String = "",
+    val rain: String = "",
 )
