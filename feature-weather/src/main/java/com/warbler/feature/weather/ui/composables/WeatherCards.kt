@@ -98,6 +98,7 @@ fun MainWeatherCard(
                 Text(
                     text = weatherUiState.feelsLike,
                     style = AppTypography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 

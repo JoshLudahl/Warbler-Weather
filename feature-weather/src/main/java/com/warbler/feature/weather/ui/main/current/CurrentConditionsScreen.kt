@@ -25,7 +25,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.warbler.core.theme.AppTypography
 import com.warbler.feature.weather.R
 import com.warbler.feature.weather.ui.composables.AqiInformation
 import com.warbler.feature.weather.ui.composables.MainWeatherCard
@@ -43,7 +45,14 @@ fun CurrentConditionsScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text("Current Conditions") },
+                title = {
+                    Text(
+                        weatherUiState?.locationName ?: "Warbler Weather",
+                        fontFamily = AppTypography.titleMedium.fontFamily,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+                subtitle = { Text("Current Conditions") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")

@@ -48,7 +48,7 @@ fun CustomInformationBanner(
         ) {
             icon()
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = message, color = iconColor, fontWeight = FontWeight.Bold)
+            Text(text = message, color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.weight(1f))
             Icon(imageVector = Icons.Rounded.Info, contentDescription = "Information", tint = iconColor)
         }
