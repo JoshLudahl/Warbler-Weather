@@ -56,7 +56,14 @@ fun ApplicationNavigation(
                     )
                 }
                 entry<Destinations.ForecastViewPager> { ForecastViewPagerScreen() }
-                entry<Destinations.Hourly> { HourlyScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
+                entry<Destinations.Hourly> {
+                    val viewModel: MainWeatherViewModel = hiltViewModel<MainWeatherViewModel>()
+                    val weatherUiState by viewModel.weatherUiState.collectAsState()
+                    HourlyScreen(
+                        weatherUiState = weatherUiState,
+                        onNavigateUp = { backStack.removeLastOrNull() },
+                    )
+                }
                 entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Settings> {
                     val context = LocalContext.current

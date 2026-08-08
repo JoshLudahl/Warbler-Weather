@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -72,19 +73,20 @@ fun LocationScreen(
             }
         },
     ) { paddingValues ->
-        Box(
+        Column(
             modifier =
                 Modifier
                     .fillMaxSize()
                     .semantics { isTraversalGroup = true }
                     .padding(paddingValues),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             SearchBar(
                 modifier =
                     Modifier
-                        .align(Alignment.TopCenter)
                         .semantics { traversalIndex = 0f }
                         .then(if (isSearchBarActive) Modifier.fillMaxWidth() else Modifier.padding(horizontal = 16.dp)),
+                windowInsets = if (isSearchBarActive) SearchBarDefaults.windowInsets else WindowInsets(0, 0, 0, 0),
                 inputField = {
                     SearchBarDefaults.InputField(
                         query = searchQuery,
@@ -165,7 +167,6 @@ fun LocationScreen(
                 Column(
                     modifier =
                         Modifier
-                            .padding(top = 80.dp) // Offset for the search bar
                             .fillMaxSize()
                             .padding(horizontal = 16.dp),
                 ) {

@@ -141,6 +141,8 @@ ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vicoCore" }
+vico-compose = { module = "com.patrykandpatrick.vico:compose", version.ref = "vicoCore" }
+vico-compose-m3 = { module = "com.patrykandpatrick.vico:compose-m3", version.ref = "vicoCore" }
 vico-views = { module = "com.patrykandpatrick.vico:views", version.ref = "vicoCore" }
 navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
 navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }

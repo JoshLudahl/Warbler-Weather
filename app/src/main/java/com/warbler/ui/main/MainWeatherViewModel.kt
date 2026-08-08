@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.core.model.location.LocationEntity
+import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.utilities.DataPref
 import com.warbler.core.utilities.Resource
 import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.Conversion.capitalizeEachFirst
+import com.warbler.data.model.weather.Conversion.convertOrReturnAccumulationByUnit
 import com.warbler.data.model.weather.Conversion.fromHourWithSuffix
 import com.warbler.data.model.weather.WeatherDataSource
 import com.warbler.data.model.weather.WeatherIconSelection.getIconForCondition
@@ -60,14 +62,16 @@ class MainWeatherViewModel
                 val temperatureUnitFlow = DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore)
                 val speedUnitFlow = DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore)
                 val clockUnitFlow = DataPref.readIntDataStoreFlow(DataPref.CLOCK_UNIT, dataStore)
+                val accumulationUnitFlow = DataPref.readIntDataStoreFlow(DataPref.ACCUMULATION_UNIT, dataStore)
                 val weatherFlow = weatherNetworkRepository.getCurrentWeather(location).catch { }
                 combine(
                     weatherFlow,
                     temperatureUnitFlow,
                     speedUnitFlow,
                     clockUnitFlow,
-                ) { weather, temperatureUnit, speedUnit, clockUnit ->
-                    weather.toUiState(location, temperatureUnit, speedUnit, clockUnit)
+                    accumulationUnitFlow,
+                ) { weather, temperatureUnit, speedUnit, clockUnit, accumulationUnit ->
+                    weather.toUiState(location, temperatureUnit, speedUnit, clockUnit, accumulationUnit)
                 }.collect { uiState ->
                     weatherUiState.value = uiState
                 }
@@ -126,6 +130,7 @@ class MainWeatherViewModel
             temperatureUnit: Int,
             speedUnit: Int,
             clockUnit: Int,
+            accumulationUnit: Int,
         ): WeatherUiState =
             WeatherUiState(
                 locationName = location.toDisplayString,
@@ -155,8 +160,19 @@ class MainWeatherViewModel
                         current.windSpeed,
                         SpeedUnit.entries[speedUnit],
                     ),
+                windUnit =
+                    when (SpeedUnit.entries[speedUnit]) {
+                        SpeedUnit.MPH -> "MPH"
+                        SpeedUnit.MPS -> "m/s"
+                        SpeedUnit.KPH -> "KMH"
+                    },
                 humidity = "${current.humidity}%",
                 rain = "${(hourly.firstOrNull()?.pop?.times(100))?.toInt() ?: 0}%",
+                accumulationUnit =
+                    when (AccumulationUnit.entries[accumulationUnit]) {
+                        AccumulationUnit.INCHES_PER_HOUR -> "in/h"
+                        AccumulationUnit.MILLIMETERS_PER_HOUR -> "mm/h"
+                    },
                 hourlyForecasts =
                     hourly.take(48).map {
                         val hour =
@@ -172,6 +188,8 @@ class MainWeatherViewModel
                                 hour.fromHourWithSuffix
                             }
 
+                        val hourlyAccumulation = (it.rain?.h ?: 0.0) + (it.snow?.h ?: 0.0)
+
                         HourlyForecastItem(
                             time = timeLabel,
                             temperature = convertTemperature(it.temp, temperatureUnit),
@@ -181,6 +199,19 @@ class MainWeatherViewModel
                                     ?.icon
                                     .orEmpty()
                                     .getIconForCondition,
+                            pop = it.pop.toFloat(),
+                            accumulation =
+                                convertOrReturnAccumulationByUnit(
+                                    hourlyAccumulation,
+                                    AccumulationUnit.entries[accumulationUnit],
+                                ).toFloat(),
+                            humidity = it.humidity,
+                            windSpeed =
+                                Conversion
+                                    .formatSpeedUnitsWithUnits(
+                                        it.windSpeed,
+                                        SpeedUnit.entries[speedUnit],
+                                    ).toFloat(),
                         )
                     },
                 dailyForecasts =

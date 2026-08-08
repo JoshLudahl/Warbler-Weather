@@ -14,8 +14,10 @@ data class WeatherUiState(
     val alertDescription: String = "",
     val iconRes: Int,
     val wind: String = "",
+    val windUnit: String = "",
     val humidity: String = "",
     val rain: String = "",
+    val accumulationUnit: String = "",
     val hourlyForecasts: List<HourlyForecastItem> = emptyList(),
     val dailyForecasts: List<DailyForecastItem> = emptyList(),
     val uvIndex: String = "",
@@ -31,6 +33,10 @@ data class HourlyForecastItem(
     val time: String,
     val temperature: String,
     val iconRes: Int,
+    val pop: Float = 0f,
+    val accumulation: Float = 0f,
+    val humidity: Int = 0,
+    val windSpeed: Float = 0f,
 )
 
 data class DailyForecastItem(

@@ -226,7 +226,7 @@ fun WeatherStatItem(
                 Icon(
                     imageVector = icon,
                     contentDescription = label,
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(32.dp),
                     tint = MaterialTheme.colorScheme.primary,
                 )
             }
@@ -234,7 +234,7 @@ fun WeatherStatItem(
                 Image(
                     painter = painterResource(id = icon),
                     contentDescription = label,
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(32.dp),
                     colorFilter =
                         ColorFilter.tint(
                             MaterialTheme.colorScheme.primary,
@@ -247,7 +247,7 @@ fun WeatherStatItem(
 
         Text(
             text = value,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
         )
 
