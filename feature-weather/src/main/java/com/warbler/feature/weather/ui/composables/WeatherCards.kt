@@ -41,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -225,14 +226,19 @@ fun WeatherStatItem(
                 Icon(
                     imageVector = icon,
                     contentDescription = label,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(48.dp),
+                    tint = MaterialTheme.colorScheme.primary,
                 )
             }
             is Int -> {
                 Image(
                     painter = painterResource(id = icon),
                     contentDescription = label,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(48.dp),
+                    colorFilter =
+                        ColorFilter.tint(
+                            MaterialTheme.colorScheme.primary,
+                        ),
                 )
             }
         }
@@ -250,6 +256,7 @@ fun WeatherStatItem(
         Text(
             text = label,
             style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 }
@@ -448,6 +455,11 @@ private fun WeatherStatCard(stat: WeatherStat) {
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(30.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
     ) {
         Column(
             modifier =
@@ -461,7 +473,7 @@ private fun WeatherStatCard(stat: WeatherStat) {
             Box(
                 modifier =
                     Modifier
-                        .size(48.dp),
+                        .size(64.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 stat.icon()
@@ -604,7 +616,7 @@ fun ForecastRow(
                 Image(
                     painter = painterResource(id = forecast.icon),
                     contentDescription = forecast.description,
-                    modifier = Modifier.size(32.dp),
+                    modifier = Modifier.size(48.dp),
                 )
             }
 

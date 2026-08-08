@@ -1,6 +1,5 @@
 package com.warbler.feature.weather.ui.main.current
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -100,10 +99,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.wind,
                 description = "Current wind speed",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wind),
                         contentDescription = "Wind Speed",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -112,10 +112,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.humidity,
                 description = "Current humidity",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_humidity),
                         contentDescription = "Humidity",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -124,10 +125,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.rain,
                 description = "Precipitation probability",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_umbrella),
                         contentDescription = "Rain",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -136,10 +138,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.uvIndex,
                 description = "Solar radiation level",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_day_sunny),
                         contentDescription = "UV Index",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -148,10 +151,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.pressure,
                 description = "Atmospheric pressure",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_barometer),
                         contentDescription = "Pressure",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -163,8 +167,8 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                     Icon(
                         imageVector = Icons.Default.Visibility,
                         contentDescription = "Visibility",
-                        modifier = Modifier.size(32.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -173,10 +177,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.clouds,
                 description = "Cloud cover percentage",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_cloud),
                         contentDescription = "Clouds",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -185,10 +190,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.dewPoint,
                 description = "Atmospheric moisture",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_raindrops),
                         contentDescription = "Dew Point",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -197,10 +203,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.sunrise,
                 description = "Time of sunrise",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_sunrise),
                         contentDescription = "Sunrise",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
@@ -209,10 +216,11 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                 value = weatherUiState.sunset,
                 description = "Time of sunset",
                 icon = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_wi_sunset),
                         contentDescription = "Sunset",
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                 },
             ),
