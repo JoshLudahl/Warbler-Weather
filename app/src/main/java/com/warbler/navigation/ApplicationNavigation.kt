@@ -65,7 +65,14 @@ fun ApplicationNavigation(
                         onReviewAppClick = { context.launchReviewFlow() },
                     )
                 }
-                entry<Destinations.Stats> { CurrentConditionsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
+                entry<Destinations.Stats> {
+                    val viewModel: MainWeatherViewModel = hiltViewModel<MainWeatherViewModel>()
+                    val weatherUiState by viewModel.weatherUiState.collectAsState()
+                    CurrentConditionsScreen(
+                        weatherUiState = weatherUiState,
+                        onNavigateUp = { backStack.removeLastOrNull() },
+                    )
+                }
             },
     )
 }

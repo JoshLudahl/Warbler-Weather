@@ -18,6 +18,13 @@ data class WeatherUiState(
     val rain: String = "",
     val hourlyForecasts: List<HourlyForecastItem> = emptyList(),
     val dailyForecasts: List<DailyForecastItem> = emptyList(),
+    val uvIndex: String = "",
+    val pressure: String = "",
+    val visibility: String = "",
+    val clouds: String = "",
+    val dewPoint: String = "",
+    val sunrise: String = "",
+    val sunset: String = "",
 )
 
 data class HourlyForecastItem(

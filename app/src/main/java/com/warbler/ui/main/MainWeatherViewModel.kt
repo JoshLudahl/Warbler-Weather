@@ -199,5 +199,12 @@ class MainWeatherViewModel
                                     .orEmpty(),
                         )
                     },
+                uvIndex = current.uvi.toString(),
+                pressure = "${current.pressure} hPa",
+                visibility = "${(current.visibility ?: 0) / 1000} km",
+                clouds = "${current.clouds}%",
+                dewPoint = convertTemperature(current.dewPoint, temperatureUnit),
+                sunrise = Conversion.getTimeFromTimeStamp(current.sunrise.toLong(), timezoneOffset.toLong()),
+                sunset = Conversion.getTimeFromTimeStamp(current.sunset.toLong(), timezoneOffset.toLong()),
             )
     }
