@@ -11,6 +11,8 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.warbler.core.model.appearance.ThemeMode
+import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.location.ui.LocationScreen
 import com.warbler.feature.settings.ui.SettingsScreen
@@ -56,7 +58,7 @@ fun ApplicationNavigation(
 @Preview(showBackground = true)
 @Composable
 private fun ApplicationNavigationPreview() {
-    AppTheme(dynamicColor = false) {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         ApplicationNavigation()
     }
 }

@@ -359,7 +359,7 @@ private fun <T> SingleSelectButtonGroup(
 @PreviewLightDark
 @Composable
 private fun SettingsScreenPreview() {
-    AppTheme {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         SettingsContent(
             uiState = SettingsUiState(),
         )
@@ -369,7 +369,7 @@ private fun SettingsScreenPreview() {
 @PreviewLightDark
 @Composable
 private fun SectionHeadingPreview() {
-    AppTheme {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         SectionHeading("Units of Measurement")
     }
 }
@@ -377,7 +377,7 @@ private fun SectionHeadingPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun SubHeadingPreview() {
-    AppTheme {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         SubHeading("Temperature")
     }
 }
@@ -386,7 +386,7 @@ private fun SubHeadingPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ButtonGroupPreview() {
-    AppTheme {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         SingleSelectButtonGroup(
             options = TemperatureUnit.entries,
             selected = TemperatureUnit.FAHRENHEIT,

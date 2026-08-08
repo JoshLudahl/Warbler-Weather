@@ -20,6 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.warbler.core.model.appearance.ThemeMode
+import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.weather.ui.composables.DailyForecast
 import com.warbler.feature.weather.ui.composables.WeatherForecastList
@@ -64,7 +66,7 @@ fun ForecastScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ForecastScreenPreview() {
-    AppTheme {
+    AppTheme(themeMode = ThemeMode.SYSTEM, themeStyle = ThemeStyle.DEFAULT) {
         ForecastScreen(
             onNavigateUp = {},
         )

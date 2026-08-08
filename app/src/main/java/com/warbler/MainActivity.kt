@@ -5,7 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateInfo
@@ -18,11 +21,13 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.warbler.core.theme.AppTheme
 import com.warbler.navigation.ApplicationNavigation
+import com.warbler.ui.theme.ThemeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val themeViewModel: ThemeViewModel by viewModels()
     private lateinit var appUpdateManager: AppUpdateManager
 
     private lateinit var aut: Task<AppUpdateInfo>
@@ -53,7 +58,11 @@ class MainActivity : AppCompatActivity() {
         checkIsUpdateAvailable()
 
         setContent {
-            AppTheme {
+            val themeState by themeViewModel.themeState.collectAsState()
+            AppTheme(
+                themeMode = themeState.themeMode,
+                themeStyle = themeState.themeStyle,
+            ) {
                 ApplicationNavigation()
             }
         }

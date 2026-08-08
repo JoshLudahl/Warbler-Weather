@@ -1,14 +1,20 @@
 package com.warbler.core.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.warbler.core.model.appearance.ThemeMode
+import com.warbler.core.model.appearance.ThemeStyle
 
 private val lightScheme =
     lightColorScheme(
@@ -262,18 +268,25 @@ val unspecified_scheme =
 
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content:
-        @Composable () -> Unit,
+    themeMode: ThemeMode = ThemeMode.SYSTEM,
+    themeStyle: ThemeStyle = ThemeStyle.DEFAULT,
+    content: @Composable () -> Unit,
 ) {
+    val darkTheme =
+        when (themeMode) {
+            ThemeMode.LIGHT -> false
+            ThemeMode.DARK -> true
+            ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        }
+
+    val dynamicColor = themeStyle == ThemeStyle.DYNAMIC && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
     val colorScheme =
         when {
-//            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-//                val context = LocalContext.current
-//                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-//            }
+            dynamicColor -> {
+                val context = LocalContext.current
+                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            }
 
             darkTheme -> darkScheme
             else -> lightScheme
@@ -289,7 +302,7 @@ fun AppTheme(
 @Preview(showBackground = true, name = "Light Theme")
 @Composable
 private fun AppThemeLightPreview() {
-    AppTheme(dynamicColor = false) {
+    AppTheme(themeMode = ThemeMode.LIGHT) {
         Text("Light Theme Preview")
     }
 }
@@ -297,7 +310,7 @@ private fun AppThemeLightPreview() {
 @Preview(showBackground = true, name = "Dark Theme")
 @Composable
 private fun AppThemeDarkPreview() {
-    AppTheme(darkTheme = true, dynamicColor = false) {
+    AppTheme(themeMode = ThemeMode.DARK) {
         Text("Dark Theme Preview")
     }
 }
