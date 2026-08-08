@@ -85,7 +85,7 @@ fun MainWeatherScreen(
 
                 WeatherStats(weatherUiState = weatherUiState)
 
-                SectionTitle(title = "Next 48 Hours", onClickMore = { onHourlyClick() })
+                SectionTitle(title = "Hourly", onClickMore = { onHourlyClick() })
                 HourlyForecastSection(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Forecast", onClickMore = { onForecastClick() })

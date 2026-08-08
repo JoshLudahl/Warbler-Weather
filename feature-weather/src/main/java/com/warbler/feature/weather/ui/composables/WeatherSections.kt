@@ -64,7 +64,7 @@ fun HourlyForecastSection(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
-        items(weatherUiState.hourlyForecasts) { forecast ->
+        items(weatherUiState.hourlyForecasts.take(12)) { forecast ->
             HourlyForecastCard(
                 time = forecast.time,
                 temperature = forecast.temperature,

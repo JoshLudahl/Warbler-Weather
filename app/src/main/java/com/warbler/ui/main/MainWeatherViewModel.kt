@@ -59,13 +59,15 @@ class MainWeatherViewModel
             viewModelScope.launch {
                 val temperatureUnitFlow = DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore)
                 val speedUnitFlow = DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore)
+                val clockUnitFlow = DataPref.readIntDataStoreFlow(DataPref.CLOCK_UNIT, dataStore)
                 val weatherFlow = weatherNetworkRepository.getCurrentWeather(location).catch { }
                 combine(
                     weatherFlow,
                     temperatureUnitFlow,
                     speedUnitFlow,
-                ) { weather, temperatureUnit, speedUnit ->
-                    weather.toUiState(location, temperatureUnit, speedUnit)
+                    clockUnitFlow,
+                ) { weather, temperatureUnit, speedUnit, clockUnit ->
+                    weather.toUiState(location, temperatureUnit, speedUnit, clockUnit)
                 }.collect { uiState ->
                     weatherUiState.value = uiState
                 }
@@ -123,6 +125,7 @@ class MainWeatherViewModel
             location: LocationEntity,
             temperatureUnit: Int,
             speedUnit: Int,
+            clockUnit: Int,
         ): WeatherUiState =
             WeatherUiState(
                 locationName = location.toDisplayString,
@@ -162,8 +165,15 @@ class MainWeatherViewModel
                                 .atZone(ZoneId.of("UTC"))
                                 .hour
 
+                        val timeLabel =
+                            if (clockUnit == 1) {
+                                String.format(Locale.getDefault(), "%02d:00", hour)
+                            } else {
+                                hour.fromHourWithSuffix
+                            }
+
                         HourlyForecastItem(
-                            time = hour.fromHourWithSuffix,
+                            time = timeLabel,
                             temperature = convertTemperature(it.temp, temperatureUnit),
                             iconRes =
                                 it.weather
@@ -204,7 +214,17 @@ class MainWeatherViewModel
                 visibility = "${(current.visibility ?: 0) / 1000} km",
                 clouds = "${current.clouds}%",
                 dewPoint = convertTemperature(current.dewPoint, temperatureUnit),
-                sunrise = Conversion.getTimeFromTimeStamp(current.sunrise.toLong(), timezoneOffset.toLong()),
-                sunset = Conversion.getTimeFromTimeStamp(current.sunset.toLong(), timezoneOffset.toLong()),
+                sunrise =
+                    Conversion.getTimeFromTimeStamp(
+                        current.sunrise.toLong(),
+                        timezoneOffset.toLong(),
+                        clockUnit,
+                    ),
+                sunset =
+                    Conversion.getTimeFromTimeStamp(
+                        current.sunset.toLong(),
+                        timezoneOffset.toLong(),
+                        clockUnit,
+                    ),
             )
     }

@@ -88,6 +88,7 @@ object Conversion {
     fun getTimeFromTimeStamp(
         timeStamp: Long,
         offset: Long,
+        clockUnit: Int = 0,
     ): String {
         val timeStampWithOffset = timeStamp + offset
         val hour =
@@ -108,13 +109,20 @@ object Conversion {
                 else -> "$minute"
             }
 
+        if (clockUnit == 1) { // H24
+            return String.format(Locale.getDefault(), "%02d:%s", hour, minuteFormatted)
+        }
+
         val hourFormatted =
             when {
                 hour > 12 -> (hour - 12).toString()
+                hour == 0 -> "12"
                 else -> "$hour"
             }
 
-        return "$hourFormatted:$minuteFormatted"
+        val suffix = if (hour >= 12) "PM" else "AM"
+
+        return "$hourFormatted:$minuteFormatted $suffix"
     }
 
     val Double.fromDoubleToPercentage get() = (this * 100).toInt()

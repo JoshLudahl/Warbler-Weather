@@ -18,6 +18,8 @@ object DataPref {
 
     const val ACCUMULATION_UNIT = "accumulation_unit"
 
+    const val CLOCK_UNIT = "clock_unit"
+
     fun readIntDataStoreFlow(
         key: String,
         dataStore: DataStore<Preferences>,

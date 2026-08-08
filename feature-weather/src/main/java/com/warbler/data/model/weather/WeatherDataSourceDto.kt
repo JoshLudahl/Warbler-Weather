@@ -101,7 +101,7 @@ object WeatherDataSourceDto {
                     Conversion.getTimeFromTimeStamp(
                         timeStamp = forecast.daily.sunrise.toLong(),
                         offset = forecast.timeZoneOffset.toLong(),
-                    ) + " AM",
+                    ),
                 label = R.string.sunrise,
             ),
         )
@@ -113,7 +113,7 @@ object WeatherDataSourceDto {
                     Conversion.getTimeFromTimeStamp(
                         timeStamp = forecast.daily.sunset.toLong(),
                         offset = forecast.timeZoneOffset.toLong(),
-                    ) + " PM",
+                    ),
                 label = R.string.sunset,
             ),
         )
@@ -125,7 +125,7 @@ object WeatherDataSourceDto {
                     Conversion.getTimeFromTimeStamp(
                         timeStamp = forecast.daily.moonrise.toLong(),
                         offset = forecast.timeZoneOffset.toLong(),
-                    ) + " PM",
+                    ),
                 label = R.string.moonrise,
             ),
         )
@@ -137,7 +137,7 @@ object WeatherDataSourceDto {
                     Conversion.getTimeFromTimeStamp(
                         timeStamp = forecast.daily.moonset.toLong(),
                         offset = forecast.timeZoneOffset.toLong(),
-                    ) + " AM",
+                    ),
                 label = R.string.moonset,
             ),
         )
