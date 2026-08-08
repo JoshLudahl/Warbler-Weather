@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.material3Compose)
     implementation(libs.material3View)
     implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
 
     // Compose
     val composeBom = platform(libs.compose.bom)

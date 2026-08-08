@@ -18,7 +18,10 @@ interface LocationDao {
     fun getCurrentLocation(): Flow<LocationEntity?>
 
     @Update
-    suspend fun updateCurrentLocation(location: LocationEntity)
+    suspend fun updateLocation(location: LocationEntity)
+
+    @Query("UPDATE location_table SET `current` = 0")
+    suspend fun setAllNotCurrent()
 
     @Query("SELECT * FROM location_table ORDER BY updated DESC")
     fun getAllLocations(): Flow<List<LocationEntity>>

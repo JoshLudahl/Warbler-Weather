@@ -10,14 +10,19 @@ import com.warbler.core.utilities.LocationService
 import com.warbler.core.utilities.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LocationViewModel
+    @OptIn(FlowPreview::class)
     @Inject
     constructor(
         private val locationRepository: LocationRepository,
@@ -43,6 +48,14 @@ class LocationViewModel
         val isLoadingCurrentLocation: StateFlow<Boolean>
             get() = _isLoadingCurrentLocation
 
+        private val _searchQuery = MutableStateFlow("")
+        val searchQuery: StateFlow<String>
+            get() = _searchQuery
+
+        private val _isSearchBarActive = MutableStateFlow(false)
+        val isSearchBarActive: StateFlow<Boolean>
+            get() = _isSearchBarActive
+
         init {
             viewModelScope.launch {
                 locationRepository
@@ -53,6 +66,16 @@ class LocationViewModel
                     }.collect {
                         Log.d("LocationViewModel", "Success: $it")
                         _locationList.value = Resource.Success(it)
+                    }
+            }
+
+            viewModelScope.launch {
+                _searchQuery
+                    .debounce(500)
+                    .distinctUntilChanged()
+                    .filter { it.length >= 3 }
+                    .collect { query ->
+                        searchForLocation(query)
                     }
             }
         }
@@ -76,6 +99,17 @@ class LocationViewModel
             viewModelScope.launch(Dispatchers.IO) {
                 locationRepository.updateToCurrentLocation(location)
             }
+        }
+
+        fun onSearchQueryChange(query: String) {
+            _searchQuery.value = query
+            if (query.length < 3) {
+                _locationSearchList.value = Resource.Success(emptyList())
+            }
+        }
+
+        fun onSearchBarActiveChange(active: Boolean) {
+            _isSearchBarActive.value = active
         }
 
         fun searchForLocation(query: String) {
