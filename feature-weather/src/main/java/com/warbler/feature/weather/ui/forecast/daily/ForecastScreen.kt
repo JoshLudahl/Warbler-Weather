@@ -19,6 +19,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.warbler.core.theme.AppTheme
 import com.warbler.feature.weather.ui.composables.DailyForecast
 import com.warbler.feature.weather.ui.composables.WeatherForecastList
@@ -52,7 +53,8 @@ fun ForecastScreen(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .padding(start = 16.dp, end = 16.dp),
         ) {
             ForecastScreenContent()
         }
