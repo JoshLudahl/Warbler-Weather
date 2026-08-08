@@ -5,6 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
+import com.warbler.core.model.appearance.ThemeMode
+import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
@@ -25,6 +27,8 @@ class SettingsRepository
         private val speedKey = intPreferencesKey("speed_unit")
         private val accumulationKey = intPreferencesKey("accumulation_unit")
         private val clockKey = intPreferencesKey("clock_unit")
+        private val themeModeKey = intPreferencesKey("theme_mode")
+        private val themeStyleKey = intPreferencesKey("theme_style")
 
         val temperatureUnit: Flow<TemperatureUnit> =
             dataStore.data
@@ -72,6 +76,29 @@ class SettingsRepository
                     }
                 }
 
+        val themeMode: Flow<ThemeMode> =
+            dataStore.data
+                .catch { emit(emptyPreferences()) }
+                .map { prefs ->
+                    when (prefs[themeModeKey] ?: 0) {
+                        0 -> ThemeMode.LIGHT
+                        1 -> ThemeMode.DARK
+                        2 -> ThemeMode.SYSTEM
+                        else -> ThemeMode.SYSTEM
+                    }
+                }
+
+        val themeStyle: Flow<ThemeStyle> =
+            dataStore.data
+                .catch { emit(emptyPreferences()) }
+                .map { prefs ->
+                    when (prefs[themeStyleKey] ?: 0) {
+                        0 -> ThemeStyle.DEFAULT
+                        1 -> ThemeStyle.DYNAMIC
+                        else -> ThemeStyle.DEFAULT
+                    }
+                }
+
         suspend fun saveTemperatureUnit(unit: TemperatureUnit) {
             val value =
                 when (unit) {
@@ -108,5 +135,24 @@ class SettingsRepository
                     ClockUnit.H24 -> 1
                 }
             dataStore.edit { it[clockKey] = value }
+        }
+
+        suspend fun saveThemeMode(mode: ThemeMode) {
+            val value =
+                when (mode) {
+                    ThemeMode.LIGHT -> 0
+                    ThemeMode.DARK -> 1
+                    ThemeMode.SYSTEM -> 2
+                }
+            dataStore.edit { it[themeModeKey] = value }
+        }
+
+        suspend fun saveThemeStyle(style: ThemeStyle) {
+            val value =
+                when (style) {
+                    ThemeStyle.DEFAULT -> 0
+                    ThemeStyle.DYNAMIC -> 1
+                }
+            dataStore.edit { it[themeStyleKey] = value }
         }
     }

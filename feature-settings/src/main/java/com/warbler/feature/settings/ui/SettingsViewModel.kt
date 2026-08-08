@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.warbler.core.model.appearance.ThemeMode
+import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
@@ -50,6 +52,16 @@ class SettingsViewModel
                     _uiState.update { it.copy(clockUnit = unit) }
                 }
             }
+            viewModelScope.launch {
+                repository.themeMode.collect { mode ->
+                    _uiState.update { it.copy(themeMode = mode) }
+                }
+            }
+            viewModelScope.launch {
+                repository.themeStyle.collect { style ->
+                    _uiState.update { it.copy(themeStyle = style) }
+                }
+            }
             _uiState.update {
                 it.copy(appVersion = "Beta Version ${getVersionName()}")
             }
@@ -90,6 +102,18 @@ class SettingsViewModel
         fun onClockUnitSelected(unit: ClockUnit) {
             viewModelScope.launch {
                 repository.saveClockUnit(unit)
+            }
+        }
+
+        fun onThemeModeSelected(mode: ThemeMode) {
+            viewModelScope.launch {
+                repository.saveThemeMode(mode)
+            }
+        }
+
+        fun onThemeStyleSelected(style: ThemeStyle) {
+            viewModelScope.launch {
+                repository.saveThemeStyle(style)
             }
         }
     }
