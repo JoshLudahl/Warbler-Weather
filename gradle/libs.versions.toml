@@ -46,6 +46,7 @@ okhttp = "5.4.0"
 orchestrator = "1.6.1"
 perfPlugin = "2.0.2"
 playServicesLocation = "21.4.0"
+review = "2.0.2"
 retrofit = "3.0.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 roomCompiler = "2.8.4"
@@ -70,6 +71,8 @@ app-update = { module = "com.google.android.play:app-update", version.ref = "app
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "review" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }

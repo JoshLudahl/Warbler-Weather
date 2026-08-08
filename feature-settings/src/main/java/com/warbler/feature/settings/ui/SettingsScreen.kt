@@ -1,5 +1,6 @@
 package com.warbler.feature.settings.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -34,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -48,6 +50,8 @@ import com.warbler.core.model.units.ClockUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.core.theme.AppTheme
+import com.warbler.core.utilities.Constants
+import com.warbler.core.utilities.openInCustomTab
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -260,6 +264,7 @@ private fun SettingsContent(
 
             // About
             SectionHeading("About")
+            val context = LocalContext.current
             Surface(
                 shape = RoundedCornerShape(30.dp),
                 color = MaterialTheme.colorScheme.surfaceContainer,
@@ -267,14 +272,28 @@ private fun SettingsContent(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Yellow-rumped Warbler",
-                        style = MaterialTheme.typography.bodyLarge,
+                        text = "This app is themed after the Yellow-rumped Warbler bird.",
+                        style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(vertical = 4.dp),
+                    )
+                    Text(
+                        text = "Learn more about the Yellow-rumped Warbler",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier =
+                            Modifier
+                                .padding(vertical = 4.dp)
+                                .clickable {
+                                    context.openInCustomTab(Constants.WARBLER_AUDUBON)
+                                },
                     )
                     Text(
                         text = "Review App",
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(vertical = 4.dp),
+                        modifier =
+                            Modifier
+                                .padding(vertical = 4.dp)
+                                .clickable { onReviewAppClick() },
                     )
                 }
             }

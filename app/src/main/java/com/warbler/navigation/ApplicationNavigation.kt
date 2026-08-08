@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavBackStack
@@ -14,6 +15,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.warbler.core.model.appearance.ThemeMode
 import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
+import com.warbler.core.utilities.launchReviewFlow
 import com.warbler.feature.location.ui.LocationScreen
 import com.warbler.feature.settings.ui.SettingsScreen
 import com.warbler.feature.weather.ui.forecast.daily.ForecastScreen
@@ -49,7 +51,13 @@ fun ApplicationNavigation(
                 entry<Destinations.ForecastViewPager> { ForecastViewPagerScreen() }
                 entry<Destinations.Hourly> { HourlyScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
                 entry<Destinations.Location> { LocationScreen(onNavigateBack = { backStack.removeLastOrNull() }) }
-                entry<Destinations.Settings> { SettingsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
+                entry<Destinations.Settings> {
+                    val context = LocalContext.current
+                    SettingsScreen(
+                        onNavigateUp = { backStack.removeLastOrNull() },
+                        onReviewAppClick = { context.launchReviewFlow() },
+                    )
+                }
                 entry<Destinations.Stats> { CurrentConditionsScreen(onNavigateUp = { backStack.removeLastOrNull() }) }
             },
     )

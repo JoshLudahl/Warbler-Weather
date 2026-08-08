@@ -16,6 +16,7 @@ configure<LibraryExtension> {
 dependencies {
     //  Android specific
     implementation(libs.appcompat)
+    implementation(libs.browser)
     implementation(libs.core.ktx)
     implementation(libs.constraintlayout)
     implementation(libs.lifecycle.extensions)
@@ -57,6 +58,8 @@ dependencies {
     //  data
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.review)
+    implementation(libs.review.ktx)
     ksp(libs.room.compiler)
     implementation(libs.play.services.location)
     implementation(libs.datastore.preferences)
