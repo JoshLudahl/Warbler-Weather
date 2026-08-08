@@ -132,8 +132,8 @@ fun HourlyScreen(
                     labels = hourlyData.map { it.time },
                     colors =
                         listOf(
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.tertiary,
+                            MaterialTheme.colorScheme.outline,
+                            MaterialTheme.colorScheme.inversePrimary,
                         ),
                 )
 

@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -364,7 +365,14 @@ private fun <T> SingleSelectButtonGroup(
                     },
                 modifier = Modifier.semantics { role = Role.RadioButton },
             ) {
+                if (checked) {
+                    Icon(
+                        Icons.Rounded.Done,
+                        contentDescription = "Localized description",
+                    )
+                }
                 Spacer(Modifier.size(ToggleButtonDefaults.IconSpacing))
+
                 Text(
                     text = label(option),
                     style = MaterialTheme.typography.bodyLarge,
