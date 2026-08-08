@@ -71,7 +71,8 @@ fun LocationScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { /** TODO Implement Tap to get device locaiton */ }) {
+                        IconButton(onClick = {
+                        }) {
                             Icon(Icons.Rounded.MyLocation, contentDescription = "Search")
                         }
                     },
