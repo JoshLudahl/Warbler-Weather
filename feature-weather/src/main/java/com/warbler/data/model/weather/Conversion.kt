@@ -178,4 +178,9 @@ object Conversion {
             AccumulationUnit.MILLIMETERS_PER_HOUR -> accumulation
             AccumulationUnit.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
         }
+
+    val wholeNumberValueFormatter =
+        AxisValueFormatter<AxisPosition.Vertical.Start> { value, _, _ ->
+            value.toInt().toString()
+        }
 }

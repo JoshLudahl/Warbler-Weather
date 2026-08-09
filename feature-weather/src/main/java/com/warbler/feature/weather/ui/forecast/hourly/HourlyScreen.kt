@@ -46,6 +46,8 @@ import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
 import com.patrykandpatrick.vico.compose.legend.horizontalLegend
 import com.patrykandpatrick.vico.compose.legend.legendItem
 import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
 import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.component.shape.shader.DynamicShaders
@@ -53,6 +55,7 @@ import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
 import com.patrykandpatrick.vico.core.model.columnSeries
 import com.patrykandpatrick.vico.core.model.lineSeries
 import com.warbler.core.theme.temp_low
+import com.warbler.data.model.weather.Conversion
 import com.warbler.feature.weather.ui.composables.HourlyForecastSection
 import com.warbler.feature.weather.ui.main.WeatherUiState
 
@@ -109,6 +112,7 @@ fun HourlyScreen(
                                 temp_low,
                                 MaterialTheme.colorScheme.inverseSurface,
                             ),
+                        valueFormatter = Conversion.wholeNumberValueFormatter,
                     )
                 } else {
                     PrecipitationNoneExpected(
@@ -122,6 +126,7 @@ fun HourlyScreen(
                     data = hourlyData.map { it.humidity.toFloat() },
                     labels = hourlyData.map { it.time },
                     color = temp_low,
+                    valueFormatter = Conversion.wholeNumberValueFormatter,
                 )
 
                 WeatherMultiLineChart(
@@ -138,6 +143,7 @@ fun HourlyScreen(
                             MaterialTheme.colorScheme.outline,
                             MaterialTheme.colorScheme.inversePrimary,
                         ),
+                    valueFormatter = Conversion.wholeNumberValueFormatter,
                 )
 
                 WeatherChart(
@@ -210,6 +216,7 @@ fun WeatherMultiBarChart(
     seriesLabels: List<String>,
     labels: List<String>,
     colors: List<Color>,
+    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
 ) {
     val modelProducer = remember { CartesianChartModelProducer.build() }
 
@@ -255,7 +262,12 @@ fun WeatherMultiBarChart(
                                     )
                                 },
                         ),
-                        startAxis = rememberStartAxis(),
+                        startAxis =
+                            if (valueFormatter != null) {
+                                rememberStartAxis(valueFormatter = valueFormatter)
+                            } else {
+                                rememberStartAxis()
+                            },
                         bottomAxis =
                             rememberBottomAxis(
                                 itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
@@ -290,6 +302,7 @@ fun WeatherChart(
     data: List<Float>,
     labels: List<String>,
     color: Color,
+    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
 ) {
     val modelProducer = remember { CartesianChartModelProducer.build() }
 
@@ -334,7 +347,12 @@ fun WeatherChart(
                                     ),
                                 ),
                         ),
-                        startAxis = rememberStartAxis(),
+                        startAxis =
+                            if (valueFormatter != null) {
+                                rememberStartAxis(valueFormatter = valueFormatter)
+                            } else {
+                                rememberStartAxis()
+                            },
                         bottomAxis =
                             rememberBottomAxis(
                                 itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
@@ -355,6 +373,7 @@ fun WeatherMultiLineChart(
     seriesLabels: List<String>,
     labels: List<String>,
     colors: List<Color>,
+    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
 ) {
     val modelProducer = remember { CartesianChartModelProducer.build() }
 
@@ -399,7 +418,12 @@ fun WeatherMultiLineChart(
                                     )
                                 },
                         ),
-                        startAxis = rememberStartAxis(),
+                        startAxis =
+                            if (valueFormatter != null) {
+                                rememberStartAxis(valueFormatter = valueFormatter)
+                            } else {
+                                rememberStartAxis()
+                            },
                         bottomAxis =
                             rememberBottomAxis(
                                 itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
