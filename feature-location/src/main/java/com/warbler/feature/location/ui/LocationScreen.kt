@@ -1,6 +1,7 @@
 package com.warbler.feature.location.ui
 
 import android.Manifest
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -44,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
@@ -68,7 +70,9 @@ fun LocationScreen(
     val isSearchBarActive by viewModel.isSearchBarActive.collectAsState()
     val currentLocationSaved by viewModel.currentLocationSaved.collectAsState()
     val isLoadingCurrentLocation by viewModel.isLoadingCurrentLocation.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
 
+    val context = LocalContext.current
     val textFieldState = rememberTextFieldState(searchQuery)
     val searchBarState =
         rememberSearchBarState(
@@ -77,6 +81,12 @@ fun LocationScreen(
     val coroutineScope = rememberCoroutineScope()
 
     val isExpanded = searchBarState.currentValue == SearchBarValue.Expanded
+
+    LaunchedEffect(errorMessage) {
+        errorMessage?.let {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        }
+    }
 
     LaunchedEffect(searchBarState.currentValue) {
         viewModel.onSearchBarActiveChange(isExpanded)

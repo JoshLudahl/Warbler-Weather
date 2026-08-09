@@ -156,11 +156,16 @@ class LocationViewModel
                     }
 
                     // Get current location
-                    val location = locationService.getCurrentLocation()
+                    var location = locationService.getCurrentLocation()
+                    if (location == null) {
+                        Log.d("LocationViewModel", "getCurrentLocation returned null, trying lastLocation")
+                        location = locationService.getLastLocation()
+                    }
+
                     Log.d("LocationViewModel", "Got location: $location")
                     if (location == null) {
-                        Log.e("LocationViewModel", "Failed to get current location")
-                        _errorMessage.value = "Failed to get current location"
+                        Log.e("LocationViewModel", "Failed to get current location or last location")
+                        _errorMessage.value = "Could not determine your location. Please check if your GPS is enabled."
                         _isLoadingCurrentLocation.value = false
                         return@launch
                     }
