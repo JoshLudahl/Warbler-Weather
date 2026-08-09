@@ -45,8 +45,22 @@ data class HourlyForecastItem(
 
 data class DailyForecastItem(
     val day: String,
+    val dateTitle: String = "",
     val highTemp: Int,
     val lowTemp: Int,
     val iconRes: Int,
     val description: String = "",
+    val sunrise: String = "",
+    val sunset: String = "",
+    val moonrise: String = "",
+    val moonset: String = "",
+    val humidity: String = "",
+    val wind: String = "",
+    val pop: String = "",
+    val uvIndex: String = "",
+    val pressure: String = "",
+    val rain: String = "",
+    val snow: String = "",
+    val clouds: String = "",
+    val dewPoint: String = "",
 )

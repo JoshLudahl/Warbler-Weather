@@ -24,5 +24,7 @@ sealed interface Destinations : NavKey {
     data object Stats : Destinations
 
     @Serializable
-    data object ForecastViewPager : Destinations
+    data class ForecastViewPager(
+        val initialPage: Int,
+    ) : Destinations
 }

@@ -32,6 +32,7 @@ import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class MainWeatherViewModel
@@ -204,30 +205,32 @@ class MainWeatherViewModel
                                 convertOrReturnAccumulationByUnit(
                                     hourlyAccumulation,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).toFloat(),
+                                ).roundToInt().toFloat(),
                             rainAccumulation =
                                 convertOrReturnAccumulationByUnit(
                                     it.rain?.h ?: 0.0,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).toFloat(),
+                                ).roundToInt().toFloat(),
                             snowAccumulation =
                                 convertOrReturnAccumulationByUnit(
                                     it.snow?.h ?: 0.0,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).toFloat(),
+                                ).roundToInt().toFloat(),
                             humidity = it.humidity,
                             windSpeed =
                                 Conversion
                                     .formatSpeedUnitsWithUnits(
                                         it.windSpeed,
                                         SpeedUnit.entries[speedUnit],
-                                    ).toFloat(),
+                                    ).roundToInt()
+                                    .toFloat(),
                             windGust =
                                 Conversion
                                     .formatSpeedUnitsWithUnits(
                                         it.windGust,
                                         SpeedUnit.entries[speedUnit],
-                                    ).toFloat(),
+                                    ).roundToInt()
+                                    .toFloat(),
                             uvi = it.uvi.toFloat(),
                         )
                     },
@@ -241,6 +244,10 @@ class MainWeatherViewModel
                             }
                         DailyForecastItem(
                             day = day,
+                            dateTitle =
+                                SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(
+                                    Date(dailyWeather.dt.toLong() * 1000),
+                                ),
                             highTemp = convertTemperatureToInt(dailyWeather.temp.max, temperatureUnit),
                             lowTemp = convertTemperatureToInt(dailyWeather.temp.min, temperatureUnit),
                             iconRes =
@@ -255,6 +262,63 @@ class MainWeatherViewModel
                                     ?.description
                                     ?.capitalizeEachFirst
                                     .orEmpty(),
+                            sunrise =
+                                Conversion.getTimeFromTimeStamp(
+                                    dailyWeather.sunrise.toLong(),
+                                    timezoneOffset.toLong(),
+                                    clockUnit,
+                                ),
+                            sunset =
+                                Conversion.getTimeFromTimeStamp(
+                                    dailyWeather.sunset.toLong(),
+                                    timezoneOffset.toLong(),
+                                    clockUnit,
+                                ),
+                            moonrise =
+                                Conversion.getTimeFromTimeStamp(
+                                    dailyWeather.moonrise.toLong(),
+                                    timezoneOffset.toLong(),
+                                    clockUnit,
+                                ),
+                            moonset =
+                                Conversion.getTimeFromTimeStamp(
+                                    dailyWeather.moonset.toLong(),
+                                    timezoneOffset.toLong(),
+                                    clockUnit,
+                                ),
+                            humidity = "${dailyWeather.humidity}%",
+                            wind =
+                                Conversion.formatSpeedUnitsWithUnitsToString(
+                                    dailyWeather.windSpeed ?: 0.0,
+                                    SpeedUnit.entries[speedUnit],
+                                ),
+                            pop = "${(dailyWeather.pop * 100).toInt()}%",
+                            uvIndex = dailyWeather.uvi.toString(),
+                            pressure = "${dailyWeather.pressure} hPa",
+                            rain =
+                                dailyWeather.rain?.let {
+                                    "${
+                                        convertOrReturnAccumulationByUnit(
+                                            it,
+                                            AccumulationUnit.entries[accumulationUnit],
+                                        )
+                                    } ${
+                                        if (AccumulationUnit.entries[accumulationUnit] == AccumulationUnit.INCHES_PER_HOUR) "in" else "mm"
+                                    }"
+                                } ?: "0",
+                            snow =
+                                dailyWeather.snow?.let {
+                                    "${
+                                        convertOrReturnAccumulationByUnit(
+                                            it,
+                                            AccumulationUnit.entries[accumulationUnit],
+                                        )
+                                    } ${
+                                        if (AccumulationUnit.entries[accumulationUnit] == AccumulationUnit.INCHES_PER_HOUR) "in" else "mm"
+                                    }"
+                                } ?: "0",
+                            clouds = "${dailyWeather.clouds}%",
+                            dewPoint = convertTemperature(dailyWeather.dewPoint, temperatureUnit),
                         )
                     },
                 uvIndex = current.uvi.toString(),

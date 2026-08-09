@@ -42,6 +42,7 @@ fun MainWeatherScreen(
     onForecastClick: () -> Boolean,
     onHourlyClick: () -> Boolean,
     onStatsNextClick: () -> Boolean,
+    onForecastItemClick: (Int) -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -101,7 +102,10 @@ fun MainWeatherScreen(
                 HourlyForecastSection(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Forecast", onClickMore = { onForecastClick() })
-                ForecastSection(weatherUiState = weatherUiState)
+                ForecastSection(
+                    weatherUiState = weatherUiState,
+                    onForecastItemClick = onForecastItemClick,
+                )
                 Spacer(modifier = Modifier.height(24.dp))
             }
         } else {

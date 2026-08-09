@@ -77,17 +77,19 @@ fun HourlyForecastSection(
 @Composable
 fun ForecastSection(
     weatherUiState: WeatherUiState,
+    onForecastItemClick: (Int) -> Unit = {},
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        weatherUiState.dailyForecasts.take(3).forEach { day ->
+        weatherUiState.dailyForecasts.take(3).forEachIndexed { index, day ->
             DailyForecastCard(
                 day = day.day,
                 high = day.highTemp,
                 low = day.lowTemp,
                 icon = day.iconRes,
+                onClick = { onForecastItemClick(index) },
                 modifier = Modifier.weight(1f),
             )
         }

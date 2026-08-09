@@ -27,6 +27,7 @@ import com.warbler.feature.weather.ui.main.WeatherUiState
 fun ForecastScreen(
     weatherUiState: WeatherUiState?,
     onNavigateUp: () -> Unit,
+    onForecastItemClick: (Int) -> Unit,
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -53,7 +54,7 @@ fun ForecastScreen(
                     .padding(paddingValues)
                     .padding(start = 16.dp, end = 16.dp),
         ) {
-            ForecastScreenContent(weatherUiState)
+            ForecastScreenContent(weatherUiState, onForecastItemClick)
         }
     }
 }
@@ -65,13 +66,17 @@ private fun ForecastScreenPreview() {
         ForecastScreen(
             weatherUiState = null,
             onNavigateUp = {},
+            onForecastItemClick = {},
         )
     }
 }
 
 // Usage example
 @Composable
-fun ForecastScreenContent(weatherUiState: WeatherUiState?) {
+fun ForecastScreenContent(
+    weatherUiState: WeatherUiState?,
+    onForecastItemClick: (Int) -> Unit,
+) {
     val forecasts =
         weatherUiState?.dailyForecasts?.map {
             DailyForecast(
@@ -85,6 +90,7 @@ fun ForecastScreenContent(weatherUiState: WeatherUiState?) {
 
     WeatherForecastList(
         forecasts = forecasts,
+        onItemClick = onForecastItemClick,
         modifier = Modifier.fillMaxSize(),
     )
 }

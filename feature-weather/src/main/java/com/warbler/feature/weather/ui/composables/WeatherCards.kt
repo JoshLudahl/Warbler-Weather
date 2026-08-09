@@ -353,6 +353,7 @@ fun HourlyForecastCard(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DailyForecastCard(
     day: String,
@@ -360,11 +361,13 @@ fun DailyForecastCard(
     low: Int,
     icon: Int,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Card(
         modifier =
             modifier
                 .height(160.dp),
+        onClick = onClick,
         shape = RoundedCornerShape(30.dp),
         colors =
             CardDefaults.cardColors(
@@ -516,6 +519,7 @@ data class DailyForecast(
 @Composable
 fun WeatherForecastList(
     forecasts: List<DailyForecast>,
+    onItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val configuration = LocalConfiguration.current
@@ -527,13 +531,15 @@ fun WeatherForecastList(
         ) {
             // Group items into rows of 2 for landscape
             val rows = forecasts.chunked(2)
-            rows.forEach { rowItems ->
+            rows.mapIndexed { index, rowItems ->
                 Row(
                     modifier = Modifier.weight(1f).fillMaxWidth(),
                 ) {
-                    rowItems.forEach { forecast ->
+                    rowItems.forEachIndexed { rowIndex, forecast ->
+                        val itemIndex = index * 2 + rowIndex
                         ForecastRow(
                             forecast = forecast,
+                            onClick = { onItemClick(itemIndex) },
                             modifier =
                                 Modifier
                                     .weight(1f)
@@ -552,9 +558,10 @@ fun WeatherForecastList(
         Column(
             modifier = modifier.fillMaxSize(),
         ) {
-            forecasts.forEach { forecast ->
+            forecasts.forEachIndexed { index, forecast ->
                 ForecastRow(
                     forecast = forecast,
+                    onClick = { onItemClick(index) },
                     modifier =
                         Modifier
                             .weight(1f)
@@ -570,10 +577,12 @@ fun WeatherForecastList(
 @Composable
 fun ForecastRow(
     forecast: DailyForecast,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier,
+        onClick = onClick,
         shape = RoundedCornerShape(30.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors =
