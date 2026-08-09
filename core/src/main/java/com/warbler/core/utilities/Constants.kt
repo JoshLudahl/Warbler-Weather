@@ -1,6 +1,6 @@
 package com.warbler.core.utilities
 
-import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
+import com.patrykandpatrick.vico.compose.cartesian.axis.VerticalAxis
 
 object Constants {
     const val ABOUT_URL: String = "https://softklass.com/weatheruous/"
@@ -14,7 +14,7 @@ object Constants {
     const val FLEXIBLE_UPDATE_COUNT: Int = 30
     const val UPDATE_TAG: Int = 1
     const val HOUR = 3600
-    val CHART_COLUMN_DEFAULT = AxisItemPlacer.Vertical.default(maxItemCount = { 4 })
-    val CHART_LINE_DEFAULT = AxisItemPlacer.Vertical.default(maxItemCount = { 6 })
+    val CHART_COLUMN_DEFAULT = VerticalAxis.ItemPlacer.count(count = { 4 })
+    val CHART_LINE_DEFAULT = VerticalAxis.ItemPlacer.count(count = { 6 })
     const val TEMP_RANGE = 5
 }

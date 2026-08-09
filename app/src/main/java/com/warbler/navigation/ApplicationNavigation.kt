@@ -38,8 +38,10 @@ fun ApplicationNavigation(
                 entry<Destinations.Home> {
                     val viewModel: MainWeatherViewModel = hiltViewModel<MainWeatherViewModel>()
                     val weatherUiState by viewModel.weatherUiState.collectAsState()
+                    val isOffline by viewModel.isOffline.collectAsState()
                     MainWeatherScreen(
                         weatherUiState = weatherUiState,
+                        isOffline = isOffline,
                         onLocationClick = { backStack.add(Destinations.Location) },
                         onSettingsClick = { backStack.add(Destinations.Settings) },
                         onForecastClick = { backStack.add(Destinations.Forecast) },

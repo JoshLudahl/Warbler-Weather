@@ -1,5 +1,6 @@
 package com.warbler.ui.main
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.warbler.core.data.repositories.location.LocationRepository
 import com.warbler.core.model.location.LocationEntity
 import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.SpeedUnit
+import com.warbler.core.utilities.ConnectivityObserver
 import com.warbler.core.utilities.DataPref
 import com.warbler.core.utilities.Resource
 import com.warbler.data.model.weather.Conversion
@@ -25,6 +27,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -41,40 +44,63 @@ class MainWeatherViewModel
         private val locationRepository: LocationRepository,
         private val weatherNetworkRepository: WeatherNetworkRepository,
         private val dataStore: DataStore<Preferences>,
+        private val connectivityObserver: ConnectivityObserver,
     ) : ViewModel() {
-        val weatherUiState: StateFlow<WeatherUiState?>
-            field = MutableStateFlow<WeatherUiState?>(null)
+        private val _weatherUiState = MutableStateFlow<WeatherUiState?>(null)
+        val weatherUiState: StateFlow<WeatherUiState?> = _weatherUiState
+
+        private val _isOffline = MutableStateFlow(false)
+        val isOffline: StateFlow<Boolean> = _isOffline
 
         private var pendingAqiLevel: Int? = null
 
         init {
             viewModelScope.launch {
-                locationRepository
-                    .getCurrentLocationFromDatabase()
-                    .catch { }
-                    .collect { location ->
+                combine(
+                    connectivityObserver.observe(),
+                    locationRepository.getCurrentLocationFromDatabase(),
+                ) { status, location ->
+                    status to location
+                }.collect { (status, location) ->
+                    if (status == ConnectivityObserver.Status.Available) {
+                        _isOffline.value = false
                         loadWeather(location)
+                    } else {
+                        _isOffline.value = true
                     }
+                }
             }
         }
 
         private fun loadWeather(location: LocationEntity) {
             viewModelScope.launch {
-                val temperatureUnitFlow = DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore)
-                val speedUnitFlow = DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore)
-                val clockUnitFlow = DataPref.readIntDataStoreFlow(DataPref.CLOCK_UNIT, dataStore)
-                val accumulationUnitFlow = DataPref.readIntDataStoreFlow(DataPref.ACCUMULATION_UNIT, dataStore)
-                val weatherFlow = weatherNetworkRepository.getCurrentWeather(location).catch { }
-                combine(
-                    weatherFlow,
-                    temperatureUnitFlow,
-                    speedUnitFlow,
-                    clockUnitFlow,
-                    accumulationUnitFlow,
-                ) { weather, temperatureUnit, speedUnit, clockUnit, accumulationUnit ->
-                    weather.toUiState(location, temperatureUnit, speedUnit, clockUnit, accumulationUnit)
-                }.collect { uiState ->
-                    weatherUiState.value = uiState
+                try {
+                    val temperatureUnit =
+                        DataPref.readIntDataStoreFlow(DataPref.TEMPERATURE_UNIT, dataStore).first()
+                    val speedUnit =
+                        DataPref.readIntDataStoreFlow(DataPref.SPEED_UNIT, dataStore).first()
+                    val clockUnit =
+                        DataPref.readIntDataStoreFlow(DataPref.CLOCK_UNIT, dataStore).first()
+                    val accumulationUnit =
+                        DataPref.readIntDataStoreFlow(DataPref.ACCUMULATION_UNIT, dataStore).first()
+
+                    weatherNetworkRepository
+                        .getCurrentWeather(location)
+                        .catch { e ->
+                            Log.e("MainWeatherViewModel", "Error fetching weather: ${e.message}")
+                            _isOffline.value = true
+                        }.collect { weather ->
+                            _weatherUiState.value =
+                                weather.toUiState(
+                                    location,
+                                    temperatureUnit,
+                                    speedUnit,
+                                    clockUnit,
+                                    accumulationUnit,
+                                )
+                        }
+                } catch (e: Exception) {
+                    Log.e("MainWeatherViewModel", "Unexpected error: ${e.message}")
                 }
             }
             loadAqi(location)
@@ -115,8 +141,8 @@ class MainWeatherViewModel
                                     ?.main
                                     ?.aqi ?: 0
                             pendingAqiLevel = aqiLevel
-                            weatherUiState.value =
-                                weatherUiState.value?.copy(
+                            _weatherUiState.value =
+                                _weatherUiState.value?.copy(
                                     hasAqi = aqiLevel in 1..5,
                                     aqiValue = aqiLevel.toString(),
                                     aqiLevel = aqiLevel,
@@ -144,9 +170,9 @@ class MainWeatherViewModel
                         .orEmpty(),
                 dateTitle = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(Date()),
                 feelsLike = "Feels like ${convertTemperature(current.feelsLike, temperatureUnit)}",
-                hasAqi = (weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0) in 1..5,
-                aqiValue = (weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0).toString(),
-                aqiLevel = weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0,
+                hasAqi = (_weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0) in 1..5,
+                aqiValue = (_weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0).toString(),
+                aqiLevel = _weatherUiState.value?.aqiLevel ?: pendingAqiLevel ?: 0,
                 hasAlerts = !alerts.isNullOrEmpty(),
                 alertTitle = alerts?.firstOrNull()?.event.orEmpty(),
                 alertDescription = alerts?.joinToString("\n\n") { it.description }.orEmpty(),
@@ -205,17 +231,17 @@ class MainWeatherViewModel
                                 convertOrReturnAccumulationByUnit(
                                     hourlyAccumulation,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).roundToInt().toFloat(),
+                                ).toFloat(),
                             rainAccumulation =
                                 convertOrReturnAccumulationByUnit(
                                     it.rain?.h ?: 0.0,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).roundToInt().toFloat(),
+                                ).toFloat(),
                             snowAccumulation =
                                 convertOrReturnAccumulationByUnit(
                                     it.snow?.h ?: 0.0,
                                     AccumulationUnit.entries[accumulationUnit],
-                                ).roundToInt().toFloat(),
+                                ).toFloat(),
                             humidity = it.humidity,
                             windSpeed =
                                 Conversion

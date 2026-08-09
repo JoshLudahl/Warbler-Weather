@@ -63,8 +63,9 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.play.services.location)
     implementation(libs.datastore.preferences)
-    implementation(libs.vico.core)
-    implementation(libs.vico.views)
+    implementation(libs.vico.compose)
+    implementation(libs.vico.compose.m3)
+    implementation(libs.vico.compose.glance)
 
     // Kotlin
     implementation(libs.navigation.fragment.ktx)

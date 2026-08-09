@@ -1,7 +1,6 @@
 package com.warbler.data.model.weather
 
-import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
+import com.patrykandpatrick.vico.compose.cartesian.data.CartesianValueFormatter
 import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
@@ -129,9 +128,9 @@ object Conversion {
 
     val WeatherDataSource.bottomAxisValueFormatter
         get() =
-            AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _, _ ->
+            CartesianValueFormatter { _, value, _ ->
 
-                val addHourlyMilli = (this.hourly[0].dt + x.toInt() * Constants.HOUR).toLong()
+                val addHourlyMilli = (this.hourly[0].dt + value.toInt() * Constants.HOUR).toLong()
 
                 var hour =
                     Instant
@@ -180,7 +179,7 @@ object Conversion {
         }
 
     val wholeNumberValueFormatter =
-        AxisValueFormatter<AxisPosition.Vertical.Start> { value, _, _ ->
+        CartesianValueFormatter { _, value, _ ->
             value.toInt().toString()
         }
 }

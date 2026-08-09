@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -31,29 +32,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
-import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
-import com.patrykandpatrick.vico.compose.chart.CartesianChartHost
-import com.patrykandpatrick.vico.compose.chart.layer.rememberColumnCartesianLayer
-import com.patrykandpatrick.vico.compose.chart.layer.rememberLineCartesianLayer
-import com.patrykandpatrick.vico.compose.chart.rememberCartesianChart
-import com.patrykandpatrick.vico.compose.component.rememberLineComponent
-import com.patrykandpatrick.vico.compose.component.rememberShapeComponent
-import com.patrykandpatrick.vico.compose.component.rememberTextComponent
-import com.patrykandpatrick.vico.compose.component.shape.shader.color
-import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
-import com.patrykandpatrick.vico.compose.legend.horizontalLegend
-import com.patrykandpatrick.vico.compose.legend.legendItem
-import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
-import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
-import com.patrykandpatrick.vico.core.chart.layer.LineCartesianLayer
-import com.patrykandpatrick.vico.core.component.shape.Shapes
-import com.patrykandpatrick.vico.core.component.shape.shader.DynamicShaders
-import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
-import com.patrykandpatrick.vico.core.model.columnSeries
-import com.patrykandpatrick.vico.core.model.lineSeries
+import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
+import com.patrykandpatrick.vico.compose.cartesian.axis.HorizontalAxis
+import com.patrykandpatrick.vico.compose.cartesian.axis.VerticalAxis
+import com.patrykandpatrick.vico.compose.cartesian.axis.rememberAxisLabelComponent
+import com.patrykandpatrick.vico.compose.cartesian.data.CartesianChartModelProducer
+import com.patrykandpatrick.vico.compose.cartesian.data.CartesianValueFormatter
+import com.patrykandpatrick.vico.compose.cartesian.data.columnModel
+import com.patrykandpatrick.vico.compose.cartesian.data.lineModel
+import com.patrykandpatrick.vico.compose.cartesian.layer.ColumnCartesianLayer
+import com.patrykandpatrick.vico.compose.cartesian.layer.LineCartesianLayer
+import com.patrykandpatrick.vico.compose.cartesian.layer.rememberColumnCartesianLayer
+import com.patrykandpatrick.vico.compose.cartesian.layer.rememberLine
+import com.patrykandpatrick.vico.compose.cartesian.layer.rememberLineCartesianLayer
+import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
+import com.patrykandpatrick.vico.compose.common.Fill
+import com.patrykandpatrick.vico.compose.common.Insets
+import com.patrykandpatrick.vico.compose.common.LegendItem
+import com.patrykandpatrick.vico.compose.common.component.rememberLineComponent
+import com.patrykandpatrick.vico.compose.common.component.rememberTextComponent
+import com.patrykandpatrick.vico.compose.common.rememberHorizontalLegend
 import com.warbler.core.theme.temp_low
 import com.warbler.data.model.weather.Conversion
 import com.warbler.feature.weather.ui.composables.HourlyForecastSection
@@ -112,7 +112,6 @@ fun HourlyScreen(
                                 temp_low,
                                 MaterialTheme.colorScheme.inverseSurface,
                             ),
-                        valueFormatter = Conversion.wholeNumberValueFormatter,
                     )
                 } else {
                     PrecipitationNoneExpected(
@@ -216,13 +215,13 @@ fun WeatherMultiBarChart(
     seriesLabels: List<String>,
     labels: List<String>,
     colors: List<Color>,
-    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
+    valueFormatter: CartesianValueFormatter? = null,
 ) {
-    val modelProducer = remember { CartesianChartModelProducer.build() }
+    val modelProducer = remember { CartesianChartModelProducer() }
 
     LaunchedEffect(data) {
         modelProducer.runTransaction {
-            columnSeries {
+            columnModel {
                 data.forEach { series(it) }
             }
         }
@@ -240,6 +239,15 @@ fun WeatherMultiBarChart(
             modifier = Modifier.padding(bottom = 8.dp),
         )
 
+        val legendIcons =
+            colors.map { color ->
+                rememberLineComponent(fill = Fill(color), shape = CircleShape)
+            }
+        val legendLabelComponent =
+            rememberTextComponent(
+                style = TextStyle(color = MaterialTheme.colorScheme.onSurface),
+            )
+
         Card(
             modifier = Modifier.fillMaxWidth().height(200.dp),
             shape = RoundedCornerShape(30.dp),
@@ -253,44 +261,52 @@ fun WeatherMultiBarChart(
                 chart =
                     rememberCartesianChart(
                         rememberColumnCartesianLayer(
-                            columns =
-                                colors.map { color ->
-                                    rememberLineComponent(
-                                        color = color,
-                                        thickness = 8.dp,
-                                        shape = Shapes.roundedCornerShape(allPercent = 40),
-                                    )
-                                },
-                        ),
-                        startAxis =
-                            if (valueFormatter != null) {
-                                rememberStartAxis(valueFormatter = valueFormatter)
-                            } else {
-                                rememberStartAxis()
-                            },
-                        bottomAxis =
-                            rememberBottomAxis(
-                                itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
-                                valueFormatter = { x, _, _ -> labels.getOrNull(x.toInt()) ?: "" },
-                            ),
-                        legend =
-                            horizontalLegend(
-                                items =
-                                    seriesLabels.mapIndexed { index, label ->
-                                        legendItem(
-                                            icon = rememberShapeComponent(shape = Shapes.pillShape, color = colors[index]),
-                                            label = rememberTextComponent(color = MaterialTheme.colorScheme.onSurface),
-                                            labelText = label,
+                            columnProvider =
+                                ColumnCartesianLayer.ColumnProvider.series(
+                                    colors.map { color ->
+                                        rememberLineComponent(
+                                            fill = Fill(color),
+                                            thickness = 8.dp,
+                                            shape = RoundedCornerShape(percent = 40),
                                         )
                                     },
+                                ),
+                        ),
+                        startAxis =
+                            VerticalAxis.rememberStart(
+                                label = rememberAxisLabelComponent(margins = Insets(end = 8.dp)),
+                                valueFormatter = valueFormatter ?: CartesianValueFormatter.decimal(),
+                            ),
+                        bottomAxis =
+                            HorizontalAxis.rememberBottom(
+                                label = rememberAxisLabelComponent(margins = Insets(top = 8.dp)),
+                                itemPlacer = HorizontalAxis.ItemPlacer.aligned(spacing = { 2 }),
+                                valueFormatter =
+                                    CartesianValueFormatter { _, value, _ ->
+                                        labels.getOrNull(value.toInt()) ?: ""
+                                    },
+                            ),
+                        legend =
+                            rememberHorizontalLegend(
+                                items = {
+                                    seriesLabels.forEachIndexed { index, label ->
+                                        add(
+                                            LegendItem(
+                                                icon = legendIcons[index],
+                                                labelComponent = legendLabelComponent,
+                                                label = label,
+                                            ),
+                                        )
+                                    }
+                                },
                                 iconSize = 8.dp,
-                                iconPadding = 4.dp,
-                                spacing = 16.dp,
-                                padding = dimensionsOf(top = 8.dp),
+                                iconLabelSpacing = 4.dp,
+                                columnSpacing = 16.dp,
+                                padding = Insets(top = 8.dp),
                             ),
                     ),
                 modelProducer = modelProducer,
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(16.dp),
             )
         }
     }
@@ -302,13 +318,13 @@ fun WeatherChart(
     data: List<Float>,
     labels: List<String>,
     color: Color,
-    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
+    valueFormatter: CartesianValueFormatter? = null,
 ) {
-    val modelProducer = remember { CartesianChartModelProducer.build() }
+    val modelProducer = remember { CartesianChartModelProducer() }
 
     LaunchedEffect(data) {
         modelProducer.runTransaction {
-            lineSeries {
+            lineModel {
                 series(data)
             }
         }
@@ -339,28 +355,34 @@ fun WeatherChart(
                 chart =
                     rememberCartesianChart(
                         rememberLineCartesianLayer(
-                            lines =
-                                listOf(
-                                    LineCartesianLayer.LineSpec(
-                                        shader = DynamicShaders.color(color),
-                                        backgroundShader = DynamicShaders.color(color.copy(alpha = 0.2f)),
+                            lineProvider =
+                                LineCartesianLayer.LineProvider.series(
+                                    LineCartesianLayer.rememberLine(
+                                        fill = LineCartesianLayer.LineFill.single(Fill(color)),
+                                        areaFill =
+                                            LineCartesianLayer.AreaFill.single(
+                                                Fill(color.copy(alpha = 0.2f)),
+                                            ),
                                     ),
                                 ),
                         ),
                         startAxis =
-                            if (valueFormatter != null) {
-                                rememberStartAxis(valueFormatter = valueFormatter)
-                            } else {
-                                rememberStartAxis()
-                            },
+                            VerticalAxis.rememberStart(
+                                label = rememberAxisLabelComponent(margins = Insets(end = 8.dp)),
+                                valueFormatter = valueFormatter ?: CartesianValueFormatter.decimal(),
+                            ),
                         bottomAxis =
-                            rememberBottomAxis(
-                                itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
-                                valueFormatter = { x, _, _ -> labels.getOrNull(x.toInt()) ?: "" },
+                            HorizontalAxis.rememberBottom(
+                                label = rememberAxisLabelComponent(margins = Insets(top = 8.dp)),
+                                itemPlacer = HorizontalAxis.ItemPlacer.aligned(spacing = { 2 }),
+                                valueFormatter =
+                                    CartesianValueFormatter { _, value, _ ->
+                                        labels.getOrNull(value.toInt()) ?: ""
+                                    },
                             ),
                     ),
                 modelProducer = modelProducer,
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(16.dp),
             )
         }
     }
@@ -373,13 +395,13 @@ fun WeatherMultiLineChart(
     seriesLabels: List<String>,
     labels: List<String>,
     colors: List<Color>,
-    valueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start>? = null,
+    valueFormatter: CartesianValueFormatter? = null,
 ) {
-    val modelProducer = remember { CartesianChartModelProducer.build() }
+    val modelProducer = remember { CartesianChartModelProducer() }
 
     LaunchedEffect(data) {
         modelProducer.runTransaction {
-            lineSeries {
+            lineModel {
                 data.forEach { series(it) }
             }
         }
@@ -397,6 +419,15 @@ fun WeatherMultiLineChart(
             modifier = Modifier.padding(bottom = 8.dp),
         )
 
+        val legendIcons =
+            colors.map { color ->
+                rememberLineComponent(fill = Fill(color), shape = CircleShape)
+            }
+        val legendLabelComponent =
+            rememberTextComponent(
+                style = TextStyle(color = MaterialTheme.colorScheme.onSurface),
+            )
+
         Card(
             modifier = Modifier.fillMaxWidth().height(200.dp),
             shape = RoundedCornerShape(30.dp),
@@ -410,43 +441,54 @@ fun WeatherMultiLineChart(
                 chart =
                     rememberCartesianChart(
                         rememberLineCartesianLayer(
-                            lines =
-                                colors.map { color ->
-                                    LineCartesianLayer.LineSpec(
-                                        shader = DynamicShaders.color(color),
-                                        backgroundShader = DynamicShaders.color(color.copy(alpha = 0.2f)),
-                                    )
-                                },
-                        ),
-                        startAxis =
-                            if (valueFormatter != null) {
-                                rememberStartAxis(valueFormatter = valueFormatter)
-                            } else {
-                                rememberStartAxis()
-                            },
-                        bottomAxis =
-                            rememberBottomAxis(
-                                itemPlacer = AxisItemPlacer.Horizontal.default(spacing = 2),
-                                valueFormatter = { x, _, _ -> labels.getOrNull(x.toInt()) ?: "" },
-                            ),
-                        legend =
-                            horizontalLegend(
-                                items =
-                                    seriesLabels.mapIndexed { index, label ->
-                                        legendItem(
-                                            icon = rememberShapeComponent(shape = Shapes.pillShape, color = colors[index]),
-                                            label = rememberTextComponent(color = MaterialTheme.colorScheme.onSurface),
-                                            labelText = label,
+                            lineProvider =
+                                LineCartesianLayer.LineProvider.series(
+                                    colors.map { color ->
+                                        LineCartesianLayer.rememberLine(
+                                            fill = LineCartesianLayer.LineFill.single(Fill(color)),
+                                            areaFill =
+                                                LineCartesianLayer.AreaFill.single(
+                                                    Fill(color.copy(alpha = 0.2f)),
+                                                ),
                                         )
                                     },
+                                ),
+                        ),
+                        startAxis =
+                            VerticalAxis.rememberStart(
+                                label = rememberAxisLabelComponent(margins = Insets(end = 8.dp)),
+                                valueFormatter = valueFormatter ?: CartesianValueFormatter.decimal(),
+                            ),
+                        bottomAxis =
+                            HorizontalAxis.rememberBottom(
+                                label = rememberAxisLabelComponent(margins = Insets(top = 8.dp)),
+                                itemPlacer = HorizontalAxis.ItemPlacer.aligned(spacing = { 2 }),
+                                valueFormatter =
+                                    CartesianValueFormatter { _, value, _ ->
+                                        labels.getOrNull(value.toInt()) ?: ""
+                                    },
+                            ),
+                        legend =
+                            rememberHorizontalLegend(
+                                items = {
+                                    seriesLabels.forEachIndexed { index, label ->
+                                        add(
+                                            LegendItem(
+                                                icon = legendIcons[index],
+                                                labelComponent = legendLabelComponent,
+                                                label = label,
+                                            ),
+                                        )
+                                    }
+                                },
                                 iconSize = 8.dp,
-                                iconPadding = 4.dp,
-                                spacing = 16.dp,
-                                padding = dimensionsOf(top = 8.dp),
+                                iconLabelSpacing = 4.dp,
+                                columnSpacing = 16.dp,
+                                padding = Insets(top = 8.dp),
                             ),
                     ),
                 modelProducer = modelProducer,
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(16.dp),
             )
         }
     }

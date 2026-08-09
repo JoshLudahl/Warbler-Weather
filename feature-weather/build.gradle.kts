@@ -76,10 +76,8 @@ dependencies {
     ksp(libs.room.compiler)
 
     // Charts
-    implementation(libs.vico.core)
     implementation(libs.vico.compose)
     implementation(libs.vico.compose.m3)
-    implementation(libs.vico.views)
 
     //  testing
     testImplementation(libs.junit)
