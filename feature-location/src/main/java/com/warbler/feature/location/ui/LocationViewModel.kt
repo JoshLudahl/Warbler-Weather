@@ -118,6 +118,10 @@ class LocationViewModel
             _isSearchBarActive.value = active
         }
 
+        fun resetCurrentLocationSaved() {
+            _currentLocationSaved.value = false
+        }
+
         fun searchForLocation(query: String) {
             Log.d("LocationViewModel", "searchForLocation launching coroutine...")
             _locationSearchList.value = Resource.Loading

@@ -116,6 +116,7 @@ fun LocationScreen(
     LaunchedEffect(currentLocationSaved) {
         if (currentLocationSaved) {
             onLocationSelected()
+            viewModel.resetCurrentLocationSaved()
         }
     }
 
