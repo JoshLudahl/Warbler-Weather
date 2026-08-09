@@ -1,15 +1,20 @@
 package com.warbler.feature.location.ui
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
@@ -17,6 +22,8 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.MyLocation
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExpandedFullScreenSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -26,11 +33,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
+import androidx.compose.material3.SearchBarValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberSearchBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -42,21 +53,75 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.warbler.core.model.location.LocationEntity
 import com.warbler.core.theme.AppTypography
 import com.warbler.core.utilities.Resource
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LocationScreen(
     onNavigateBack: () -> Unit = {},
+    onLocationSelected: () -> Unit = onNavigateBack,
     viewModel: LocationViewModel = hiltViewModel(),
 ) {
     val locationList by viewModel.locationList.collectAsState()
     val locationSearchList by viewModel.locationSearchList.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val isSearchBarActive by viewModel.isSearchBarActive.collectAsState()
+    val currentLocationSaved by viewModel.currentLocationSaved.collectAsState()
+    val isLoadingCurrentLocation by viewModel.isLoadingCurrentLocation.collectAsState()
+
+    val textFieldState = rememberTextFieldState(searchQuery)
+    val searchBarState =
+        rememberSearchBarState(
+            initialValue = if (isSearchBarActive) SearchBarValue.Expanded else SearchBarValue.Collapsed,
+        )
+    val coroutineScope = rememberCoroutineScope()
+
+    val isExpanded = searchBarState.currentValue == SearchBarValue.Expanded
+
+    LaunchedEffect(searchBarState.currentValue) {
+        viewModel.onSearchBarActiveChange(isExpanded)
+    }
+
+    LaunchedEffect(isSearchBarActive) {
+        if (isSearchBarActive && !isExpanded) {
+            searchBarState.animateToExpanded()
+        } else if (!isSearchBarActive && isExpanded) {
+            searchBarState.animateToCollapsed()
+        }
+    }
+
+    LaunchedEffect(textFieldState.text) {
+        viewModel.onSearchQueryChange(textFieldState.text.toString())
+    }
+
+    LaunchedEffect(searchQuery) {
+        if (searchQuery != textFieldState.text.toString()) {
+            textFieldState.setTextAndPlaceCursorAtEnd(searchQuery)
+        }
+    }
+
+    val permissionLauncher =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions(),
+        ) { permissions ->
+            val isGranted =
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
+                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)
+
+            if (isGranted) {
+                viewModel.getCurrentLocationAndSave()
+            }
+        }
+
+    LaunchedEffect(currentLocationSaved) {
+        if (currentLocationSaved) {
+            onLocationSelected()
+        }
+    }
 
     Scaffold(
         topBar = {
-            if (!isSearchBarActive) {
+            if (!isExpanded) {
                 TopAppBar(
                     title = {
                         Text(
@@ -72,8 +137,14 @@ fun LocationScreen(
                     },
                     actions = {
                         IconButton(onClick = {
+                            permissionLauncher.launch(
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                ),
+                            )
                         }) {
-                            Icon(Icons.Rounded.MyLocation, contentDescription = "Search")
+                            Icon(Icons.Rounded.MyLocation, contentDescription = "My Location")
                         }
                     },
                 )
@@ -89,44 +160,58 @@ fun LocationScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             SearchBar(
+                state = searchBarState,
+                inputField = {
+                    SearchBarDefaults.InputField(
+                        textFieldState = textFieldState,
+                        searchBarState = searchBarState,
+                        onSearch = {
+                            coroutineScope.launch { searchBarState.animateToCollapsed() }
+                        },
+                        placeholder = { Text("Search for a location") },
+                        leadingIcon = {
+                            Icon(Icons.Default.Search, contentDescription = null)
+                        },
+                    )
+                },
                 modifier =
                     Modifier
                         .semantics { traversalIndex = 0f }
-                        .then(if (isSearchBarActive) Modifier.fillMaxWidth() else Modifier.padding(horizontal = 16.dp)),
-                windowInsets = if (isSearchBarActive) SearchBarDefaults.windowInsets else WindowInsets(0, 0, 0, 0),
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth(),
+            )
+
+            ExpandedFullScreenSearchBar(
+                state = searchBarState,
                 inputField = {
                     SearchBarDefaults.InputField(
-                        query = searchQuery,
-                        onQueryChange = { viewModel.onSearchQueryChange(it) },
-                        onSearch = { viewModel.onSearchBarActiveChange(false) },
-                        expanded = isSearchBarActive,
-                        onExpandedChange = { viewModel.onSearchBarActiveChange(it) },
+                        textFieldState = textFieldState,
+                        searchBarState = searchBarState,
+                        onSearch = {
+                            coroutineScope.launch { searchBarState.animateToCollapsed() }
+                        },
                         placeholder = { Text("Search for a location") },
                         leadingIcon = {
-                            if (isSearchBarActive) {
-                                IconButton(onClick = { viewModel.onSearchBarActiveChange(false) }) {
-                                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                                }
-                            } else {
-                                Icon(Icons.Default.Search, contentDescription = null)
+                            IconButton(onClick = {
+                                coroutineScope.launch { searchBarState.animateToCollapsed() }
+                            }) {
+                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                             }
                         },
                         trailingIcon = {
-                            if (isSearchBarActive && searchQuery.isNotEmpty()) {
-                                IconButton(onClick = { viewModel.onSearchQueryChange("") }) {
+                            if (textFieldState.text.isNotEmpty()) {
+                                IconButton(onClick = { textFieldState.setTextAndPlaceCursorAtEnd("") }) {
                                     Icon(Icons.Default.Close, contentDescription = "Clear")
                                 }
                             }
                         },
                     )
                 },
-                expanded = isSearchBarActive,
-                onExpandedChange = { viewModel.onSearchBarActiveChange(it) },
             ) {
                 // Expanded Content
                 when (val searchState = locationSearchList) {
                     is Resource.Success -> {
-                        if (searchState.data.isEmpty() && searchQuery.length >= 3) {
+                        if (searchState.data.isEmpty() && textFieldState.text.length >= 3) {
                             Text(
                                 "No results found",
                                 modifier = Modifier.padding(16.dp),
@@ -136,7 +221,6 @@ fun LocationScreen(
                             LazyColumn(modifier = Modifier.fillMaxWidth()) {
                                 items(searchState.data) { location ->
                                     ListItem(
-                                        headlineContent = { Text(location.name) },
                                         supportingContent = {
                                             Text(
                                                 listOfNotNull(location.state, location.country).joinToString(", "),
@@ -146,10 +230,12 @@ fun LocationScreen(
                                         modifier =
                                             Modifier.clickable {
                                                 viewModel.saveToDatabase(location)
-                                                viewModel.onSearchBarActiveChange(false)
-                                                onNavigateBack()
+                                                coroutineScope.launch { searchBarState.animateToCollapsed() }
+                                                onLocationSelected()
                                             },
-                                    )
+                                    ) {
+                                        Text(location.name)
+                                    }
                                 }
                             }
                         }
@@ -170,7 +256,7 @@ fun LocationScreen(
             }
 
             // Background content (Saved Locations)
-            if (!isSearchBarActive) {
+            if (!isExpanded) {
                 Column(
                     modifier =
                         Modifier
@@ -194,7 +280,7 @@ fun LocationScreen(
                                         location = location,
                                         onClick = {
                                             viewModel.updateCurrentLocation(location)
-                                            onNavigateBack()
+                                            onLocationSelected()
                                         },
                                     )
                                 }
@@ -206,6 +292,20 @@ fun LocationScreen(
                 }
             }
         }
+
+        if (isLoadingCurrentLocation) {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .clickable(enabled = false) {},
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(48.dp),
+                )
+            }
+        }
     }
 }
 
@@ -215,12 +315,6 @@ fun LocationItem(
     onClick: () -> Unit,
 ) {
     ListItem(
-        headlineContent = {
-            Text(
-                location.name,
-                fontWeight = if (location.current) FontWeight.Bold else FontWeight.Normal,
-            )
-        },
         supportingContent = {
             Text(
                 listOfNotNull(location.state, location.country).joinToString(", "),
@@ -246,6 +340,11 @@ fun LocationItem(
             Modifier
                 .clickable { onClick() }
                 .fillMaxWidth(),
-    )
+    ) {
+        Text(
+            location.name,
+            fontWeight = if (location.current) FontWeight.Bold else FontWeight.Normal,
+        )
+    }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 }

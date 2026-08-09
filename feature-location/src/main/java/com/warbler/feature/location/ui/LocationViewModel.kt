@@ -58,6 +58,10 @@ class LocationViewModel
         val isSearchBarActive: StateFlow<Boolean>
             get() = _isSearchBarActive
 
+        private val _errorMessage = MutableStateFlow<String?>(null)
+        val errorMessage: StateFlow<String?>
+            get() = _errorMessage
+
         init {
             viewModelScope.launch {
                 locationRepository
@@ -136,10 +140,13 @@ class LocationViewModel
             viewModelScope.launch {
                 try {
                     _isLoadingCurrentLocation.value = true
+                    _errorMessage.value = null
+                    _currentLocationSaved.value = false
 
                     // Check permissions first
                     if (!locationService.hasLocationPermission()) {
                         Log.e("LocationViewModel", "Location permission not granted")
+                        _errorMessage.value = "Location permission not granted"
                         _isLoadingCurrentLocation.value = false
                         return@launch
                     }
@@ -149,6 +156,7 @@ class LocationViewModel
                     Log.d("LocationViewModel", "Got location: $location")
                     if (location == null) {
                         Log.e("LocationViewModel", "Failed to get current location")
+                        _errorMessage.value = "Failed to get current location"
                         _isLoadingCurrentLocation.value = false
                         return@launch
                     }
@@ -160,6 +168,7 @@ class LocationViewModel
                         .reverseGeocodeLocation(location.latitude, location.longitude)
                         .catch { error ->
                             Log.e("LocationViewModel", "Reverse geocode error: ${error.message}")
+                            _errorMessage.value = "Error resolving location name"
                             _isLoadingCurrentLocation.value = false
                         }.collect { locationEntity ->
                             if (locationEntity != null) {
@@ -172,11 +181,13 @@ class LocationViewModel
                                 _isLoadingCurrentLocation.value = false
                             } else {
                                 Log.e("LocationViewModel", "Reverse geocode returned null")
+                                _errorMessage.value = "Could not find your location name"
                                 _isLoadingCurrentLocation.value = false
                             }
                         }
                 } catch (e: Exception) {
                     Log.e("LocationViewModel", "Error in getCurrentLocationAndSave: ${e.message}")
+                    _errorMessage.value = "An unexpected error occurred"
                     _isLoadingCurrentLocation.value = false
                 }
             }

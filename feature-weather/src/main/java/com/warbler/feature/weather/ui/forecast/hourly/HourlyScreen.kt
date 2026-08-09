@@ -15,7 +15,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +28,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -53,7 +56,7 @@ import com.warbler.core.theme.temp_low
 import com.warbler.feature.weather.ui.composables.HourlyForecastSection
 import com.warbler.feature.weather.ui.main.WeatherUiState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun HourlyScreen(
     weatherUiState: WeatherUiState?,
@@ -77,19 +80,19 @@ fun HourlyScreen(
             )
         },
     ) { paddingValues ->
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState()),
-        ) {
-            Log.d("HourlyScreen", "weatherUiState: $weatherUiState")
-            if (weatherUiState != null) {
+        if (weatherUiState != null) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .verticalScroll(rememberScrollState()),
+            ) {
+                Log.d("HourlyScreen", "weatherUiState: $weatherUiState")
                 Spacer(modifier = Modifier.height(16.dp))
                 HourlyForecastSection(weatherUiState = weatherUiState)
 
-                val hourlyData = weatherUiState.hourlyForecasts.take(12)
+                val hourlyData = weatherUiState.hourlyForecasts
 
                 if (hourlyData.any { it.accumulation > 0 }) {
                     WeatherMultiBarChart(
@@ -146,6 +149,16 @@ fun HourlyScreen(
 
                 Spacer(modifier = Modifier.height(32.dp))
             }
+        } else {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularWavyProgressIndicator()
+            }
         }
     }
 }
@@ -178,7 +191,7 @@ fun PrecipitationNoneExpected(
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = androidx.compose.ui.Alignment.Center,
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = "None expected for the next $size hours",
