@@ -79,18 +79,19 @@ fun ForecastSection(
     weatherUiState: WeatherUiState,
     onForecastItemClick: (Int) -> Unit = {},
 ) {
-    Row(
+    LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
-        weatherUiState.dailyForecasts.take(3).forEachIndexed { index, day ->
+        items(weatherUiState.dailyForecasts.size) { index ->
+            val day = weatherUiState.dailyForecasts[index]
             DailyForecastCard(
                 day = day.day,
                 high = day.highTemp,
                 low = day.lowTemp,
                 icon = day.iconRes,
                 onClick = { onForecastItemClick(index) },
-                modifier = Modifier.weight(1f),
             )
         }
     }
