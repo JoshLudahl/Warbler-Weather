@@ -34,7 +34,6 @@ fun CustomInformationBanner(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp, bottom = 8.dp)
                 .clickable { onClick() },
         colors =
             CardDefaults.cardColors(

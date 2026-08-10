@@ -1,5 +1,6 @@
 package com.warbler.feature.weather.ui.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -53,15 +55,24 @@ fun MainWeatherScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Row {
-                        Icon(
-                            Icons.Default.LocationOn,
-                            contentDescription = "Location Icon",
-                        )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        IconButton(onClick = { onLocationClick() }) {
+                            Icon(
+                                Icons.Default.LocationOn,
+                                contentDescription = "Location Icon",
+                            )
+                        }
+
                         Text(
                             weatherUiState?.locationName ?: "Warbler Weather",
                             fontFamily = AppTypography.titleMedium.fontFamily,
                             fontWeight = FontWeight.Bold,
+                            modifier =
+                                Modifier.clickable {
+                                    onLocationClick()
+                                },
                         )
                     }
                 },
@@ -115,8 +126,11 @@ fun MainWeatherScreen(
                     modifier = Modifier,
                 )
 
+                Spacer(modifier = Modifier.height(8.dp))
+
                 if (weatherUiState.hasAqi) {
                     AqiInformation(weatherUiState = weatherUiState)
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
                 WeatherStats(weatherUiState = weatherUiState)
