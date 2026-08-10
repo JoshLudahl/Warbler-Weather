@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="module_name_core">Core</string>
-    
+    <string name="humidity">Humidity</string>
+    <string name="uv_index">UV Index</string>
+    <string name="pressure">%1$s hPa</string>
+    <string name="cloudy">%1$s%%</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="dew_point">Dew Point</string>
+    <string name="clouds">Clouds</string>
+    <string name="pressure_text">Pressure</string>
+    <string name="chance_of_rain">Rain %</string>
+    <string name="percentage">%1$s%%</string>
+    <string name="wind">Wind</string>
+    <string name="wind_gust">Wind Gust</string>
+    <string name="moonrise">Moonrise</string>
+    <string name="moonset">Moonset</string>
 </resources>
