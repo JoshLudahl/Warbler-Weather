@@ -80,7 +80,7 @@ class SettingsRepository
             dataStore.data
                 .catch { emit(emptyPreferences()) }
                 .map { prefs ->
-                    when (prefs[themeModeKey] ?: 0) {
+                    when (prefs[themeModeKey] ?: 2) {
                         0 -> ThemeMode.LIGHT
                         1 -> ThemeMode.DARK
                         2 -> ThemeMode.SYSTEM
