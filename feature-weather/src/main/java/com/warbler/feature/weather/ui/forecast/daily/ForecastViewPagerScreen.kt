@@ -17,6 +17,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,21 +27,29 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.warbler.core.model.appearance.ThemeMode
 import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
+import com.warbler.core.utilities.ShareUtils
 import com.warbler.feature.weather.R
 import com.warbler.feature.weather.ui.composables.WeatherStat
 import com.warbler.feature.weather.ui.composables.WeatherStatsGrid
 import com.warbler.feature.weather.ui.main.DailyForecastItem
 import com.warbler.feature.weather.ui.main.WeatherUiState
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +58,9 @@ fun ForecastViewPagerScreen(
     initialPage: Int,
     onNavigateUp: () -> Unit,
 ) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val graphicsLayer = rememberGraphicsLayer()
     val dailyForecasts = weatherUiState?.dailyForecasts ?: emptyList()
     val pagerState =
         rememberPagerState(
@@ -75,6 +87,23 @@ fun ForecastViewPagerScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
+                actions = {
+                    if (dailyForecasts.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                coroutineScope.launch {
+                                    val bitmap = graphicsLayer.toImageBitmap().asAndroidBitmap()
+                                    ShareUtils.shareImage(context, bitmap)
+                                }
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Share,
+                                contentDescription = "Share Forecast",
+                            )
+                        }
+                    }
+                },
                 colors =
                     TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surface,
@@ -87,7 +116,13 @@ fun ForecastViewPagerScreen(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .drawWithContent {
+                        graphicsLayer.record {
+                            this@drawWithContent.drawContent()
+                        }
+                        drawLayer(graphicsLayer)
+                    },
         ) {
             HorizontalPager(
                 state = pagerState,
