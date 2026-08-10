@@ -178,6 +178,15 @@ object Conversion {
             AccumulationUnit.INCHES_PER_HOUR -> accumulation.fromMillimetersPerHourToInchesPerHour
         }
 
+    fun formatAccumulationValue(
+        accumulation: Double,
+        unit: AccumulationUnit,
+    ): String {
+        val converted = convertOrReturnAccumulationByUnit(accumulation, unit)
+        val unitLabel = if (unit == AccumulationUnit.INCHES_PER_HOUR) "in" else "mm"
+        return String.format(Locale.getDefault(), "%.2f %s", converted, unitLabel)
+    }
+
     val wholeNumberValueFormatter =
         CartesianValueFormatter { _, value, _ ->
             value.toInt().toString()

@@ -263,7 +263,11 @@ class MainWeatherViewModel
                         SpeedUnit.KPH -> "KMH"
                     },
                 humidity = "${current.humidity}%",
-                rain = "${(hourly.firstOrNull()?.pop?.times(100))?.toInt() ?: 0}%",
+                rain =
+                    Conversion.formatAccumulationValue(
+                        current.rain?.h ?: 0.0,
+                        AccumulationUnit.entries[accumulationUnit],
+                    ),
                 accumulationUnit =
                     when (AccumulationUnit.entries[accumulationUnit]) {
                         AccumulationUnit.INCHES_PER_HOUR -> "in/h"
@@ -391,27 +395,15 @@ class MainWeatherViewModel
                             uvIndex = dailyWeather.uvi.toString(),
                             pressure = "${dailyWeather.pressure} hPa",
                             rain =
-                                dailyWeather.rain?.let {
-                                    "${
-                                        convertOrReturnAccumulationByUnit(
-                                            it,
-                                            AccumulationUnit.entries[accumulationUnit],
-                                        )
-                                    } ${
-                                        if (AccumulationUnit.entries[accumulationUnit] == AccumulationUnit.INCHES_PER_HOUR) "in" else "mm"
-                                    }"
-                                } ?: "0",
+                                Conversion.formatAccumulationValue(
+                                    dailyWeather.rain ?: 0.0,
+                                    AccumulationUnit.entries[accumulationUnit],
+                                ),
                             snow =
-                                dailyWeather.snow?.let {
-                                    "${
-                                        convertOrReturnAccumulationByUnit(
-                                            it,
-                                            AccumulationUnit.entries[accumulationUnit],
-                                        )
-                                    } ${
-                                        if (AccumulationUnit.entries[accumulationUnit] == AccumulationUnit.INCHES_PER_HOUR) "in" else "mm"
-                                    }"
-                                } ?: "0",
+                                Conversion.formatAccumulationValue(
+                                    dailyWeather.snow ?: 0.0,
+                                    AccumulationUnit.entries[accumulationUnit],
+                                ),
                             clouds = "${dailyWeather.clouds}%",
                             dewPoint = convertTemperature(dailyWeather.dewPoint, temperatureUnit),
                         )

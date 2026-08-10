@@ -140,7 +140,7 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
             WeatherStat(
                 title = "Rain",
                 value = weatherUiState.rain,
-                description = "Precipitation probability",
+                description = "Current precipitation",
                 icon = {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_wi_umbrella),
