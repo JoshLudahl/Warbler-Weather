@@ -48,6 +48,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.warbler.core.theme.AppTypography
@@ -441,7 +442,7 @@ fun WeatherStatsGrid(
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 150.dp),
+        columns = GridCells.Adaptive(minSize = 180.dp),
         modifier =
             modifier
                 .padding(16.dp),
@@ -458,7 +459,9 @@ fun WeatherStatsGrid(
 @Composable
 private fun WeatherStatCard(stat: WeatherStat) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier =
+            Modifier
+                .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(30.dp),
         colors =
@@ -470,40 +473,50 @@ private fun WeatherStatCard(stat: WeatherStat) {
         Column(
             modifier =
                 Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.Center,
         ) {
-            // Title
-            Text(
-                text = stat.title,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Medium,
-            )
-
-            // Icon
-            Box(
-                modifier =
-                    Modifier
-                        .size(56.dp),
-                contentAlignment = Alignment.Center,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                stat.icon()
-            }
+                // Icon
+                Box(
+                    modifier =
+                        Modifier
+                            .size(56.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    stat.icon()
+                }
 
-            // Value
-            Text(
-                text = stat.value,
-                style = MaterialTheme.typography.bodyLargeEmphasized,
-                fontWeight = FontWeight.Bold,
-            )
+                Column {
+                    // Title
+                    Text(
+                        text = stat.title,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium,
+                    )
+
+                    // Value
+                    Text(
+                        text = stat.value,
+                        style = MaterialTheme.typography.bodySmallEmphasized,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
 
             // Description
             Text(
                 text = stat.description,
+                modifier = Modifier.fillMaxWidth(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

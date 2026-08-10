@@ -260,6 +260,14 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
                         StatIcon(icon = R.drawable.ic_wi_cloud, contentDescription = "Clouds")
                     },
                 ),
+                WeatherStat(
+                    title = "Dew Point",
+                    value = forecast.dewPoint,
+                    description = "Dew Point",
+                    icon = {
+                        StatIcon(icon = R.drawable.ic_wi_raindrops, contentDescription = "Dew Point")
+                    },
+                ),
             )
 
         WeatherStatsGrid(stats = stats)
@@ -308,6 +316,7 @@ private fun ForecastViewPagerScreenPreview() {
                         wind = "10 MPH",
                         uvIndex = "5",
                         pressure = "1012 hPa",
+                        dewPoint = "60°F",
                     ),
                 ),
         )
