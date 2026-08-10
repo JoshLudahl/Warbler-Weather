@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.rounded.SwapVert
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -41,6 +42,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
@@ -402,23 +404,23 @@ fun DailyForecastCard(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "$high°",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = temp_high,
-                )
-
-                Icon(
-                    imageVector = Icons.Default.SwapVert,
-                    contentDescription = "High and Low",
-                    modifier = Modifier.size(20.dp),
-                )
-
-                Text(
                     text = "$low°",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = temp_low,
+                )
+
+                Icon(
+                    imageVector = Icons.Rounded.SwapVert,
+                    contentDescription = "High and Low",
+                    modifier = Modifier.size(20.dp).scale(scaleX = -1f, scaleY = 1f),
+                )
+
+                Text(
+                    text = "$high°",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = temp_high,
                 )
             }
         }
