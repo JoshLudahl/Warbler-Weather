@@ -282,7 +282,7 @@ private fun StatIcon(
     Image(
         painter = painterResource(id = icon),
         contentDescription = contentDescription,
-        modifier = Modifier.size(32.dp),
+        modifier = Modifier.size(48.dp),
         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
     )
 }

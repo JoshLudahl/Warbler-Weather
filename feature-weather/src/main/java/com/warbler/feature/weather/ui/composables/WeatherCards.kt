@@ -48,7 +48,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.warbler.core.theme.AppTypography
@@ -508,16 +507,16 @@ private fun WeatherStatCard(stat: WeatherStat) {
                 }
             }
 
-            // Description
-            Text(
-                text = stat.description,
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
+//            // Description
+//            Text(
+//                text = stat.description,
+//                modifier = Modifier.fillMaxWidth(),
+//                style = MaterialTheme.typography.bodySmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                textAlign = TextAlign.Center,
+//                maxLines = 2,
+//                overflow = TextOverflow.Ellipsis,
+//            )
         }
     }
 }
@@ -626,7 +625,7 @@ fun ForecastRow(
                 )
                 Text(
                     text = forecast.description,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -663,7 +662,7 @@ fun ForecastRow(
                 Icon(
                     imageVector = Icons.Filled.SwapVert,
                     contentDescription = "",
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                 )
 
