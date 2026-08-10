@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.warbler.data.model.weather.WeatherCacheEntity
 import com.warbler.data.model.weather.WeatherDataEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +13,9 @@ import kotlinx.coroutines.flow.Flow
 interface WeatherDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWeather(weather: WeatherDataEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWeatherCache(cache: WeatherCacheEntity)
 
     @Update
     fun updateWeather(weather: WeatherDataEntity)
@@ -27,4 +31,10 @@ interface WeatherDatabaseDao {
 
     @Query("SELECT * FROM weather_table ORDER BY updated DESC LIMIT 1")
     suspend fun getCurrentWeatherSync(): WeatherDataEntity?
+
+    @Query("SELECT * FROM weather_cache WHERE lat = :lat AND lon = :lon LIMIT 1")
+    suspend fun getWeatherCache(
+        lat: Double,
+        lon: Double,
+    ): WeatherCacheEntity?
 }

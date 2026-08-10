@@ -41,6 +41,15 @@ abstract class DataSourceModule {
                 }
             }
 
+        private val MIGRATION_2_3 =
+            object : Migration(2, 3) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL(
+                        "CREATE TABLE IF NOT EXISTS `weather_cache` (`lat` REAL NOT NULL, `lon` REAL NOT NULL, `json` TEXT NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`lat`, `lon`))",
+                    )
+                }
+            }
+
         @Singleton
         @Provides
         fun providesWeatherDatabase(
@@ -50,7 +59,7 @@ abstract class DataSourceModule {
                 context,
                 WeatherDatabase::class.java,
                 "weather_database_v2",
-            ).addMigrations(MIGRATION_1_2)
+            ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
             .build()
 
         @Singleton

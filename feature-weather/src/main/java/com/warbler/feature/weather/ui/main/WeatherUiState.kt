@@ -28,6 +28,7 @@ data class WeatherUiState(
     val sunrise: String = "",
     val sunset: String = "",
     val isOffline: Boolean = false,
+    val lastRefreshedAt: String? = null,
 )
 
 data class HourlyForecastItem(

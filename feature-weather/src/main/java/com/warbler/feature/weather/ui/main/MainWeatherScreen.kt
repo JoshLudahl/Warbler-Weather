@@ -85,8 +85,13 @@ fun MainWeatherScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (isOffline) {
+                val offlineMessage =
+                    weatherUiState?.lastRefreshedAt?.let {
+                        "Offline. Last updated at $it"
+                    } ?: "Application is offline"
+
                 CustomInformationBanner(
-                    message = "Application is offline",
+                    message = offlineMessage,
                     onClick = { },
                     icon = {
                         Icon(
@@ -103,7 +108,7 @@ fun MainWeatherScreen(
                     WeatherAlert(weatherUiState = weatherUiState)
                 }
 
-                SectionTitle(title = "Current Conditions", onClickMore = { onStatsNextClick() })
+                SectionTitle(title = "Current Conditions") { onStatsNextClick() }
                 MainWeatherCard(
                     weatherUiState = weatherUiState,
                     icon = weatherUiState.iconRes,
