@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="colorLight">#EEEEEE</color>
+    <color name="colorDark">#282828</color>
+</resources>
