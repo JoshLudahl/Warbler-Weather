@@ -25,12 +25,15 @@ import com.warbler.feature.weather.ui.main.DailyForecastItem
 import com.warbler.feature.weather.ui.main.HourlyForecastItem
 import com.warbler.feature.weather.ui.main.WeatherUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.retryWhen
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -43,6 +46,7 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class MainWeatherViewModel
@@ -98,6 +102,7 @@ class MainWeatherViewModel
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
         private var loadWeatherJob: Job? = null
+        private var isConnected = false
         private val json = Json { ignoreUnknownKeys = true }
 
         data class UnitSettings(
@@ -115,14 +120,12 @@ class MainWeatherViewModel
                 ) { status, location ->
                     status to location
                 }.collect { (status, location) ->
-                    Log.d("MainWeatherViewModel", "Connectivity status: $status")
-                    if (status == ConnectivityObserver.Status.Available) {
-                        _isOffline.value = false
-                        loadWeather(location)
-                    } else {
-                        _isOffline.value = true
-                        loadWeather(location, forceCache = true)
-                    }
+                    Log.d(TAG, "Connectivity status: $status")
+                    isConnected = status == ConnectivityObserver.Status.Available
+                    // Coming back online clears the banner up front. It only returns if every
+                    // attempt against the network fails and we fall back to the cache.
+                    _isOffline.value = !isConnected
+                    loadWeather(location, forceCache = !isConnected)
                 }
             }
         }
@@ -140,46 +143,57 @@ class MainWeatherViewModel
                             cache?.let {
                                 Duration
                                     .between(Instant.ofEpochMilli(it.lastUpdated), Instant.now())
-                                    .toMinutes() < 5
+                                    .toMinutes() < CACHE_LIFETIME_MINUTES
                             } ?: false
 
-                        if (!forceCache && !isCacheFresh && !_isOffline.value) {
-                            weatherNetworkRepository
-                                .getCurrentWeather(location)
-                                .catch { e ->
-                                    Log.e("MainWeatherViewModel", "Error fetching weather: ${e.message}")
-                                    _isOffline.value = true
-                                    loadWeather(location, forceCache = true)
-                                }.collect { weather ->
-                                    val weatherJson = json.encodeToString(WeatherDataSource.serializer(), weather)
-                                    weatherDatabaseRepository.insertWeatherCache(
-                                        WeatherCacheEntity(
-                                            lat = location.lat,
-                                            lon = location.lon,
-                                            json = weatherJson,
-                                            lastUpdated = System.currentTimeMillis(),
-                                        ),
-                                    )
+                        if (forceCache || isCacheFresh) {
+                            cache?.let { showCachedWeather(it) }
+                            return@launch
+                        }
 
-                                    lastRefreshedAt.value = formatLastUpdated(System.currentTimeMillis())
-                                    currentWeatherData.value = weather
-                                    _isOffline.value = false
+                        weatherNetworkRepository
+                            .getCurrentWeather(location)
+                            .retryWhen { cause, attempt ->
+                                // A network that has just come back often fails the first request
+                                // or two. Retrying keeps a transient failure from latching the
+                                // offline banner on for a user who is actually online.
+                                val shouldRetry = isConnected && attempt < MAX_NETWORK_RETRIES
+                                if (shouldRetry) {
+                                    Log.w(TAG, "Weather fetch failed, retrying: ${cause.message}")
+                                    delay((RETRY_DELAY_MS * (attempt + 1)).milliseconds)
                                 }
-                        } else if (cache != null) {
-                            val weather = json.decodeFromString<WeatherDataSource>(cache.json)
-                            lastRefreshedAt.value = formatLastUpdated(cache.lastUpdated)
-                            currentWeatherData.value = weather
-                            // If we are online but using cache (e.g. cache is fresh),
-                            // we should not show the offline banner.
-                            if (!_isOffline.value) {
+                                shouldRetry
+                            }.catch { e ->
+                                Log.e(TAG, "Error fetching weather: ${e.message}")
+                                cache?.let { showCachedWeather(it) }
+                                _isOffline.value = true
+                            }.collect { weather ->
+                                val weatherJson = json.encodeToString(WeatherDataSource.serializer(), weather)
+                                weatherDatabaseRepository.insertWeatherCache(
+                                    WeatherCacheEntity(
+                                        lat = location.lat,
+                                        lon = location.lon,
+                                        json = weatherJson,
+                                        lastUpdated = System.currentTimeMillis(),
+                                    ),
+                                )
+
+                                lastRefreshedAt.value = formatLastUpdated(System.currentTimeMillis())
+                                currentWeatherData.value = weather
                                 _isOffline.value = false
                             }
-                        }
+                    } catch (e: CancellationException) {
+                        throw e
                     } catch (e: Exception) {
-                        Log.e("MainWeatherViewModel", "Unexpected error: ${e.message}")
+                        Log.e(TAG, "Unexpected error: ${e.message}")
                     }
                 }
-            loadAqi(location)
+            if (!forceCache) loadAqi(location)
+        }
+
+        private fun showCachedWeather(cache: WeatherCacheEntity) {
+            lastRefreshedAt.value = formatLastUpdated(cache.lastUpdated)
+            currentWeatherData.value = json.decodeFromString<WeatherDataSource>(cache.json)
         }
 
         private fun formatLastUpdated(timestamp: Long): String =
@@ -442,4 +456,11 @@ class MainWeatherViewModel
                 2 -> tempKelvin.toInt() // Kelvin
                 else -> ((tempKelvin - 273.15) * 9 / 5 + 32).toInt() // Default to Fahrenheit
             }
+
+        private companion object {
+            const val TAG = "MainWeatherViewModel"
+            const val CACHE_LIFETIME_MINUTES = 5
+            const val MAX_NETWORK_RETRIES = 2
+            const val RETRY_DELAY_MS = 1_000L
+        }
     }

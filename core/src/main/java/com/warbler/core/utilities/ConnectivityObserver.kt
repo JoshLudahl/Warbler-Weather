@@ -8,19 +8,18 @@ import android.net.NetworkRequest
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface ConnectivityObserver {
     fun observe(): Flow<Status>
 
+    /** [Available] means a network is connected *and* validated as reaching the internet. */
     enum class Status {
         Available,
         Unavailable,
-        Losing,
-        Lost,
     }
 }
 
@@ -35,29 +34,49 @@ class NetworkConnectivityObserver
 
         override fun observe(): Flow<ConnectivityObserver.Status> =
             callbackFlow {
+                // Networks that are currently able to reach the internet. Callbacks fire per
+                // network, so a device on wifi + cellular must not be reported as offline just
+                // because one of them dropped. Only touched from the callback thread.
+                val usableNetworks = mutableSetOf<Network>()
+
+                fun emitStatus() {
+                    trySend(
+                        if (usableNetworks.isNotEmpty()) {
+                            ConnectivityObserver.Status.Available
+                        } else {
+                            ConnectivityObserver.Status.Unavailable
+                        },
+                    )
+                }
+
                 val callback =
                     object : ConnectivityManager.NetworkCallback() {
-                        override fun onAvailable(network: Network) {
-                            super.onAvailable(network)
-                            launch { send(ConnectivityObserver.Status.Available) }
-                        }
-
-                        override fun onLosing(
+                        // onAvailable fires as soon as a network connects, which is before it is
+                        // known to actually reach the internet. Reporting Available here makes
+                        // the first request after a reconnect fail, so wait for validation in
+                        // onCapabilitiesChanged instead.
+                        override fun onCapabilitiesChanged(
                             network: Network,
-                            maxMsToLive: Int,
+                            networkCapabilities: NetworkCapabilities,
                         ) {
-                            super.onLosing(network, maxMsToLive)
-                            launch { send(ConnectivityObserver.Status.Losing) }
+                            super.onCapabilitiesChanged(network, networkCapabilities)
+                            if (networkCapabilities.isUsable) {
+                                usableNetworks.add(network)
+                            } else {
+                                usableNetworks.remove(network)
+                            }
+                            emitStatus()
                         }
 
                         override fun onLost(network: Network) {
                             super.onLost(network)
-                            launch { send(ConnectivityObserver.Status.Lost) }
+                            usableNetworks.remove(network)
+                            emitStatus()
                         }
 
                         override fun onUnavailable() {
                             super.onUnavailable()
-                            launch { send(ConnectivityObserver.Status.Unavailable) }
+                            emitStatus()
                         }
                     }
 
@@ -70,19 +89,25 @@ class NetworkConnectivityObserver
                 connectivityManager.registerNetworkCallback(networkRequest, callback)
 
                 // Initial check
-                val isOnline =
-                    connectivityManager
-                        .getNetworkCapabilities(connectivityManager.activeNetwork)
-                        ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
-
-                if (isOnline) {
-                    send(ConnectivityObserver.Status.Available)
-                } else {
-                    send(ConnectivityObserver.Status.Unavailable)
+                val activeNetwork = connectivityManager.activeNetwork
+                if (activeNetwork != null &&
+                    connectivityManager.getNetworkCapabilities(activeNetwork)?.isUsable == true
+                ) {
+                    usableNetworks.add(activeNetwork)
                 }
+                emitStatus()
 
                 awaitClose {
                     connectivityManager.unregisterNetworkCallback(callback)
                 }
-            }.distinctUntilChanged()
+            }
+                // Emit from the callback thread without suspending so statuses can never be
+                // delivered out of order; only the latest one matters.
+                .conflate()
+                .distinctUntilChanged()
+
+        private val NetworkCapabilities.isUsable: Boolean
+            get() =
+                hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                    hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
     }
