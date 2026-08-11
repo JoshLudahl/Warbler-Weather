@@ -164,7 +164,6 @@ dependencies {
     implementation(libs.viewpager2)
     implementation(libs.material3Compose)
     implementation(libs.material3View)
-    implementation(libs.navigation3.runtime)
     implementation(libs.navigation3.ui)
 
     // Compose
@@ -259,7 +258,6 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation3.runtime)
-    implementation(libs.navigation3.ui)
     implementation(libs.kotlinx.serialization.json)
 
     // Feature module Support
