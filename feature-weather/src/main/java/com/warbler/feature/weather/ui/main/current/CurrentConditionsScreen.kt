@@ -242,10 +242,35 @@ fun WeatherStatsScreen(weatherUiState: WeatherUiState) {
                     )
                 },
             ),
+            WeatherStat(
+                title = "Moonrise",
+                value = weatherUiState.moonrise,
+                description = "Time of moonrise",
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_wi_moonrise),
+                        contentDescription = "Moonrise",
+                        modifier = Modifier.size(iconSize),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                },
+            ),
+            WeatherStat(
+                title = "Moonset",
+                value = weatherUiState.moonset,
+                description = "Time of moonset",
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_wi_moonset),
+                        contentDescription = "Moonset",
+                        modifier = Modifier.size(iconSize),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                },
+            ),
         )
 
     WeatherStatsGrid(
         stats = weatherStats,
-        modifier = Modifier.height(800.dp), // Height to accommodate grid items
     )
 }

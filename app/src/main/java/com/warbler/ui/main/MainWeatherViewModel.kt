@@ -425,6 +425,18 @@ class MainWeatherViewModel
                         timezoneOffset.toLong(),
                         clockUnit,
                     ),
+                moonrise =
+                    Conversion.getTimeFromTimeStamp(
+                        daily.firstOrNull()?.moonrise?.toLong() ?: 0L,
+                        timezoneOffset.toLong(),
+                        clockUnit,
+                    ),
+                moonset =
+                    Conversion.getTimeFromTimeStamp(
+                        daily.firstOrNull()?.moonset?.toLong() ?: 0L,
+                        timezoneOffset.toLong(),
+                        clockUnit,
+                    ),
             )
 
         private fun convertTemperature(

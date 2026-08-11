@@ -7,6 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,9 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -508,32 +507,35 @@ data class WeatherStat(
     val icon: @Composable () -> Unit,
 )
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WeatherStatsGrid(
     stats: List<WeatherStat>,
     modifier: Modifier = Modifier,
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 180.dp),
-        modifier =
-            modifier
-                .padding(16.dp),
+    FlowRow(
+        modifier = modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        maxItemsInEachRow = 2,
     ) {
-        items(stats) { stat ->
-            WeatherStatCard(stat = stat)
+        stats.forEach { stat ->
+            WeatherStatCard(
+                stat = stat,
+                modifier = Modifier.weight(1f),
+            )
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun WeatherStatCard(stat: WeatherStat) {
+private fun WeatherStatCard(
+    stat: WeatherStat,
+    modifier: Modifier = Modifier,
+) {
     Card(
-        modifier =
-            Modifier
-                .fillMaxWidth(),
+        modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(30.dp),
         colors =

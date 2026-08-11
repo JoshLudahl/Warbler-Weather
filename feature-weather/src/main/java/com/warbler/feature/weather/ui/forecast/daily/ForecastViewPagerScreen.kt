@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.rounded.Share
@@ -182,6 +184,7 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
         modifier =
             Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(16.dp),
     ) {
         com.warbler.feature.weather.ui.composables.DailyForecastCard(
@@ -210,6 +213,22 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
                     description = "Sunset",
                     icon = {
                         StatIcon(icon = R.drawable.ic_wi_sunset, contentDescription = "Sunset")
+                    },
+                ),
+                WeatherStat(
+                    title = "Moonrise",
+                    value = forecast.moonrise,
+                    description = "Moonrise",
+                    icon = {
+                        StatIcon(icon = R.drawable.ic_wi_moonrise, contentDescription = "Moonrise")
+                    },
+                ),
+                WeatherStat(
+                    title = "Moonset",
+                    value = forecast.moonset,
+                    description = "Moonset",
+                    icon = {
+                        StatIcon(icon = R.drawable.ic_wi_moonset, contentDescription = "Moonset")
                     },
                 ),
                 WeatherStat(
@@ -312,6 +331,8 @@ private fun ForecastViewPagerScreenPreview() {
                         description = "Sunny",
                         sunrise = "6:00 AM",
                         sunset = "8:00 PM",
+                        moonrise = "9:00 PM",
+                        moonset = "5:00 AM",
                         humidity = "50%",
                         wind = "10 MPH",
                         uvIndex = "5",

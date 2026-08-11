@@ -27,6 +27,8 @@ data class WeatherUiState(
     val dewPoint: String = "",
     val sunrise: String = "",
     val sunset: String = "",
+    val moonrise: String = "",
+    val moonset: String = "",
     val isOffline: Boolean = false,
     val lastRefreshedAt: String? = null,
 )
