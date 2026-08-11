@@ -325,7 +325,7 @@ private fun SectionHeading(text: String) {
 private fun SubHeading(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.titleSmall,
         modifier = Modifier.padding(vertical = 4.dp),
     )
 }
@@ -375,7 +375,7 @@ private fun <T> SingleSelectButtonGroup(
 
                 Text(
                     text = label(option),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
