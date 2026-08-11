@@ -1,6 +1,7 @@
 package com.warbler.feature.weather.ui.composables
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -43,12 +44,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.warbler.core.theme.AppTypography
 import com.warbler.core.theme.error
@@ -174,6 +181,9 @@ fun AqiInformation(
                 tint = aqiColor,
             )
         },
+        bottomContent = {
+            AqiGradientBar(currentLevel = weatherUiState.aqiLevel)
+        },
     )
 
     if (showAqiDialog) {
@@ -210,6 +220,69 @@ fun AqiInformation(
                 }
             },
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AqiInformationPreview() {
+    val state =
+        WeatherUiState(
+            locationName = "London",
+            temperature = "20°",
+            description = "Clear",
+            dateTitle = "Monday",
+            feelsLike = "18°",
+            hasAqi = true,
+            aqiValue = "3",
+            aqiLevel = 3,
+            hasAlerts = false,
+            iconRes = 0,
+        )
+    AqiInformation(weatherUiState = state)
+}
+
+@Composable
+fun AqiGradientBar(
+    currentLevel: Int,
+    modifier: Modifier = Modifier,
+) {
+    val aqiColors = aqiLevelInfoList.map { it.color }
+
+    Box(
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .height(8.dp)
+                .background(
+                    brush = Brush.linearGradient(colors = aqiColors),
+                    shape = RoundedCornerShape(6.dp),
+                ),
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val canvasWidth = size.width
+            val canvasHeight = size.height
+
+            // Calculate position based on level (1 to 5)
+            // 1 -> 0%, 5 -> 100%
+            val fraction = ((currentLevel - 1).coerceIn(0, 4)).toFloat() / 4f
+            val xPosition = canvasWidth * fraction
+
+            drawCircle(
+                color = Color.White,
+                radius = canvasHeight,
+                center = Offset(xPosition, canvasHeight / 2),
+                style = Fill,
+            )
+
+            drawCircle(
+                color = Color.Black.copy(alpha = 0.2f),
+                radius = canvasHeight,
+                center = Offset(xPosition, canvasHeight / 2),
+                style = Stroke(width = 1.dp.toPx()),
+            )
+        }
     }
 }
 

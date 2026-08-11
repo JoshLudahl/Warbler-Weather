@@ -1,10 +1,11 @@
 package com.warbler.feature.weather.ui.composables
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +29,7 @@ fun CustomInformationBanner(
     message: String = "",
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
+    bottomContent: @Composable (() -> Unit)? = null,
 ) {
     Card(
         shape = RoundedCornerShape(30.dp),
@@ -41,15 +43,27 @@ fun CustomInformationBanner(
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
     ) {
-        Row(
+        Column(
             modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
         ) {
-            icon()
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = message, color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier.weight(1f))
-            Icon(imageVector = Icons.Rounded.Info, contentDescription = "Information", tint = iconColor)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                icon()
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = message,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(imageVector = Icons.Rounded.Info, contentDescription = "Information", tint = iconColor)
+            }
+
+            if (bottomContent != null) {
+                Spacer(modifier = Modifier.height(12.dp))
+                bottomContent()
+            }
         }
     }
 }
