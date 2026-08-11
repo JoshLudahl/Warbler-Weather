@@ -1,5 +1,9 @@
 package com.warbler.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,6 +37,36 @@ fun ApplicationNavigation(
     NavDisplay(
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
+        transitionSpec = {
+            slideInHorizontally(
+                initialOffsetX = { it },
+                animationSpec = tween(700),
+            ) togetherWith
+                slideOutHorizontally(
+                    targetOffsetX = { -it },
+                    animationSpec = tween(700),
+                )
+        },
+        popTransitionSpec = {
+            slideInHorizontally(
+                initialOffsetX = { -it },
+                animationSpec = tween(700),
+            ) togetherWith
+                slideOutHorizontally(
+                    targetOffsetX = { it },
+                    animationSpec = tween(700),
+                )
+        },
+        predictivePopTransitionSpec = {
+            slideInHorizontally(
+                initialOffsetX = { -it },
+                animationSpec = tween(700),
+            ) togetherWith
+                slideOutHorizontally(
+                    targetOffsetX = { it },
+                    animationSpec = tween(700),
+                )
+        },
         entryProvider =
             entryProvider {
                 entry<Destinations.Home> {
