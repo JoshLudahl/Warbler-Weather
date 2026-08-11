@@ -525,6 +525,10 @@ fun WeatherStatsGrid(
                 modifier = Modifier.weight(1f),
             )
         }
+        // Add a spacer to prevent the last item from stretching if it's the only one in the row
+        if (stats.size % 2 != 0) {
+            Spacer(modifier = Modifier.weight(1f))
+        }
     }
 }
 
