@@ -305,6 +305,7 @@ fun WeatherStatItem(
                     tint = MaterialTheme.colorScheme.primary,
                 )
             }
+
             is Int -> {
                 Image(
                     painter = painterResource(id = icon),
@@ -485,7 +486,9 @@ fun DailyForecastCard(
                 Icon(
                     imageVector = Icons.Rounded.SwapVert,
                     contentDescription = "High and Low",
-                    modifier = Modifier.size(20.dp).scale(scaleX = -1f, scaleY = 1f),
+                    modifier = Modifier
+                        .size(20.dp)
+                        .scale(scaleX = -1f, scaleY = 1f),
                 )
 
                 Text(
@@ -626,7 +629,9 @@ fun WeatherForecastList(
             val rows = forecasts.chunked(2)
             rows.mapIndexed { index, rowItems ->
                 Row(
-                    modifier = Modifier.weight(1f).fillMaxWidth(),
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
                 ) {
                     rowItems.forEachIndexed { rowIndex, forecast ->
                         val itemIndex = index * 2 + rowIndex
