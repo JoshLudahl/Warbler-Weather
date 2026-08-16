@@ -590,17 +590,6 @@ private fun WeatherStatCard(
                     )
                 }
             }
-
-//            // Description
-//            Text(
-//                text = stat.description,
-//                modifier = Modifier.fillMaxWidth(),
-//                style = MaterialTheme.typography.bodySmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                textAlign = TextAlign.Center,
-//                maxLines = 2,
-//                overflow = TextOverflow.Ellipsis,
-//            )
         }
     }
 }
