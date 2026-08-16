@@ -112,6 +112,7 @@ fun HourlyScreen(
                                 temp_low,
                                 MaterialTheme.colorScheme.inverseSurface,
                             ),
+                        valueFormatter = Conversion.precipValueFormatter,
                     )
                 } else {
                     PrecipitationNoneExpected(
@@ -150,6 +151,7 @@ fun HourlyScreen(
                     data = hourlyData.map { it.uvi },
                     labels = hourlyData.map { it.time },
                     color = MaterialTheme.colorScheme.error,
+                    valueFormatter = Conversion.precipValueFormatter,
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))

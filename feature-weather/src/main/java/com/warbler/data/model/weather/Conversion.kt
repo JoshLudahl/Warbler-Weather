@@ -5,6 +5,7 @@ import com.warbler.core.model.units.AccumulationUnit
 import com.warbler.core.model.units.SpeedUnit
 import com.warbler.core.model.units.TemperatureUnit
 import com.warbler.core.utilities.Constants
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -119,7 +120,7 @@ object Conversion {
                 else -> "$hour"
             }
 
-        val suffix = if (hour >= 12) "PM" else "AM"
+        val suffix = if (hour >= 12) " PM" else " AM"
 
         return "$hourFormatted:$minuteFormatted $suffix"
     }
@@ -138,10 +139,10 @@ object Conversion {
                         .atZone(ZoneId.of("UTC"))
                         .hour
 
-                var suffix = "AM"
+                var suffix = " AM"
                 if (hour >= 12) {
                     hour %= 12
-                    suffix = "PM"
+                    suffix = " PM"
                 }
                 if (hour == 0) hour = 12
 
@@ -160,12 +161,12 @@ object Conversion {
             when {
                 this > 12 -> {
                     val hour = this % 12
-                    "${hour}PM"
+                    "$hour PM"
                 }
 
-                this == 12 -> "${this}PM"
+                this == 12 -> "$this PM"
                 this == 0 -> "12AM"
-                else -> "${this}AM"
+                else -> "$this AM"
             }
     private val Double.fromMillimetersPerHourToInchesPerHour get(): Double = this / 25.4
 
@@ -190,5 +191,12 @@ object Conversion {
     val wholeNumberValueFormatter =
         CartesianValueFormatter { _, value, _ ->
             value.toInt().toString()
+        }
+
+    private val precipDecimalFormat = DecimalFormat("0.###")
+
+    val precipValueFormatter =
+        CartesianValueFormatter { _, value, _ ->
+            precipDecimalFormat.format(value)
         }
 }
