@@ -579,6 +579,7 @@ private fun WeatherStatCard(
                         text = stat.title,
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Medium,
+                        modifier = Modifier.padding(bottom = 4.dp),
                     )
 
                     // Value
