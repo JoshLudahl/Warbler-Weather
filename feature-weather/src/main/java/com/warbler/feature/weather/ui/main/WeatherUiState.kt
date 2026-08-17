@@ -72,4 +72,10 @@ data class DailyForecastItem(
     val snow: String = "",
     val clouds: String = "",
     val dewPoint: String = "",
+    val windGust: String = "",
+    val windDeg: Int = 0,
+    val moonPhase: Double = 0.0,
+    val moonPhaseName: String = "",
+    val summary: String = "",
+    val feelsLikeDay: String = "",
 )

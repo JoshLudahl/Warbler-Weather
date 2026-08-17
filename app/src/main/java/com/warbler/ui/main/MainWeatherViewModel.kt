@@ -417,10 +417,12 @@ class MainWeatherViewModel
                                 ),
                             humidity = "${dailyWeather.humidity}%",
                             wind =
-                                Conversion.formatSpeedUnitsWithUnitsToString(
-                                    dailyWeather.windSpeed ?: 0.0,
-                                    SpeedUnit.entries[speedUnit],
-                                ),
+                                "${
+                                    Conversion.formatSpeedUnitsWithUnitsToString(
+                                        dailyWeather.windSpeed ?: 0.0,
+                                        SpeedUnit.entries[speedUnit],
+                                    )
+                                } ${Conversion.getWindDirection(dailyWeather.windDeg ?: 0)}",
                             pop = "${(dailyWeather.pop * 100).toInt()}%",
                             uvIndex = dailyWeather.uvi.toString(),
                             pressure = "${dailyWeather.pressure} hPa",
@@ -436,6 +438,16 @@ class MainWeatherViewModel
                                 ),
                             clouds = "${dailyWeather.clouds}%",
                             dewPoint = convertTemperature(dailyWeather.dewPoint, temperatureUnit),
+                            windGust =
+                                Conversion.formatSpeedUnitsWithUnitsToString(
+                                    dailyWeather.windGust ?: 0.0,
+                                    SpeedUnit.entries[speedUnit],
+                                ),
+                            windDeg = dailyWeather.windDeg ?: 0,
+                            moonPhase = dailyWeather.moonPhase,
+                            moonPhaseName = Conversion.getMoonPhaseName(dailyWeather.moonPhase),
+                            summary = dailyWeather.summary,
+                            feelsLikeDay = convertTemperature(dailyWeather.feelsLike.day, temperatureUnit),
                         )
                     },
                 uvIndex = current.uvi.toString(),

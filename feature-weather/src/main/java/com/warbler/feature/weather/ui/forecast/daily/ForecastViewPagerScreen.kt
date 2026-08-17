@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Navigation
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,12 +35,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.warbler.core.model.appearance.ThemeMode
@@ -195,99 +199,200 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
             modifier = Modifier.fillMaxWidth(),
         )
 
+        if (forecast.summary.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = forecast.summary,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         val stats =
-            listOf(
-                WeatherStat(
-                    title = "Sunrise",
-                    value = forecast.sunrise,
-                    description = "Sunrise",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_sunrise, contentDescription = "Sunrise")
-                    },
-                ),
-                WeatherStat(
-                    title = "Sunset",
-                    value = forecast.sunset,
-                    description = "Sunset",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_sunset, contentDescription = "Sunset")
-                    },
-                ),
-                WeatherStat(
-                    title = "Moonrise",
-                    value = forecast.moonrise,
-                    description = "Moonrise",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_moonrise, contentDescription = "Moonrise")
-                    },
-                ),
-                WeatherStat(
-                    title = "Moonset",
-                    value = forecast.moonset,
-                    description = "Moonset",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_moonset, contentDescription = "Moonset")
-                    },
-                ),
-                WeatherStat(
-                    title = "Humidity",
-                    value = forecast.humidity,
-                    description = "Humidity",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_humidity, contentDescription = "Humidity")
-                    },
-                ),
-                WeatherStat(
-                    title = "UV Index",
-                    value = forecast.uvIndex,
-                    description = "UV Index",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_day_sunny, contentDescription = "UV Index")
-                    },
-                ),
-                WeatherStat(
-                    title = "Pressure",
-                    value = forecast.pressure,
-                    description = "Pressure",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_barometer, contentDescription = "Pressure")
-                    },
-                ),
-                WeatherStat(
-                    title = "Wind",
-                    value = forecast.wind,
-                    description = "Wind Speed",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wind, contentDescription = "Wind Speed")
-                    },
-                ),
-                WeatherStat(
-                    title = "Rain",
-                    value = forecast.rain,
-                    description = "Rain",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_umbrella, contentDescription = "Rain")
-                    },
-                ),
-                WeatherStat(
-                    title = "Clouds",
-                    value = forecast.clouds,
-                    description = "Clouds",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_cloud, contentDescription = "Clouds")
-                    },
-                ),
-                WeatherStat(
-                    title = "Dew Point",
-                    value = forecast.dewPoint,
-                    description = "Dew Point",
-                    icon = {
-                        StatIcon(icon = R.drawable.ic_wi_raindrops, contentDescription = "Dew Point")
-                    },
-                ),
-            )
+            buildList {
+                add(
+                    WeatherStat(
+                        title = "Sunrise",
+                        value = forecast.sunrise,
+                        description = "Sunrise",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_sunrise, contentDescription = "Sunrise")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Sunset",
+                        value = forecast.sunset,
+                        description = "Sunset",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_sunset, contentDescription = "Sunset")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Moonrise",
+                        value = forecast.moonrise,
+                        description = "Moonrise",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_moonrise, contentDescription = "Moonrise")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Moonset",
+                        value = forecast.moonset,
+                        description = "Moonset",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_moonset, contentDescription = "Moonset")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Humidity",
+                        value = forecast.humidity,
+                        description = "Humidity",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_humidity, contentDescription = "Humidity")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "UV Index",
+                        value = forecast.uvIndex,
+                        description = "UV Index",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_day_sunny, contentDescription = "UV Index")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Pressure",
+                        value = forecast.pressure,
+                        description = "Pressure",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_barometer, contentDescription = "Pressure")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Wind",
+                        value = forecast.wind,
+                        description = "Wind Speed",
+                        icon = {
+                            StatIcon(
+                                icon = Icons.Rounded.Navigation,
+                                contentDescription = "Wind Speed",
+                                rotation = forecast.windDeg.toFloat(),
+                            )
+                        },
+                    ),
+                )
+
+                add(
+                    WeatherStat(
+                        title = "Rain",
+                        value = forecast.rain,
+                        description = "Rain",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_umbrella, contentDescription = "Rain")
+                        },
+                    ),
+                )
+
+                add(
+                    WeatherStat(
+                        title = "Clouds",
+                        value = forecast.clouds,
+                        description = "Clouds",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_cloud, contentDescription = "Clouds")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Dew Point",
+                        value = forecast.dewPoint,
+                        description = "Dew Point",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_wi_raindrops, contentDescription = "Dew Point")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Precipitation",
+                        value = forecast.pop,
+                        description = "Precipitation Probability",
+                        icon = {
+                            StatIcon(
+                                icon = R.drawable.ic_wi_raindrops,
+                                contentDescription = "Precipitation",
+                            )
+                        },
+                    ),
+                )
+
+                if (forecast.snow.any { it.isDigit() && it != '0' }) {
+                    add(
+                        WeatherStat(
+                            title = "Snow",
+                            value = forecast.snow,
+                            description = "Snow",
+                            icon = {
+                                StatIcon(icon = R.drawable.ic_13d, contentDescription = "Snow")
+                            },
+                        ),
+                    )
+                }
+
+                add(
+                    WeatherStat(
+                        title = "Wind Gust",
+                        value = forecast.windGust,
+                        description = "Wind Gust Speed",
+                        icon = {
+                            StatIcon(
+                                icon = R.drawable.ic_wi_strong_wind,
+                                contentDescription = "Wind Gust Speed",
+                            )
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Moon Phase",
+                        value = forecast.moonPhaseName,
+                        description = "Moon Phase",
+                        icon = {
+                            StatIcon(icon = R.drawable.ic_01n, contentDescription = "Moon Phase")
+                        },
+                    ),
+                )
+                add(
+                    WeatherStat(
+                        title = "Feels Like",
+                        value = forecast.feelsLikeDay,
+                        description = "Feels Like (Day)",
+                        icon = {
+                            StatIcon(
+                                icon = R.drawable.ic_wi_day_sunny,
+                                contentDescription = "Feels Like",
+                            )
+                        },
+                    ),
+                )
+            }
 
         WeatherStatsGrid(stats = stats)
     }
@@ -295,15 +400,36 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
 
 @Composable
 private fun StatIcon(
-    icon: Int,
+    icon: Any,
     contentDescription: String,
+    modifier: Modifier = Modifier,
+    rotation: Float = 0f,
 ) {
-    Image(
-        painter = painterResource(id = icon),
-        contentDescription = contentDescription,
-        modifier = Modifier.size(48.dp),
-        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
-    )
+    when (icon) {
+        is ImageVector -> {
+            Icon(
+                imageVector = icon,
+                contentDescription = contentDescription,
+                modifier =
+                    modifier
+                        .size(38.dp)
+                        .rotate(rotation),
+                tint = MaterialTheme.colorScheme.primary,
+            )
+        }
+
+        is Int -> {
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = contentDescription,
+                modifier =
+                    modifier
+                        .size(48.dp)
+                        .rotate(rotation),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)

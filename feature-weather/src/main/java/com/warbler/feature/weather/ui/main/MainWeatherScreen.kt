@@ -138,14 +138,15 @@ fun MainWeatherScreen(
 
                 SunAndMoonCard(weatherUiState = weatherUiState)
 
-                SectionTitle(title = "Hourly", onClickMore = { onHourlyClick() })
-                HourlyForecastSection(weatherUiState = weatherUiState)
-
                 SectionTitle(title = "Forecast", onClickMore = { onForecastClick() })
                 ForecastSection(
                     weatherUiState = weatherUiState,
                     onForecastItemClick = onForecastItemClick,
                 )
+
+                SectionTitle(title = "Hourly", onClickMore = { onHourlyClick() })
+                HourlyForecastSection(weatherUiState = weatherUiState)
+
                 Spacer(modifier = Modifier.height(24.dp))
             } else if (!isOffline) {
                 Box(
