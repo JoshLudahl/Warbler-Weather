@@ -136,7 +136,6 @@ fun MainWeatherScreen(
 
                 WeatherStats(weatherUiState = weatherUiState)
 
-                SectionTitle(title = "Sun & Moon", hasMore = false)
                 SunAndMoonCard(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Hourly", onClickMore = { onHourlyClick() })

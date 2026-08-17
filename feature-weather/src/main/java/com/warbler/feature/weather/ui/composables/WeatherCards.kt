@@ -344,7 +344,10 @@ fun SunAndMoonCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
         shape = RoundedCornerShape(30.dp),
         colors =
             CardDefaults.cardColors(
@@ -353,13 +356,15 @@ fun SunAndMoonCard(
             ),
     ) {
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(24.dp).fillMaxWidth(),
         ) {
             Text(
                 text = "Sun & Moon",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
             )
 
             Spacer(modifier = Modifier.height(16.dp))
