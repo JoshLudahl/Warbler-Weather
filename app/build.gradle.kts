@@ -46,21 +46,20 @@ configure<ApplicationExtension> {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            optimization {
+                enable = true
+            }
+
             resValue(
                 "string",
                 "WEATHER_API_KEY",
                 "\"${System.getenv("WEATHER_API_KEY") ?: project.property("WEATHER_API_KEY")}\"",
             )
-            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
-            isMinifyEnabled = false
+            optimization {
+                enable = false
+            }
 
             val weatherApiKey =
                 System
