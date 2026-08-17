@@ -241,7 +241,7 @@ fun AqiInformation(
                                     modifier = Modifier.weight(1f),
                                     colors =
                                         CardDefaults.cardColors(
-                                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                            containerColor = MaterialTheme.colorScheme.primaryContainer,
                                         ),
                                 ) {
                                     Column(
@@ -250,16 +250,19 @@ fun AqiInformation(
                                     ) {
                                         Text(
                                             text = name,
-                                            style = MaterialTheme.typography.labelSmall,
+                                            style = MaterialTheme.typography.labelLarge,
                                             fontWeight = FontWeight.Bold,
                                             modifier = Modifier.fillMaxWidth(),
                                             textAlign = TextAlign.Center,
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer,
                                         )
                                         Text(
                                             text = String.format(LocalLocale.current.platformLocale, "%.1f", value),
                                             style = MaterialTheme.typography.bodySmall,
                                             modifier = Modifier.fillMaxWidth(),
                                             textAlign = TextAlign.Center,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                                         )
                                     }
                                 }
