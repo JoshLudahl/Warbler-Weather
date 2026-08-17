@@ -36,6 +36,7 @@ import com.warbler.feature.weather.ui.composables.HourlyForecastSection
 import com.warbler.feature.weather.ui.composables.MainWeatherCard
 import com.warbler.feature.weather.ui.composables.NavigationMenuOptions
 import com.warbler.feature.weather.ui.composables.SectionTitle
+import com.warbler.feature.weather.ui.composables.SunAndMoonCard
 import com.warbler.feature.weather.ui.composables.WeatherAlert
 import com.warbler.feature.weather.ui.composables.WeatherStats
 
@@ -134,6 +135,9 @@ fun MainWeatherScreen(
                 }
 
                 WeatherStats(weatherUiState = weatherUiState)
+
+                SectionTitle(title = "Sun & Moon", hasMore = false)
+                SunAndMoonCard(weatherUiState = weatherUiState)
 
                 SectionTitle(title = "Hourly", onClickMore = { onHourlyClick() })
                 HourlyForecastSection(weatherUiState = weatherUiState)

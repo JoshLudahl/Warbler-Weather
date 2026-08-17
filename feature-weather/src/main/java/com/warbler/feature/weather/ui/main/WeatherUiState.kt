@@ -29,6 +29,11 @@ data class WeatherUiState(
     val sunset: String = "",
     val moonrise: String = "",
     val moonset: String = "",
+    val moonPhase: Double = 0.0,
+    val moonPhaseName: String = "",
+    val moonIllumination: String = "",
+    val windDeg: Int = 0,
+    val aqiComponents: Map<String, Double>? = null,
     val isOffline: Boolean = false,
     val lastRefreshedAt: String? = null,
 )

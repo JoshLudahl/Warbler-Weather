@@ -199,4 +199,23 @@ object Conversion {
         CartesianValueFormatter { _, value, _ ->
             precipDecimalFormat.format(value)
         }
+
+    fun getWindDirection(degrees: Int): String {
+        val directions = arrayOf("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW")
+        val index = ((degrees + 11.25) / 22.5).toInt() % 16
+        return directions[index]
+    }
+
+    fun getMoonPhaseName(phase: Double): String =
+        when {
+            phase == 0.0 || phase == 1.0 -> "New Moon"
+            phase > 0.0 && phase < 0.25 -> "Waxing Crescent"
+            phase == 0.25 -> "First Quarter Moon"
+            phase > 0.25 && phase < 0.5 -> "Waxing Gibbous"
+            phase == 0.5 -> "Full Moon"
+            phase > 0.5 && phase < 0.75 -> "Waning Gibbous"
+            phase == 0.75 -> "Last Quarter Moon"
+            phase > 0.75 && phase < 1.0 -> "Waning Crescent"
+            else -> "Unknown"
+        }
 }

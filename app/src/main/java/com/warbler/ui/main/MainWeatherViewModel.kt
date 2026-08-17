@@ -60,6 +60,7 @@ class MainWeatherViewModel
     ) : ViewModel() {
         private val currentWeatherData = MutableStateFlow<WeatherDataSource?>(null)
         private val currentAqiLevel = MutableStateFlow(0)
+        private val currentAqiComponents = MutableStateFlow<Map<String, Double>?>(null)
         private val lastRefreshedAt = MutableStateFlow<String?>(null)
         private val _isOffline = MutableStateFlow(false)
 
@@ -77,14 +78,21 @@ class MainWeatherViewModel
 
         val weatherUiState: StateFlow<WeatherUiState?> =
             combine(
-                combine(currentWeatherData, currentAqiLevel, _isOffline) { d, a, o -> Triple(d, a, o) },
+                combine(
+                    currentWeatherData,
+                    currentAqiLevel,
+                    currentAqiComponents,
+                    _isOffline,
+                ) { d, a, c, o ->
+                    DataSnapshot(d, a, c, o)
+                },
                 combine(
                     lastRefreshedAt,
                     locationRepository.getCurrentLocationFromDatabase(),
                     unitSettingsFlow,
                 ) { r, l, u -> Triple(r, l, u) },
             ) { t1, t2 ->
-                val (data, aqi, offline) = t1
+                val (data, aqi, components, offline) = t1
                 val (refreshed, location, units) = t2
 
                 data
@@ -95,6 +103,7 @@ class MainWeatherViewModel
                         units.clockUnit,
                         units.accumulationUnit,
                         aqi,
+                        components,
                     )?.copy(
                         isOffline = offline,
                         lastRefreshedAt = if (offline) refreshed else null,
@@ -104,6 +113,13 @@ class MainWeatherViewModel
         private var loadWeatherJob: Job? = null
         private var isConnected = false
         private val json = Json { ignoreUnknownKeys = true }
+
+        data class DataSnapshot(
+            val data: WeatherDataSource?,
+            val aqi: Int,
+            val components: Map<String, Double>?,
+            val offline: Boolean,
+        )
 
         data class UnitSettings(
             val temperatureUnit: Int,
@@ -209,12 +225,24 @@ class MainWeatherViewModel
                     .catch { }
                     .collect { resource ->
                         if (resource is Resource.Success) {
-                            val aqiLevel =
-                                resource.data.list
-                                    .firstOrNull()
-                                    ?.main
-                                    ?.aqi ?: 0
+                            val aqiItem = resource.data.list.firstOrNull()
+                            val aqiLevel = aqiItem?.main?.aqi ?: 0
+                            val components = aqiItem?.components
+
                             currentAqiLevel.value = aqiLevel
+                            currentAqiComponents.value =
+                                components?.let {
+                                    mapOf(
+                                        "CO" to it.co,
+                                        "NO" to it.no,
+                                        "NO2" to it.no2,
+                                        "O3" to it.o3,
+                                        "SO2" to it.so2,
+                                        "PM2.5" to it.pm25,
+                                        "PM10" to it.pm10,
+                                        "NH3" to it.nh3,
+                                    )
+                                }
                         }
                     }
             }
@@ -227,8 +255,10 @@ class MainWeatherViewModel
             clockUnit: Int,
             accumulationUnit: Int,
             aqiLevel: Int,
-        ): WeatherUiState =
-            WeatherUiState(
+            aqiComponents: Map<String, Double>?,
+        ): WeatherUiState {
+            val moonPhaseValue = daily.firstOrNull()?.moonPhase ?: 0.0
+            return WeatherUiState(
                 locationName = location.toDisplayString,
                 temperature = convertTemperature(current.temp, temperatureUnit),
                 description =
@@ -437,7 +467,13 @@ class MainWeatherViewModel
                         timezoneOffset.toLong(),
                         clockUnit,
                     ),
+                moonPhase = moonPhaseValue,
+                moonPhaseName = Conversion.getMoonPhaseName(moonPhaseValue),
+                moonIllumination = "${(moonPhaseValue * 100).toInt()}%",
+                windDeg = current.windDeg ?: 0,
+                aqiComponents = aqiComponents,
             )
+        }
 
         private fun convertTemperature(
             tempKelvin: Double,

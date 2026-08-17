@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.rounded.Navigation
 import androidx.compose.material.icons.rounded.SwapVert
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.AlertDialog
@@ -31,7 +32,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -49,10 +49,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,6 +63,7 @@ import com.warbler.core.theme.AppTypography
 import com.warbler.core.theme.error
 import com.warbler.core.theme.temp_high
 import com.warbler.core.theme.temp_low
+import com.warbler.data.model.weather.Conversion
 import com.warbler.data.model.weather.aqiColorForLevel
 import com.warbler.data.model.weather.aqiLevelInfoList
 import com.warbler.feature.weather.R
@@ -189,7 +193,7 @@ fun AqiInformation(
         AlertDialog(
             onDismissRequest = { showAqiDialog = false },
             confirmButton = {
-                IconButton(onClick = { showAqiDialog = false }) {
+                TextButton(onClick = { showAqiDialog = false }) {
                     Text(text = "OK")
                 }
             },
@@ -213,7 +217,53 @@ fun AqiInformation(
                                         .background(color = info.color, shape = CircleShape),
                             )
                             Spacer(modifier = Modifier.width(12.dp))
-                            Text(text = info.description)
+                            Text(text = info.description, style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+
+                    weatherUiState.aqiComponents?.let { components ->
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Pollutants (μg/m³)",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            maxItemsInEachRow = 3,
+                        ) {
+                            components.forEach { (name, value) ->
+                                Card(
+                                    modifier = Modifier.weight(1f),
+                                    colors =
+                                        CardDefaults.cardColors(
+                                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                        ),
+                                ) {
+                                    Column(
+                                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                    ) {
+                                        Text(
+                                            text = name,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier.fillMaxWidth(),
+                                            textAlign = TextAlign.Center,
+                                        )
+                                        Text(
+                                            text = String.format(LocalLocale.current.platformLocale, "%.1f", value),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            modifier = Modifier.fillMaxWidth(),
+                                            textAlign = TextAlign.Center,
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -286,36 +336,134 @@ fun AqiGradientBar(
 }
 
 @Composable
+fun SunAndMoonCard(
+    weatherUiState: WeatherUiState,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(30.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
+    ) {
+        Column(
+            modifier = Modifier.padding(24.dp),
+        ) {
+            Text(
+                text = "Sun & Moon",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                SunMoonItem(
+                    icon = R.drawable.ic_wi_sunrise,
+                    label = "Sunrise",
+                    value = weatherUiState.sunrise,
+                )
+                SunMoonItem(
+                    icon = R.drawable.ic_wi_sunset,
+                    label = "Sunset",
+                    value = weatherUiState.sunset,
+                )
+                SunMoonItem(
+                    icon = R.drawable.ic_wi_moonrise,
+                    label = "Moonrise",
+                    value = weatherUiState.moonrise,
+                )
+                SunMoonItem(
+                    icon = R.drawable.ic_wi_moonset,
+                    label = "Moonset",
+                    value = weatherUiState.moonset,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Moon Phase: ${weatherUiState.moonPhaseName}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = "Illumination: ${weatherUiState.moonIllumination}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SunMoonItem(
+    icon: Int,
+    label: String,
+    value: String,
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(id = icon),
+            contentDescription = label,
+            modifier = Modifier.size(32.dp),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(text = label, style = MaterialTheme.typography.labelSmall)
+        Text(text = value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
 fun WeatherStatItem(
     icon: Any,
     value: String,
     label: String,
     modifier: Modifier = Modifier,
+    rotation: Float = 0f,
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        when (icon) {
-            is ImageVector -> {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = label,
-                    modifier = Modifier.size(32.dp),
-                    tint = MaterialTheme.colorScheme.primary,
-                )
-            }
+        Box(contentAlignment = Alignment.Center) {
+            when (icon) {
+                is ImageVector -> {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = label,
+                        modifier = Modifier.size(32.dp).graphicsLayer(rotationZ = rotation),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                }
 
-            is Int -> {
-                Image(
-                    painter = painterResource(id = icon),
-                    contentDescription = label,
-                    modifier = Modifier.size(32.dp),
-                    colorFilter =
-                        ColorFilter.tint(
-                            MaterialTheme.colorScheme.primary,
-                        ),
-                )
+                is Int -> {
+                    Image(
+                        painter = painterResource(id = icon),
+                        contentDescription = label,
+                        modifier = Modifier.size(32.dp).graphicsLayer(rotationZ = rotation),
+                        colorFilter =
+                            ColorFilter.tint(
+                                MaterialTheme.colorScheme.primary,
+                            ),
+                    )
+                }
             }
         }
 
@@ -359,9 +507,10 @@ fun WeatherStats(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             WeatherStatItem(
-                icon = R.drawable.ic_wind,
-                value = weatherUiState.wind,
+                icon = Icons.Rounded.Navigation,
+                value = "${weatherUiState.wind} ${Conversion.getWindDirection(weatherUiState.windDeg)}",
                 label = "Wind",
+                rotation = weatherUiState.windDeg.toFloat(),
             )
 
             WeatherStatItem(
@@ -402,13 +551,13 @@ fun HourlyForecastCard(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(vertical = 16.dp),
+                    .padding(vertical = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = time,
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary,
             )
