@@ -42,7 +42,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -634,10 +633,10 @@ fun DailyForecastCard(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "$low°",
+                    text = "$high°",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
-                    color = temp_low,
+                    color = temp_high,
                 )
 
                 Icon(
@@ -645,15 +644,14 @@ fun DailyForecastCard(
                     contentDescription = "High and Low",
                     modifier =
                         Modifier
-                            .size(20.dp)
-                            .scale(scaleX = -1f, scaleY = 1f),
+                            .size(20.dp),
                 )
 
                 Text(
-                    text = "$high°",
+                    text = "$low°",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
-                    color = temp_high,
+                    color = temp_low,
                 )
             }
         }
@@ -883,12 +881,12 @@ fun ForecastRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.End),
             ) {
-                // Low temp
+                // High temp
                 Text(
-                    text = "${forecast.lowTemp}°",
+                    text = "${forecast.highTemp}°",
                     style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Medium,
-                    color = temp_low.copy(alpha = 0.7f),
+                    fontWeight = FontWeight.Bold,
+                    color = temp_high,
                 )
 
                 // Separator icon
@@ -899,12 +897,12 @@ fun ForecastRow(
                     tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                 )
 
-                // High temp
+                // Low temp
                 Text(
-                    text = "${forecast.highTemp}°",
+                    text = "${forecast.lowTemp}°",
                     style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = temp_high,
+                    fontWeight = FontWeight.Medium,
+                    color = temp_low.copy(alpha = 0.7f),
                 )
             }
         }
