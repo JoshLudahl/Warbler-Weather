@@ -31,6 +31,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -103,6 +104,7 @@ fun HourlyScreen(
                     data = hourlyData.map { it.tempValue },
                     labels = hourlyData.map { it.time },
                     color = temp_high,
+                    secondaryColor = temp_low,
                     valueFormatter = Conversion.wholeNumberValueFormatter,
                 )
 
@@ -329,6 +331,7 @@ fun WeatherChart(
     data: List<Float>,
     labels: List<String>,
     color: Color,
+    secondaryColor: Color? = null,
     valueFormatter: CartesianValueFormatter? = null,
 ) {
     val modelProducer = remember { CartesianChartModelProducer() }
@@ -372,7 +375,19 @@ fun WeatherChart(
                                         fill = LineCartesianLayer.LineFill.single(Fill(color)),
                                         areaFill =
                                             LineCartesianLayer.AreaFill.single(
-                                                Fill(color.copy(alpha = 0.2f)),
+                                                if (secondaryColor != null) {
+                                                    Fill(
+                                                        Brush.verticalGradient(
+                                                            colors =
+                                                                listOf(
+                                                                    color.copy(alpha = 0.3f),
+                                                                    secondaryColor.copy(alpha = 0.3f),
+                                                                ),
+                                                        ),
+                                                    )
+                                                } else {
+                                                    Fill(color.copy(alpha = 0.2f))
+                                                },
                                             ),
                                     ),
                                 ),
