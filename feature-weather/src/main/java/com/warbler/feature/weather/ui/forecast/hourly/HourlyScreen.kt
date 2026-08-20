@@ -54,6 +54,7 @@ import com.patrykandpatrick.vico.compose.common.LegendItem
 import com.patrykandpatrick.vico.compose.common.component.rememberLineComponent
 import com.patrykandpatrick.vico.compose.common.component.rememberTextComponent
 import com.patrykandpatrick.vico.compose.common.rememberHorizontalLegend
+import com.warbler.core.theme.temp_high
 import com.warbler.core.theme.temp_low
 import com.warbler.data.model.weather.Conversion
 import com.warbler.feature.weather.ui.composables.HourlyForecastSection
@@ -96,6 +97,14 @@ fun HourlyScreen(
                 HourlyForecastSection(weatherUiState = weatherUiState)
 
                 val hourlyData = weatherUiState.hourlyForecasts
+
+                WeatherChart(
+                    title = "Temperature (${weatherUiState.tempUnit})",
+                    data = hourlyData.map { it.tempValue },
+                    labels = hourlyData.map { it.time },
+                    color = temp_high,
+                    valueFormatter = Conversion.wholeNumberValueFormatter,
+                )
 
                 if (hourlyData.any { it.accumulation > 0 }) {
                     WeatherMultiBarChart(

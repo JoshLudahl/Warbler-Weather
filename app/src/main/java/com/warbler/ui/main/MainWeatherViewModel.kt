@@ -303,6 +303,13 @@ class MainWeatherViewModel
                         AccumulationUnit.INCHES_PER_HOUR -> "in/h"
                         AccumulationUnit.MILLIMETERS_PER_HOUR -> "mm/h"
                     },
+                tempUnit =
+                    when (temperatureUnit) {
+                        0 -> "°C"
+                        1 -> "°F"
+                        2 -> "K"
+                        else -> "°F"
+                    },
                 hourlyForecasts =
                     hourly.take(48).map {
                         val hour =
@@ -323,6 +330,7 @@ class MainWeatherViewModel
                         HourlyForecastItem(
                             time = timeLabel,
                             temperature = convertTemperature(it.temp, temperatureUnit),
+                            tempValue = convertTemperatureToInt(it.temp, temperatureUnit).toFloat(),
                             iconRes =
                                 it.weather
                                     .firstOrNull()
