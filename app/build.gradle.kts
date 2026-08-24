@@ -18,6 +18,7 @@ plugins {
 configure<ApplicationExtension> {
     val target = 37
     compileSdk = target
+
     defaultConfig {
         applicationId = "com.softklass.warbler"
         minSdk = 26
