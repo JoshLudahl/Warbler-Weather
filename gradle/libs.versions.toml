@@ -145,13 +145,16 @@ ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-f
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradle" }
+android-library = { id = "com.android.library", version.ref = "gradle" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = {id = "com.google.firebase.crashlytics"}
 hilt-android = { id = "dagger.hilt.android.plugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf" }
 google-services = { id = "com.google.gms.google-services" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+warbler-android-library = { id = "warbler.android.library" }

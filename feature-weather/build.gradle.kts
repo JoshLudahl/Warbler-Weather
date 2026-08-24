@@ -1,9 +1,9 @@
 import com.android.build.api.dsl.LibraryExtension
 
 plugins {
-    id("warbler.android.library")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.warbler.android.library)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
