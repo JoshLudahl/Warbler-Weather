@@ -117,6 +117,7 @@ fun MainWeatherScreen(
 
             if (weatherUiState != null) {
                 if (weatherUiState.hasAlerts) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     WeatherAlert(weatherUiState = weatherUiState)
                 }
 
