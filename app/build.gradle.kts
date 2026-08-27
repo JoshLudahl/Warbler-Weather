@@ -21,7 +21,7 @@ configure<ApplicationExtension> {
 
     defaultConfig {
         applicationId = "com.softklass.warbler"
-        minSdk = 26
+        minSdk = 32
         targetSdk = target
         versionCode = 101
         versionName = "2026.08.24"
