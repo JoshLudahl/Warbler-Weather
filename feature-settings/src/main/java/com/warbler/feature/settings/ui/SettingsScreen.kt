@@ -1,5 +1,6 @@
 package com.warbler.feature.settings.ui
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.rounded.Done
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -62,6 +64,7 @@ fun SettingsScreen(
     onReviewAppClick: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     SettingsContent(
         uiState = uiState,
@@ -73,6 +76,16 @@ fun SettingsScreen(
         onThemeStyleSelected = viewModel::onThemeStyleSelected,
         onNavigateUp = onNavigateUp,
         onReviewAppClick = onReviewAppClick,
+        onShareAppClick = {
+            val sendIntent: Intent =
+                Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, Constants.WEATHER_WARBLER_URL)
+                    type = "text/plain"
+                }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            context.startActivity(shareIntent)
+        },
     )
 }
 
@@ -88,6 +101,7 @@ private fun SettingsContent(
     onThemeStyleSelected: (ThemeStyle) -> Unit = {},
     onNavigateUp: () -> Unit = {},
     onReviewAppClick: () -> Unit = {},
+    onShareAppClick: () -> Unit = {},
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -97,6 +111,11 @@ private fun SettingsContent(
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onShareAppClick) {
+                        Icon(Icons.Rounded.Share, contentDescription = "Share")
                     }
                 },
                 colors =
