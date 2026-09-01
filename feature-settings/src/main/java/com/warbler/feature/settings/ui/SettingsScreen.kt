@@ -60,8 +60,6 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = viewModel(),
     onNavigateUp: () -> Unit = {},
     onReviewAppClick: () -> Unit = {},
-    onAboutClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -75,8 +73,6 @@ fun SettingsScreen(
         onThemeStyleSelected = viewModel::onThemeStyleSelected,
         onNavigateUp = onNavigateUp,
         onReviewAppClick = onReviewAppClick,
-        onAboutClick = onAboutClick,
-        onShareClick = onShareClick,
     )
 }
 
@@ -92,8 +88,6 @@ private fun SettingsContent(
     onThemeStyleSelected: (ThemeStyle) -> Unit = {},
     onNavigateUp: () -> Unit = {},
     onReviewAppClick: () -> Unit = {},
-    onAboutClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -351,7 +345,7 @@ private fun <T> SingleSelectButtonGroup(
                 checked = checked,
                 onCheckedChange = { onSelected(option) },
                 colors =
-                    ToggleButtonDefaults.toggleButtonColors(
+                    ToggleButtonDefaults.colors(
                         checkedContainerColor = MaterialTheme.colorScheme.onSurface,
                         checkedContentColor = MaterialTheme.colorScheme.surface,
                         containerColor = MaterialTheme.colorScheme.background,

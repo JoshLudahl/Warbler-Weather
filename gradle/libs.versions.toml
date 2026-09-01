@@ -1,5 +1,5 @@
 [versions]
-appfunctions = "1.0.0-alpha10"
+appfunctions = "1.0.0-alpha11"
 accessibilityTestFramework = "4.1.1"
 activityCompose = "1.13.0"
 appcompat = "1.8.0"
@@ -16,7 +16,7 @@ espressoLibraryKotlin = "2023.9.01"
 firebaseBom = "34.18.0"
 firebaseCrashlyticsGradle = "3.0.8"
 googleServices = "4.5.0"
-gradle = "9.3.2"
+gradle = "9.4.0"
 hiltAndroidGradlePlugin = "2.60.1"
 hiltAndroidTesting = "2.60.1"
 hiltCompiler = "1.4.0"
@@ -36,12 +36,12 @@ lifecycleLivedataKtx = "2.11.0"
 lifecycleViewmodelCompose = "2.11.0"
 loggingInterceptor = "5.5.0"
 material3 = "1.14.0"
-material3Compose = "1.5.0-alpha26"
-navigationDynamicFeaturesFragment = "2.9.8"
-navigationFragmentKtx = "2.9.8"
-navigationSafeArgsGradlePlugin = "2.9.8"
-navigationTesting = "2.9.8"
-navigationUiKtx = "2.9.8"
+material3Compose = "1.5.0-alpha27"
+navigationDynamicFeaturesFragment = "2.10.0"
+navigationFragmentKtx = "2.10.0"
+navigationSafeArgsGradlePlugin = "2.10.0"
+navigationTesting = "2.10.0"
+navigationUiKtx = "2.10.0"
 okhttp = "5.5.0"
 orchestrator = "1.6.1"
 perfPlugin = "2.0.2"
@@ -54,10 +54,10 @@ roomKtx = "2.8.4"
 roomRuntime = "2.8.4"
 rules = "1.7.0"
 runner = "1.7.0"
-vico = "3.3.0"
+vico = "3.3.1"
 viewpager2 = "1.1.0"
-navigation3Runtime = "1.1.6"
-navigation3Ui = "1.1.6"
+navigation3Runtime = "1.1.7"
+navigation3Ui = "1.1.7"
 uiTextGoogleFonts = "1.12.0"
 
 [libraries]
@@ -145,7 +145,6 @@ ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-f
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradle" }
-android-library = { id = "com.android.library", version.ref = "gradle" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = {id = "com.google.firebase.crashlytics"}
 hilt-android = { id = "dagger.hilt.android.plugin" }

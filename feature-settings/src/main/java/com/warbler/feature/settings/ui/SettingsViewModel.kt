@@ -24,101 +24,101 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel
-@Inject
-constructor(
-    private val repository: SettingsRepository,
-    @ApplicationContext private val context: Context,
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(SettingsUiState())
-    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+    @Inject
+    constructor(
+        private val repository: SettingsRepository,
+        @ApplicationContext private val context: Context,
+    ) : ViewModel() {
+        private val _uiState = MutableStateFlow(SettingsUiState())
+        val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            repository.temperatureUnit.collect { unit ->
-                _uiState.update { it.copy(temperatureUnit = unit) }
-            }
-        }
-        viewModelScope.launch {
-            repository.speedUnit.collect { unit ->
-                _uiState.update { it.copy(speedUnit = unit) }
-            }
-        }
-        viewModelScope.launch {
-            repository.accumulationUnit.collect { unit ->
-                _uiState.update { it.copy(accumulationUnit = unit) }
-            }
-        }
-        viewModelScope.launch {
-            repository.clockUnit.collect { unit ->
-                _uiState.update { it.copy(clockUnit = unit) }
-            }
-        }
-        viewModelScope.launch {
-            repository.themeMode.collect { mode ->
-                _uiState.update { it.copy(themeMode = mode) }
-            }
-        }
-        viewModelScope.launch {
-            repository.themeStyle.collect { style ->
-                _uiState.update { it.copy(themeStyle = style) }
-            }
-        }
-        _uiState.update {
-            it.copy(appVersion = getVersionName())
-        }
-    }
-
-    private fun getVersionName(): String =
-        try {
-            val packageInfo =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    context.packageManager.getPackageInfo(
-                        context.packageName,
-                        PackageManager.PackageInfoFlags.of(0)
-                    )
-                } else {
-                    @Suppress("DEPRECATION")
-                    context.packageManager.getPackageInfo(context.packageName, 0)
+        init {
+            viewModelScope.launch {
+                repository.temperatureUnit.collect { unit ->
+                    _uiState.update { it.copy(temperatureUnit = unit) }
                 }
-            packageInfo.versionName ?: ""
-        } catch (e: PackageManager.NameNotFoundException) {
-            Log.e("SettingsViewModel", "getVersionName: ${e.message}")
-            ""
+            }
+            viewModelScope.launch {
+                repository.speedUnit.collect { unit ->
+                    _uiState.update { it.copy(speedUnit = unit) }
+                }
+            }
+            viewModelScope.launch {
+                repository.accumulationUnit.collect { unit ->
+                    _uiState.update { it.copy(accumulationUnit = unit) }
+                }
+            }
+            viewModelScope.launch {
+                repository.clockUnit.collect { unit ->
+                    _uiState.update { it.copy(clockUnit = unit) }
+                }
+            }
+            viewModelScope.launch {
+                repository.themeMode.collect { mode ->
+                    _uiState.update { it.copy(themeMode = mode) }
+                }
+            }
+            viewModelScope.launch {
+                repository.themeStyle.collect { style ->
+                    _uiState.update { it.copy(themeStyle = style) }
+                }
+            }
+            _uiState.update {
+                it.copy(appVersion = getVersionName())
+            }
         }
 
-    fun onTemperatureUnitSelected(unit: TemperatureUnit) {
-        viewModelScope.launch {
-            repository.saveTemperatureUnit(unit)
-        }
-    }
+        private fun getVersionName(): String =
+            try {
+                val packageInfo =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        context.packageManager.getPackageInfo(
+                            context.packageName,
+                            PackageManager.PackageInfoFlags.of(0),
+                        )
+                    } else {
+                        @Suppress("DEPRECATION")
+                        context.packageManager.getPackageInfo(context.packageName, 0)
+                    }
+                packageInfo.versionName ?: ""
+            } catch (e: PackageManager.NameNotFoundException) {
+                Log.e("SettingsViewModel", "getVersionName: ${e.message}")
+                ""
+            }
 
-    fun onSpeedUnitSelected(unit: SpeedUnit) {
-        viewModelScope.launch {
-            repository.saveSpeedUnit(unit)
+        fun onTemperatureUnitSelected(unit: TemperatureUnit) {
+            viewModelScope.launch {
+                repository.saveTemperatureUnit(unit)
+            }
         }
-    }
 
-    fun onAccumulationUnitSelected(unit: AccumulationUnit) {
-        viewModelScope.launch {
-            repository.saveAccumulationUnit(unit)
+        fun onSpeedUnitSelected(unit: SpeedUnit) {
+            viewModelScope.launch {
+                repository.saveSpeedUnit(unit)
+            }
         }
-    }
 
-    fun onClockUnitSelected(unit: ClockUnit) {
-        viewModelScope.launch {
-            repository.saveClockUnit(unit)
+        fun onAccumulationUnitSelected(unit: AccumulationUnit) {
+            viewModelScope.launch {
+                repository.saveAccumulationUnit(unit)
+            }
         }
-    }
 
-    fun onThemeModeSelected(mode: ThemeMode) {
-        viewModelScope.launch {
-            repository.saveThemeMode(mode)
+        fun onClockUnitSelected(unit: ClockUnit) {
+            viewModelScope.launch {
+                repository.saveClockUnit(unit)
+            }
         }
-    }
 
-    fun onThemeStyleSelected(style: ThemeStyle) {
-        viewModelScope.launch {
-            repository.saveThemeStyle(style)
+        fun onThemeModeSelected(mode: ThemeMode) {
+            viewModelScope.launch {
+                repository.saveThemeMode(mode)
+            }
+        }
+
+        fun onThemeStyleSelected(style: ThemeStyle) {
+            viewModelScope.launch {
+                repository.saveThemeStyle(style)
+            }
         }
     }
-}
