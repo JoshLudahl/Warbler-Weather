@@ -51,6 +51,7 @@ import com.warbler.core.model.appearance.ThemeStyle
 import com.warbler.core.theme.AppTheme
 import com.warbler.core.utilities.ShareUtils
 import com.warbler.feature.weather.R
+import com.warbler.feature.weather.ui.composables.DailyForecastDetailCard
 import com.warbler.feature.weather.ui.composables.WeatherStat
 import com.warbler.feature.weather.ui.composables.WeatherStatsGrid
 import com.warbler.feature.weather.ui.main.DailyForecastItem
@@ -191,7 +192,7 @@ private fun ForecastDetailContent(forecast: DailyForecastItem) {
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
     ) {
-        com.warbler.feature.weather.ui.composables.DailyForecastCard(
+        DailyForecastDetailCard(
             day = forecast.day,
             high = forecast.highTemp,
             low = forecast.lowTemp,

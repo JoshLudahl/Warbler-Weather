@@ -597,6 +597,7 @@ fun DailyForecastCard(
     Card(
         modifier =
             modifier
+                .width(120.dp)
                 .height(160.dp),
         onClick = onClick,
         shape = RoundedCornerShape(30.dp),
@@ -653,6 +654,85 @@ fun DailyForecastCard(
                     fontWeight = FontWeight.Bold,
                     color = temp_low,
                 )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DailyForecastDetailCard(
+    day: String,
+    high: Int,
+    low: Int,
+    icon: Int,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+) {
+    Card(
+        modifier =
+            modifier
+                .height(160.dp),
+        onClick = onClick,
+        shape = RoundedCornerShape(30.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+    ) {
+        Row(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                modifier = Modifier.size(80.dp),
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = day,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "$high°",
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = temp_high,
+                    )
+
+                    Icon(
+                        imageVector = Icons.Rounded.SwapVert,
+                        contentDescription = "High and Low",
+                        modifier =
+                            Modifier
+                                .size(24.dp),
+                    )
+
+                    Text(
+                        text = "$low°",
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = temp_low,
+                    )
+                }
             }
         }
     }
