@@ -19,7 +19,7 @@ class WarblerAndroidLibraryConventionPlugin : Plugin<Project> {
             compileSdk = targetSdk
 
             defaultConfig {
-                minSdk = 26
+                minSdk = 32
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 consumerProguardFiles("consumer-rules.pro")
             }
