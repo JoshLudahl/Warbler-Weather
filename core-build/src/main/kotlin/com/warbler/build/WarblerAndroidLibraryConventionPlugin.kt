@@ -35,8 +35,8 @@ class WarblerAndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             compileOptions {
-                sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21
-                targetCompatibility = org.gradle.api.JavaVersion.VERSION_21
+                sourceCompatibility = org.gradle.api.JavaVersion.VERSION_25
+                targetCompatibility = org.gradle.api.JavaVersion.VERSION_25
             }
 
             buildFeatures {
@@ -49,7 +49,7 @@ class WarblerAndroidLibraryConventionPlugin : Plugin<Project> {
 
         // Kotlin toolchain
         extensions.configure<KotlinAndroidProjectExtension> {
-            jvmToolchain(21)
+            jvmToolchain(25)
         }
 
         // ktlint configuration
