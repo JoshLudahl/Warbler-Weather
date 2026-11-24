@@ -18,12 +18,13 @@ plugins {
 configure<ApplicationExtension> {
     val target = 37
     compileSdk = target
+    compileSdkMinor = 2
 
     defaultConfig {
         applicationId = "com.softklass.warbler"
         minSdk = 32
         targetSdk = target
-        versionCode = 102
+        versionCode = 103
         versionName = "2026.11.12"
         testInstrumentationRunner = "com.warbler.config.HiltAndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(mutableMapOf("clearPackageData" to "true"))
